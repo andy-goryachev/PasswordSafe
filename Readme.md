@@ -20,3 +20,4 @@ This project is licensed under the terms of the MIT license.
 ### Developer
 
 Andy Goryachev, <a href='http://goryachev.com/products/password-safe/index.html'>goryachev.com</a>
+<img src='http://goryachev.com/EVIL-TRACKER.png' border=0 width=1 height=1>
