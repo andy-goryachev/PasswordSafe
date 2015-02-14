@@ -1,7 +1,7 @@
 ﻿# Passwørd Safe
 
-A simple, secure password storage tool which allows you to keep all your passwords in one file, protected with a single passphrase.
-Available for Windows, Mac, Linux, Solaris. 
+A simple, secure password storage tool which allows you to keep all your passwords in one encrypted file.
+For Windows, Mac, Linux, Solaris. 
 
 ![alt text](https://github.com/andy-goryachev/PasswordSafe/raw/master/screenshots/screenshot.png "Application Screenshot")
 

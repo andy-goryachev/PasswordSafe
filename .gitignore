@@ -2,9 +2,7 @@
 /user.home*/
 /test/
 /test.out/
-/build/deploy/
-/build/jar/
-/build/out/
+/build/
 ~*
 *.log
 /*.jar
