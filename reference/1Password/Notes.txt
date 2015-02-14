@@ -1,1 +1,0 @@
-http://learn.agilebits.com/1Password4/Security/keychain-design.html
