@@ -1,0 +1,11 @@
+/out/
+/user.home*/
+/test/
+/test.out/
+/build/deploy/
+/build/jar/
+/build/out/
+~*
+*.log
+/*.jar
+/test.data/

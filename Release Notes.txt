@@ -1,0 +1,70 @@
+﻿		KNOWN ISSUES
+		============
+		
+- open dialogs on the same monitor as the parent window
+- preferences: incorrectly prompts to save even if no changes were made
+- jar should be signed
+
+
+
+		RELEASE NOTES
+		=============
+
+2.03.33
+- copyright 2015
+
+2.02.30
+- hebrew localization fixes
+- copyright 2014
+
+2.02.29
+- delay jvm SecureRandom call until needed to improve start up time
+- look and feel improvements on linux
+- changed scrypt parameters (N=16384, R=8, P=32) to speed it up
+
+2.01.28
+- initialize entropy collector with jvm SecureRandom
+- added more sources to entropy collector
+- added support for right-to-left languages
+- hebrew localization
+- virtual keyboard in the current language
+- fixed onscreen keyboard alignment
+
+2.00.27
+- format change: scrypt + EAX authenticated encryption mode
+- sha-512 digest-based random number generator
+- entropy collection from user mouse/keyboard events as well as standard jvm SecureRandom
+- bouncycastle 1.50
+- require old passphrase when changing the database passphrase
+
+1.00.26
+- contact support menu
+
+1.00.25
+- updated icons
+- updated welcome wizard
+
+1.00.24
+- localization: ru
+
+1.00.19
+- check for updates
+- undo redo
+
+1.00.18
+- AESFastEngine
+- component licenses
+- internationalization
+- File->Open filter fix
+- bouncycastle 1.49
+- spinning gear icon
+- new application icon
+
+0.00.17
+- minor changes
+
+0.0.16
+- sorted list
+
+0.0.15
+- updated web site link

@@ -1,0 +1,5 @@
+﻿crypto-150.zip            - everything (for reference only)
+
+bcprov-jdk15on-150.jar    - binary
+lcrypto-jdk15on-150.zip   - sources
+

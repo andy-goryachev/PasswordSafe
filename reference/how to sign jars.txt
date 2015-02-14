@@ -1,0 +1,12 @@
+http://wiki.plexinfo.net/?title=How_to_sign_JAR_files
+
+
+- Create a new key in a new keystore as follows:
+	keytool -genkey -keystore myKeystore -alias myself
+
+- Create a self-signed test certificate as follows:
+	keytool -selfcert -alias myself -keystore myKeystore
+	keytool -list -keystore myKeystore
+
+- sign the JAR file with the test certificate as follows:
+	jarsigner -keystore myKeystore test.jar myself
