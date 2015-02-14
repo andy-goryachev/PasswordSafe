@@ -16,3 +16,7 @@ Then I discovered that a SHA-256 hash of the stretched key in the original Passw
 ### License
 
 This project is licensed under the terms of the MIT license.
+
+### Developer
+
+<a href='http://goryachev.com/products/password-safe/index.html'>Andy Goryachev</a>
