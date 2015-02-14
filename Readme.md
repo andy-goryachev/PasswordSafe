@@ -19,4 +19,4 @@ This project is licensed under the terms of the MIT license.
 
 ### Developer
 
-<a href='http://goryachev.com/products/password-safe/index.html'>Andy Goryachev</a>
+Andy Goryachev, <a href='http://goryachev.com/products/password-safe/index.html'>goryachev.com</a>
