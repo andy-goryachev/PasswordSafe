@@ -10,6 +10,9 @@
 		RELEASE NOTES
 		=============
 
+3.00.36
+- open source release on https://github.com/andy-goryachev/PasswordSafe
+
 2.03.33
 - copyright 2015
 
