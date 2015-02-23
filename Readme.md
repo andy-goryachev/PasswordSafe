@@ -13,6 +13,8 @@ At first, I needed to have a cross-platform tool that I could run on Mac and Lin
 
 Then I discovered that a SHA-256 hash of the stretched key in the original Password Safe file is provided in the clear.  The documentation explains that it "is used to verify that the user has the correct passphrase".  I am not so sure.  I don't know if the opposition has rainbow tables or specialized hardware to brute force a 256 bit hashes, but it feels like this can be a backdoor.  In any case, this goal that can be easily achieved in a more secure way by using, for instance, <a href="http://en.wikipedia.org/wiki/Authenticated_encryption">authenticated encryption</a>.
 
+<a href='http://goryachev.com/products/password-safe/file-format-specification.html'>File format specification</a>.
+
 ### License
 
 This project is licensed under the terms of the MIT license.
