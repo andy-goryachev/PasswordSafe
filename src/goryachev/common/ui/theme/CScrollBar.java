@@ -10,7 +10,7 @@ import javax.swing.plaf.ScrollBarUI;
 
 
 public class CScrollBar
-    extends JScrollBar
+	extends JScrollBar
 {
 	private static int scrollLineCount = 3;
 	public final CScrollPane scroll;

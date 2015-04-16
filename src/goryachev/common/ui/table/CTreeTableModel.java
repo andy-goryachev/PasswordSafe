@@ -469,10 +469,10 @@ public class CTreeTableModel<T extends CTreeNode>
 		}
 		fireModelUpdated(index);
 	}
-	
-	
+
+
 	public String dump()
-    {
+	{
 		SB sb = new SB();
 		sb.nl();
 		
@@ -497,15 +497,15 @@ public class CTreeTableModel<T extends CTreeNode>
 			
 			sb.nl();
 		}
-		
+
 		// dump real structure
 		sb.nl();
 		dump(sb, rootEntry, 0);
-		
-	    return sb.toString();
-    }
-	
-	
+
+		return sb.toString();
+	}
+
+
 	protected void dump(SB sb, TreeEntry en, int indent)
 	{
 		for(int i=0; i<indent; i++)

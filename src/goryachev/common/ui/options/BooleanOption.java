@@ -5,7 +5,7 @@ import java.util.Collection;
 
 
 public class BooleanOption
-    extends COption<Boolean>
+	extends COption<Boolean>
 {
 	private boolean defaultValue;
 

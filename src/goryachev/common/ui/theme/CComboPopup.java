@@ -7,7 +7,7 @@ import javax.swing.plaf.basic.BasicComboPopup;
 
 
 public class CComboPopup
-    extends BasicComboPopup
+	extends BasicComboPopup
 {
 	public CComboPopup(JComboBox c)
 	{

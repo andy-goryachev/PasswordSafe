@@ -20,7 +20,7 @@ package goryachev.common.util.img.jhlabs;
  * A filter to change the brightness and contrast of an image.
  */
 public class ContrastFilter
-    extends TransferFilter
+	extends TransferFilter
 {
 	private float brightness = 1.0f;
 	private float contrast = 1.0f;

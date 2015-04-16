@@ -12,7 +12,7 @@ import javax.swing.text.JTextComponent;
  * This service is started by Application.startUI().
  */
 public class CFocusMonitor
-    implements PropertyChangeListener
+	implements PropertyChangeListener
 {
 	private Window lastWindow;
 	private JTextComponent lastEditor;

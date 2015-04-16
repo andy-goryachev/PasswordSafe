@@ -5,7 +5,7 @@ import javax.swing.text.JTextComponent;
 
 
 public class CEditorPasteAction
-    extends CEditorAction
+	extends CEditorAction
 {
 	public CEditorPasteAction()
 	{

@@ -9,7 +9,7 @@ import javax.swing.UIManager;
 
 
 public final class CPasswordField
-    extends JPasswordField
+	extends JPasswordField
 {
 	public CPasswordField()
 	{

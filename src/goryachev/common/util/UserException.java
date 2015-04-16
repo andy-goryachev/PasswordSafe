@@ -3,7 +3,7 @@ package goryachev.common.util;
 
 
 public class UserException
-    extends RuntimeException
+	extends RuntimeException
 {
 	public UserException(String message)
 	{

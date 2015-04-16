@@ -299,11 +299,11 @@ public class AppFrame
 
 
 	public static AppFrame getAppFrame(Component c)
-    {
-	    return UI.getAncestorOfClass(AppFrame.class, c);
-    }
-	
-	
+	{
+		return UI.getAncestorOfClass(AppFrame.class, c);
+	}
+
+
 	public void setFixedSize(int w, int h)
 	{
 		Dimension d = new Dimension(w, h);

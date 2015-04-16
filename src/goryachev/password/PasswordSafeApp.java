@@ -23,7 +23,7 @@ import javax.swing.ImageIcon;
 public class PasswordSafeApp
 	extends Application
 {
-	public static final String VERSION   = "3.00.36";
+	public static final String VERSION   = "3.00.37";
 	public static final String COPYRIGHT = "copyright © 2015 andy goryachev";	
 	public static final String TITLE = "PasswørdSafe";
 	public static final String EXTENSION = ".safe";

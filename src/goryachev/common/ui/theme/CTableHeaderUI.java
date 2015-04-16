@@ -106,14 +106,14 @@ public class CTableHeaderUI
 
 
 	public void valueChanged(ListSelectionEvent e)
-    {
+	{
 		if(header != null)
 		{
 			header.repaint();
 		}
-    }
-	
-	
+	}
+
+
 	public void paint(Graphics g, JComponent c)
 	{
 		if(listenOn == null)
@@ -124,7 +124,7 @@ public class CTableHeaderUI
 				listenOn.getSelectionModel().addListSelectionListener(this);
 			}
 		}
-		
-		super.paint(g,c);
+
+		super.paint(g, c);
 	}
 }

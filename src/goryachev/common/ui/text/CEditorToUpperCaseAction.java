@@ -9,7 +9,7 @@ import javax.swing.text.DefaultStyledDocument;
 
 
 public class CEditorToUpperCaseAction
-    extends CEditorAction
+	extends CEditorAction
 {
 	public CEditorToUpperCaseAction()
 	{

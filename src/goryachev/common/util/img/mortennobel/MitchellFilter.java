@@ -11,7 +11,7 @@ package goryachev.common.util.img.mortennobel;
  * The Mitchell resample filter.
  */
 public class MitchellFilter
-    implements ResampleFilter
+	implements ResampleFilter
 {
 	private static final float B = 1.0f / 3.0f;
 	private static final float C = 1.0f / 3.0f;

@@ -6,7 +6,7 @@ import javax.swing.text.DefaultEditorKit;
 
 
 public class CEditorSelectLineAction
-    extends CEditorAction
+	extends CEditorAction
 {
 	private Action start;
 	private Action end;

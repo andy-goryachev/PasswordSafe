@@ -103,18 +103,18 @@ public class IntHashtable<T>
 		Entry tab[] = table;
 		for(int i=tab.length; i-- > 0 ; )
 		{
-			for(Entry<Object> e=tab[i]; e != null; e=e.next)
+			for(Entry<Object> e=tab[i]; e!=null; e=e.next)
 			{
 				if(e.value.equals(value))
 				{
 					return true;
 				}
 			}
-	    }
+		}
 		return false;
 	}
 
-	
+
 	// Returns true if the collection contains an element for the key.
 	// @param key the key that we are looking for
 	// @see IntHashtable#contains
@@ -125,9 +125,9 @@ public class IntHashtable<T>
 		int index = (hash & MASK) % tab.length;
 		for(Entry<Object> e=tab[index]; e != null ; e=e.next)
 		{
-		    if((e.hash == hash) && (e.key == key))
+			if((e.hash == hash) && (e.key == key))
 			{
-		    	return true;
+				return true;
 			}
 		}
 		return false;
@@ -210,14 +210,14 @@ public class IntHashtable<T>
 		int index = (hash & MASK) % tab.length;
 		for(Entry<Object> e=tab[index]; e != null; e = e.next)
 		{
-		    if((e.hash == hash) && (e.key == key))
+			if((e.hash == hash) && (e.key == key))
 			{
 				Object old = e.value;
 				e.value = value;
 				return old;
 			}
-	    }
-		
+		}
+
 		if(count >= threshold)
 		{
 			// Rehash the table if the threshold is exceeded.
@@ -255,17 +255,17 @@ public class IntHashtable<T>
 					prev.next = e.next;
 				}
 				else
-			    {
+				{
 					tab[index] = e.next;
-			    }
+				}
 				--count;
 				return e.value;
 			}
 		}
 		return null;
 	}
-	
-	
+
+
 	// Clears the hash table so that it has no more elements in it.
 	public synchronized void clear()
 	{
@@ -284,11 +284,13 @@ public class IntHashtable<T>
 	public synchronized Object clone()
 	{
 		try
-	    {
+		{
 			IntHashtable t = (IntHashtable)super.clone();
 			t.table = new Entry[table.length];
-			for(int i=table.length ; i-->0 ; )
-			t.table[i] = (table[i] != null) ? (Entry)table[i].clone() : null;
+			for(int i = table.length; i-- > 0;)
+			{
+				t.table[i] = (table[i] != null) ? (Entry)table[i].clone() : null;	
+			}
 			return t;
 		}
 		catch(CloneNotSupportedException e)
@@ -297,8 +299,8 @@ public class IntHashtable<T>
 			throw new InternalError();
 		}
 	}
-	
-	
+
+
 	public synchronized String toString()
 	{
 		int max = size() - 1;
@@ -371,6 +373,7 @@ public class IntHashtable<T>
 			{
 				return true;
 			}
+			
 			while(index-- > 0)
 			{
 				if((entry = table[index]) != null)
@@ -378,23 +381,27 @@ public class IntHashtable<T>
 					return true;
 				}
 			}
+			
 			return false;
 		}
-		
-		
+
+
 		public Object nextElement()
 		{
 			if(entry == null)
 			{
-			    while((index-- > 0) && ((entry = table[index]) == null))
-			    { }
+				while((index-- > 0) && ((entry = table[index]) == null))
+				{
+				}
 			}
+			
 			if(entry != null)
 			{
 				Entry<Object> e = entry;
 				entry = e.next;
 				return keys ? new Integer(e.key) : e.value;
 			}
+			
 			throw new NoSuchElementException("IntHashtableEnumerator");
 		}
 	}

@@ -607,14 +607,14 @@ public class UISettings
 				GraphicsDevice[] ds = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
 				for(GraphicsDevice dev: ds)
 				{
-					 Rectangle screen = dev.getDefaultConfiguration().getBounds();
-					 if(r.intersects(screen))
-					 {
-						 partiallyVisible = true;
-						 break;
-					 }
+					Rectangle screen = dev.getDefaultConfiguration().getBounds();
+					if(r.intersects(screen))
+					{
+						partiallyVisible = true;
+						break;
+					}
 				}
-				
+
 				if(!partiallyVisible)
 				{
 					// show on main screen and resize if necessary

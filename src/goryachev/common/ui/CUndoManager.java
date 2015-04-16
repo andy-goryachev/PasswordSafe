@@ -149,7 +149,7 @@ public class CUndoManager
 	
 	
 	public class LocalRedoAction
-	    extends CAction
+		extends CAction
 	{
 		public LocalRedoAction()
 		{

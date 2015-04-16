@@ -1,30 +1,22 @@
 // Copyright (c) 2006-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util.log;
+import goryachev.common.util.CKit;
 
 
 public class LogEntry
 {
-	private long timestamp = System.currentTimeMillis();
+	private final long timestamp = System.currentTimeMillis();
 	private Throwable exception;
 	private String text;
 	private String caller;
+	private int stackTraceLevel;
 
-
-	public LogEntry()
-	{
-	}
 	
-	
-	public LogEntry(Throwable e)
-	{
-		this.exception = e;
-	}
-	
-	
-	public LogEntry(Throwable e, String text)
+	public LogEntry(Throwable e, String text, int stackTraceLevel)
 	{
 		this.exception = e;
 		this.text = text;
+		this.stackTraceLevel = stackTraceLevel;
 	}
 	
 	
@@ -105,5 +97,19 @@ public class LogEntry
 			// problem with stack trace array?
 			e.printStackTrace();
 		}
+	}
+	
+	
+	public String getMessage()
+	{
+		if(text == null)
+		{
+			if(exception != null)
+			{
+				return CKit.stackTrace(exception, stackTraceLevel);
+			}
+		}
+		
+		return text;
 	}
 }

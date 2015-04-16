@@ -10,7 +10,7 @@ import org.bouncycastle.crypto.params.KeyParameter;
 
 
 public class EAXEncryptStream
-    extends OutputStream
+	extends OutputStream
 {
 	public static final int KEY_LENGTH_BYTES = 256/8;
 	public static final int BUFFER_SIZE = 64; // why so short?

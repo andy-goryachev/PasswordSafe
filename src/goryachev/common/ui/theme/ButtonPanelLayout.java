@@ -8,7 +8,7 @@ import java.awt.LayoutManager2;
 
 
 public class ButtonPanelLayout
-    implements LayoutManager2
+	implements LayoutManager2
 {
 	private int gap = 10;
 	private int minButtonWidth = 70;

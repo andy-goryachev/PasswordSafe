@@ -13,7 +13,7 @@ import javax.swing.text.JTextComponent;
 
 // Focus traversal policy with a pre-defined order.
 public class CFocusTraversalPolicy
-    extends FocusTraversalPolicy
+	extends FocusTraversalPolicy
 {
 	private CList<Component> components = new CList();
 	private Component defaultComponent;

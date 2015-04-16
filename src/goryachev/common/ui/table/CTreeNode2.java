@@ -11,7 +11,7 @@ import goryachev.common.util.CList;
  * children each time getChildren() is called (make sure to call clearChildren());
  */
 public abstract class CTreeNode2
-    extends CTreeNode
+	extends CTreeNode
 {
 	/** override in non-caching mode */
 	protected void loadChildren() { }

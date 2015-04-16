@@ -304,13 +304,13 @@ public class CSplitPaneDivider
 
 
 	//
-	
-	
+
+
 	public class DragControllerHack
 	{
-        protected int initialX;
-        protected int maxX;
-        protected int minX;
+		protected int initialX;
+		protected int maxX;
+		protected int minX;
 		protected int offset;
 
 

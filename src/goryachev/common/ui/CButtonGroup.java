@@ -8,8 +8,8 @@ import javax.swing.JToggleButton;
 
 
 public class CButtonGroup
-    extends ButtonGroup
-    implements ItemListener
+	extends ButtonGroup
+	implements ItemListener
 {
 	protected void onButtonStateChange() { }
 	

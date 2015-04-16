@@ -13,7 +13,7 @@ import javax.swing.text.ViewFactory;
 
 
 public class XParagraphView
-    extends ParagraphView
+	extends ParagraphView
 {
 	private CEditorKit kit;
 

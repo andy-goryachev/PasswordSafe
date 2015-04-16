@@ -12,8 +12,8 @@ import java.util.Iterator;
 // ZTableColumn: converst binary to text, configures the renderer for each column
 // populateRow() uses the item to populate the actual cells.
 public abstract class ZTableModel<K,V>
-    extends ZBaseTableModelCommon
-    implements Iterable<V>
+	extends ZBaseTableModelCommon
+	implements Iterable<V>
 {
 	protected abstract V getRowValue(K key);
 	

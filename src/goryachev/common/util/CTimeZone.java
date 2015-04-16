@@ -7,7 +7,7 @@ import java.util.TimeZone;
 // TODO why do I have this class?
 @Deprecated
 public class CTimeZone
-    implements HasProperty, HasDisplayName
+	implements HasProperty, HasDisplayName
 {
 	public final TimeZone tz;
 

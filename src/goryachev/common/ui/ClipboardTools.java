@@ -31,11 +31,11 @@ public class ClipboardTools
 		}
 		return null;
 	}
-	
-	
+
+
 	public static void copy(String s)
 	{
-        StringSelection sel = new StringSelection(s);
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(sel,null);
+		StringSelection sel = new StringSelection(s);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(sel, null);
 	}
 }

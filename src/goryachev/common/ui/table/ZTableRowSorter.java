@@ -13,7 +13,7 @@ import javax.swing.table.TableStringConverter;
 
 
 public class ZTableRowSorter
-    extends TableRowSorter
+	extends TableRowSorter
 {
 	private final ZTable table;
 	private Comparator[] comparators;
@@ -166,7 +166,7 @@ public class ZTableRowSorter
 	
 	// replaces TableRowSorter.TableRowSorterModelWrapper
 	public class Wrapper
-	    extends ModelWrapper<TableModel,Integer>
+		extends ModelWrapper<TableModel,Integer>
 	{
 		TableModel model;
 		

@@ -11,7 +11,7 @@ package goryachev.common.util.img.mortennobel;
  * A triangle filter (also known as linear or bilinear filter).
  */
 public class TriangleFilter
-    implements ResampleFilter
+	implements ResampleFilter
 {
 	public float getSamplingRadius()
 	{

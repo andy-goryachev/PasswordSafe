@@ -14,7 +14,7 @@ import javax.swing.text.Document;
 
 
 public class AboutDialog
-    extends CDialog
+	extends CDialog
 {
 	public final StandardDialogPanel panel;
 	

@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 
 
 public class OptionTreeNode
-    extends CTreeNode2
+	extends CTreeNode2
 {
 	private ImageIcon icon;
 	private String name;

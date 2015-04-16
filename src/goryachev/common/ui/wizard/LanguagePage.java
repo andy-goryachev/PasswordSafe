@@ -22,8 +22,8 @@ import javax.swing.JLabel;
 
 
 public class LanguagePage
-    extends BasePanel
-    implements HasPrompts
+	extends BasePanel
+	implements HasPrompts
 {
 	public final JLabel logoField;
 	public final CComboBox languageField;

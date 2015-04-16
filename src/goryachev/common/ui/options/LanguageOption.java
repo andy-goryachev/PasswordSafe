@@ -4,7 +4,7 @@ import goryachev.common.util.CLanguage;
 
 
 public class LanguageOption
-    extends COption<CLanguage>
+	extends COption<CLanguage>
 {
 	public LanguageOption(String id)
 	{

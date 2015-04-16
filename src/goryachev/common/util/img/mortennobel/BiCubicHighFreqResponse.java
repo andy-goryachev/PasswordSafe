@@ -11,7 +11,7 @@ package goryachev.common.util.img.mortennobel;
  * @author Heinz Doerr
  */
 public class BiCubicHighFreqResponse
-    extends BiCubicFilter
+	extends BiCubicFilter
 {
 	public BiCubicHighFreqResponse()
 	{

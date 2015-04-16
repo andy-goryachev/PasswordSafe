@@ -11,7 +11,7 @@ package goryachev.common.util.img.mortennobel;
  * A Hermite resampling filter.
  */
 public class HermiteFilter
-    implements ResampleFilter
+	implements ResampleFilter
 {
 	public float getSamplingRadius()
 	{

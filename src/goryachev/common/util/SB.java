@@ -477,14 +477,14 @@ public class SB
 
 	public void setCharAt(int index, char c)
 	{
-		sb.replace(index, index+1, String.valueOf(c));
+		sb.replace(index, index + 1, String.valueOf(c));
 	}
-	
-	
-    public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin)
-    {
-    	sb.getChars(srcBegin, srcEnd, dst, dstBegin);
-    }
+
+
+	public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin)
+	{
+		sb.getChars(srcBegin, srcEnd, dst, dstBegin);
+	}
 
 
 	public String getAndClear()
@@ -610,12 +610,12 @@ public class SB
 
 
 	public boolean conditionalNewline()
-    {
+	{
 		if(sb.length() > 0)
 		{
 			sb.append('\n');
 			return true;
 		}
 		return false;
-    }
+	}
 }

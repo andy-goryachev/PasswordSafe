@@ -11,7 +11,7 @@ package goryachev.common.util.img.mortennobel;
  * A B-spline resample filter.
  */
 public class BSplineFilter
-    implements ResampleFilter
+	implements ResampleFilter
 {
 	public float getSamplingRadius()
 	{

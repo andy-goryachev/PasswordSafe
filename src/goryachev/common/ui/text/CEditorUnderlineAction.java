@@ -8,7 +8,7 @@ import javax.swing.text.StyledEditorKit;
 
 
 public class CEditorUnderlineAction
-    extends CEditorAction
+	extends CEditorAction
 {
 	public CEditorUnderlineAction()
 	{

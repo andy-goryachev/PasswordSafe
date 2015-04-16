@@ -11,7 +11,7 @@ package goryachev.common.util.img.mortennobel;
  * @author Heinz Doerr
  */
 public class BiCubicFilter
-    implements ResampleFilter
+	implements ResampleFilter
 {
 	protected final float a;
 

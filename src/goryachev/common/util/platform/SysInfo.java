@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2015 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.util.log;
+package goryachev.common.util.platform;
 import goryachev.common.ui.Application;
 import goryachev.common.util.CComparator;
 import goryachev.common.util.CKit;
@@ -11,7 +11,11 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
+import java.awt.Rectangle;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Map;
@@ -24,11 +28,24 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 
 
-public class StartupLog
+public class SysInfo
 {
+	private boolean ui;
 	private SB sb;
 	private String indent = "\t";
 	private DecimalFormat numberFormat = new DecimalFormat("#,##0.##");
+	
+	
+	public SysInfo(boolean ui)
+	{
+		this.ui = ui;
+	}
+	
+	
+	public SysInfo()
+	{
+		this(true);
+	}
 	
 	
 	public String getSystemInfo()
@@ -36,19 +53,16 @@ public class StartupLog
 		sb = new SB();
 		
 		extractApp();
+		extractGraphics();
 		extractEnvironment();
 		extractSystemProperties();
 		
-		try
+		if(ui)
 		{
 			extractUIDefaults();
 		}
-		catch(Throwable ignore)
-		{ }
 		
-		String s = sb.toString();
-		sb = null;
-		return s;
+		return sb.getAndClear();
 	}
 	
 	
@@ -173,13 +187,14 @@ public class StartupLog
 			sb.a(x.getClass().getSimpleName());
 			
 			Color c = (Color)x;
-			sb.a("(r=").a(c.getRed());
-			sb.a(",g=").a(c.getGreen());
-			sb.a(",b=").a(c.getBlue());
+			sb.a("(");
+			sb.a(Hex.toHexByte(c.getRed()));
+			sb.a(Hex.toHexByte(c.getGreen()));
+			sb.a(Hex.toHexByte(c.getBlue()));
 			
 			if(c.getAlpha() != 255)
 			{
-				sb.a(",a=").a(c.getAlpha());
+				sb.a(".").a(Hex.toHexByte(c.getAlpha()));
 			}
 			
 			sb.a(")");
@@ -295,30 +310,69 @@ public class StartupLog
 	
 	protected void extractUIDefaults()
 	{
-		sb.a("UIManager.getLookAndFeelDefaults");
-		sb.nl();
-		
-		UIDefaults defs = UIManager.getLookAndFeelDefaults();
-		
-		CList<Object> keys = new CList(defs.keySet());
-		new CComparator<Object>()
-		{
-			public int compare(Object a, Object b)
+		try
+            {
+	            sb.a("UIManager.getLookAndFeelDefaults");
+	            sb.nl();
+	            
+	            UIDefaults defs = UIManager.getLookAndFeelDefaults();
+	            
+	            CList<Object> keys = new CList(defs.keySet());
+	            new CComparator<Object>()
+	            {
+	            	public int compare(Object a, Object b)
+	            	{
+	            		return compareText(a, b);
+	            	}
+	            }.sort(keys);
+	            
+	            for(Object key: keys)
+	            {
+	            	sb.tab();
+	            	sb.a(key);
+	            	sb.a(" = ");
+	            	
+	            	Object v = defs.get(key);
+	            	describe(v);
+	            	
+	            	sb.nl();
+	            }
+            }
+            catch(Throwable ignore)
+            {
+            }
+	}
+	
+	
+	protected void extractGraphics()
+	{
+		try
+            {
+	            sb.a("Graphics");
+			sb.nl();
+
+			GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			for(GraphicsDevice dev: env.getScreenDevices())
 			{
-				return compareText(a, b);
+				sb.a(indent);
+				sb.a(dev.getIDstring()).a(":");
+				sb.nl();
+				
+				for(GraphicsConfiguration gc: dev.getConfigurations())
+				{
+					Rectangle r = gc.getBounds();
+					sb.a(indent);
+					sb.a(indent);
+					sb.a(r.width).a("x").a(r.height);
+					sb.a(" @(").a(r.x).a(",").a(r.y).a(")");
+					sb.nl();
+				}
 			}
-		}.sort(keys);
-		
-		for(Object key: keys)
-		{
-			sb.tab();
-			sb.a(key);
-			sb.a(" = ");
-			
-			Object v = defs.get(key);
-			describe(v);
 			
 			sb.nl();
 		}
+		catch(Throwable ignore)
+		{
+            }
 	}
 }

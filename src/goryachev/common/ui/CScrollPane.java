@@ -62,11 +62,11 @@ public class CScrollPane
 
 	/** a JTextArea in a scrollpane with this flag set would resize automatically */
 	public void setTrackComponentDimensions(boolean on)
-    {
+	{
 		trackComponentDimensions = on;
-    }
-	
-	
+	}
+
+
 	public Dimension getMinimumSize()
 	{
 		if(trackComponentDimensions)

@@ -8,7 +8,7 @@ import javax.swing.text.StyledEditorKit;
 
 
 public class CEditorItalicAction
-    extends CEditorAction
+	extends CEditorAction
 {
 	public CEditorItalicAction()
 	{

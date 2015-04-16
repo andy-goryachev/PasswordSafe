@@ -5,7 +5,7 @@ import java.util.Collection;
 
 
 public class CStringList
-    extends CList<String>
+	extends CList<String>
 {
 	public CStringList(int initialCapacity)
 	{

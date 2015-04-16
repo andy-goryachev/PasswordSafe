@@ -236,8 +236,8 @@ public class CButtonPanel
 				JButton b = (JButton)c;
 				if(b.getAction() == a)
 				{
-					 b.setEnabled(on);
-					 return;
+					b.setEnabled(on);
+					return;
 				}
 			}
 		}

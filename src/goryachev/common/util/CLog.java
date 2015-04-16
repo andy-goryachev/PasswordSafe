@@ -31,7 +31,7 @@ public class CLog
 	{
 		if(enabled)
 		{
-			LogEntry en = new LogEntry(e, CKit.stackTrace(e));
+			LogEntry en = new LogEntry(e, null, 0);
 			if(printCallingMethod)
 			{
 				en.setCaller(e, 0);
@@ -52,7 +52,7 @@ public class CLog
 		if(enabled)
 		{
 			Throwable e = new Throwable(message);
-			LogEntry en = new LogEntry(e, CKit.stackTrace(e, level));
+			LogEntry en = new LogEntry(e, null, level);
 			if(printCallingMethod)
 			{
 				en.setCaller(e, level);

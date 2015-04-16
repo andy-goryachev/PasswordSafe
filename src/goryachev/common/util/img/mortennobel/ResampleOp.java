@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author Heinz Doerr
  */
 public class ResampleOp
-    extends AdvancedResizeOp
+	extends AdvancedResizeOp
 {
 	public static class SubSamplingData
 	{

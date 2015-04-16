@@ -11,7 +11,7 @@ import javax.swing.event.ListSelectionListener;
 
 
 public abstract class CTableSelector
-    implements ListSelectionListener
+	implements ListSelectionListener
 {
 	public abstract void tableSelectionChangeDetected();
 	

@@ -8,7 +8,7 @@ import javax.swing.text.StyledEditorKit;
 
 
 public class CEditorSuperscriptAction
-    extends CEditorAction
+	extends CEditorAction
 {
 	public CEditorSuperscriptAction()
 	{

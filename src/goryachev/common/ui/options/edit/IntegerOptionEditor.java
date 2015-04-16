@@ -8,7 +8,7 @@ import javax.swing.JTextField;
 
 
 public class IntegerOptionEditor
-    extends OptionEditor<Integer>
+	extends OptionEditor<Integer>
 {
 	public final JTextField editor = new JTextField();
 

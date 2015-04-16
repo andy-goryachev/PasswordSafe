@@ -217,15 +217,15 @@ public class ZTable
 			setRowSorter(null);
 		}
 	}
-	
-	
+
+
 	public void setRowFilter(final ZRowFilter f)
 	{
 		DefaultRowSorter rs = (DefaultRowSorter)getRowSorter();
 		rs.setRowFilter(new RowFilter<TableModel,Integer>()
 		{
-			public boolean include(RowFilter.Entry<? extends TableModel, ? extends Integer> en)
-            {
+			public boolean include(RowFilter.Entry<? extends TableModel,? extends Integer> en)
+			{
 				if(f == null)
 				{
 					return true;
@@ -234,9 +234,9 @@ public class ZTable
 				{
 					TableModel m = en.getModel();
 					Integer ix = en.getIdentifier();
-                	return f.include(m, ix);
+					return f.include(m, ix);
 				}
-            }
+			}
 		});
 	}
 

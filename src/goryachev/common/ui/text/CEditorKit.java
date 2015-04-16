@@ -103,20 +103,20 @@ public class CEditorKit
 	{
 		return new CDocument();
 	}
-	
-	
+
+
 	public void setNoWrapMode(boolean on)
-    {
+	{
 		noWrapMode = on;
-    }
-	
-	
+	}
+
+
 	public boolean isNoWrapMode()
-    {
+	{
 		return noWrapMode;
-    }
-	
-	
+	}
+
+
 	public MutableAttributeSet getInputAttributes()
 	{
 		// TODO use this to clean up attributes

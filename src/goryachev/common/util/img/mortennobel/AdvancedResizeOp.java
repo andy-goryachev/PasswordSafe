@@ -21,7 +21,7 @@ import java.awt.image.ColorModel;
  * @author Morten Nobel-Joergensen
  */
 public abstract class AdvancedResizeOp
-    implements BufferedImageOp
+	implements BufferedImageOp
 {
 	public static enum UnsharpenMask
 	{

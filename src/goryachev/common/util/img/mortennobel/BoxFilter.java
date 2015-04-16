@@ -11,7 +11,7 @@ package goryachev.common.util.img.mortennobel;
  * A box filter (also known as nearest neighbor).
  */
 public class BoxFilter
-    implements ResampleFilter
+	implements ResampleFilter
 {
 	public float getSamplingRadius()
 	{

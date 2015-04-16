@@ -103,7 +103,7 @@ public abstract class LogWriter
 			sb.a(' ');
 		}
 		
-		sb.a(en.getText());
+		sb.a(en.getMessage());
 		
 		return sb.toString();
 	}

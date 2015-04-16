@@ -20,7 +20,7 @@ package goryachev.common.util.img.jhlabs;
  * A simple blur filter. You should probably use BoxBlurFilter instead.
  */
 public class BlurFilter
-    extends ConvolveFilter
+	extends ConvolveFilter
 {
 	/**
 	 * A 3x3 convolution kernel for a simple blur.

@@ -8,7 +8,7 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 
 public class CTableRendererBorder
-    extends CBorder
+	extends CBorder
 {
 	public static final int VGAP = 0;
 	public static final int HGAP = 3;

@@ -648,14 +648,14 @@ public class CTreeTable<T extends CTreeNode>
 		}
 		return rv;
 	}
-	
+
 
 	public String dump()
-    {
+	{
 		return getCTreeTableModel().dump();
-    }
-	
-	
+	}
+
+
 	public void stopEditing()
 	{
 		UI.stopEditing(this);

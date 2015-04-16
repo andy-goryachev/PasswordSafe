@@ -6,7 +6,7 @@ import javax.swing.text.Utilities;
 
 
 public class CEditorEndLineAction
-    extends CEditorAction
+	extends CEditorAction
 {
 	private boolean select;
 	

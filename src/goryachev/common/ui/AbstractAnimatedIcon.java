@@ -78,10 +78,10 @@ public abstract class AbstractAnimatedIcon
 		Component actual = findActualComponent(c);
 		if(actual != null)
 		{
-            Point p = SwingUtilities.convertPoint(c, x, y, actual);
-            c = actual;
-            x = p.x;
-            y = p.y;
+			Point p = SwingUtilities.convertPoint(c, x, y, actual);
+			c = actual;
+			x = p.x;
+			y = p.y;
 		}
 		repaints.add(new Repaint(c, x, y, getIconWidth(), getIconHeight()));
 	}
@@ -111,6 +111,7 @@ public abstract class AbstractAnimatedIcon
 			{
 				r.repaint();
 			}
+			
 			repaints.clear();
 		}
 	}

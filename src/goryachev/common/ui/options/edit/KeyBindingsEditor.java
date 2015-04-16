@@ -52,13 +52,13 @@ public class KeyBindingsEditor
 		UI.whenFocused(table, KeyEvent.VK_ENTER, modifyAction);
 		
 		filter = new ZFilterLogic(table);
-		
+
 		selector = new CTableSelector(table)
 		{
 			public void tableSelectionChangeDetected()
-            {
+			{
 				onSelectionChange();
-            }
+			}
 		};
 		
 		CScrollPane scroll = new CScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -204,10 +204,10 @@ public class KeyBindingsEditor
 			model.refreshAll();
 		}
 	}
-	
-	
+
+
 	public boolean isModified()
-    {
+	{
 		for(KeyBindingEntry en: model.getItems())
 		{
 			if(en.isModified())
@@ -215,19 +215,19 @@ public class KeyBindingsEditor
 				return true;
 			}
 		}
-	    return false;
-    }
+		return false;
+	}
 
 
 	public void commit()
-    {
+	{
 		for(KeyBindingEntry en: model.getItems())
 		{
 			en.commit();
 		}
-    }
-	
-	
+	}
+
+
 	public String getSearchString()
 	{
 		SB sb = new SB();

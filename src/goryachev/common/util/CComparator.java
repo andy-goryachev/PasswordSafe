@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public abstract class CComparator<T>
-    implements Comparator<T>
+	implements Comparator<T>
 {
 	public abstract int compare(T a, T b);
 

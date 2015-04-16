@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
  * than the destination image
  */
 public class ThumbnailRescaleOp
-    extends AdvancedResizeOp
+	extends AdvancedResizeOp
 {
 	public static enum Sampling
 	{

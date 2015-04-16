@@ -1,21 +1,24 @@
-// Copyright (c) 2009-2012 Andy Goryachev
+// Copyright (c) 2009-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.util.CKit;
 import goryachev.common.util.TXT;
+import goryachev.common.util.platform.SysInfo;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
 import javax.swing.JLabel;
+import javax.swing.JPopupMenu;
 
 
 public class CMemoryBar
 	extends JLabel
 	implements CAnimator.Client
 {
+	public final CAction gcAction = new CAction() { public void action() { actionGC(); } };
+	public final CAction sysInfoAction = new CAction() { public void action() { actionSysInfo(); } };
+	
 	private boolean startAnimator = true;
 	private int period = 750;
 	private String usedText;
@@ -46,10 +49,34 @@ public class CMemoryBar
 		setForeground(Color.gray);
 		setHorizontalAlignment(CENTER);
 		setBorder(new CBorder(Color.gray));
-		setPreferredSize(new Dimension(75,-1));
+		setPreferredSize(new Dimension(75, -1));
+
+		new CPopupMenuController(this)
+		{
+			public JPopupMenu constructPopupMenu()
+			{
+				return createPopupMenu();
+			}
+
+			public void onDoubleClick()
+			{
+				actionGC();
+			}
+		};
 	}
-	
-	
+
+
+	public JPopupMenu createPopupMenu()
+	{
+		CPopupMenu m = new CPopupMenu();
+		m.add(new CMenuItem(TXT.get("CMemoryBar.run memory garbage collector", "Run Garbage Collector (double click)"), gcAction));
+		m.addSeparator();
+		m.add(new CMenuItem(TXT.get("CMemoryBar.show system info", "System Information"), sysInfoAction));
+		m.add(TXT.get("CMemoryBar.show error log", "Error Log"));
+		return m;
+	}
+
+
 	public void setUsedColor(Color c)
 	{
 		usedColor = c;
@@ -73,6 +100,12 @@ public class CMemoryBar
 		period = ms;
 	}
 	
+	
+	public void setPreferredWidth(int w)
+	{
+		setPreferredSize(new Dimension(w,-1));
+	}
+
 	
 	public boolean isOpaque()
 	{
@@ -121,11 +154,11 @@ public class CMemoryBar
 		
 		String tooltip = 
 			"<html>" + 
-			TXT.get("CMemoryBar.used ram","Used memory: {0}", usedText) + "<br>" +
-			TXT.get("CMemoryBar.total ram","Allocated: {0}", totalText) + "<br>" +
-			TXT.get("CMemoryBar.max ram","Maximum: {0}", maxText) + "<br>" +
+			TXT.get("CMemoryBar.used ram", "Used memory: {0}", usedText) + "<br>" +
+			TXT.get("CMemoryBar.total ram", "Allocated: {0}", totalText) + "<br>" +
+			TXT.get("CMemoryBar.max ram", "Maximum: {0}", maxText) + "<br>" +
 			"<i>" +
-			TXT.get("CMemoryBar.description","Click to try to free up memory.");
+			TXT.get("CMemoryBar.for menu", "Right click for menu");
 		
 		setToolTipText(tooltip);
 	}
@@ -231,48 +264,41 @@ public class CMemoryBar
 
 		if(startAnimator)
 		{
-			new Animator(this, period);
+			initHandler();
 			startAnimator = false;
 		}
 	}
 	
 	
-	public void setPreferredWidth(int w)
+	protected void initHandler()
 	{
-		setPreferredSize(new Dimension(w,-1));
+		new CAnimator(this, period);
 	}
-
-	
-	//
 	
 	
-	public static class Animator extends CAnimator implements MouseListener 
+	protected void actionGC()
 	{
-		public Animator(CMemoryBar b, int period)
-		{
-			super(b, period);
-			b.addMouseListener(this);
-		}
+		System.gc();
+		System.runFinalization();
+		System.gc();
+	}
+	
+	
+	protected void actionSysInfo()
+	{
+		String text = new SysInfo(false).getSystemInfo();
 		
+		BaseDialog d = new BaseDialog(this, "SystemInformationDialog", true);
+		d.setSize(700, 750);
+		d.setTitle(TXT.get("CMemoryBar.system information","System Information"));
 		
-		public void mouseClicked(MouseEvent e) 
-		{
-			switch(e.getClickCount())
-			{
-			case 2:
-				System.gc();
-				System.runFinalization();
-				System.gc();
-				break;
-			default:
-				System.gc();
-			}
-		}
-
-
-		public void mouseEntered(MouseEvent e) { }
-		public void mouseExited(MouseEvent e) { }
-		public void mousePressed(MouseEvent e) { }
-		public void mouseReleased(MouseEvent e) { }
+		BasePanel p = new BasePanel();
+		CTextPane t = p.setCenterCTextPane();
+		t.setText0(text);
+		t.setCaretPosition(0);
+		p.buttons().add(new CButton(Menus.OK, d.closeDialogAction, true));
+		d.setCenter(p);
+		d.closeOnEscape(p);
+		d.open();
 	}
 }

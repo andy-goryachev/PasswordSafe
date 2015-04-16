@@ -11,7 +11,7 @@ package goryachev.common.util.img.mortennobel;
  * A Bell resample filter.
  */
 public class BellFilter
-    implements ResampleFilter
+	implements ResampleFilter
 {
 	public float getSamplingRadius()
 	{

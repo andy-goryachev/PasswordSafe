@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 
 
 public class DefaultSplashScreen
-    extends JFrame
+	extends JFrame
 {
 	public final JLabel splashField;
 

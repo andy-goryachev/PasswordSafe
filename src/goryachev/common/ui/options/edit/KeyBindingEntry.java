@@ -12,15 +12,15 @@ public class KeyBindingEntry
 	private KeyStroke key;
 	private KeyStroke original;
 
-	
+
 	public KeyBindingEntry(Accelerator a, KeyStroke k)
-    {
+	{
 		this.accelerator = a;
 		this.key = k;
 		this.original = k;
-    }
-	
-	
+	}
+
+
 	public KeyStroke getKey()
 	{
 		return key;

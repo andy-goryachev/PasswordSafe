@@ -37,12 +37,12 @@ public class KeyNames
 		{
 			sb.append("Alt").append('-');
 		}
-		if((modifiers & InputEvent.ALT_GRAPH_DOWN_MASK) != 0) 
+		if((modifiers & InputEvent.ALT_GRAPH_DOWN_MASK) != 0)
 		{
 			sb.append("AltGr").append('-');
 		}
-		
-        if(key.getKeyCode() == KeyEvent.VK_UNDEFINED)
+
+		if(key.getKeyCode() == KeyEvent.VK_UNDEFINED)
 		{
 			sb.append(key.getKeyChar());
 		}
@@ -50,7 +50,7 @@ public class KeyNames
 		{
 			sb.append(KeyNames.getKeyCodeName(key.getKeyCode()));
 		}
-        
+
 		return sb.toString();
 	}
 	
@@ -76,7 +76,7 @@ public class KeyNames
 
 
 	// keys that have English names printed on them are not translated
-    public static String getKeyCodeName(int key)
+	public static String getKeyCodeName(int key)
 	{
 		switch(key)
 		{

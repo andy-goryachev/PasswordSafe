@@ -8,7 +8,7 @@ import javax.swing.text.StyledEditorKit;
 
 
 public class CEditorStrikethroughAction
-    extends CEditorAction
+	extends CEditorAction
 {
 	public CEditorStrikethroughAction()
 	{

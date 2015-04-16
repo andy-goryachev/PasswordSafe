@@ -36,22 +36,22 @@ public class ColorOption
 		super(propertyName);
 		color = c;
 	}
-	
-	
+
+
 	public ColorOption(String propertyName, int r, int g, int b)
 	{
 		super(propertyName);
-        color = new Color(r, g, b);
+		color = new Color(r, g, b);
 	}
-	
-	
+
+
 	public ColorOption(String propertyName, int r, int g, int b, int a)
 	{
 		super(propertyName);
-        color = new Color(r, g, b, a);
+		color = new Color(r, g, b, a);
 	}
-	
-	
+
+
 	public ColorOption(String propertyName, CSettings settings, Collection<COption<?>> list)
 	{
 		super(propertyName, settings, list);
@@ -66,7 +66,7 @@ public class ColorOption
 
 	public Color parseProperty(String s)
 	{
-		return new Color(Integer.parseInt(s,16), true);
+		return new Color(Integer.parseInt(s, 16), true);
 	}
 
 

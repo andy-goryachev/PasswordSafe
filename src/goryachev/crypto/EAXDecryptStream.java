@@ -49,99 +49,99 @@ public class EAXDecryptStream
 		if(available == 0)
 		{
 			load();
-			
+
 			if(available == 0)
 			{
 				return -1;
 			}
 		}
-		
+
 		int b = out[pos++] & 0xff;
 		available--;
-			
+
 		return b;
 	}
-	
-	
-    public int read(byte b[], int off, int len) throws IOException 
-    {
-    	if(available == 0)
-    	{
+
+
+	public int read(byte b[], int off, int len) throws IOException
+	{
+		if(available == 0)
+		{
 			load();
-			
+
 			if(available == 0)
 			{
 				return -1;
 			}
-    	}
-    	
-    	int sz = Math.min(available, len);
-    	
-    	System.arraycopy(out, pos, b, off, sz);
-    	
-    	pos += sz;
-    	available -= sz;
-    	    	
-    	return sz;
-    }
-    
-    
-    protected void load() throws IOException
-    {
-    	pos = 0;
-    	
-    	if(in == null)
-    	{
-    		return;
-    	}
-    	
-    	try
-    	{
-	    	while(available == 0)
-	    	{
-	    		int rd = in.read(buf);
-	    		if(rd >= 0)
-	    		{
-		    		int n = cipher.processBytes(buf, 0, rd, out, 0);
-					available += n;
-	    		}
-	    		else
-	    		{	    			
-	    			int n = cipher.doFinal(out, 0);
-	    			available += n;
-	    			
-	    			CKit.close(in);
-	    			in = null;
+		}
 
-	    			return;
-	    		}
-	    	}
-    	}
-    	catch(IOException e)
-    	{
-    		throw e;
-    	}
-    	catch(Exception e)
-    	{
-    		throw new IOException(e);
-    	}
-    }
-    
-    
-    public void close() throws IOException
-    {
-   		Crypto.zero(keyParameter);
-    	CKit.close(in);
-    	Crypto.zero(buf);
-    	Crypto.zero(out);
-    	
-    	cipher = null;
-    	buf = null;
-    	out = null;
+		int sz = Math.min(available, len);
+
+		System.arraycopy(out, pos, b, off, sz);
+
+		pos += sz;
+		available -= sz;
+
+		return sz;
 	}
 
 
-    /** for debugging */
+	protected void load() throws IOException
+	{
+		pos = 0;
+
+		if(in == null)
+		{
+			return;
+		}
+
+		try
+		{
+			while(available == 0)
+			{
+				int rd = in.read(buf);
+				if(rd >= 0)
+				{
+					int n = cipher.processBytes(buf, 0, rd, out, 0);
+					available += n;
+				}
+				else
+				{
+					int n = cipher.doFinal(out, 0);
+					available += n;
+
+					CKit.close(in);
+					in = null;
+
+					return;
+				}
+			}
+		}
+		catch(IOException e)
+		{
+			throw e;
+		}
+		catch(Exception e)
+		{
+			throw new IOException(e);
+		}
+	}
+
+
+	public void close() throws IOException
+	{
+		Crypto.zero(keyParameter);
+		CKit.close(in);
+		Crypto.zero(buf);
+		Crypto.zero(out);
+
+		cipher = null;
+		buf = null;
+		out = null;
+	}
+
+
+	/** for debugging */
 	public InputStream getInputStream()
 	{
 		return in;

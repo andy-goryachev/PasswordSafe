@@ -159,23 +159,23 @@ public class D
 
 		return sb.toString();
 	}
-	
-	
-    /**
-     * Writes a formatted string to this object's destination using the
-     * specified format string and arguments.
-     *
-     * @param  format
-     *         A format string per {@link java.util.Formatter} rules.
-     *
-     * @param  args
-     *         Arguments referenced by the format specifiers in the format
-     *         string.  If there are more arguments than format specifiers, the
-     *         extra arguments are ignored.  The maximum number of arguments is
-     *         limited by the maximum dimension of a Java array as defined by
-     *         <cite>The Java&trade; Virtual Machine Specification</cite>.
-     */
-	public static void printf(String format, Object ... args)
+
+
+	/**
+	 * Writes a formatted string to this object's destination using the
+	 * specified format string and arguments.
+	 *
+	 * @param  format
+	 *         A format string per {@link java.util.Formatter} rules.
+	 *
+	 * @param  args
+	 *         Arguments referenced by the format specifiers in the format
+	 *         string.  If there are more arguments than format specifiers, the
+	 *         extra arguments are ignored.  The maximum number of arguments is
+	 *         limited by the maximum dimension of a Java array as defined by
+	 *         <cite>The Java&trade; Virtual Machine Specification</cite>.
+	 */
+	public static void printf(String format, Object... args)
 	{
 		String s = String.format(format, args);
 		log(s, 2);
@@ -433,17 +433,17 @@ public class D
 
 
 	public static String toString(Object a)
-    {
+	{
 		return (a == null ? null : a.toString());
-    }
-	
-	
+	}
+
+
 	public static int hashCode(Object ... xs)
 	{
 		return hashCodeArray(xs);
 	}
-	
-	
+
+
 	public static int hashCodeArray(Object[] xs)
 	{
 		int c = 0;

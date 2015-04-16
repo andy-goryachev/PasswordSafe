@@ -9,7 +9,7 @@ import javax.swing.text.DefaultStyledDocument;
 
 
 public class CEditorToLowerCaseAction
-    extends CEditorAction
+	extends CEditorAction
 {
 	public CEditorToLowerCaseAction()
 	{

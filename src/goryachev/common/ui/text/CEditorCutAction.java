@@ -5,7 +5,7 @@ import javax.swing.text.JTextComponent;
 
 
 public class CEditorCutAction
-    extends CEditorAction
+	extends CEditorAction
 {
 	public CEditorCutAction()
 	{

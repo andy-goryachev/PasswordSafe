@@ -144,7 +144,7 @@ public class CTreeUI
 	}
 	
 	
-    // This method is slow -- revisit when Java2D is ready.
+	// This method is slow -- revisit when Java2D is ready.
 	// assumes x1 <= x2
 	protected void drawDashedHorizontalLine(Graphics g, int y, int x1, int x2)
 	{

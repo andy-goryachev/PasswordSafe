@@ -108,19 +108,19 @@ public abstract class LocalImageView
 	{
 		return getIntAttr(HTML.Attribute.BORDER, isLink() ? 1 : 0);
 	}
-    
-	
-    // Returns the amount of extra space to add along an axis
-	protected int getSpace(int axis) 
+
+
+	// Returns the amount of extra space to add along an axis
+	protected int getSpace(int axis)
 	{
-		return getIntAttr(axis==X_AXIS ? HTML.Attribute.HSPACE : HTML.Attribute.VSPACE, 0);
+		return getIntAttr(axis == X_AXIS ? HTML.Attribute.HSPACE : HTML.Attribute.VSPACE, 0);
 	}
-    
-	
-    // Returns the border's color, or null if this is not a link
-	protected Color getBorderColor() 
+
+
+	// Returns the border's color, or null if this is not a link
+	protected Color getBorderColor()
 	{
-		StyledDocument doc = (StyledDocument) getDocument();
+		StyledDocument doc = (StyledDocument)getDocument();
 		return doc.getForeground(getAttributes());
 	}
     
@@ -169,13 +169,13 @@ public abstract class LocalImageView
 			return i;
 		}
 		else
-	    {
+		{
 			return deflt;
-	    }
+		}
 	}
-    
 
-	public void setParent(View parent) 
+
+	public void setParent(View parent)
 	{
 		super.setParent(parent);
 		container = (parent != null ? getContainer() : null);
@@ -186,27 +186,27 @@ public abstract class LocalImageView
 		}
 	}
 
-	
-    public void changedUpdate(DocumentEvent e, Shape a, ViewFactory f) 
-    {
-    	super.changedUpdate(e,a,f);
-    	float align = getVerticalAlignment();
-    	
-    	int h = height;
-    	int w = width;
-    	
-    	initialize(getElement());
-    	
-    	boolean hChanged = (height != h);
-    	boolean wChanged = (width != w);
-    	if(hChanged || wChanged || getVerticalAlignment()!=align ) 
-    	{
-			getParent().preferenceChanged(this,hChanged,wChanged);
-    	}
-    }
+
+	public void changedUpdate(DocumentEvent e, Shape a, ViewFactory f)
+	{
+		super.changedUpdate(e, a, f);
+		float align = getVerticalAlignment();
+
+		int h = height;
+		int w = width;
+
+		initialize(getElement());
+
+		boolean hChanged = (height != h);
+		boolean wChanged = (width != w);
+		if(hChanged || wChanged || getVerticalAlignment() != align)
+		{
+			getParent().preferenceChanged(this, hChanged, wChanged);
+		}
+	}
 
 
-	public void paint(Graphics g, Shape a) 
+	public void paint(Graphics g, Shape a)
 	{
 		Color oldColor = g.getColor();
 		bounds = a.getBounds();
@@ -271,18 +271,18 @@ public abstract class LocalImageView
 	// Determines whether the image is selected, and if it's the only thing selected.
 	// return  0 if not selected, 1 if selected, 2 if exclusively selected.
 	// "Exclusive" selection is only returned when editable. */
-	protected int getSelectionState() 
+	protected int getSelectionState()
 	{
 		int p0 = element.getStartOffset();
 		int p1 = element.getEndOffset();
-		if(container instanceof JTextComponent) 
+		if(container instanceof JTextComponent)
 		{
-		    JTextComponent textComp = (JTextComponent)container;
-		    int start = textComp.getSelectionStart();
-		    int end = textComp.getSelectionEnd();
-		    if(start<=p0 && end>=p1) 
-		    {
-				if(start==p0 && end==p1 && isEditable())
+			JTextComponent textComp = (JTextComponent)container;
+			int start = textComp.getSelectionStart();
+			int end = textComp.getSelectionEnd();
+			if(start <= p0 && end >= p1)
+			{
+				if(start == p0 && end == p1 && isEditable())
 				{
 					return 2;
 				}
@@ -290,27 +290,27 @@ public abstract class LocalImageView
 				{
 					return 1;
 				}
-		    }
+			}
 		}
 		return 0;
 	}
 
-	
-	protected boolean isEditable() 
+
+	protected boolean isEditable()
 	{
-    	return (container instanceof JEditorPane) && ((JEditorPane)container).isEditable();
+		return (container instanceof JEditorPane) && ((JEditorPane)container).isEditable();
 	}
-    
-	
-	protected Color getHighlightColor() 
+
+
+	protected Color getHighlightColor()
 	{
 		JTextComponent textComp = (JTextComponent)container;
 		return textComp.getSelectionColor();
-    }
+	}
 
-    
-    // no progressive display
-	public boolean imageUpdate(Image img, int flags, int x, int y, int width, int height ) 
+
+	// no progressive display
+	public boolean imageUpdate(Image img, int flags, int x, int y, int width, int height)
 	{
 		return false;
 	}
@@ -337,25 +337,25 @@ public abstract class LocalImageView
 		}
 	}
 
-	
-    /**
-     * Provides a mapping from the document model coordinate space
-     * to the coordinate space of the view mapped to it.
-     * @param pos the position to convert
-     * @param a the allocated region to render into
-     * @return the bounding box of the given position
-     * @exception BadLocationException  if the given position does not represent a
-     *   valid location in the associated document
-     * @see View#modelToView
-     */
-	public Shape modelToView(int pos, Shape a, Position.Bias b) throws BadLocationException 
+
+	/**
+	 * Provides a mapping from the document model coordinate space
+	 * to the coordinate space of the view mapped to it.
+	 * @param pos the position to convert
+	 * @param a the allocated region to render into
+	 * @return the bounding box of the given position
+	 * @exception BadLocationException  if the given position does not represent a
+	 *   valid location in the associated document
+	 * @see View#modelToView
+	 */
+	public Shape modelToView(int pos, Shape a, Position.Bias b) throws BadLocationException
 	{
 		int p0 = getStartOffset();
 		int p1 = getEndOffset();
-		if((pos >= p0) && (pos <= p1)) 
+		if((pos >= p0) && (pos <= p1))
 		{
 			Rectangle r = a.getBounds();
-			if(pos == p1) 
+			if(pos == p1)
 			{
 				r.x += r.width;
 			}
@@ -365,40 +365,40 @@ public abstract class LocalImageView
 		return null;
 	}
 
-	
-    /**
-     * Provides a mapping from the view coordinate space to the logical
-     * coordinate space of the model.
-     *
-     * @param x the X coordinate
-     * @param y the Y coordinate
-     * @param a the allocated region to render into
-     * @return the location within the model that best represents the
-     *  given point of view
-     * @see View#viewToModel
-     */
-	public int viewToModel(float x, float y, Shape a, Position.Bias[] bias) 
+
+	/**
+	 * Provides a mapping from the view coordinate space to the logical
+	 * coordinate space of the model.
+	 *
+	 * @param x the X coordinate
+	 * @param y the Y coordinate
+	 * @param a the allocated region to render into
+	 * @return the location within the model that best represents the
+	 *  given point of view
+	 * @see View#viewToModel
+	 */
+	public int viewToModel(float x, float y, Shape a, Position.Bias[] bias)
 	{
 		Rectangle alloc = (Rectangle)a;
-		if(x < alloc.x + alloc.width) 
+		if(x < alloc.x + alloc.width)
 		{
-		    bias[0] = Position.Bias.Forward;
-		    return getStartOffset();
+			bias[0] = Position.Bias.Forward;
+			return getStartOffset();
 		}
 		bias[0] = Position.Bias.Backward;
 		return getEndOffset();
 	}
 
-    
-	public void setSize(float width, float height) 
+
+	public void setSize(float width, float height)
 	{
 		// Ignore -- image size is determined by the tag attrs
 	}
-    
-	
+
+
 	// Change the size of this image. This alters the HEIGHT and WIDTH
 	// attributes of the Element and causes a re-layout
-	protected void resize(int w, int h) 
+	protected void resize(int w, int h)
 	{
 		if(w==width && h==height)
 		{

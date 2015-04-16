@@ -238,21 +238,21 @@ public class CLanguage
 	{
 		return get(Locale.getDefault());
 	}
-	
-	
+
+
 	public static CLanguage get(Locale locale)
 	{
 		try
-        {
-	        return new CLanguage(byID(locale.getLanguage(), locale.getCountry()));
-        }
-        catch(Exception e)
-        {
-        	return new CLanguage(locale.toString());
-        }
+		{
+			return new CLanguage(byID(locale.getLanguage(), locale.getCountry()));
+		}
+		catch(Exception e)
+		{
+			return new CLanguage(locale.toString());
+		}
 	}
-	
-	
+
+
 	public static CLanguage parse(Object x)
 	{
 		if(x == null)

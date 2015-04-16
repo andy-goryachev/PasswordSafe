@@ -94,7 +94,7 @@ public class MainWindow
 		panel = new CPanel();
 		panel.setNorth(createToolbar());
 		panel.setCenter(listTab);
-		panel.setSouth(createStatusBar(false));
+		panel.setSouth(createStatusBar(true));
 		
 		setJMenuBar(createMenu());
 		

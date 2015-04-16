@@ -6,7 +6,7 @@ import java.util.Collection;
 
 
 public class FileOption
-    extends COption<File>
+	extends COption<File>
 {
 	private File defaultValue;
 

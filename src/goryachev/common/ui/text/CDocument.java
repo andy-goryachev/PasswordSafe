@@ -17,7 +17,7 @@ import javax.swing.text.StyleContext;
 
 
 public class CDocument
-   	extends DefaultStyledDocument
+	extends DefaultStyledDocument
 {
 	public static final Object AttributeLink = new Object();
 	

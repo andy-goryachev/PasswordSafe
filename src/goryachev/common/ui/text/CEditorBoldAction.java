@@ -8,7 +8,7 @@ import javax.swing.text.StyledEditorKit;
 
 
 public class CEditorBoldAction
-    extends CEditorAction
+	extends CEditorAction
 {
 	public CEditorBoldAction()
 	{

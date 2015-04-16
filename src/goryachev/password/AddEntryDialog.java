@@ -81,16 +81,16 @@ public class AddEntryDialog
 				onHide();
 			}
 		});
-		
+
 		verifier = new PasswordVerifier2(clearPassField, passField, verifyField, hidePassField, matchField)
 		{
 			protected void onPasswordsMatch(boolean have, boolean match)
-            {
+			{
 				// FIX allow empty password
 				addAction.setEnabled(have && match);
-            }
+			}
 		};
-		
+
 		keyboard = Styles.createKeyboard();
 		
 		notesField = new JTextArea();

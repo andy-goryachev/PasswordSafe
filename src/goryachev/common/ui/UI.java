@@ -613,12 +613,12 @@ public class UI
 	}
 
 
-    // set mnemonic from button (menu, menu item) name
+	// set mnemonic from button (menu, menu item) name
 	// "&File" -> "File" + mnemonic(0)
 	// NOTE: will not work if the text gets changed (add listener?)
 	@Deprecated
 	public static void setMnemonic(AbstractButton b)
-    {
+	{
 		String s = b.getText();
 		if(s != null)
 		{
@@ -628,9 +628,9 @@ public class UI
 				// sometimes & is used for 'and'
 				if(!Character.isWhitespace(s.charAt(ix)))
 				{
-					s = s.replace("&","");
+					s = s.replace("&", "");
 					b.setText(s);
-					
+
 					// we don't want mnemonic in OSX for some reason
 					if(!CPlatform.isMac())
 					{
@@ -640,7 +640,7 @@ public class UI
 				}
 			}
 		}
-    }
+	}
 
 
 	public static void errorFeedback()
@@ -865,10 +865,9 @@ public class UI
 
 		if(memoryBar)
 		{
-			CMemoryBar b = new CMemoryBar();
-			b.setPreferredSize(new Dimension(75, -1));
-			p.add(b);
+			p.add(new CMemoryBar());
 		}
+		
 		p.fill();
 		p.copyright();
 		return p;
@@ -910,7 +909,9 @@ public class UI
 		{
 			c.removeMouseListener(x);
 		}
+		
 		c.addMouseListener(m);
+		
 		for(MouseListener x: ms)
 		{
 			c.addMouseListener(x);
@@ -925,7 +926,9 @@ public class UI
 		{
 			c.removeMouseMotionListener(x);
 		}
+		
 		c.addMouseMotionListener(m);
+		
 		for(MouseMotionListener x: ms)
 		{
 			c.addMouseMotionListener(x);
@@ -1333,7 +1336,7 @@ public class UI
 
 
 	public static void invokeCopyAction(Component c)
-    {
+	{
 		if(c instanceof JComponent)
 		{
 			JComponent comp = (JComponent)c;
@@ -1344,8 +1347,8 @@ public class UI
 			}
 		}
 	}
-	
-	
+
+
 	public static void focus(JComponent c)
 	{
 		c.requestFocusInWindow();
@@ -1624,7 +1627,7 @@ public class UI
 
 
 	public static void validateAndRepaint(Component c)
-    {
+	{
 		if(c instanceof JFrame)
 		{
 			validateAndRepaint(((JFrame)c).getContentPane());
@@ -1634,18 +1637,18 @@ public class UI
 			c.validate();
 			c.repaint();
 		}
-    }
+	}
 
 
-	/** cascade child window */ 
+	/** cascade child window */
 	public static void cascade(Window parent, Window child)
-    {
+	{
 		int shift = 30;
-		
+
 		Rectangle r = parent.getBounds();
 		r.x += shift;
 		r.y += shift;
-		
+
 		Rectangle screen = getScreenBounds();
 		if(!screen.contains(r))
 		{
@@ -1653,11 +1656,11 @@ public class UI
 			r.x = screen.x;
 			r.y = screen.y;
 		}
-		
+
 		child.setBounds(r);
-    }
-	
-	
+	}
+
+
 	public static void clear(JComponent ... cs)
 	{
 		if(cs != null)
@@ -1722,21 +1725,21 @@ public class UI
 		if(m != null)
 		{
 			boolean populated = false;
-	        int sz = m.getComponentCount();
-	        for(int i=0; i<sz; i++) 
-	        {
-	            Component c = m.getComponent(i);
-	            if(c instanceof MenuElement)
-	            {
-	            	populated = true;
-	            	break;
-	            }
-	        }
-	        
-	        if(populated)
-	        {
-	        	m.addSeparator();
-	        }
+			int sz = m.getComponentCount();
+			for(int i = 0; i < sz; i++)
+			{
+				Component c = m.getComponent(i);
+				if(c instanceof MenuElement)
+				{
+					populated = true;
+					break;
+				}
+			}
+
+			if(populated)
+			{
+				m.addSeparator();
+			}
 		}
 	}
 
@@ -1745,8 +1748,8 @@ public class UI
 	{
 		resizeToContent(t, -1);
 	}
-	
-	
+
+
 	public static void resizeToContent(JTable t, int maxColumnWidth)
 	{
 		int rows = t.getRowCount();		
@@ -1802,10 +1805,10 @@ public class UI
 
 
 	public static void scrollRectToVisible(JComponent c)
-    {
+	{
 		if(c != null)
 		{
 			c.scrollRectToVisible(new Rectangle(0, 0, c.getWidth(), c.getHeight()));
 		}
-    }
+	}
 }

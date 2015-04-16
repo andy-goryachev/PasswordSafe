@@ -10,6 +10,10 @@
 		RELEASE NOTES
 		=============
 
+3.00.37
+- system info menu in the status bar
+- whitespace cleanup
+
 3.00.36
 - open source release on https://github.com/andy-goryachev/PasswordSafe
 

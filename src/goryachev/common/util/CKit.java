@@ -229,13 +229,13 @@ public class CKit
 			int beg = 0;
 			int end = s.length();
 
-			while((beg < end) && isBlank(s.charAt(beg))) 
+			while((beg < end) && isBlank(s.charAt(beg)))
 			{
-			    beg++;
+				beg++;
 			}
-			while((beg < end) && isBlank(s.charAt(end - 1))) 
+			while((beg < end) && isBlank(s.charAt(end - 1)))
 			{
-			    end--;
+				end--;
 			}
 			return beg == end;
 		}
@@ -400,13 +400,13 @@ public class CKit
 			close(in);
 		}
 	}
-	
-	
+
+
 	public static String readStringQuiet(Class cs, String resource)
 	{
 		try
 		{
-			 return readString(cs, resource);
+			return readString(cs, resource);
 		}
 		catch(Exception e)
 		{
@@ -414,8 +414,8 @@ public class CKit
 			return null;
 		}
 	}
-	
-	
+
+
 	public static String readString(String resource) throws Exception
 	{
 		return readString(resource, "UTF-8");
@@ -1003,9 +1003,9 @@ public class CKit
 	public static String toString(Object a)
 	{
 		return (a == null ? null : a.toString());
-    }
-	
-	
+	}
+
+
 	public static int hashCode(Object ... xs)
 	{
 		return hashCodeArray(xs);
@@ -1804,14 +1804,14 @@ public class CKit
 
 	/** concatenates two byte arrays */
 	public static byte[] cat(byte[] a, byte[] b)
-    {
+	{
 		byte[] rv = new byte[a.length + b.length];
 		System.arraycopy(a, 0, rv, 0, a.length);
 		System.arraycopy(b, 0, rv, a.length, b.length);
-	    return rv;
-    }
-	
-	
+		return rv;
+	}
+
+
 	public static Properties readProperties(String filename)
 	{
 		return readProperties(new File(filename));

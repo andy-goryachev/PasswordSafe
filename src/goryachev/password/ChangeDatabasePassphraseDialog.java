@@ -71,15 +71,15 @@ public class ChangeDatabasePassphraseDialog
 		});
 		
 		matchField = new MatchLabel();
-		
+
 		verifier = new PasswordVerifier2(clearPassField, passField, verifyField, hidePassField, matchField)
 		{
 			protected void onPasswordsMatch(boolean have, boolean match)
-            {
+			{
 				commitAction.setEnabled(have && match);
-            }
+			}
 		};
-		
+
 		keyboard = Styles.createKeyboard();
 		
 		changeButton = new CButton(TXT.get("ChangeDatabasePassphraseDialog.button.change password", "Change"), commitAction);

@@ -16,7 +16,7 @@ import javax.swing.table.TableModel;
 public class ZTableRenderer
 	extends DefaultTableCellRenderer
 {
-	protected CTableRendererBorder border = new CTableRendererBorder();
+	protected CTableRendererBorder border = createDefaultBorder();
 	protected transient JTable table;
 	protected transient ElasticColumnHandler handler;
 	protected transient Object value;
@@ -31,6 +31,12 @@ public class ZTableRenderer
 		setHorizontalAlignment(LEADING);
 		setVerticalAlignment(TOP);
 		UI.disableHtml(this);
+	}
+	
+
+	public static CTableRendererBorder createDefaultBorder()
+	{
+		return new CTableRendererBorder();
 	}
 	
 

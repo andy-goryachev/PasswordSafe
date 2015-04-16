@@ -44,14 +44,14 @@ public class CTextPane
 		setText(s);
 		setCaretPosition(0);
 	}
-	
-	
+
+
 	public void setAutoIndent(boolean on)
-    {
+	{
 		autoIndent = on;
-    }
-	
-	
+	}
+
+
 	// FIX I think this is wrong
 	public boolean getScrollableTracksViewportWidth()
 	{
@@ -225,7 +225,7 @@ public class CTextPane
 
 
 	public class Handler
-	    implements KeyListener
+		implements KeyListener
 	{
 		public void keyTyped(KeyEvent ev)
 		{

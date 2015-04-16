@@ -5,7 +5,7 @@ import javax.swing.text.JTextComponent;
 
 
 public class CEditorCopyAction
-    extends CEditorAction
+	extends CEditorAction
 {
 	public CEditorCopyAction()
 	{

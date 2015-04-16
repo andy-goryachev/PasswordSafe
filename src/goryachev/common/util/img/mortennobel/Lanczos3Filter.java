@@ -8,7 +8,7 @@ package goryachev.common.util.img.mortennobel;
 
 
 public class Lanczos3Filter
-    implements ResampleFilter
+	implements ResampleFilter
 {
 	private final static float PI_FLOAT = (float)Math.PI;
 

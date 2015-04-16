@@ -1669,7 +1669,7 @@ public class Base64
 	 * @since 1.3
 	 */
 	public static class Base64InputStream
-	    extends java.io.FilterInputStream
+		extends java.io.FilterInputStream
 	{
 		private boolean encode; // Encoding or decoding
 		private int position; // Current position in the buffer
@@ -1827,9 +1827,7 @@ public class Base64
 				}
 				else
 				{
-					lineLength++; // This isn't important when decoding
-					              // but throwing an extra "if" seems
-					              // just as wasteful.
+					lineLength++;
 
 					int b = buffer[position++];
 					if(position >= bufferLength)
@@ -1837,8 +1835,7 @@ public class Base64
 						position = -1;
 					}
 
-					return b & 0xFF; // This is how you "cast" a byte that's
-					                 // intended to be unsigned.
+					return b & 0xFF;
 				}
 			}
 			else
@@ -1899,7 +1896,7 @@ public class Base64
 	 * @since 1.3
 	 */
 	public static class Base64OutputStream
-	    extends FilterOutputStream
+		extends FilterOutputStream
 	{
 		private boolean encode;
 		private int position;

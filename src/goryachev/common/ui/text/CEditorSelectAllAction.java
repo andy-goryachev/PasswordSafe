@@ -6,7 +6,7 @@ import javax.swing.text.JTextComponent;
 
 
 public class CEditorSelectAllAction
-    extends CEditorAction
+	extends CEditorAction
 {
 	public CEditorSelectAllAction()
 	{

@@ -8,7 +8,7 @@ import org.bouncycastle.crypto.CipherParameters;
 
 
 public class XCipherOutputStream
-    extends OutputStream
+	extends OutputStream
 {
 	private BufferedBlockCipher cipher;
 	private OutputStream os;

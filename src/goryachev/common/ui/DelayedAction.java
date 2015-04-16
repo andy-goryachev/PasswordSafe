@@ -8,7 +8,7 @@ import javax.swing.Timer;
 
 // Swing delayed action
 public abstract class DelayedAction
-    extends Timer
+	extends Timer
 {
 	public abstract void action();
 

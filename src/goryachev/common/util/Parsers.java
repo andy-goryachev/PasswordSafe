@@ -524,7 +524,7 @@ public class Parsers
 
 
 	public static ByteBuffer parseByteBuffer(Object x)
-    {
+	{
 		if(x != null)
 		{
 			if(x instanceof byte[])
@@ -532,12 +532,12 @@ public class Parsers
 				return ByteBuffer.wrap((byte[])x);
 			}
 		}
-	    return null;
-    }
+		return null;
+	}
 
 
 	public static <T> HashSet<T> parseHashSet(Object x)
-    {
+	{
 		if(x != null)
 		{
 			if(x instanceof Collection)
@@ -545,6 +545,6 @@ public class Parsers
 				return new HashSet((Collection)x);
 			}
 		}
-	    return new HashSet();
-    }
+		return new HashSet();
+	}
 }

@@ -17,15 +17,15 @@ public class MailTools
 			
 		Desktop.getDesktop().mail(new URI(sb.toString()));
 	}
-	
-	
-    public static String encode(String s) throws Exception
+
+
+	public static String encode(String s) throws Exception
 	{
-    	if(s == null)
-    	{
-    		return "";
-    	}
-    	
+		if(s == null)
+		{
+			return "";
+		}
+
 		int n = s.length();
 		if(n == 0)
 		{

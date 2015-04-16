@@ -283,17 +283,17 @@ public class Dialogs
 		p.setCenter(content);
 		return p;
 	}
-	
+
 
 	public static void openOptions(Component parent, String title, OptionTreeNode root, String id, int width, int height)
-    {
+	{
 		COptionDialog d = new COptionDialog(parent, title, root, id);
 		d.setSize(width, height);
 		d.expandTree();
 		d.open();
-    }
-	
-	
+	}
+
+
 	public static DiscardChanges discardChanges(Component parent)
 	{
 		int rv = Dialogs.choice

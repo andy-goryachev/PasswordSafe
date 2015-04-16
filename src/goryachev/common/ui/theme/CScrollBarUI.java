@@ -233,9 +233,9 @@ public class CScrollBarUI
 			scrollbar.repaint();
 		}
 	}
-	
-	
-    public Dimension getPreferredSize(JComponent c)
+
+
+	public Dimension getPreferredSize(JComponent c)
 	{
 		return (scrollbar.getOrientation() == JScrollBar.VERTICAL) ? new Dimension(barWidth, 48) : new Dimension(48, barWidth);
 	}

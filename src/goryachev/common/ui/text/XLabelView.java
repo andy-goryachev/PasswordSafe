@@ -15,7 +15,7 @@ import javax.swing.text.View;
 // http://bugs.sun.com/view_bug.do?bug_id=6539700
 // This class and XParagprahView seem to fix the problem
 public class XLabelView
-    extends LabelView
+	extends LabelView
 {
 	public XLabelView(Element elem)
 	{

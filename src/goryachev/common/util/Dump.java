@@ -419,45 +419,45 @@ public class Dump
 		ch[1] = HEX.charAt(d & 0x0f);
 		return new String(ch);
 	}
-	
-	
+
+
 	public static String dumpDocument(Document doc, boolean inclideText)
 	{
 		try
-        {
-	        StyledDocument d = (StyledDocument)doc;
-	        
-	        SB b = new SB();
-	        b.a("<\n");
-	        
-	        int len = d.getLength();
-	        int pos = 0;
-	        while(pos < len)
-	        {
-	        	Element em = d.getCharacterElement(pos);
-	        	b.a(pos).a(' ');
-	        	int end = em.getEndOffset();
-	        	
-	        	if(inclideText)
-	        	{
-		        	String text;
-		        	try
-		        	{
-		        		text = d.getText(pos,end-pos); 
-		        	}
-		        	catch(Exception e)
-		        	{
-		        		text = "?ERR" + pos + "," + end;
-		        	}
-		        	b.a("[").a(text).a("] ");
-	        	}
-	        	
-	        	AttributeSet a = em.getAttributes();
-	        	Enumeration<?> en = a.getAttributeNames();
-	        	CList<Object> names = new CList();
-	        	while(en.hasMoreElements())
-	        	{
-	        		names.add(en.nextElement());
+		{
+			StyledDocument d = (StyledDocument)doc;
+
+			SB b = new SB();
+			b.a("<\n");
+
+			int len = d.getLength();
+			int pos = 0;
+			while(pos < len)
+			{
+				Element em = d.getCharacterElement(pos);
+				b.a(pos).a(' ');
+				int end = em.getEndOffset();
+
+				if(inclideText)
+				{
+					String text;
+					try
+					{
+						text = d.getText(pos, end - pos);
+					}
+					catch(Exception e)
+					{
+						text = "?ERR" + pos + "," + end;
+					}
+					b.a("[").a(text).a("] ");
+				}
+
+				AttributeSet a = em.getAttributes();
+				Enumeration<?> en = a.getAttributeNames();
+				CList<Object> names = new CList();
+				while(en.hasMoreElements())
+				{
+					names.add(en.nextElement());
 				}
 				Collections.sort(names, new Comparator<Object>()
 				{
@@ -466,26 +466,26 @@ public class Dump
 						return a.toString().compareTo(b.toString());
 					}
 				});
-	        	
-	        	for(Object name: names)
-	        	{
-	        		b.a(name).a("=").a(a.getAttribute(name)).a(" ");
-	        	}
-	        	b.a("\n");
-	        	
-	        	pos = end;
-	        }
-	        b.a(">\n");
-	        
-	        return b.toString();
-        }
-        catch(Exception e)
-        {
-        	return CKit.stackTrace(e);
-        }
+
+				for(Object name: names)
+				{
+					b.a(name).a("=").a(a.getAttribute(name)).a(" ");
+				}
+				b.a("\n");
+
+				pos = end;
+			}
+			b.a(">\n");
+
+			return b.toString();
+		}
+		catch(Exception e)
+		{
+			return CKit.stackTrace(e);
+		}
 	}
-	
-	
+
+
 	public static String documentStructure(Document d)
 	{
 		SB sb = new SB("\n");
