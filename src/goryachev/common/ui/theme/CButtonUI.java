@@ -38,13 +38,14 @@ public class CButtonUI
 
 	public static void init(UIDefaults defs)
 	{
+		defs.put("ButtonUI", CButtonUI.class.getName());
 		defs.put("Button.showMnemonics", Boolean.TRUE);
-		
 		defs.put("Button.shadow", UI.mix(127, Theme.textFG(), Theme.textBG()));
 		defs.put("Button.disabledShadow", new Color(255, 255, 255, 224));
 	}
 	
 	
+	// UIManager.getUI(JComponent) uses reflection to invoke this method.  not nice.
 	public static ComponentUI createUI(JComponent c)
 	{
 		return ui;

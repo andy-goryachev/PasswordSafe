@@ -16,7 +16,6 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 
@@ -264,13 +263,13 @@ public class CDialog
 	}
 	
 	
-	public JTextArea textArea()
+	public CTextArea textArea()
 	{
-		JTextArea t = new JTextArea();
+		CTextArea t = new CTextArea();
 		t.setLineWrap(true);
 		t.setWrapStyleWord(true);
 		t.setFont(Theme.plainFont());
-		t.setBorder(new CBorder(Color.gray, 4));
+		t.setBorder(Theme.BORDER_FIELD);
 		return t;
 	}
 	
@@ -306,6 +305,12 @@ public class CDialog
 	public void addButton(JButton b)
 	{
 		getButtonPanel().addButton(b);
+	}
+	
+	
+	public void addSpace()
+	{
+		getButtonPanel().addSpace();
 	}
 	
 

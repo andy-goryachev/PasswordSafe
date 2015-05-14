@@ -106,58 +106,70 @@ public class ImageTools
 	}
 
 
-	public static byte[] toPNG(BufferedImage im) throws Exception
+	public static byte[] toPNG(BufferedImage im)
 	{
-		if(im == null)
+		if(im != null)
 		{
-			return null;
+			try
+			{
+				ByteArrayOutputStream out = new ByteArrayOutputStream(32768);
+				ImageIO.write(im, "PNG", out);
+				return out.toByteArray();
+			}
+			catch(Exception e)
+			{
+				Log.err(e);
+			}
 		}
-
-		ByteArrayOutputStream out = new ByteArrayOutputStream(32768);
-		ImageIO.write(im, "PNG", out);
-		return out.toByteArray();
+		return null;
 	}
 
 
-	public static byte[] toJPG(BufferedImage im) throws Exception
+	public static byte[] toJPG(BufferedImage im)
 	{
-		if(im == null)
+		if(im != null)
 		{
-			return null;
-		}
-		
-		// TODO
-		// http://stackoverflow.com/questions/17108234/setting-jpg-compression-level-with-imageio-in-java
-		
-		/*
-		ImageWriter jpgWriter = ImageIO.getImageWritersByFormatName("jpg").next();
-		ImageWriteParam jpgWriteParam = jpgWriter.getDefaultWriteParam();
-		jpgWriteParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-		jpgWriteParam.setCompressionQuality(0.7f);
-
-		OutputStream outputStream = createOutputStream(); //For example, FileImageOutputStream
-		jpgWriter.setOutput(outputStream);
-		IIOImage outputImage = new IIOImage(image, null, null);
-		jpgWriter.write(null, outputImage, jpgWriteParam);
-		jpgWriter.dispose();
-
-		The call to ImageWriteParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT) is needed in order to explicitly set 
-		the compression's level (quality).
-
-		In ImageWriteParam.setCompressionQuality() 1.0f is maximum quality, minimum compression, while 0.0f is minimum quality, 
-		maximum compression.
+			// TODO
+			// http://stackoverflow.com/questions/17108234/setting-jpg-compression-level-with-imageio-in-java
 			
-		For those of you who don't want to write in disk: 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
-		writer.setOutput(new MemoryCacheImageOutputStream(baos)); 
-		baos.flush();
-		byte[] returnImage = baos.toByteArray(); 
-		baos.close();
-		*/
-		
-		ByteArrayOutputStream out = new ByteArrayOutputStream(32768);
-		ImageIO.write(im, "JPG", out);
-		return out.toByteArray();
+			/*
+			ImageWriter jpgWriter = ImageIO.getImageWritersByFormatName("jpg").next();
+			ImageWriteParam jpgWriteParam = jpgWriter.getDefaultWriteParam();
+			jpgWriteParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+			jpgWriteParam.setCompressionQuality(0.7f);
+	
+			OutputStream outputStream = createOutputStream(); //For example, FileImageOutputStream
+			jpgWriter.setOutput(outputStream);
+			IIOImage outputImage = new IIOImage(image, null, null);
+			jpgWriter.write(null, outputImage, jpgWriteParam);
+			jpgWriter.dispose();
+	
+			The call to ImageWriteParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT) is needed in order to explicitly set 
+			the compression's level (quality).
+	
+			In ImageWriteParam.setCompressionQuality() 1.0f is maximum quality, minimum compression, while 0.0f is minimum quality, 
+			maximum compression.
+				
+			For those of you who don't want to write in disk: 
+			ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
+			writer.setOutput(new MemoryCacheImageOutputStream(baos)); 
+			baos.flush();
+			byte[] returnImage = baos.toByteArray(); 
+			baos.close();
+			*/
+			
+			try
+			{
+				ByteArrayOutputStream out = new ByteArrayOutputStream(32768);
+				ImageIO.write(im, "JPG", out);
+				return out.toByteArray();
+			}
+			catch(Exception e)
+			{
+				Log.err(e);
+			}
+		}
+		return null;
 	}
 	
 	

@@ -5,7 +5,6 @@ import java.util.TimeZone;
 
 
 // TODO why do I have this class?
-@Deprecated
 public class CTimeZone
 	implements HasProperty, HasDisplayName
 {
@@ -45,6 +44,12 @@ public class CTimeZone
 	public String getID()
 	{
 		return tz.getID();
+	}
+	
+	
+	public static String getID(CTimeZone tz)
+	{
+		return tz == null ? null : tz.getID();
 	}
 	
 	
@@ -130,11 +135,18 @@ public class CTimeZone
 	{
 		if(x != null)
 		{
-			String s = Parsers.parseString(x);
-			if(CKit.isNotBlank(s))
+			if(x instanceof CTimeZone)
 			{
-				TimeZone tz = TimeZone.getTimeZone(s);
-				return new CTimeZone(tz);
+				return (CTimeZone)x;
+			}
+			else
+			{
+				String s = Parsers.parseString(x);
+				if(CKit.isNotBlank(s))
+				{
+					TimeZone tz = TimeZone.getTimeZone(s);
+					return new CTimeZone(tz);
+				}
 			}
 		}
 		return null;

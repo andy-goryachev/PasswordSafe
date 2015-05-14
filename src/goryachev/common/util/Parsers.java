@@ -330,6 +330,19 @@ public class Parsers
 		return null;
 	}
 	
+	
+	public static byte[] parseByteArrayQuiet(Object x)
+	{
+		try
+		{
+			return parseByteArray(x);
+		}
+		catch(Exception e)
+		{ }
+		
+		return null;
+	}
+	
 
 	public static Icon parseIcon(Object x)
 	{
@@ -475,6 +488,17 @@ public class Parsers
 			{ }
 		}
 		return null;
+	}
+	
+	
+	public static BigInteger parseBigIntegerNotNull(Object x)
+	{
+		BigInteger v = parseBigInteger(x);
+		if(v == null)
+		{
+			throw new IllegalArgumentException("not a BigInteger: " + x);
+		}
+		return v;
 	}
 	
 	

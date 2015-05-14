@@ -10,6 +10,9 @@
 		RELEASE NOTES
 		=============
 
+3.00.38
+- ui improvements
+
 3.00.37
 - system info menu in the status bar
 - whitespace cleanup

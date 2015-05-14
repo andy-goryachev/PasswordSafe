@@ -161,7 +161,7 @@ public class CButtonPanel
 	
 	public void addSpace()
 	{
-		// TODO
+		// TODO use special component and modify layout class
 	}
 	
 	
@@ -200,7 +200,7 @@ public class CButtonPanel
 	
 	public JButton getLastButton()
 	{
-		for(int i=getComponentCount() - 1; i>=0; --i)
+		for(int i=getComponentCount()-1; i>=0; --i)
 		{
 			Component c = getComponent(i);
 			if(c instanceof JButton)

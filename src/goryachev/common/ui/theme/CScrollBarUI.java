@@ -3,18 +3,21 @@ package goryachev.common.ui.theme;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.ColorTools;
 import goryachev.common.ui.Theme;
+import goryachev.common.ui.UI;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JScrollBar;
 import javax.swing.UIDefaults;
 import javax.swing.border.Border;
 import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.DimensionUIResource;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
@@ -22,11 +25,12 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 public class CScrollBarUI
 	extends BasicScrollBarUI
 {
-	private static final Border BORDER = new CBorder.UIResource();
-	private static int barWidth = 16;
-	private static int serrationMargin = 4;
+	private static int trackThickness = 7;
+	private static int thumbGap = 3;
 	private static int hoverAlpha = 128;
-	//private static int trackAlpha = 8;
+	private static final Border BORDER = new CBorder.UIResource();
+	private static final BasicStroke STROKE = new BasicStroke(trackThickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+	private static final Color THUMB_COLOR = new Color(0, 0, 0, 48);
 	
 	
 	public CScrollBarUI()
@@ -37,23 +41,30 @@ public class CScrollBarUI
 	public static void init(UIDefaults defs)
 	{
 		defs.put("ScrollBarUI", CScrollBarUI.class.getName());
-		defs.put("ScrollBar.minimumThumbSize", new DimensionUIResource(10,10));
-		defs.put("ScrollBar.maximumThumbSize", new DimensionUIResource(4096,4096));
+		defs.put("ScrollBar.minimumThumbSize", new DimensionUIResource(10, 10));
+		defs.put("ScrollBar.maximumThumbSize", new DimensionUIResource(4096, 4096));
 		defs.put("ScrollBar.border", BORDER);
 		defs.put("ScrollBar.track", new ColorUIResource(Theme.fieldBG()));
 	}
-	
+
+
+	// UIManager.getUI(JComponent) uses reflection to invoke this method.  not nice.
+	public static ComponentUI createUI(JComponent c)
+	{
+		return new CScrollBarUI();
+	}
+
 
 	protected void installDefaults()
 	{
 		super.installDefaults();
-		
-//		minimumThumbSize = new Dimension(8,8);
-//		scrollbar.setBorder(null);
-		
-//		trackColor = Theme.panelBG();
-//		trackColor = Theme.fieldBG();
 	}
+	
+	
+    public void installUI(JComponent c)
+    {
+    	super.installUI(c);
+    }
 
 
 	public void uninstallUI(JComponent c)
@@ -61,52 +72,42 @@ public class CScrollBarUI
 		super.uninstallUI(c);
 	}
 
-	
-	public JScrollBar getScrollBar()
+
+	protected void installComponents()
 	{
-		return scrollbar;
+		scrollbar.setEnabled(scrollbar.isEnabled());
+	}
+
+
+	protected void uninstallComponents()
+	{
+	}
+
+
+	protected JButton createDecreaseButton(int orientation)
+	{
+		// no buttons
+		return null;
+	}
+
+
+	protected JButton createIncreaseButton(int orientation)
+	{
+		// no buttons
+		return null;
 	}
 
 
 	protected ArrowButtonListener createArrowButtonListener()
 	{
-		return new ArrowButtonListener()
-		{
-			public void mouseEntered(MouseEvent evt)
-			{
-				repaint();
-				super.mouseEntered(evt);
-			}
-
-
-			public void mouseExited(MouseEvent evt)
-			{
-				repaint();
-				super.mouseExited(evt);
-			}
-
-
-			private void repaint()
-			{
-				getScrollBar().repaint();
-			}
-		};
-
-//		return super.createArrowButtonListener();
+		// no buttons
+		return null;
 	}
 
 
 	protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds)
 	{
-		boolean vertical = (scrollbar.getOrientation() == JScrollBar.VERTICAL);
-		
-		// looks bad
-		//GradientPainter.paint(g, !vertical, trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height, trackColor, 18, 18, Theme.getGradientFactor(), true, false);
-		
-		// looks too dark
-		// Color bg = CKit.setAlpha(Theme.textFG(), trackAlpha);
-		Color bg = trackColor;
-		g.setColor(bg);
+		g.setColor(trackColor);
 		g.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height);
 
 		if(trackHighlight == DECREASE_HIGHLIGHT)
@@ -120,73 +121,60 @@ public class CScrollBarUI
 	}
 
 
-	protected void paintThumb(Graphics g, JComponent c, Rectangle th)
+	protected void paintThumb(Graphics gg, JComponent c, Rectangle tr)
 	{
-		if(th.isEmpty() || !scrollbar.isEnabled())
+		if(tr.isEmpty() || !scrollbar.isEnabled())
 		{
 			return;
 		}
 
-		g.translate(th.x, th.y);
+		Graphics2D g = (Graphics2D)gg;
+		UI.setAntiAliasing(g);
+
+		g.setStroke(STROKE);
+		g.setColor(THUMB_COLOR);
 
 		boolean vertical = (scrollbar.getOrientation() == JScrollBar.VERTICAL);
-		GradientPainter.paint(g, !vertical, th.width, th.height, thumbColor, 50, 50, Theme.getGradientFactor(), false, true); 
-
-		// serration
-		if(Math.min(th.height,th.width) > 13)
+		if(vertical)
 		{
-			g.setColor(Theme.panelBG().darker());
-			if(vertical)
+			if(tr.height > trackThickness)
 			{
-				int x0 = serrationMargin;
-				int y0 = th.height/2;
-				int x2 = th.width - serrationMargin;
-				for(int i=-2; i<=2; i+=2)
-				{
-					int y = y0 + i;
-					g.drawLine(x0, y, x2, y); 
-				}
-			}
-			else
-			{
-				int x0 = th.width/2;
-				int y0 = serrationMargin;
-				int y2 = th.height - serrationMargin;
-				for(int i=-2; i<=2; i+=2)
-				{
-					int x = x0 + i;
-					g.drawLine(x,y0,x,y2);
-				}
+				// TODO insets
+				int x = c.getWidth() / 2;
+				g.drawLine(x, tr.y + trackThickness / 2 + thumbGap, x, tr.y + tr.height - trackThickness - thumbGap);
 			}
 		}
-
-		// TODO hover
-		
-		Theme.raisedBevelBorder().paintBorder(scrollbar, g, 0, 0, th.width, th.height);
-
-		g.translate(-th.x, -th.y);
+		else
+		{
+			// TODO insets
+			int y = c.getHeight() / 2;
+			g.drawLine(tr.x + trackThickness / 2 + thumbGap, y, tr.x + tr.width - trackThickness - thumbGap, y);
+		}
 	}
 
 
 	protected void paintDecreaseHighlight(Graphics g)
 	{
-		Insets insets = scrollbar.getInsets();
-		Rectangle thumbR = getThumbBounds();
-		int x, y, w, h;
+		Insets m = scrollbar.getInsets();
+		Rectangle tr = getThumbBounds();
+		int x;
+		int y;
+		int w;
+		int h;
 
 		if(scrollbar.getOrientation() == JScrollBar.VERTICAL)
 		{
-			x = insets.left;
-			y = decrButton.getY() + decrButton.getHeight();
-			w = scrollbar.getWidth() - (insets.left + insets.right);
-			h = thumbR.y - y;
+			x = m.left;
+			y = m.top;
+			w = scrollbar.getWidth() - (m.left + m.right);
+			h = tr.y - y;
 		}
 		else
 		{
-			x = decrButton.getX() + decrButton.getHeight();
-			y = insets.top;
-			w = thumbR.x - x;
-			h = scrollbar.getHeight() - (insets.top + insets.bottom);
+			x = m.left;
+			y = m.top;
+			w = tr.x - x;
+			h = scrollbar.getHeight() - (m.top + m.bottom);
 		}
 
 		g.setColor(ColorTools.alpha(Theme.hoverColor(), hoverAlpha));
@@ -196,141 +184,152 @@ public class CScrollBarUI
 
 	protected void paintIncreaseHighlight(Graphics g)
 	{
-		Insets insets = scrollbar.getInsets();
-		Rectangle thumbR = getThumbBounds();
-		int x, y, w, h;
+		int x;
+		int y;
+		int w;
+		int h;
+
+		Insets m = scrollbar.getInsets();
+		Rectangle tr = getThumbBounds();
 
 		if(scrollbar.getOrientation() == JScrollBar.VERTICAL)
 		{
-			x = insets.left;
-			y = thumbR.y + thumbR.height;
-			w = scrollbar.getWidth() - (insets.left + insets.right);
-			h = incrButton.getY() - y;
+			x = m.left;
+			y = tr.y + tr.height;
+			w = scrollbar.getWidth() - (m.left + m.right);
+			h = scrollbar.getHeight() - (m.top + m.bottom) - y;
 		}
 		else
 		{
-			x = thumbR.x + thumbR.width;
-			y = insets.top;
-			w = incrButton.getX() - x;
-			h = scrollbar.getHeight() - (insets.top + insets.bottom);
+			x = tr.x + tr.width;
+			y = m.top;
+			w = scrollbar.getWidth() - (m.left + m.right) - x;
+			h = scrollbar.getHeight() - (m.top + m.bottom);
 		}
-		
+
 		g.setColor(ColorTools.alpha(Theme.hoverColor(), hoverAlpha));
-		g.fillRect(x,y,w,h);
+		g.fillRect(x, y, w, h);
 	}
 
 
-	protected void setThumbRollover(boolean active)
+	protected void setThumbRollover(boolean on)
 	{
-		//boolean old = isThumbRollover();
-		super.setThumbRollover(active);
-		
-		// TODO
-		// we need to repaint the entire scrollbar because state change for thumb
-		// causes state change for incr and decr buttons on Vista
-//		if(XPStyle.isVista() && active != old)
-		{
-			scrollbar.repaint();
-		}
+		super.setThumbRollover(on);
 	}
 
 
 	public Dimension getPreferredSize(JComponent c)
 	{
-		return (scrollbar.getOrientation() == JScrollBar.VERTICAL) ? new Dimension(barWidth, 48) : new Dimension(48, barWidth);
+		int w = trackThickness + thumbGap + thumbGap;
+		return (scrollbar.getOrientation() == JScrollBar.VERTICAL) ? new Dimension(w, 48) : new Dimension(48, w);
 	}
 
-
-	protected JButton createDecreaseButton(int orientation)
-	{
-		return new CScrollBarArrowButton(this, orientation);
-	}
-
-
-	protected JButton createIncreaseButton(int orientation)
-	{
-		return new CScrollBarArrowButton(this, orientation);
-	}
-	
 
 	protected void layoutVScrollbar(JScrollBar sb)
 	{
-		Dimension sbSize = sb.getSize();
-		Insets sbInsets = sb.getInsets();
+		int width = sb.getWidth();
+		int height = sb.getHeight();
+		Insets m = sb.getInsets();
 
-		// Width and left edge of the buttons and thumb.
-		int itemW = sbSize.width - (sbInsets.left + sbInsets.right);
-		int itemX = sbInsets.left;
-
-		boolean squareButtons = false; //DefaultLookup.getBoolean(scrollbar, this, "ScrollBar.squareButtons", false);
-		int decrButtonH = squareButtons ? itemW : decrButton.getPreferredSize().height;
-		int decrButtonY = sbInsets.top;
-
-		int incrButtonH = squareButtons ? itemW : incrButton.getPreferredSize().height;
-		int incrButtonY = sbSize.height - (sbInsets.bottom + incrButtonH);
-
-		// The thumb must fit within the height left over after we
-		// subtract the preferredSize of the buttons and the insets and the gaps
-		int sbInsetsH = sbInsets.top + sbInsets.bottom;
-		int sbButtonsH = decrButtonH + incrButtonH;
-		float trackH = sbSize.height - (sbInsetsH + sbButtonsH);
-
-		// Compute the height and origin of the thumb.   The case
-		// where the thumb is at the bottom edge is handled specially 
-		// to avoid numerical problems in computing thumbY.  Enforce
-		// the thumbs min/max dimensions.  If the thumb doesn't
-		// fit in the track (trackH) we'll hide it later.
+		int w = width - m.left - m.right;
+		int y0 = height - m.bottom;
+		
+		float trackHeight = height - m.top - m.bottom;
 		float min = sb.getMinimum();
 		float extent = sb.getVisibleAmount();
 		float range = sb.getMaximum() - min;
-		float value = sb.getValue();
+		float val = sb.getValue();
 
-		int thumbH = (range <= 0) ? getMaximumThumbSize().height : (int) (trackH * (extent / range));
-		thumbH = Math.max(thumbH, getMinimumThumbSize().height);
-		thumbH = Math.min(thumbH, getMaximumThumbSize().height);
+		int th = (range <= 0) ? getMaximumThumbSize().height : (int)(trackHeight * (extent / range));
+		th = Math.max(th, getMinimumThumbSize().height);
+		th = Math.min(th, getMaximumThumbSize().height);
 
-		int thumbY = incrButtonY - thumbH;
-		if(value < (sb.getMaximum() - sb.getVisibleAmount()))
+		int ty = y0 - th;
+		
+		if(val < (sb.getMaximum() - sb.getVisibleAmount()))
 		{
-			float thumbRange = trackH - thumbH;
-			thumbY = (int) (0.5f + (thumbRange * ((value - min) / (range - extent))));
-			thumbY += decrButtonY + decrButtonH;
+			float thumbRange = trackHeight - th;
+			ty = (int)(0.5f + (thumbRange * ((val - min) / (range - extent))));
+			ty += m.top;
 		}
 
-		// If the buttons don't fit, allocate half of the available 
-		// space to each and move the lower one (incrButton) down.
-		int sbAvailButtonH = (sbSize.height - sbInsetsH);
-		if(sbAvailButtonH < sbButtonsH)
-		{
-			incrButtonH = decrButtonH = sbAvailButtonH / 2;
-			incrButtonY = sbSize.height - (sbInsets.bottom + incrButtonH);
-		}
-		decrButton.setBounds(itemX, decrButtonY, itemW, decrButtonH);
-		incrButton.setBounds(itemX, incrButtonY, itemW, incrButtonH);
+		trackRect.setBounds(m.left, m.top, w, y0 - m.top);
 
-		// Update the trackRect field.
-		int itrackY = decrButtonY + decrButtonH;
-		int itrackH = incrButtonY - itrackY;
-		trackRect.setBounds(itemX, itrackY, itemW, itrackH);
-
-		// If the thumb isn't going to fit, zero it's bounds.  Otherwise
-		// make sure it fits between the buttons.  Note that setting the
-		// thumbs bounds will cause a repaint.
-		if(thumbH >= (int) trackH)
+		if(th >= (int)trackHeight)
 		{
 			setThumbBounds(0, 0, 0, 0);
 		}
 		else
 		{
-			if((thumbY + thumbH) > incrButtonY)
+			if((ty + th) > y0)
 			{
-				thumbY = incrButtonY - thumbH;
+				ty = y0 - th;
 			}
-			if(thumbY < (decrButtonY + decrButtonH))
+			if(ty < m.top)
 			{
-				thumbY = decrButtonY + decrButtonH + 1;
+				ty = m.top + 1;
 			}
-			setThumbBounds(itemX, thumbY, itemW, thumbH);
+			
+			setThumbBounds(m.left, ty, w, th);
+		}
+	}
+
+
+	protected void layoutHScrollbar(JScrollBar sb)
+	{
+		int width = sb.getWidth();
+		int height = sb.getHeight();
+		Insets m = sb.getInsets();
+		
+		int h = height - m.top - m.bottom;
+		int x0 = width - m.right;
+		
+		float trackWidth = width - m.left - m.right;
+		float min = sb.getMinimum();
+		float max = sb.getMaximum();
+		float extent = sb.getVisibleAmount();
+		float range = max - min;
+		float val = sb.getValue();
+
+		int tw = (range <= 0) ? getMaximumThumbSize().width : (int)(trackWidth * (extent / range));
+		tw = Math.max(tw, getMinimumThumbSize().width);
+		tw = Math.min(tw, getMaximumThumbSize().width);
+
+		boolean ltr = sb.getComponentOrientation().isLeftToRight();
+		int tx = ltr ? x0 - tw : m.left;
+		
+		if(val < (max - sb.getVisibleAmount()))
+		{
+			float thumbRange = trackWidth - tw;
+			if(ltr)
+			{
+				tx = (int)(0.5f + (thumbRange * ((val - min) / (range - extent))));
+			}
+			else
+			{
+				tx = (int)(0.5f + (thumbRange * ((max - extent - val) / (range - extent))));
+			}
+			tx += m.left;
+		}
+
+		trackRect.setBounds(m.left, m.top, x0 - m.left, h);
+
+		if(tw >= (int)trackWidth)
+		{
+			setThumbBounds(0, 0, 0, 0);
+		}
+		else
+		{
+			if(tx + tw > x0)
+			{
+				tx = x0 - tw;
+			}
+			if(tx < m.left)
+			{
+				tx = m.left + 1;
+			}
+			
+			setThumbBounds(tx, m.top, tw, h);
 		}
 	}
 }

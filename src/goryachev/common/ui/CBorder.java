@@ -12,6 +12,7 @@ import javax.swing.border.AbstractBorder;
  */
 public class CBorder
 	extends AbstractBorder
+	implements Cloneable
 {
 	public static final CBorder NONE = new CBorder();
 	public static final CBorder LINE = new CBorder(1, Theme.panelBG().darker());
@@ -42,6 +43,24 @@ public class CBorder
 		setGapBottom(bottom);
 		setGapLeft(left);
 		setGapRight(right);
+	}
+	
+	
+	public CBorder(CBorder c)
+	{
+		padLeft = c.padLeft;
+		padRight = c.padRight;
+		padTop = c.padTop;
+		padBottom = c.padBottom;
+		lineLeft = c.lineLeft;
+		lineRight = c.lineRight;
+		lineTop = c.lineTop;
+		lineBottom = c.lineBottom;
+		gapLeft = c.gapLeft;
+		gapRight = c.gapRight;
+		gapTop = c.gapTop;
+		gapBottom = c.gapBottom;
+		Color color = c.color;
 	}
 	
 	
@@ -178,6 +197,21 @@ public class CBorder
 	
 	public CBorder()
 	{
+	}
+	
+	
+	public CBorder copy()
+	{
+		return new CBorder(this);
+	}
+	
+	
+	public void adjustGaps(int d)
+	{
+		gapLeft += d;
+		gapRight += d;
+		gapTop += d;
+		gapBottom += d;
 	}
 	
 	

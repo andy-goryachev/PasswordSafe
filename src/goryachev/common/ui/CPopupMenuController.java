@@ -19,6 +19,7 @@ public abstract class CPopupMenuController
 	
 	public void onMouseClick(boolean left) { }
 	
+	/** create the popup menu.  returning null results in no popup being shown */
 	public abstract JPopupMenu constructPopupMenu();
 	
 	//
@@ -53,6 +54,15 @@ public abstract class CPopupMenuController
 	
 	public void monitor(JComponent c)
 	{
+		// remove all instances of previously set CPopupMenuControllers
+		for(MouseListener x: c.getMouseListeners())
+		{
+			if(x instanceof CPopupMenuController)
+			{
+				c.removeMouseListener(x);
+			}
+		}
+		
 		c.addMouseListener(this);
 	}
 	

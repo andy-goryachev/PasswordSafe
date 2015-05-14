@@ -26,10 +26,10 @@ public class CScrollBar
 	}
 	
 	
-	public void setUI(ScrollBarUI ui)
-	{
-		super.setUI(new CScrollBarUI());
-	}
+//	public void setUI(ScrollBarUI ui)
+//	{
+//		super.setUI(new CScrollBarUI());
+//	}
 
 
 	public void setUnitIncrement(int unitIncrement)

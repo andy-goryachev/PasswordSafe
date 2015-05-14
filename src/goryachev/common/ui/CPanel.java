@@ -45,6 +45,13 @@ public class CPanel
 	}
 	
 	
+	public CPanel(boolean opaque)
+	{
+		super(new CBorderLayout());
+		setOpaque(opaque);
+	}
+	
+	
 	/** creates standard 10-pixel border */
 	public void border()
 	{

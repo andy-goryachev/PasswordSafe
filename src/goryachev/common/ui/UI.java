@@ -6,6 +6,7 @@ import goryachev.common.util.CException;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
 import goryachev.common.util.CPlatform;
+import goryachev.common.util.Clearable;
 import goryachev.common.util.Log;
 import goryachev.common.util.Obj;
 import goryachev.common.util.SB;
@@ -76,7 +77,8 @@ public class UI
 	public static final int SHIFT = InputEvent.SHIFT_DOWN_MASK;
 	private static final String HTML_DISABLE_CLIENT_PROPERTY = "html.disable";
 	private static final Obj KEY_TABLE_HEADER_HIGHLIGHT = new Obj("KEY_TABLE_HEADER_HIGHLIGHT");
-
+	private static CPopupMenuController defaultPopupMenuController;
+	
 	
 	public static void resize(Component c, Point location, Dimension dimension)
 	{
@@ -1444,6 +1446,13 @@ public class UI
 	}
 	
 	
+	/** intelligently place the popup menu below or above the component, aligning it with the component boundary */
+	public static void showPopup(Component c, JPopupMenu popup)
+	{
+		showPopup(c, new Rectangle(0, 0, c.getWidth(), c.getHeight()), popup);
+	}
+	
+	
 	public static void showPopup(Component c, int x, int y, JPopupMenu popup)
 	{
 		UI.showPopup(c, new Rectangle(x, y, 0, 0), popup);
@@ -1675,6 +1684,10 @@ public class UI
 				{
 					((JTextComponent)c).setText(null);
 				}
+				else if(c instanceof Clearable)
+				{
+					((Clearable)c).clear();
+				}
 			}
 		}
 	}
@@ -1809,6 +1822,78 @@ public class UI
 		if(c != null)
 		{
 			c.scrollRectToVisible(new Rectangle(0, 0, c.getWidth(), c.getHeight()));
+		}
+	}
+	
+
+	private static CPopupMenuController createDefaultPopupMenuController()
+	{
+		return new CPopupMenuController()
+		{
+			public JPopupMenu constructPopupMenu()
+			{
+				Component c = getSourceComponent();
+				if(c instanceof JTextComponent)
+				{
+					final JTextComponent t = (JTextComponent)c;
+
+					CAction cutAction = new CAction()
+					{
+						public void action() throws Exception
+						{
+							t.cut();
+						}
+					};
+					cutAction.setEnabled(t.isEditable() && t.isEnabled());
+					
+					CAction copyAction = new CAction()
+					{
+						public void action() throws Exception
+						{
+							t.copy();
+						}
+					};
+					
+					CAction pasteAction = new CAction()
+					{
+						public void action() throws Exception
+						{
+							t.paste();
+						}
+					};
+					pasteAction.setEnabled(t.isEditable() && t.isEnabled());
+					
+					CPopupMenu m = new CPopupMenu();
+					m.add(new CMenuItem(Menus.Cut, cutAction));
+					m.add(new CMenuItem(Menus.Copy, copyAction));
+					m.add(new CMenuItem(Menus.Paste, pasteAction));
+					return m;	
+				}
+				return null;
+			}
+		};
+	}
+
+
+	public static void installDefaultPopupMenu(JTextComponent c)
+    {
+		if(defaultPopupMenuController == null)
+		{
+			defaultPopupMenuController = createDefaultPopupMenuController();
+		}
+		
+		defaultPopupMenuController.monitor(c);
+    }
+	
+	
+	/** alters prefereed width of the component */ 
+	public static void setPreferredWidth(Component c, int width)
+	{
+		if(c != null)
+		{
+			Dimension d = c.getPreferredSize();
+			d.width = width;
+			c.setPreferredSize(d);
 		}
 	}
 }
