@@ -139,16 +139,16 @@ public class CScrollBarUI
 		{
 			if(tr.height > trackThickness)
 			{
-				// TODO insets
 				int x = c.getWidth() / 2;
-				g.drawLine(x, tr.y + trackThickness / 2 + thumbGap, x, tr.y + tr.height - trackThickness - thumbGap);
+				int y = tr.y + trackThickness / 2;
+				g.drawLine(x, y + thumbGap, x, y + tr.height - trackThickness - thumbGap);
 			}
 		}
 		else
 		{
-			// TODO insets
 			int y = c.getHeight() / 2;
-			g.drawLine(tr.x + trackThickness / 2 + thumbGap, y, tr.x + tr.width - trackThickness - thumbGap, y);
+			int x = tr.x + trackThickness / 2;
+			g.drawLine(x + thumbGap, y, x + tr.width - trackThickness - thumbGap, y);
 		}
 	}
 

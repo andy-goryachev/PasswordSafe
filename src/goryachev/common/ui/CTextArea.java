@@ -52,5 +52,6 @@ public class CTextArea
 	private void init()
     {
 		UI.installDefaultPopupMenu(this);
+		setFont(Theme.plainFont());
     }
 }

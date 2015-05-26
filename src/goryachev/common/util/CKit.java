@@ -865,23 +865,26 @@ public class CKit
 	{
 		CList<String> a = new CList();
 
-		int start = 0;
-		for(;;)
+		if(s != null)
 		{
-			int ix = s.indexOf(delim, start);
-			if(ix >= 0)
+			int start = 0;
+			for(;;)
 			{
-				a.add(s.substring(start, ix));
-				if(includeDelimiter)
+				int ix = s.indexOf(delim, start);
+				if(ix >= 0)
 				{
-					a.add(s.substring(ix, ix+1));
+					a.add(s.substring(start, ix));
+					if(includeDelimiter)
+					{
+						a.add(s.substring(ix, ix+1));
+					}
+					start = ix + 1;
 				}
-				start = ix + 1;
-			}
-			else
-			{
-				a.add(s.substring(start, s.length()));
-				break;
+				else
+				{
+					a.add(s.substring(start, s.length()));
+					break;
+				}
 			}
 		}
 
