@@ -52,12 +52,18 @@ public class FileLogWriter
 			try
 			{
 				CWriter out = new CWriter(fs);
-				
-				out.write(s);
-				out.write("\n");
-				out.flush();
-				
-				pos = fs.getChannel().position();
+				try
+				{
+					out.write(s);
+					out.write("\n");
+					out.flush();
+					
+					pos = fs.getChannel().position();
+				}
+				finally
+				{
+					CKit.close(out);
+				}
 			}
 			finally
 			{

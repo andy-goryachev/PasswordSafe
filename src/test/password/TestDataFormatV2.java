@@ -3,7 +3,6 @@ package test.password;
 import goryachev.common.test.TF;
 import goryachev.common.test.Test;
 import goryachev.crypto.OpaqueChars;
-import goryachev.password.DataFormat;
 import goryachev.password.data.v2.DataFormatV2;
 import java.security.SecureRandom;
 

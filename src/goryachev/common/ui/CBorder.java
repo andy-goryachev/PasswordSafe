@@ -60,7 +60,7 @@ public class CBorder
 		gapRight = c.gapRight;
 		gapTop = c.gapTop;
 		gapBottom = c.gapBottom;
-		Color color = c.color;
+		color = c.color;
 	}
 	
 	

@@ -108,7 +108,6 @@ public abstract class ZTableModel<K,V>
 	
 	protected void setValueNoEvent(Object val, int row, int col)
 	{
-		int sz = getColumnCount();
 		Object[] cells = rows().get(row);
 		cells[col] = val;
 	}

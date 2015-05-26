@@ -1,6 +1,5 @@
 // Copyright (c) 2009-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
-import goryachev.common.ui.CPopupMenu;
 import goryachev.common.ui.text.CDocumentFilter;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -224,7 +223,6 @@ public class DocumentTools
 					end = text.length();
 				}
 							
-				CPopupMenu m = new CPopupMenu();
 				String s = text.substring(beg, end);
 				return s;
 			}

@@ -13,7 +13,6 @@ import goryachev.common.util.CList;
 import goryachev.common.util.CLookup;
 import goryachev.common.util.CSorter;
 import goryachev.common.util.HasPrompts;
-import goryachev.common.util.SB;
 import goryachev.common.util.TXT;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;

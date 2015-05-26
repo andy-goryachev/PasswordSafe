@@ -733,7 +733,6 @@ public class TextTools
 			int start = 0;
 			int len = text.length();
 			boolean white = true;
-			boolean cjk = false;
 			
 			for(int i=0; i<len; i++)
 			{
@@ -747,7 +746,6 @@ public class TextTools
 							add(list, text.substring(start, i));
 						}
 						white = true;
-						cjk = false;
 					}
 				}
 				else if(isCJK(c))
@@ -764,7 +762,6 @@ public class TextTools
 						}
 					}
 					start = i;
-					cjk = true;
 				}
 				else
 				{

@@ -190,7 +190,6 @@ public class Dialogs
 	{
 		StandardDialog d = new StandardDialog(parent);
 		
-		boolean error;
 		if(exceptionOrMessage instanceof Throwable)
 		{
 			Throwable err = (Throwable)exceptionOrMessage;
@@ -200,7 +199,6 @@ public class Dialogs
 			}
 			
 			d.setTextError(err);
-			error = true;
 		}
 		else if(exceptionOrMessage != null)
 		{
@@ -213,7 +211,6 @@ public class Dialogs
 			{
 				d.setTextPlain(s);
 			}
-			error = false;
 		}
 		
 		d.setLogo(icon);

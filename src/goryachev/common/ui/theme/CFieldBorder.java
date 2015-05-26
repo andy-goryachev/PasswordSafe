@@ -49,7 +49,6 @@ public class CFieldBorder
 		Color col = Theme.lineColor();
 		
 		// line around
-		int dh = 0;
 		if(drawLine)
 		{
 			w--;
@@ -60,7 +59,6 @@ public class CFieldBorder
 
 			x++;
 			y++;
-			dh = 1;
 		}
 
 		// dark horizontal shadow

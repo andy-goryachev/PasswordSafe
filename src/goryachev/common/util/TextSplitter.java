@@ -19,7 +19,6 @@ public abstract class TextSplitter
 		int start = 0;
 		int len = text.length();
 		boolean white = true;
-		boolean cjk = false;
 		
 		for(int i=0; i<len; i++)
 		{
@@ -33,7 +32,6 @@ public abstract class TextSplitter
 						add(list, text.substring(start, i));
 					}
 					white = true;
-					cjk = false;
 				}
 			}
 			else

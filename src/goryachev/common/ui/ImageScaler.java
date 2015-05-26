@@ -235,7 +235,6 @@ public class ImageScaler
 			boolean fitWidth;
 			if(trim)
 			{
-				double scale = Math.max(sx, sy);
 				if(sx > sy)
 				{
 					fitWidth = true;

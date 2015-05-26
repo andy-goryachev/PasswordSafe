@@ -175,20 +175,27 @@ public class Crypto
 	public static APrivateKey getRSAPrivateKey(byte[] b) throws Exception
 	{
 		ASN1InputStream in = new ASN1InputStream(b);
-		ASN1Primitive x = in.readObject();
-		RSAPrivateKey k = RSAPrivateKey.getInstance(x);
-
-		return new APrivateKey(new RSAPrivateCrtKeyParameters
-		(
-			k.getModulus(), 
-			k.getPublicExponent(),
-			k.getPrivateExponent(),
-			k.getPrime1(),
-			k.getPrime2(),
-			k.getExponent1(),
-			k.getExponent2(),
-			k.getCoefficient()
-		));
+		try
+		{
+			ASN1Primitive x = in.readObject();
+			RSAPrivateKey k = RSAPrivateKey.getInstance(x);
+	
+			return new APrivateKey(new RSAPrivateCrtKeyParameters
+			(
+				k.getModulus(), 
+				k.getPublicExponent(),
+				k.getPrivateExponent(),
+				k.getPrime1(),
+				k.getPrime2(),
+				k.getExponent1(),
+				k.getExponent2(),
+				k.getCoefficient()
+			));
+		}
+		finally
+		{
+			CKit.close(in);
+		}
 	}
 	
 	

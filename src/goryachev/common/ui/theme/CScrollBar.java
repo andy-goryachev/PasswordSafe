@@ -6,7 +6,6 @@ import java.awt.Rectangle;
 import javax.swing.JScrollBar;
 import javax.swing.JViewport;
 import javax.swing.Scrollable;
-import javax.swing.plaf.ScrollBarUI;
 
 
 public class CScrollBar

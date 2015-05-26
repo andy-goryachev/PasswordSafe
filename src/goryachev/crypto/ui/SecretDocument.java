@@ -1,7 +1,6 @@
 // Copyright (c) 2012-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.ui;
 import goryachev.crypto.OpaqueChars;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
 

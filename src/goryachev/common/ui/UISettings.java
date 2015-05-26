@@ -715,7 +715,7 @@ public class UISettings
 			STokenizer tok = new STokenizer(getProperty(prefix + DIALOG));
 			int w = tok.nextInt(-1);
 			int h = tok.nextInt(-1);
-			String state = tok.nextString(FRAME_NORMAL);
+			//String state = tok.nextString(FRAME_NORMAL);
 			
 			if(w < 0)
 			{

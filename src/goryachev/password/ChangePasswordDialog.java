@@ -9,7 +9,6 @@ import goryachev.common.ui.CFocusTraversalPolicy;
 import goryachev.common.ui.CPanel;
 import goryachev.common.ui.Dialogs;
 import goryachev.common.ui.Menus;
-import goryachev.common.util.TXT;
 import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.ui.CPasswordField;
 import goryachev.crypto.ui.MatchLabel;

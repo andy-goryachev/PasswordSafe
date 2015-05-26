@@ -61,7 +61,7 @@ public class LocalizedPromptsFormat
 		else if(b.length >= 3)
 		{
 			int b2 = b[2] & 0xff;
-			if((b0 == 0xef) && (b1 == 0xbb) && (b[2] == 0xbf))
+			if((b0 == 0xef) && (b1 == 0xbb) && (b2 == 0xbf))
 			{
 				// UTF-8
 				return new String(b, 3, b.length - 3, CKit.CHARSET_UTF8);

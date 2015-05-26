@@ -12,7 +12,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
-import java.awt.font.FontRenderContext;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
 import javax.swing.JComponent;

@@ -319,7 +319,7 @@ public class CLanguage
 			}
 		}
 		
-		int ix = id.indexOf('_');
+		//int ix = id.indexOf('_');
 		
 		return new CLanguage(id);
 	}

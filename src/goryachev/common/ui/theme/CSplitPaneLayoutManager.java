@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.LayoutManager2;
 import javax.swing.JSplitPane;
-import javax.swing.plaf.basic.BasicSplitPaneUI;
 
 
 /** 
@@ -74,8 +73,6 @@ public class CSplitPaneLayoutManager
 		int div = splitPane.getDividerLocation();
 		Insets insets = splitPane.getInsets();
 		int availableSize = getAvailableSize(containerSize, insets);
-		int newSize = getSizeForPrimaryAxis(containerSize);
-		int beginLocation = ui.getDividerLocation(splitPane);
 		int dOffset = getSizeForPrimaryAxis(insets, true);
 		Dimension dSize = (components[2] == null) ? null : components[2].getPreferredSize();
 

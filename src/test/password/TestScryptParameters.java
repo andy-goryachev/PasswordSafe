@@ -102,7 +102,6 @@ public class TestScryptParameters
 		int p;
 
 		long memlimit;
-		double opps;
 		double opslimit;
 		double maxN, maxrp;
 

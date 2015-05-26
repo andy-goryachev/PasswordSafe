@@ -556,26 +556,33 @@ public final class DataFormatV1
 		CipherParameters p = new KeyParameter(key);
 		SecretByteArrayInputStream is = new SecretByteArrayInputStream(data);
 		XCipherInputStream in = new XCipherInputStream(c, p, is);
-		SecretByteArrayOutputStream out = new SecretByteArrayOutputStream();
 		try
 		{
-			byte[] buf = new byte[AES_BLOCK_SIZE_BYTES];
-			int rd;
-			while((rd = in.read(buf)) >= 0)
+			SecretByteArrayOutputStream out = new SecretByteArrayOutputStream();
+			try
 			{
-				if(rd > 0)
+				byte[] buf = new byte[AES_BLOCK_SIZE_BYTES];
+				int rd;
+				while((rd = in.read(buf)) >= 0)
 				{
-					out.write(buf, 0, rd);
+					if(rd > 0)
+					{
+						out.write(buf, 0, rd);
+					}
 				}
+				
+				byte[] b = out.toByteArray();
+				return b;
 			}
-			
-			byte[] b = out.toByteArray();
-			return b;
+			finally
+			{
+				out.zero();
+				Crypto.zero(p);
+			}
 		}
 		finally
 		{
-			out.zero();
-			Crypto.zero(p);
+			CKit.close(in);
 		}
 	}
 	
