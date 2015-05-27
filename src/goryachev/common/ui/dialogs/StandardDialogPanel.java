@@ -33,7 +33,6 @@ public class StandardDialogPanel
 	public final CPanel contentPanel;
 	public final JLabel iconField;
 	protected CButtonPanel buttons;
-	private JButton defaultButton;
 
 	
 	public StandardDialogPanel()

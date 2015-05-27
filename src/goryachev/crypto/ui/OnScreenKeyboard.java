@@ -25,7 +25,6 @@ public class OnScreenKeyboard
 	private boolean shift;
 	private boolean capsLock;
 	private boolean altGraph;
-	private Dimension dim;
 	private Color keyColor = new Color(255, 255, 240);
 	private Color ctrlColor = UI.darker(keyColor, 0.85f);
 	private Color hoverColor = Color.white;

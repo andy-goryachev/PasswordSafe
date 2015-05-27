@@ -34,9 +34,15 @@ public class TestCase
 	}
 	
 	
-	public void setInstance(Object test)
+	public void setTestInstance(Object test)
 	{
 		this.test = test;
+	}
+	
+	
+	public Object getTestInstance()
+	{
+		return test;
 	}
 	
 	
@@ -97,8 +103,20 @@ public class TestCase
 	}
 	
 	
+	public long getStartTime()
+	{
+		return startTime;
+	}
+	
+	
 	public void stopped()
 	{
 		stopTime = System.currentTimeMillis();
+	}
+	
+	
+	public long getStopTime()
+	{
+		return stopTime;
 	}
 }

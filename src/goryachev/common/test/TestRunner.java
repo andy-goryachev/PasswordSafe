@@ -222,7 +222,7 @@ public class TestRunner
 		try
 		{
 			Object instance = c.newInstance();
-			tc.setInstance(instance);
+			tc.setTestInstance(instance);
 			
 			for(RunEntry m: before)
 			{

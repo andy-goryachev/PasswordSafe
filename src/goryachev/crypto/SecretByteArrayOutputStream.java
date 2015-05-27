@@ -110,11 +110,6 @@ public final class SecretByteArrayOutputStream
 
 	public void close() throws IOException
 	{
-	}
-	
-	
-	public void zero()
-	{
 		Crypto.zero(buf);
 	}
 }

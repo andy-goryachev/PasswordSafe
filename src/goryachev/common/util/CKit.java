@@ -728,14 +728,17 @@ public class CKit
 	}
 
 	
+	@SuppressWarnings("resource") // actually no resource leak, the compiler does not understand our close()
 	public static byte[] readBytes(File f, int maxSize) throws Exception
 	{
-		FileInputStream in = new FileInputStream(f);
 		int len = (int)Math.min(maxSize, f.length());
-		int read = 0;
 		byte[] buf = new byte[len];
+
+		FileInputStream in = new FileInputStream(f);
 		try
 		{
+			int read = 0;
+
 			while(read < len)
 			{
 				int rv = in.read(buf, read, len-read);

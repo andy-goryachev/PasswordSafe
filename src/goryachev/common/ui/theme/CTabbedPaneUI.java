@@ -22,7 +22,6 @@ public class CTabbedPaneUI
 {
 	private static Set managingFocusForwardTraversalKeys;
 	private static Set managingFocusBackwardTraversalKeys;
-	private boolean contentOpaque = true;
 
 
 	public static void init(UIDefaults defs)

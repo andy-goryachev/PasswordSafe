@@ -620,10 +620,10 @@ public class Dump
 	}
 	
 	
-	private static void describeObjectSimple(SB sb, Object x)
-	{
-		sb.a(CKit.simpleName(x)).a(".").a(Hex.toHexString(x.hashCode()));
-	}
+//	private static void describeObjectSimple(SB sb, Object x)
+//	{
+//		sb.a(CKit.simpleName(x)).a(".").a(Hex.toHexString(x.hashCode()));
+//	}
 	
 	
 	// FIX stack overflows with circular dependencies

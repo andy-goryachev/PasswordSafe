@@ -3,10 +3,12 @@ package goryachev.crypto;
 import goryachev.common.util.CException;
 import goryachev.common.util.CKit;
 import goryachev.common.util.Log;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.Arrays;
+
 import org.bouncycastle.asn1.ASN1InputStream;
 import org.bouncycastle.asn1.ASN1Object;
 import org.bouncycastle.asn1.ASN1Primitive;
@@ -105,22 +107,6 @@ public class Crypto
 	}
 	
 	
-	public static final void zero(SecretByteArrayOutputStream x)
-	{
-		try
-		{
-			if(x != null)
-			{
-				x.zero();
-			}
-		}
-		catch(Throwable e)
-		{
-			Log.err(e);
-		}
-	}
-	
-	
 	public static RSAPublicKey toRSAPublicKey(RSAPublicKeySpec k)
 	{
 		return new RSAPublicKey(k.getModulus(), k.getPublicExponent());
@@ -202,10 +188,17 @@ public class Crypto
 	public static APublicKey getRSAPublicKey(byte[] b) throws Exception
 	{
 		ASN1InputStream in = new ASN1InputStream(b);
-		ASN1Primitive x = in.readObject();
-		RSAPublicKey k = RSAPublicKey.getInstance(x);
-
-		return new APublicKey(new RSAKeyParameters(false, k.getModulus(), k.getPublicExponent()));
+		try
+		{
+			ASN1Primitive x = in.readObject();
+			RSAPublicKey k = RSAPublicKey.getInstance(x);
+	
+			return new APublicKey(new RSAKeyParameters(false, k.getModulus(), k.getPublicExponent()));
+		}
+		finally
+		{
+			CKit.close(in);
+		}
 	}
 	
 	

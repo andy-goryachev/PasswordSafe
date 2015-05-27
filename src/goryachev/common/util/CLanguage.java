@@ -460,41 +460,41 @@ public class CLanguage
 	}
 	
 	
-	private static String[] split(String s)
-	{
-		CList<String> list = new CList();
-		
-		int start = 0;
-		boolean delim = true;
-		for(int i=0; i<s.length(); i++)
-		{
-			char c = s.charAt(i);
-			boolean de = isDelimiter(c);
-			if(de != delim)
-			{
-				if(de)
-				{
-					if(i > start)
-					{
-						list.add(s.substring(start, i));
-					}
-				}
-				else
-				{
-					start = i;
-				}
-				
-				delim = de;
-			}
-		}
-		
-		if(!delim && (start < s.length()))
-		{
-			list.add(s.substring(start));
-		}
-		
-		return list.toArray(new String[list.size()]);
-	}
+//	private static String[] split(String s)
+//	{
+//		CList<String> list = new CList();
+//		
+//		int start = 0;
+//		boolean delim = true;
+//		for(int i=0; i<s.length(); i++)
+//		{
+//			char c = s.charAt(i);
+//			boolean de = isDelimiter(c);
+//			if(de != delim)
+//			{
+//				if(de)
+//				{
+//					if(i > start)
+//					{
+//						list.add(s.substring(start, i));
+//					}
+//				}
+//				else
+//				{
+//					start = i;
+//				}
+//				
+//				delim = de;
+//			}
+//		}
+//		
+//		if(!delim && (start < s.length()))
+//		{
+//			list.add(s.substring(start));
+//		}
+//		
+//		return list.toArray(new String[list.size()]);
+//	}
 	
 	
 	private static boolean isDelimiter(int c)

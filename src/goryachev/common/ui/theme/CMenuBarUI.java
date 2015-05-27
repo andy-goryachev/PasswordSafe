@@ -1,12 +1,9 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
-import java.awt.Component;
 import java.awt.Window;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+
 import javax.swing.JComponent;
-import javax.swing.JMenuBar;
 import javax.swing.UIDefaults;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicMenuBarUI;
@@ -44,29 +41,29 @@ public class CMenuBarUI
 	}
 
 
-	private void installWindowListener()
-	{
-		if(windowListener == null)
-		{
-			final JMenuBar mb = menuBar;
-			Component c = mb.getTopLevelAncestor();
-			if(c instanceof Window)
-			{
-				window = (Window)c;
-				windowListener = new WindowAdapter()
-				{
-					public void windowActivated(WindowEvent ev)
-					{
-						mb.repaint();
-					}
-
-					public void windowDeactivated(WindowEvent ev)
-					{
-						mb.repaint();
-					}
-				};
-				((Window)c).addWindowListener(windowListener);
-			}
-		}
-	}
+//	private void installWindowListener()
+//	{
+//		if(windowListener == null)
+//		{
+//			final JMenuBar mb = menuBar;
+//			Component c = mb.getTopLevelAncestor();
+//			if(c instanceof Window)
+//			{
+//				window = (Window)c;
+//				windowListener = new WindowAdapter()
+//				{
+//					public void windowActivated(WindowEvent ev)
+//					{
+//						mb.repaint();
+//					}
+//
+//					public void windowDeactivated(WindowEvent ev)
+//					{
+//						mb.repaint();
+//					}
+//				};
+//				((Window)c).addWindowListener(windowListener);
+//			}
+//		}
+//	}
 }

@@ -532,19 +532,25 @@ public final class DataFormatV1
 	{
 		PaddedBufferedBlockCipher c = new PaddedBufferedBlockCipher(new CBCBlockCipher(new AESFastEngine()));
 		CipherParameters p = new KeyParameter(key);
-		SecretByteArrayOutputStream ba = new SecretByteArrayOutputStream();
 		try
 		{
-			XCipherOutputStream out = new XCipherOutputStream(c, p, ba);
-			out.write(data);
-			out.close();
-	
-			byte[] b = ba.toByteArray();
-			return b;
+			SecretByteArrayOutputStream ba = new SecretByteArrayOutputStream();
+			try
+			{
+				XCipherOutputStream out = new XCipherOutputStream(c, p, ba);
+				out.write(data);
+				out.close();
+		
+				byte[] b = ba.toByteArray();
+				return b;
+			}
+			finally
+			{
+				CKit.close(ba);
+			}
 		}
 		finally
 		{
-			ba.zero();
 			Crypto.zero(p);
 		}
 	}
@@ -554,35 +560,41 @@ public final class DataFormatV1
 	{
 		PaddedBufferedBlockCipher c = new PaddedBufferedBlockCipher(new CBCBlockCipher(new AESFastEngine()));
 		CipherParameters p = new KeyParameter(key);
-		SecretByteArrayInputStream is = new SecretByteArrayInputStream(data);
-		XCipherInputStream in = new XCipherInputStream(c, p, is);
 		try
 		{
-			SecretByteArrayOutputStream out = new SecretByteArrayOutputStream();
+			SecretByteArrayInputStream is = new SecretByteArrayInputStream(data);
+			XCipherInputStream in = new XCipherInputStream(c, p, is);
 			try
 			{
-				byte[] buf = new byte[AES_BLOCK_SIZE_BYTES];
-				int rd;
-				while((rd = in.read(buf)) >= 0)
+				SecretByteArrayOutputStream out = new SecretByteArrayOutputStream();
+				try
 				{
-					if(rd > 0)
+					byte[] buf = new byte[AES_BLOCK_SIZE_BYTES];
+					int rd;
+					while((rd = in.read(buf)) >= 0)
 					{
-						out.write(buf, 0, rd);
+						if(rd > 0)
+						{
+							out.write(buf, 0, rd);
+						}
 					}
+					
+					byte[] b = out.toByteArray();
+					return b;
 				}
-				
-				byte[] b = out.toByteArray();
-				return b;
+				finally
+				{
+					CKit.close(out);
+				}
 			}
 			finally
 			{
-				out.zero();
-				Crypto.zero(p);
+				CKit.close(in);
 			}
 		}
 		finally
 		{
-			CKit.close(in);
+			Crypto.zero(p);
 		}
 	}
 	

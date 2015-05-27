@@ -50,6 +50,12 @@ public class CTextPane
 	{
 		autoIndent = on;
 	}
+	
+	
+	public boolean getAutoIndent()
+	{
+		return autoIndent;
+	}
 
 
 	// FIX I think this is wrong

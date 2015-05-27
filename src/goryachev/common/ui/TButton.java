@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -113,12 +114,6 @@ public class TButton
 	}
 	
 	
-	private static String getTooltip(Action a)
-	{
-		return (String)a.getValue(Action.NAME);
-	}
-	
-	
 	protected void setPressed(boolean on)
 	{
 		if(on != pressed)
@@ -164,33 +159,6 @@ public class TButton
 	public void setSelected(boolean on)
 	{
 		super.setSelected(on);
-	}
-	
-	
-	private byte[] buildLookup(int hi, int percent)
-	{
-		byte[] ba = new byte[256];
-		int delta = (hi * percent / 100);
-		int lo = hi - delta;
-		for(int i=0; i<256; i++)
-		{
-			//ba[i] = (byte)(delta*i/255 + lo);
-			
-			// reverse intensity: source black is colored light
-			ba[255-i] = (byte)(delta*i/255 + lo);
-		}
-		return ba;
-	}
-	
-	
-	private byte[] buildAlpha()
-	{
-		byte[] ba = new byte[256];
-		for(int i=0; i<256; i++)
-		{
-			ba[i] = (byte)i;
-		}
-		return ba;
 	}
 	
 	

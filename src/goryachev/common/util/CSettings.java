@@ -11,7 +11,6 @@ public class CSettings
 	{
 		public String getProperty(String key) { return null; }
 		public void setProperty(String key, String value) { }
-		public void removeProperty(String key) { }
 		public CList<String> getPropertyNames() { return new CList(0); }
 		public void save() throws Exception { }
 	};

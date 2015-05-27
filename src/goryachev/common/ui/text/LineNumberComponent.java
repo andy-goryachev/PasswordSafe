@@ -14,8 +14,6 @@ import java.awt.Rectangle;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-import javax.swing.border.MatteBorder;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
@@ -32,7 +30,6 @@ public class LineNumberComponent
 	extends JPanel
 	implements CaretListener, DocumentListener, PropertyChangeListener
 {
-	private final static Border OUTER = new MatteBorder(0, 0, 0, 1, Color.GRAY); // FIX theme
 	private final static int HEIGHT = Integer.MAX_VALUE - 1000000;
 
 	protected JTextComponent component;

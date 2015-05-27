@@ -52,7 +52,6 @@ public abstract class Application
 	public final String profileName;
 	public final String version;
 	public final String copyright;
-	private String preferencesFileName = "preferences.dat";
 	private static String company = "goryachev.com";
 	protected Window splash;
 	private static Application instance;

@@ -17,7 +17,6 @@ public class CFocusTraversalPolicy
 {
 	private CList<Component> components = new CList();
 	private Component defaultComponent;
-	private int index;
 
 
 	public CFocusTraversalPolicy()

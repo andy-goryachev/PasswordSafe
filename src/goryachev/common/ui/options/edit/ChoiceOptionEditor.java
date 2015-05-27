@@ -17,7 +17,6 @@ public abstract class ChoiceOptionEditor<T>
 	//
 	
 	public final JComboBox combo;
-	private String[] choices;
 	
 	
 	public ChoiceOptionEditor(COption<T> option)
@@ -31,7 +30,6 @@ public abstract class ChoiceOptionEditor<T>
 	
 	public void setChoices(String[] choices)
 	{
-		this.choices = choices;
 		combo.removeAllItems();
 		for(String s: choices)
 		{

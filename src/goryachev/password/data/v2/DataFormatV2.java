@@ -242,7 +242,7 @@ public final class DataFormatV2
 		}
 		finally
 		{
-			out.zero();
+			CKit.close(out);
 		}
 	}
 	

@@ -19,7 +19,7 @@ import javax.swing.ImageIcon;
 
 public class FileTools
 {
-	private static final String COPYRIGHT = "Copyright (c) Andy Goryachev <andy@goryachev.com>.  All Rights Reserved.";
+	public static final String COPYRIGHT = "Copyright (c) Andy Goryachev <andy@goryachev.com>.  All Rights Reserved.";
 	
 	
 	public static final String[] IMAGE =
