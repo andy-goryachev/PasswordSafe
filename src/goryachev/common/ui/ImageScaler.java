@@ -31,7 +31,6 @@ public class ImageScaler
 	private Color paddingColor;
 	private Color background;
 	private int shadowAlpha;
-	@SuppressWarnings("unused") // TODO
 	private int shadowAngle;
 	private int shadowDepth;
 	private CAlignment horizontalAlignment = CAlignment.CENTER;
