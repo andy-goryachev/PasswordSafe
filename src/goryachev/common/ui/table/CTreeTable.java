@@ -505,7 +505,6 @@ public class CTreeTable<T extends CTreeNode>
 	
 	
 	/** returns row index of the item identified by path or -1 */
-	@SuppressWarnings("unused")
     public int expandPath(String[] fullPath)
 	{
 		if(fullPath != null)
