@@ -707,4 +707,12 @@ public class Theme
 	{
 		return new SpinningGearIcon(size);
 	}
+	
+	
+	/** minimum button width in button panels */
+	public static int minimumButtonWidth()
+	{
+		// TODO depends on font size
+		return 70;
+	}
 }

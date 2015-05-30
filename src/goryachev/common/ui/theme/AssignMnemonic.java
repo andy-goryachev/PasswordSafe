@@ -1,6 +1,7 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
 import goryachev.common.ui.CButtonPanel;
+import goryachev.common.ui.CButtonPanel3;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CUnique;
 import goryachev.common.util.SB;
@@ -31,7 +32,11 @@ public class AssignMnemonic
 		}
 		else if(x instanceof CButtonPanel) 
 		{
-			assignButtonPanel((CButtonPanel)x);
+			assignButtonPanel((Container)x);
+		}
+		else if(x instanceof CButtonPanel3) 
+		{
+			assignButtonPanel((Container)x);
 		}
 		else if(x instanceof Container)
 		{
@@ -94,7 +99,7 @@ public class AssignMnemonic
 	}
 	
 	
-	private static void assignButtonPanel(CButtonPanel p)
+	private static void assignButtonPanel(Container p)
 	{
 		CUnique<Character> u = new CUnique();
 		

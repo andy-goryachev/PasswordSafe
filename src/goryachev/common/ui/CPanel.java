@@ -17,11 +17,13 @@ import javax.swing.SwingConstants;
 
 
 // border layout panel where center component can be configured to have table layout
+@Deprecated
 public class CPanel
 	extends JPanel
 	implements Scrollable
 {
-	protected void onAddNotify() { }
+	// TODO kill
+	protected final void onAddNotify() { }
 	
 	//
 	
@@ -35,19 +37,19 @@ public class CPanel
 	
 	public CPanel()
 	{
-		super(new CBorderLayout());
+		super(new BorderLayout());
 	}
 	
 	
 	public CPanel(int hgap, int vgap)
 	{
-		super(new CBorderLayout(hgap,vgap));
+		super(new BorderLayout(hgap,vgap));
 	}
 	
 	
 	public CPanel(boolean opaque)
 	{
-		super(new CBorderLayout());
+		super(new BorderLayout());
 		setOpaque(opaque);
 	}
 	
@@ -67,7 +69,7 @@ public class CPanel
 	
 	public void setLayout(LayoutManager m)
 	{
-		if(m instanceof CBorderLayout)
+		if(m instanceof BorderLayout)
 		{
 			super.setLayout(m);
 		}
@@ -94,9 +96,9 @@ public class CPanel
 	}
 	
 
-	protected CBorderLayout getBorderLayout()
+	protected BorderLayout getBorderLayout()
 	{
-		return (CBorderLayout)getLayout();
+		return (BorderLayout)getLayout();
 	}
 
 
@@ -208,12 +210,14 @@ public class CPanel
 	}
 
 
+	@Deprecated
 	public void setLayout(double[] cols, double[] rows)
 	{
 		setLayout(cols, rows, 0, 0);
 	}
 
 
+	@Deprecated
 	public void setLayout(double[] cols, double[] rows, int hgap, int vgap)
 	{
 		TableLayout layout = new TableLayout(cols, rows);
@@ -225,6 +229,7 @@ public class CPanel
 	}
 
 
+	@Deprecated
 	public TableLayout getTableLayout()
 	{
 		Component c = getCenter();
@@ -412,26 +417,5 @@ public class CPanel
 	public void setBorder(int vertGap, int horGap)
 	{
 		setBorder(new CBorder(vertGap, horGap));
-	}
-	
-	
-	// TODO
-//	public void removeRow(int row)
-//	{
-//		TableLayout t = getTableLayout();
-//		if(t != null)
-//		{
-//			t.get
-//		}
-//	}
-	
-	
-	//
-	
-	
-	private static class CBorderLayout extends BorderLayout
-	{
-		public CBorderLayout() { }
-		public CBorderLayout(int hgap, int vgap) { super(hgap,vgap); }
 	}
 }

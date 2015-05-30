@@ -12,15 +12,22 @@ import javax.swing.JTextArea;
 /** Universal CPanel with commonly used UI capabilities such as toolbar and button panel, created upon demand. */
 // TODO StandardDialogPanel, pick one
 public class BasePanel
-	extends CPanel
+	extends CPanel3
 {
 	protected CToolBar toolbar;
-	protected CButtonPanel buttons;
 
 
 	public BasePanel()
 	{
+		this(false);
+	}
+	
+	
+	public BasePanel(boolean opaque)
+	{
+		super(opaque);
 		setBackground(Theme.textBG());
+		//setGaps(10, 10);
 	}
 	
 	
@@ -44,25 +51,6 @@ public class BasePanel
 	protected CToolBar createToolBar()
 	{
 		return Theme.toolbar();
-	}
-	
-	
-	public CButtonPanel buttons()
-	{
-		if(buttons == null)
-		{
-			buttons = createButtonPanel();
-			setSouth(buttons);
-		}
-		return buttons;
-	}
-	
-	
-	protected CButtonPanel createButtonPanel()
-	{
-		CButtonPanel b = new CButtonPanel();
-		b.setBorder(Theme.BORDER_10);
-		return b;
 	}
 	
 	

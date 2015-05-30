@@ -313,7 +313,7 @@ public class BaseDialog
 		
 		BasePanel p = new BasePanel();
 		p.setCenter(c);
-		p.buttons().add(new CButton(Menus.Cancel, cancelAction));
+		p.buttonPanel().add(new CButton(Menus.Cancel, cancelAction));
 		
 		thread = new BackgroundThread(op.getName())
 		{

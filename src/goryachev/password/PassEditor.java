@@ -3,10 +3,11 @@ package goryachev.password;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CButton;
-import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.CScrollPane;
+import goryachev.common.ui.CTextArea;
+import goryachev.common.ui.CTextField;
 import goryachev.common.ui.CUndoManager;
-import goryachev.common.ui.HorizontalLayoutPanel;
 import goryachev.common.ui.InputTracker;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.UI;
@@ -17,24 +18,21 @@ import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.ui.CPasswordField;
 import goryachev.password.ui.ClipboardHandler;
 import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 
 public class PassEditor
-	extends CPanel
+	extends CPanel3
 {
-	public final CAction copyPasswordAction = new CAction() { public void action() { copyPassword(); } };
-	public final CAction copyUsernameAction = new CAction() { public void action() { copyUsername(); } };
-	public final CAction editPasswordAction = new CAction() { public void action() { editPassword(); } };
-	public final JTextField nameField;
-	public final JTextField usernameField;
+	public final CAction changePasswordAction = new CAction() { public void action() { actionChangePassword(); } };
+	public final CAction copyPasswordAction = new CAction() { public void action() { actionCopyPassword(); } };
+	public final CAction copyUsernameAction = new CAction() { public void action() { actionCopyUsername(); } };
+	public final CTextField nameField;
+	public final CTextField usernameField;
 	public final CButton copyUserButton;
 	public final CPasswordField passField;
 	public final CButton copyPassButton;
 	public final CButton editPassButton;
-	public final JTextArea notesField;
+	public final CTextArea notesField;
 	private PassEntry entry;
 	protected InputTracker tracker;
 
@@ -49,16 +47,16 @@ public class PassEditor
 			}
 		};
 		
-		nameField = new JTextField();
+		nameField = new CTextField();
 		tracker.add(nameField);
 		
-		usernameField = new JTextField();
+		usernameField = new CTextField();
 		tracker.add(usernameField);
 		
 		passField = new CPasswordField();
 		passField.setEditable(false);
 		
-		notesField = new JTextArea();
+		notesField = new CTextArea();
 		notesField.setFont(Theme.monospacedFont());
 		notesField.setBorder(Theme.BORDER_FIELD);
 		notesField.setWrapStyleWord(true);
@@ -78,53 +76,28 @@ public class PassEditor
 		copyPassButton = new CButton(TXT.get("PassEditor.button.copy password", "Copy Password"), TXT.get("PassEditor.button tooltip.copy p", "Copy password to clipboard"), copyPasswordAction);
 		copyPassButton.setHighlight(new Color(0x00cc00));
 		
-		editPassButton = new CButton(TXT.get("PassEditor.button.change password", "Change Password"), TXT.get("PassEditor.button tooltip.change password", "Change password"), editPasswordAction);
+		editPassButton = new CButton(TXT.get("PassEditor.button.change password", "Change Password"), TXT.get("PassEditor.button tooltip.change password", "Change password"), changePasswordAction);
 
 		CScrollPane scroll = new CScrollPane(notesField, false);
 		
-		HorizontalLayoutPanel bp = new HorizontalLayoutPanel();
-		bp.add(editPassButton);
+		setGaps(5, 5);
+		addColumns(PREFERRED, PREFERRED, FILL, PREFERRED, PREFERRED);
 		
-		setLayout
-		(
-			new double[]
-			{
-				PREFERRED,
-				FILL,
-				PREFERRED,
-				PREFERRED
-			},
-			new double[]
-			{
-				PREFERRED,
-				PREFERRED,
-				PREFERRED,
-				PREFERRED,
-				PREFERRED,
-				FILL
-			},
-			10, 5
-		);
-		
-		JLabel la;
-		int ix = 0;
-		add(0, ix, label(TXT.get("PassEditor.label.name", "Name:")));
-		add(1, ix, 3, ix, nameField);
-		ix++;
-		add(0, ix, label(TXT.get("PassEditor.label.user", "User name:")));
-		add(1, ix, 2, ix, usernameField);
-		add(3, ix, copyUserButton);
-		ix++;
-		add(0, ix, label(TXT.get("PassEditor.label.pw", "Password:")));
-		add(1, ix, 2, ix, passField);
-		add(3, ix, copyPassButton);
-		ix++;
-		add(1, ix, bp);
-		ix++;
-		add(0, ix, la = new JLabel(TXT.get("PassEditor.label.notes", "Notes:")));
-		ix++;
-		add(0, ix, 3, ix, scroll);
-		la.setVerticalAlignment(JLabel.TOP);
+		row(0, label(TXT.get("PassEditor.label.name", "Name:")));
+		row(1, 4, nameField);
+		nextRow();
+		row(0, label(TXT.get("PassEditor.label.user", "User name:")));
+		row(1, 3, usernameField);
+		row(4, copyUserButton);
+		nextRow();
+		row(0, label(TXT.get("PassEditor.label.pw", "Password:")));
+		row(1, 3, passField);
+		row(4, copyPassButton);
+		nextRow();
+		row(1, editPassButton);
+		nextFillRow();
+		row(0, labelTopAligned(TXT.get("PassEditor.label.notes", "Notes:")));
+		row(1, 4, scroll);
 		
 		setBorder(new CBorder(5, 5, 0, 5));
 		
@@ -186,7 +159,7 @@ public class PassEditor
 	}
 	
 	
-	protected void copyPassword()
+	protected void actionCopyPassword()
 	{
 		if(entry != null)
 		{
@@ -223,10 +196,11 @@ public class PassEditor
 	}
 	
 	
-	protected void editPassword()
+	protected void actionChangePassword()
 	{
 		ChangePasswordDialog d = new ChangePasswordDialog(this);
 		d.open();
+		
 		OpaqueChars pass = d.getEnteredPassword();
 		if(pass != null)
 		{
@@ -236,7 +210,7 @@ public class PassEditor
 	}
 	
 	
-	protected void copyUsername()
+	protected void actionCopyUsername()
 	{
 		ClipboardHandler.copy(usernameField.getText());
 	}

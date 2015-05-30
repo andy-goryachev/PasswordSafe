@@ -99,9 +99,9 @@ public class KeyEditorDialog
 		
 		BasePanel bp = new BasePanel();
 		bp.setCenter(p);
-		bp.buttons().add(new CButton(Menus.Cancel, cancelAction));
-		bp.buttons().add(new CButton(TXT.get("KeyEditorDialog.clear keystroke", "Clear"), clearAction));
-		bp.buttons().add(new CButton(Menus.OK, okAction, true));
+		bp.buttonPanel().add(new CButton(Menus.Cancel, cancelAction));
+		bp.buttonPanel().add(new CButton(TXT.get("KeyEditorDialog.clear keystroke", "Clear"), clearAction));
+		bp.buttonPanel().add(new CButton(Menus.OK, okAction, true));
 		
 		setCenter(bp);
 		

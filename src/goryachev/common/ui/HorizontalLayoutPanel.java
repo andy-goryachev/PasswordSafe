@@ -5,6 +5,7 @@ import info.clearthought.layout.TableLayout;
 import java.awt.Component;
 
 
+@Deprecated // switch to CPanel3 variant
 public class HorizontalLayoutPanel
 	extends ScrollablePanel
 {

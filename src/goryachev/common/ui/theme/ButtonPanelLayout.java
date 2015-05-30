@@ -7,6 +7,7 @@ import java.awt.Insets;
 import java.awt.LayoutManager2;
 
 
+@Deprecated // use CButtonPanel3
 public class ButtonPanelLayout
 	implements LayoutManager2
 {
@@ -143,11 +144,11 @@ public class ButtonPanelLayout
 	{
 		synchronized(target.getTreeLock())
 		{
-			Insets insets = target.getInsets();
-			int top = insets.top;
-			int bottom = target.getHeight() - insets.bottom;
-			int left = insets.left;
-			int right = target.getWidth() - insets.right;
+			Insets m = target.getInsets();
+			int top = m.top;
+			int bottom = target.getHeight() - m.bottom;
+			int left = m.left;
+			int right = target.getWidth() - m.right;
 			int sz = target.getComponentCount() - 1;
 			int h = bottom - top;
 			boolean ltr = target.getComponentOrientation().isLeftToRight();

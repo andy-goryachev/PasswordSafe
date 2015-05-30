@@ -2,7 +2,7 @@
 package goryachev.password;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
-import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.CScrollPane;
 import goryachev.common.ui.CSplitPane;
 import goryachev.common.ui.Dialogs;
@@ -22,10 +22,10 @@ import java.awt.event.KeyEvent;
 
 
 public class ListTab
-	extends CPanel
+	extends CPanel3
 {
-	public final CAction addAction = new CAction() { public void action() { actionAdd(); } };
-	public final CAction deleteAction = new CAction() { public void action() { actionDelete(); } };
+	public final CAction addEntryAction = new CAction() { public void action() { actionAddEntry(); } };
+	public final CAction deleteEntryAction = new CAction() { public void action() { actionDeleteEntry(); } };
 	public final CAction focusFilterAction = new CAction() { public void action() { actionFocusFilter(); } };
 	public final CAction focusTableAction = new CAction() { public void action() { actionFocusTable(); } };
 
@@ -34,7 +34,7 @@ public class ListTab
 	public final ZFilterLogic filter;
 	public final PassEditor passPanel;
 	public final CTableSelector selector;
-	protected CPanel detailPanel;
+	protected CPanel3 detailPanel;
 	protected boolean handleEvents;
 	private DataFile dataFile;
 
@@ -65,14 +65,11 @@ public class ListTab
 		CScrollPane scroll = new CScrollPane(table, CScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, CScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.getViewport().setBackground(Theme.textBG());
 
-		CPanel p = new CPanel();
-		p.setCenter(scroll);
-		
 		// detail
 		
 		passPanel = new PassEditor();
 		
-		detailPanel = new CPanel();
+		detailPanel = new CPanel3();
 		detailPanel.setName("detail");
 		detailPanel.setBackground(Theme.textBG());
 		
@@ -198,7 +195,7 @@ public class ListTab
 	}
 	
 	
-	public void actionAdd()
+	public void actionAddEntry()
 	{
 		filter.clear();
 		
@@ -212,7 +209,7 @@ public class ListTab
 	}
 	
 	
-	public void actionDelete()
+	public void actionDeleteEntry()
 	{
 		if(Dialogs.confirm(this, Menus.Delete, TXT.get("ListTab.delete entries", "Delete selected entries?")))
 		{

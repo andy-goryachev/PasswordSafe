@@ -120,9 +120,9 @@ public class WizardPanel2
 		BasePanel p = new BasePanel(c);
 		if(allowBackButton)
 		{
-			p.buttons().add(new CButton(Menus.Back, backAction));
+			p.buttonPanel().add(new CButton(Menus.Back, backAction));
 		}
-		p.buttons().add(new CButton(Menus.Close, closeAction));
+		p.buttonPanel().add(new CButton(Menus.Close, closeAction));
 		
 		setCard(p, Menus.Error);
 		return p;

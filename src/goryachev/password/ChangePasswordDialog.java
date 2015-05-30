@@ -3,10 +3,9 @@ package goryachev.password;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CButton;
-import goryachev.common.ui.CButtonPanel;
 import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CFocusTraversalPolicy;
-import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.Dialogs;
 import goryachev.common.ui.Menus;
 import goryachev.crypto.OpaqueChars;
@@ -33,8 +32,6 @@ public class ChangePasswordDialog
 	protected JCheckBox hidePassField;
 	protected final PasswordVerifier2 verifier;
 	protected OnScreenKeyboard keyboard;
-	protected CButton changeButton;
-	protected CButton cancelButton;
 	private OpaqueChars entered;
 	private boolean showPassword;
 
@@ -73,20 +70,13 @@ public class ChangePasswordDialog
 		
 		keyboard = Styles.createKeyboard();
 		
-		changeButton = new CButton(Tx.Change, commitAction);
-		changeButton.setHighlight();
-		
-		cancelButton = new CButton(Menus.Cancel, closeAction);
-		
 		setShowPassword(true);
 		hidePassField.setSelected(false);
 
-		CButtonPanel bp = new CButtonPanel(10, cancelButton, changeButton);
-		getContentPanel().setSouth(bp);
-		
 		commitAction.setEnabled(false);
 		
-		pack();
+		setMinimumSize(500, 300);
+		setSize(500, 300);
 	}
 	
 
@@ -100,52 +90,43 @@ public class ChangePasswordDialog
 	{
 		this.showPassword = on;
 		
-		CPanel p = new CPanel();
+		CPanel3 p = new CPanel3();
 		p.setBorder(new CBorder(0, 0, 10, 0));
-		p.setLayout
+		p.setGaps(5);
+		p.addColumns
 		(
-			new double[]
-			{
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.FILL,
-				CPanel.PREFERRED
-			},
-			new double[]
-			{
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.FILL
-			},
-			10, 5
+			CPanel3.PREFERRED,
+			CPanel3.PREFERRED,
+			CPanel3.FILL,
+			CPanel3.PREFERRED
 		);
 		
-		int ix = 0;
-		p.add(0, ix, p.label(Tx.PasswordForm));
+		p.row(0, p.label(Tx.PasswordForm));
 		if(showPassword)
 		{
-			p.add(1, ix, 2, ix, clearPassField);
+			p.row(1, 2, clearPassField);
 		}
 		else
 		{
-			p.add(1, ix, 2, ix, passField);
+			p.row(1, 2, passField);
 		}
+		
 		if(!showPassword)
 		{
-			ix++;
-			p.getTableLayout().insertRow(ix, CPanel.PREFERRED);
-			p.add(0, ix, p.label(Tx.VerifyForm));
-			p.add(1, ix, 2, ix, verifyField);
-			p.add(3, ix, matchField);
+			p.nextRow();
+			p.row(0, p.label(Tx.VerifyForm));
+			p.row(1, 2, verifyField);
+			p.row(3, matchField);
 		}
-		ix++;
-		p.add(1, ix, keyboard);
-		ix++;
-		p.add(1, ix, 3, ix, hidePassField);
 		
-		setContent(p);
+		p.nextRow();
+		p.row(1, keyboard);
+		p.nextRow();
+		p.add(1, 3, hidePassField);
 		
+		CButton cancelButton = new CButton(Menus.Cancel, closeAction);
+		CButton changeButton = new CButton(Tx.Change, commitAction, true);
+
 		CFocusTraversalPolicy tp = new CFocusTraversalPolicy();
 		if(showPassword)
 		{
@@ -159,6 +140,10 @@ public class ChangePasswordDialog
 		tp.add(changeButton);
 		tp.add(cancelButton);
 		tp.apply(this);
+		
+		p.buttonPanel().addButton(cancelButton);
+		p.buttonPanel().addButton(changeButton);
+		setContent(p);
 				
 		validate();
 		repaint();

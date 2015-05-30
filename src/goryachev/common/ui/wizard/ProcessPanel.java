@@ -96,15 +96,15 @@ public abstract class ProcessPanel
 	
 	protected void updateActions()
 	{
-		if(buttons != null)
+		if(hasButtonPanel())
 		{
 			boolean running = (thread != null);
-			buttons.setButtonEnabled(continueAction, !running && (error == null));
+			buttonPanel().setButtonEnabled(continueAction, !running && (error == null));
 			for(Action a: otherActions)
 			{
-				buttons.setButtonEnabled(a, !running);
+				buttonPanel().setButtonEnabled(a, !running);
 			}
-			buttons.setButtonEnabled(cancelAction, running);
+			buttonPanel().setButtonEnabled(cancelAction, running);
 		}
 	}
 	

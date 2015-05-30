@@ -1,5 +1,6 @@
 // Copyright (c) 2005-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
+import goryachev.common.ui.theme.AssignMnemonic;
 import goryachev.common.util.Log;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -48,8 +49,7 @@ public class CDialog
 	public static final Border defaultBorder = new CBorder(MARGIN);
 	
 	private Component defaultFocusComponent;
-	protected final CPanel contentPanel;
-	private CButtonPanel buttonPanel;
+	protected final CPanel3 contentPanel;
 
 	//
 	
@@ -81,7 +81,8 @@ public class CDialog
 		
 		getContentPane().setLayout(new BorderLayout());
 		
-		contentPanel = new CPanel();
+		contentPanel = new CPanel3();
+		contentPanel.setGaps(10, 10);
 		contentPanel.setBorder(defaultBorder);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		
@@ -155,28 +156,15 @@ public class CDialog
 	}
 	
 	
-	public CPanel getContentPanel()
+	public CPanel3 getContentPanel()
 	{
 		return contentPanel;
 	}
 	
 	
-	public CButtonPanel getButtonPanel()
+	public CButtonPanel3 getButtonPanel()
 	{
-		if(buttonPanel == null)
-		{
-			buttonPanel = createButtonPanel();
-			contentPanel.setSouth(buttonPanel);
-		}
-		return buttonPanel;
-	}
-	
-	
-	protected CButtonPanel createButtonPanel()
-	{
-		CButtonPanel p = new CButtonPanel();
-		p.setBorder(new CBorder(MARGIN, 0, 0, 0));
-		return p;
+		return contentPanel.buttonPanel();
 	}
 	
 	
@@ -213,6 +201,7 @@ public class CDialog
 	public Window open()
 	{
 		GlobalSettings.opening(this);
+		AssignMnemonic.assign(getRootPane());
 		setVisible(true);
 		toFront();
 		return this;
@@ -310,7 +299,7 @@ public class CDialog
 	
 	public void addSpace()
 	{
-		getButtonPanel().addSpace();
+		getButtonPanel().space();
 	}
 	
 

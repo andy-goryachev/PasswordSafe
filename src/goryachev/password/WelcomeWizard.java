@@ -3,11 +3,11 @@ package goryachev.password;
 import goryachev.common.ui.Application;
 import goryachev.common.ui.BasePanel;
 import goryachev.common.ui.CAction;
-import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CButton;
-import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.CheckForUpdate;
 import goryachev.common.ui.GlobalSettings;
+import goryachev.common.ui.Menus;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.dialogs.CFileChooser;
 import goryachev.common.ui.dialogs.license.StandardLicense;
@@ -62,8 +62,10 @@ public class WelcomeWizard
 	protected void showLanguagePage()
 	{
 		languagePage = new LanguagePage();
+		languagePage.setBorder(10);
+		languagePage.setGaps(10, 20);
 		languagePage.setLogo(PasswordSafeIcons.Logo);
-		languagePage.buttons().add(new CButton(showLicenseAction, true));
+		languagePage.buttonPanel().addButton(showLicenseAction, true);
 		setCard(languagePage, null);
 	}
 	
@@ -74,7 +76,7 @@ public class WelcomeWizard
 		sb.a("<html><b>");
 		sb.a(WelcomePrompts.thankYou());
 		sb.a("</b><br><br>");
-		sb.a(TXT.get("WelcomeDialog.APP is a storage", "{0} is a password storage program.  It stores your passwords and short notes in an encrypted file, allowing you to remember only one passphrase instead of all different username/password combinations.", Application.getTitle()));
+		sb.a(TXT.get("WelcomeDialog.APP is a storage", "{0} is a password storage program.  It stores your passwords and short notes in an encrypted file, allowing you to remember only one passphrase instead of many different username/password combinations.", Application.getTitle()));
 		languagePage.setInfo(sb.toString());
 		
 		setTitle(WelcomePrompts.welcomeToApp());
@@ -99,10 +101,13 @@ public class WelcomeWizard
 		
 		BasePanel p = new BasePanel();
 		p.setCenterTextArea().setDocument(lic.getDocument());
-		p.buttons().add(new CButton(closeAction));
-		p.buttons().add(new CButton(backAction));
-		p.buttons().add(new CButton(acceptLicenseAction, Theme.alternativeButtonHighlight()));
-		p.buttons().add(new CButton(showOptionsAction, true));
+		
+		p.buttonPanel().addButton(closeAction);
+		p.buttonPanel().addButton(backAction);
+		p.buttonPanel().addButton(acceptLicenseAction, Theme.alternativeButtonHighlight());
+		p.buttonPanel().addButton(showOptionsAction, true);
+		p.buttonPanel().setBorder(10);
+		
 		setCard(p, WelcomePrompts.licenseAgreement());
 	}
 	
@@ -149,36 +154,37 @@ public class WelcomeWizard
 		
 		String info = TXT.get("WelcomeDialog.info.1", "Unless you already have an existing password database, you need to create a new file which will hold the encrypted database.");
 		
-		CPanel p = new CPanel();
-		p.setBorder(new CBorder(20));
-		p.setLayout
-		(
-			new double[]
-			{
-				CPanel.PREFERRED,
-				CPanel.FILL
-			},
-			new double[]
-			{
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-			},
-			10, 10
-		);
-		int ix = 0;
-		p.add(0, ix, 1, ix, p.info(info));
-		ix++;
-		p.add(0, ix, new CButton(createNewAction, true));
-		p.add(1, ix, new JLabel(TXT.get("WelcomeDialog.create new database", "Create new password database")));
-		ix++;
-		p.add(0, ix, new CButton(openExistingAction, Theme.alternativeButtonHighlight()));
-		p.add(1, ix, new JLabel(TXT.get("WelcomeDialog.open existing database", "Open existing password database")));
+		String check = 
+			TXT.get("WelcomeDialog.check.1", "To make sure that you're protected by the latest security updates, {0} will make a one time attempt to detect if a new version is available.", Application.getTitle()) +
+			"\n\n" +
+			TXT.get("WelcomeDialog.check.1", "Only your public IP address, and Java version is transmitted to the web server as it happens with any HTTP request.  No personally identifiable information whatsoever is or will be sent.") +
+			"\n\n" +
+			TXT.get("WelcomeDialog.check.3", "You can always check for updates from the main menu by selecting {0} -> {1}.", Menus.Help, Menus.CheckForUpdates);
 		
-		CPanel mp = new CPanel();
-		mp.setNorth(p);
-		mp.setCenter(pp);
-		setCard(mp, null);
+		CPanel3 p = new CPanel3();
+		p.setBorder();
+		p.setGaps(10);
+		p.addColumns
+		(
+			CPanel3.PREFERRED,
+			CPanel3.FILL
+		);
+		p.setColumnMinimumSize(0, Theme.minimumButtonWidth());
+		
+		p.row(0, 2, p.info(info));
+		p.nextRow();
+		p.row(0, new CButton(createNewAction, true));
+		p.row(1, new JLabel(TXT.get("WelcomeDialog.create new database", "Create new password database")));
+		p.nextRow();
+		p.row(0, new CButton(openExistingAction, Theme.alternativeButtonHighlight()));
+		p.row(1, new JLabel(TXT.get("WelcomeDialog.open existing database", "Open existing password database")));
+		p.nextRow(20);
+		p.nextRow();
+		p.row(0, 2, p.info(check));
+		p.nextFillRow();
+		p.row(1, pp);
+		
+		setCard(p, null);
 		
 		pp.start();
 		pp.setText(TXT.get("WelcomeWizard.checking for updates", "Checking for updates..."));

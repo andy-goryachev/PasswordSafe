@@ -3,11 +3,11 @@ package goryachev.password;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CButton;
-import goryachev.common.ui.CButtonPanel;
 import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CFocusTraversalPolicy;
-import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.CScrollPane;
+import goryachev.common.ui.CTextField;
 import goryachev.common.ui.Dialogs;
 import goryachev.common.ui.Menus;
 import goryachev.common.ui.Theme;
@@ -28,12 +28,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
-public class AddEntryDialog
-	extends CDialog
+public class AddEntryDialog extends CDialog
 {
 	public final CAction addAction = new CAction() { public void action() { onAdd(); } };
-	protected JTextField nameField;
-	protected JTextField usernameField;
+	protected CTextField nameField;
+	protected CTextField usernameField;
 	protected CPasswordField passField;
 	protected SecureTextField clearPassField;
 	protected CPasswordField verifyField;
@@ -44,34 +43,32 @@ public class AddEntryDialog
 	protected CScrollPane scroll;
 	protected JLabel notesLabel;
 	private OnScreenKeyboard keyboard;
-	protected CButton addButton;
-	protected CButton cancelButton;
 	private DataFile dataFile;
 	private PassEntry entry;
 	private boolean showPassword;
 
-	
+
 	public AddEntryDialog(JComponent parent, DataFile df)
 	{
 		super(parent, "AddEntryDialog", true);
-		
-		this.dataFile = df;
-		
-		setTitle(Tx.AddEntry);
-		setMinimumSize(500,300);
 
-		nameField = new JTextField();
-		
-		usernameField = new JTextField();
-		
+		this.dataFile = df;
+
+		setTitle(Tx.AddEntry);
+		setMinimumSize(500, 400);
+
+		nameField = new CTextField();
+
+		usernameField = new CTextField();
+
 		clearPassField = new SecureTextField();
-		
+
 		passField = new CPasswordField();
 
 		verifyField = new CPasswordField();
 
 		matchField = new MatchLabel();
-		
+
 		hidePassField = new JCheckBox(Tx.HidePasswordInThisDialog);
 		hidePassField.setBorder(null);
 		hidePassField.addItemListener(new ItemListener()
@@ -92,7 +89,7 @@ public class AddEntryDialog
 		};
 
 		keyboard = Styles.createKeyboard();
-		
+
 		notesField = new JTextArea();
 		notesField.setWrapStyleWord(true);
 		notesField.setLineWrap(true);
@@ -100,89 +97,64 @@ public class AddEntryDialog
 		notesField.setBorder(Theme.BORDER_FIELD);
 
 		scroll = new CScrollPane(notesField, false);
-		
+
 		notesLabel = new JLabel(TXT.get("AddEntryDialog.label.notes", "Notes:"));
 		notesLabel.setVerticalAlignment(JLabel.TOP);
-		
-		addButton = new CButton(Menus.OK, addAction);
-		addButton.setHighlight(Theme.buttonHighlight());
-		
-		cancelButton = new CButton(Menus.Cancel, closeAction);
-		
+		notesLabel.setHorizontalAlignment(JLabel.RIGHT);
+
 		setShowPassword(true);
 		hidePassField.setSelected(false);
 
-		getContentPanel().setSouth(new CButtonPanel(10, cancelButton, addButton));
-		addAction.setEnabled(true);	
-		
-		pack();
+		addAction.setEnabled(true);
 	}
-	
-	
+
+
 	protected void setShowPassword(boolean on)
 	{
 		this.showPassword = on;
-		
-		CPanel p = new CPanel();
+
+		CPanel3 p = new CPanel3();
+		p.setGaps(5);
 		p.setBorder(new CBorder(0, 0, 10, 0));
-		p.setLayout
-		(
-			new double[]
-			{
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.FILL,
-				CPanel.PREFERRED
-			},
-			new double[]
-			{
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.FILL
-			},
-			10, 5
-		);
-		
-		int ix = 0;
-		p.add(0, ix, p.label(TXT.get("AddEntryDialog.label.name", "Name:")));
-		p.add(1, ix, 3, ix, nameField);
-		ix++;
-		p.add(0, ix, p.label(TXT.get("AddEntryDialog.label.user", "User name:")));
-		p.add(1, ix, 3, ix, usernameField);
-		ix++;
-		p.add(0, ix, p.label(TXT.get("AddEntryDialog.label.password", "Password:")));
+		p.addColumns(CPanel3.PREFERRED, CPanel3.PREFERRED, CPanel3.FILL, CPanel3.PREFERRED);
+
+		p.row(0, p.label(TXT.get("AddEntryDialog.label.name", "Name:")));
+		p.row(1, 3, nameField);
+		p.nextRow();
+		p.row(0, p.label(TXT.get("AddEntryDialog.label.user", "User name:")));
+		p.row(1, 3, usernameField);
+		p.nextRow();
+		p.row(0, p.label(TXT.get("AddEntryDialog.label.password", "Password:")));
 		if(showPassword)
 		{
-			p.add(1, ix, 3, ix, clearPassField);
+			p.row(1, 3, clearPassField);
 		}
 		else
 		{
-			p.add(1, ix, 2, ix, passField);
+			p.row(1, 2, passField);
 		}
-		//p.add(3, ix, hidePassField);
+		
 		if(!showPassword)
 		{
-			ix++;
-			p.getTableLayout().insertRow(ix, CPanel.PREFERRED);
-			p.add(0, ix, p.label(TXT.get("AddEntryDialog.label.verify password", "Verify:")));
-			p.add(1, ix, 2, ix, verifyField);
-			p.add(3, ix, matchField);
+			p.nextRow();
+			p.row(0, p.label(TXT.get("AddEntryDialog.label.verify password", "Verify:")));
+			p.row(1, 2, verifyField);
+			p.row(3, matchField);
 		}
-		ix++;
-		p.add(1, ix, keyboard);
-		ix++;
-		p.add(1, ix, 3, ix, hidePassField);
-		ix++;
-		p.add(0, ix, notesLabel);
-		ix++;
-		p.add(0, ix, 3, ix, scroll);
-		
-		setContent(p);
-		
+		p.nextRow();
+		p.row(1, keyboard);
+		p.nextRow();
+		p.row(1, 3, hidePassField);
+		p.nextFillRow();
+		p.row(0, notesLabel);
+		p.row(1, 4, scroll);
+
+		CButton addButton = new CButton(Menus.OK, addAction, true);
+		CButton cancelButton = new CButton(Menus.Cancel, closeAction);
+
+		p.buttonPanel().addButton(cancelButton);
+		p.buttonPanel().addButton(addButton);
+
 		CFocusTraversalPolicy tp = new CFocusTraversalPolicy();
 		tp.add(nameField);
 		tp.add(usernameField);
@@ -199,38 +171,40 @@ public class AddEntryDialog
 		tp.add(addButton);
 		tp.add(cancelButton);
 		tp.apply(this);
-				
+
+		setContent(p);
+
 		validate();
 		repaint();
 	}
-	
-	
+
+
 	protected void onHide()
 	{
 		boolean on = !hidePassField.isSelected();
 		setShowPassword(on);
 		// TODO carry password
 	}
-	
-	
+
+
 	public void focus()
 	{
 		nameField.requestFocusInWindow();
 	}
-	
-	
+
+
 	protected void onAdd()
 	{
 		try
 		{
 			OpaqueChars pass = verifier.getPassword();
-			
+
 			entry = dataFile.addEntry();
 			entry.setName(nameField.getText());
 			entry.setUserName(usernameField.getText());
 			entry.setPassword(pass);
 			entry.setNotes(notesField.getText());
-			
+
 			MainWindow w = MainWindow.get(this);
 			w.setModified(true);
 			close();
@@ -240,7 +214,7 @@ public class AddEntryDialog
 			Dialogs.error(this, e.getMessage());
 		}
 	}
-	
+
 
 	public PassEntry openDialog()
 	{

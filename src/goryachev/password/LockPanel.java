@@ -4,12 +4,11 @@ import goryachev.common.ui.AppFrame;
 import goryachev.common.ui.Application;
 import goryachev.common.ui.BackgroundThread;
 import goryachev.common.ui.CAction;
-import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CButton;
-import goryachev.common.ui.CButtonPanel;
 import goryachev.common.ui.CFocusTraversalPolicy;
-import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.CProgressField;
+import goryachev.common.ui.CTextField;
 import goryachev.common.ui.Dialogs;
 import goryachev.common.ui.InputTracker;
 import goryachev.common.ui.Menus;
@@ -22,17 +21,16 @@ import goryachev.crypto.ui.CPasswordField;
 import goryachev.crypto.ui.OnScreenKeyboard;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import javax.swing.JTextField;
 
 
 public class LockPanel
-	extends CPanel
+	extends CPanel3
 {
 	public final CAction browseAction = new CAction() { public void action() { onBrowse(); } };
 	public final CAction createAction = new CAction() { public void action() { onCreate(); } };
 	public final CAction exitAction = new CAction() { public void action() { onExit(); } };
 	public final CAction okAction = new CAction() { public void action() { onOk(); } };
-	protected JTextField fileField;
+	protected CTextField fileField;
 	protected CProgressField progressField;
 	private CPasswordField passField;
 	protected OnScreenKeyboard keyboard;
@@ -41,7 +39,7 @@ public class LockPanel
 	
 	public LockPanel(File f)
 	{
-		fileField = new JTextField(f.getAbsolutePath());
+		fileField = new CTextField(f.getAbsolutePath());
 		
 		passField = new CPasswordField();
 		new InputTracker(passField)
@@ -63,48 +61,35 @@ public class LockPanel
 		CButton createButton = new CButton(TXT.get("LockPanel.create new data file", "Create New"), createAction);
 		CButton browseButton = new CButton(Menus.Browse, browseAction);
 		
-		CButtonPanel bp = new CButtonPanel(10, createButton, exitButton, okButton);
-		
-		setBorder(new CBorder(20));
-		setLayout
+		setBorder(10);
+		setGaps(10, 5);
+		addColumns
 		(
-			new double[]
-			{
-				PREFERRED,
-				PREFERRED,
-				FILL,
-				PREFERRED,
-				PREFERRED
-			},
-			new double[]
-			{
-				PREFERRED,
-				20,
-				PREFERRED,
-				PREFERRED,
-				PREFERRED,
-				PREFERRED,
-				PREFERRED
-			},
-			10, 5
+			PREFERRED,
+			PREFERRED,
+			FILL,
+			PREFERRED
 		);
+		setColumnMinimumSize(3, Theme.minimumButtonWidth());
 		
-		int ix = 0;
-		add(1, ix, Styles.logo());
-		ix++;
-		ix++;
-		add(0, ix, label(TXT.get("LockPanel.open existing file", "Open File:")));
-		add(1, ix, 2, ix, fileField);
-		add(3, ix, browseButton);
-		ix++;
-		add(0, ix, label(TXT.get("LockPanel.passphrase", "Passphrase:")));
-		add(1, ix, 3, ix, passField);
-		ix++;
-		add(1, ix, keyboard);
-		ix++;
-		add(1, ix, 2, ix, progressField);
-		ix++;
-		add(1, ix, 3, ix, bp);
+		nextRow(10);
+		row(1, Styles.logo());
+		nextRow(20);
+		nextRow();
+		row(0, label(TXT.get("LockPanel.open existing file", "Open File:")));
+		row(1, 2, fileField);
+		row(3, browseButton);
+		nextRow();
+		row(0, label(TXT.get("LockPanel.passphrase", "Passphrase:")));
+		row(1, 3, passField);
+		nextRow();
+		row(1, keyboard);
+		nextRow();
+		row(1, 2, progressField);
+		
+		buttonPanel().addButton(createButton);
+		buttonPanel().addButton(exitButton);
+		buttonPanel().addButton(okButton);
 		
 		UI.whenInFocusedWindow(passField, KeyEvent.VK_ENTER, okAction);
 		
@@ -118,12 +103,8 @@ public class LockPanel
 		tp.apply(this);
 		
 		updateActions();
-	}
-	
-	
-	protected void onAddNotify()
-	{
-		passField.requestFocusInWindow();
+		
+		UI.focusLater(passField);
 	}
 	
 	

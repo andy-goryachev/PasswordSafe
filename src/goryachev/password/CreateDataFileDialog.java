@@ -6,8 +6,9 @@ import goryachev.common.ui.CButton;
 import goryachev.common.ui.CButtonPanel;
 import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CFocusTraversalPolicy;
-import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.CProgressField;
+import goryachev.common.ui.CTextField;
 import goryachev.common.ui.Dialogs;
 import goryachev.common.ui.InfoField;
 import goryachev.common.ui.Menus;
@@ -24,15 +25,13 @@ import goryachev.crypto.ui.OnScreenKeyboard;
 import goryachev.password.ui.PasswordVerifier2;
 import java.awt.Component;
 import java.io.File;
-import javax.swing.JTextField;
 
 
-// FIX change to panel, open in a frame or a dialog...
 public class CreateDataFileDialog
 	extends CDialog
 {
 	public final CAction browseAction = new CAction() { public void action() { onBrowse(); } };
-	private final JTextField fileField;
+	private final CTextField fileField;
 	private final CPasswordField passField;
 	private final CPasswordField verifyField;
 	private final MatchLabel matchField;
@@ -47,9 +46,9 @@ public class CreateDataFileDialog
 		super(parent, "CreateDataFileDialog", true);
 		
 		setTitle(TXT.get("CreateDataFileDialog.title.create file", "Create Password Database"));
-		setMinimumSize(750, 500);
+		setMinimumSize(750, 450);
 		
-		fileField = new JTextField();
+		fileField = new CTextField();
 		
 		passField = new CPasswordField();
 
@@ -77,47 +76,34 @@ public class CreateDataFileDialog
 		
 		CButton cancelButton = new CButton(Menus.Cancel, closeAction);
 		
-		CPanel p = new CPanel();
-		p.setLayout
+		CPanel3 p = new CPanel3();
+		p.addColumns
 		(
-			new double[]
-			{
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.FILL,
-				CPanel.PREFERRED
-			},
-			new double[]
-			{
-				CPanel.PREFERRED,
-				10,
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.FILL
-			},
-			10, 5
+			CPanel3.PREFERRED,
+			CPanel3.PREFERRED,
+			CPanel3.FILL,
+			CPanel3.PREFERRED
 		);
-		int ix = 0;
-		p.add(1, ix, 3, ix, createInfoField());
-		ix++;
-		ix++;
-		p.add(0, ix, p.label(TXT.get("CreateDataFileDialog.file", "File:")));
-		p.add(1, ix, 2, ix, fileField);
-		p.add(3, ix, browseButton);
-		ix++;
-		p.add(0, ix, p.label(TXT.get("CreateDataFileDialog.label.passphrase", "Passphrase:")));
-		p.add(1, ix, 3, ix, passField);
-		ix++;
-		p.add(0, ix, p.label(TXT.get("CreateDataFileDialog.label.verify password", "Verify:")));
-		p.add(1, ix, 3, ix, verifyField);
-		p.add(3, ix, matchField);
-		ix++;
-		p.add(1, ix, keyboard);
-		ix++;
-		p.add(1, ix, 3, ix, progressField);
+		p.setColumnMinimumSize(3, Theme.minimumButtonWidth());
+
+		p.setGaps(10, 5);
+		p.row(1, 2,createInfoField());
+		p.nextRow(10);
+		p.nextRow();
+		p.row(0, p.label(TXT.get("CreateDataFileDialog.file", "File:")));
+		p.row(1, 2, fileField);
+		p.row(3, browseButton);
+		p.nextRow();
+		p.row(0, p.label(TXT.get("CreateDataFileDialog.label.passphrase", "Passphrase:")));
+		p.row(1, 2, passField);
+		p.nextRow();
+		p.row(0, p.label(TXT.get("CreateDataFileDialog.label.verify password", "Verify:")));
+		p.row(1, 2, verifyField);
+		p.row(3, matchField);
+		p.nextRow();
+		p.row(1, keyboard);
+		p.nextRow();
+		p.add(1, 2, progressField);
 	
 		p.setSouth(new CButtonPanel(10, cancelButton, okButton));
 	
@@ -210,7 +196,8 @@ public class CreateDataFileDialog
 					return;
 				}
 				
-				if(Dialogs.confirm(this, "File exists", TXT.get("CreateDataFileDialog.err.overwrite", "Do you want t overwrite existing file {0}?", f)) == false)
+				if(!Dialogs.checkFileExistsOverwrite(this, f))
+				//if(Dialogs.confirm(this, "File exists", TXT.get("CreateDataFileDialog.err.overwrite", "Do you want t overwrite existing file {0}?", f)) == false)
 				{
 					return;
 				}

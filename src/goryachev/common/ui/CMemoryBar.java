@@ -296,7 +296,7 @@ public class CMemoryBar
 		CTextPane t = p.setCenterCTextPane();
 		t.setText0(text);
 		t.setCaretPosition(0);
-		p.buttons().add(new CButton(Menus.OK, d.closeDialogAction, true));
+		p.buttonPanel().add(new CButton(Menus.OK, d.closeDialogAction, true));
 		d.setCenter(p);
 		d.closeOnEscape(p);
 		d.open();

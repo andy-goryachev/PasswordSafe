@@ -8,7 +8,7 @@ import goryachev.common.ui.CButton;
 import goryachev.common.ui.CFocusTraversalPolicy;
 import goryachev.common.ui.CMenu;
 import goryachev.common.ui.CMenuItem;
-import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.CToolBar;
 import goryachev.common.ui.CUndoManager;
 import goryachev.common.ui.ContactSupport;
@@ -29,6 +29,7 @@ import goryachev.password.img.PasswordSafeIcons;
 import goryachev.password.ui.ActivityMonitor;
 import goryachev.password.ui.ClipboardHandler;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -60,7 +61,7 @@ public class MainWindow
 	public final CButton exitButton;
 	
 	public static final String KEY_LAST_FOLDER = "last.folder";
-	public final CPanel panel;
+	public final CPanel3 panel;
 	public final ListTab listTab;
 	private File file;
 	private boolean modified;
@@ -85,13 +86,13 @@ public class MainWindow
 		
 		listTab = new ListTab();
 		
-		addButton = new CButton(TXT.get("MainWindow.toolbar.add entry", "Add"), listTab.addAction);
+		addButton = new CButton(TXT.get("MainWindow.toolbar.add entry", "Add"), listTab.addEntryAction);
 		saveButton = new CButton(Menus.Save, saveAction);
 		clearButton = new CButton(TXT.get("MainWindow.toolbar.clear clipboard", "Clear"), TXT.get("MainWindow.toolbar.clear clipboard.tooltip", "Clear sensitive data from the clipboard"), clearClipboardAction);
 		lockButton = new CButton(TXT.get("MainWindow.toolbar.lock program", "Lock"), TXT.get("MainWindow.toolbar.lock.tooltip", "Lock the program"), lockAction);
 		exitButton = new CButton(Menus.Exit, exitAction);
 		
-		panel = new CPanel();
+		panel = new CPanel3();
 		panel.setNorth(createToolbar());
 		panel.setCenter(listTab);
 		panel.setSouth(createStatusBar(true));
@@ -134,15 +135,28 @@ public class MainWindow
 		t.setPreferredSize(null);
 		t.setBorder(new CBorder(2, 0, 2, 0));
 		
-		t.add(addButton);
-		t.add(saveButton);
+		t.add(sz(addButton));
+		t.add(sz(saveButton));
 		t.space(10);
 		t.add(listTab.filter.getComponent());
 		t.fill();
-		t.add(clearButton);
-		t.add(lockButton);
-		t.add(exitButton);
+		t.add(sz(clearButton));
+		t.add(sz(lockButton));
+		t.add(sz(exitButton));
 		return t;
+	}
+	
+	
+	protected CButton sz(CButton b)
+	{
+		Dimension d = b.getPreferredSize();
+		int min = Theme.minimumButtonWidth();
+		if(d.width < min)
+		{
+			d.width = min;
+		}
+		b.setPreferredSize(d);
+		return b;
 	}
 	
 	
@@ -176,7 +190,7 @@ public class MainWindow
 		m.add(new CMenuItem(TXT.get("MainWindow.menu.copy password","Copy Password to Clipboard"), listTab.passPanel.copyPasswordAction));
 		m.add(new CMenuItem(TXT.get("MainWindow.menu.clear clipboard","Clear Clipboard"), clearClipboardAction));
 		m.addSeparator();
-		m.add(new CMenuItem(TXT.get("MainWindow.menu.delete an entry","Delete Entry"), listTab.deleteAction));
+		m.add(new CMenuItem(TXT.get("MainWindow.menu.delete an entry","Delete Entry"), listTab.deleteEntryAction));
 		
 		// help
 		mb.add(m = new CMenu(Menus.Help));
@@ -443,9 +457,7 @@ public class MainWindow
 	protected void displaySaving()
 	{
 		JLabel t = new JLabel(TXT.get("MainWindow.saving database", "Saving database..."));
-		//t.setIcon(Theme.waitIcon(32));
 		t.setHorizontalAlignment(JLabel.CENTER);
-		//t.setVerticalTextPosition(JLabel.TOP);
 		
 		setJMenuBar(null);
 		panel.setNorth(null);
