@@ -36,7 +36,7 @@ public class ListTab
 	public final ZModel<PassEntry> model;
 	public final ZTable table;
 	public final ZFilterLogic filter;
-	public final PassEditor passPanel;
+	public final PassEditor passEditor;
 	public final CTableSelector selector;
 	protected CPanel3 detailPanel;
 	protected boolean handleEvents;
@@ -79,7 +79,7 @@ public class ListTab
 
 		// detail
 		
-		passPanel = new PassEditor();
+		passEditor = new PassEditor();
 		
 		detailPanel = new CPanel3();
 		detailPanel.setName("detail");
@@ -134,13 +134,13 @@ public class ListTab
 		{
 			// no selection
 			detailPanel.setCenter(null);
-			passPanel.setEntry(null);
+			passEditor.setEntry(null);
 		}
 		else if(items.size() == 0)
 		{
 			// no selection
 			detailPanel.setCenter(null);
-			passPanel.setEntry(null);
+			passEditor.setEntry(null);
 			
 			if(filter.isFiltering())
 			{
@@ -153,15 +153,15 @@ public class ListTab
 		else if(items.size() == 1)
 		{
 			// single selection
-			detailPanel.setCenter(passPanel);
+			detailPanel.setCenter(passEditor);
 			PassEntry en = items.get(0);
-			passPanel.setEntry(en);
+			passEditor.setEntry(en);
 		}
 		else
 		{
 			// multiple selection
 			detailPanel.setCenter(null);
-			passPanel.setEntry(null);
+			passEditor.setEntry(null);
 		}
 		
 		GlobalSettings.restorePreferences(detailPanel);
@@ -227,7 +227,7 @@ public class ListTab
 		{
 			refresh();
 			select(en);
-			passPanel.focus();
+			passEditor.focus();
 		}
 	}
 	

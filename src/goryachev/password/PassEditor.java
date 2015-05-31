@@ -3,14 +3,19 @@ package goryachev.password;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CButton;
+import goryachev.common.ui.CMenuItem;
 import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPopupMenu;
+import goryachev.common.ui.CPopupMenuController;
 import goryachev.common.ui.CScrollPane;
 import goryachev.common.ui.CTextArea;
 import goryachev.common.ui.CTextField;
 import goryachev.common.ui.CUndoManager;
 import goryachev.common.ui.InputTracker;
+import goryachev.common.ui.Menus;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.UI;
+import goryachev.common.ui.text.CEditorKit;
 import goryachev.common.util.Log;
 import goryachev.common.util.TXT;
 import goryachev.crypto.Crypto;
@@ -18,6 +23,7 @@ import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.ui.CPasswordField;
 import goryachev.password.ui.ClipboardHandler;
 import java.awt.Color;
+import javax.swing.JPopupMenu;
 
 
 public class PassEditor
@@ -33,6 +39,8 @@ public class PassEditor
 	public final CButton copyPassButton;
 	public final CButton editPassButton;
 	public final CTextArea notesField;
+	public final Color userColor = new Color(0x8500c8);
+	public final Color passColor = new Color(0x00cc00);
 	private PassEntry entry;
 	protected InputTracker tracker;
 
@@ -52,9 +60,23 @@ public class PassEditor
 		
 		usernameField = new CTextField();
 		tracker.add(usernameField);
+		new CPopupMenuController(usernameField)
+		{
+			public JPopupMenu constructPopupMenu()
+			{
+				return createUserFieldPopup();
+			}
+		};
 		
 		passField = new CPasswordField();
 		passField.setEditable(false);
+		new CPopupMenuController(passField)
+		{
+			public JPopupMenu constructPopupMenu()
+			{
+				return createPassFieldPopup();
+			}
+		};
 		
 		notesField = new CTextArea();
 		notesField.setFont(Theme.monospacedFont());
@@ -70,11 +92,9 @@ public class PassEditor
 			notesField
 		);
 		
-		copyUserButton = new CButton(TXT.get("PassEditor.button.copy username", "Copy User Name"), TXT.get("PassEditor.button tooltip.copy u", "Copy username to clipboard"), copyUsernameAction);
-		copyUserButton.setHighlight(new Color(0x8500c8));
+		copyUserButton = new CButton(TXT.get("PassEditor.button.copy username", "Copy User Name"), TXT.get("PassEditor.button tooltip.copy u", "Copy username to clipboard"), copyUsernameAction, userColor);
 		
-		copyPassButton = new CButton(TXT.get("PassEditor.button.copy password", "Copy Password"), TXT.get("PassEditor.button tooltip.copy p", "Copy password to clipboard"), copyPasswordAction);
-		copyPassButton.setHighlight(new Color(0x00cc00));
+		copyPassButton = new CButton(TXT.get("PassEditor.button.copy password", "Copy Password"), TXT.get("PassEditor.button tooltip.copy p", "Copy password to clipboard"), copyPasswordAction, passColor);
 		
 		editPassButton = new CButton(TXT.get("PassEditor.button.change password", "Change Password"), TXT.get("PassEditor.button tooltip.change password", "Change password"), changePasswordAction);
 
@@ -103,8 +123,28 @@ public class PassEditor
 		
 		updateActions();
 	}
+
+
+	protected JPopupMenu createUserFieldPopup()
+	{
+		CPopupMenu m = new CPopupMenu();
+		m.add(new CMenuItem(copyUserButton.getText(), copyUsernameAction));
+		m.addSeparator();
+		m.add(new CMenuItem(Menus.Cut, CEditorKit.cutAction));
+		m.add(new CMenuItem(Menus.Copy, CEditorKit.copyAction));
+		m.add(new CMenuItem(Menus.Paste, CEditorKit.pasteAction));
+		return m;
+	}
 	
 	
+	protected JPopupMenu createPassFieldPopup()
+	{
+		CPopupMenu m = new CPopupMenu();
+		m.add(new CMenuItem(copyPassButton.getText(), copyUsernameAction));
+		return m;
+	}
+	
+
 	public void setEntry(PassEntry en)
 	{
 		this.entry = en;

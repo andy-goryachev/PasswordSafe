@@ -105,11 +105,11 @@ public class MainWindow
 		setSize(700, 500);
 		
 		CFocusTraversalPolicy tp = new CFocusTraversalPolicy();
-		tp.add(listTab.passPanel.nameField);
-		tp.add(listTab.passPanel.usernameField);
-		tp.add(listTab.passPanel.copyUserButton);
-		tp.add(listTab.passPanel.passField);
-		tp.add(listTab.passPanel.copyPassButton);
+		tp.add(listTab.passEditor.nameField);
+		tp.add(listTab.passEditor.usernameField);
+		tp.add(listTab.passEditor.copyUserButton);
+		tp.add(listTab.passEditor.passField);
+		tp.add(listTab.passEditor.copyPassButton);
 		tp.add(listTab.table);
 		tp.add(addButton);
 		tp.add(saveButton);
@@ -186,8 +186,8 @@ public class MainWindow
 		m.add(new CMenuItem(Menus.Undo, Accelerators.UNDO, CUndoManager.undoAction));
 		m.add(new CMenuItem(Menus.Redo, Accelerators.REDO, CUndoManager.redoAction));
 		m.addSeparator();
-		m.add(new CMenuItem(TXT.get("MainWindow.menu.copy username","Copy User Name to Clipboard"), listTab.passPanel.copyUsernameAction));
-		m.add(new CMenuItem(TXT.get("MainWindow.menu.copy password","Copy Password to Clipboard"), listTab.passPanel.copyPasswordAction));
+		m.add(new CMenuItem(TXT.get("MainWindow.menu.copy username","Copy User Name to Clipboard"), listTab.passEditor.copyUsernameAction));
+		m.add(new CMenuItem(TXT.get("MainWindow.menu.copy password","Copy Password to Clipboard"), listTab.passEditor.copyPasswordAction));
 		m.add(new CMenuItem(TXT.get("MainWindow.menu.clear clipboard","Clear Clipboard"), clearClipboardAction));
 		m.addSeparator();
 		m.add(new CMenuItem(TXT.get("MainWindow.menu.delete an entry","Delete Entry"), listTab.deleteEntryAction));

@@ -130,6 +130,13 @@ public class CButton
 	}
 	
 	
+	public CButton(String text, String tooltip, Action a, Color highlight)
+	{
+		this(text, tooltip, a);
+		setHighlight(highlight);
+	}
+	
+	
 	public CButton(Icon icon, Action a)
 	{
 		super(a);
