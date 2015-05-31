@@ -288,17 +288,17 @@ public class CMemoryBar
 	{
 		String text = new SysInfo(false).getSystemInfo();
 		
-		BaseDialog d = new BaseDialog(this, "SystemInformationDialog", true);
+		CDialog d = new CDialog(this, "SystemInformationDialog", true);
+		d.borderless();
 		d.setSize(700, 750);
 		d.setTitle(TXT.get("CMemoryBar.system information","System Information"));
+
+		d.panel().setCenter(Panels.scrollText(text));
 		
-		BasePanel p = new BasePanel();
-		CTextPane t = p.setCenterCTextPane();
-		t.setText0(text);
-		t.setCaretPosition(0);
-		p.buttonPanel().add(new CButton(Menus.OK, d.closeDialogAction, true));
-		d.setCenter(p);
-		d.closeOnEscape(p);
+		d.buttonPanel().addButton(Menus.CopyToClipboard, ClipboardTools.copyAction(text));
+		d.buttonPanel().fill();
+		d.buttonPanel().add(new CButton(Menus.OK, d.closeDialogAction, true));
+		d.setCloseOnEscape();
 		d.open();
 	}
 }

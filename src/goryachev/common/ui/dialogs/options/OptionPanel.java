@@ -2,7 +2,7 @@
 package goryachev.common.ui.dialogs.options;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
-import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.CScrollPane;
 import goryachev.common.ui.CSplitPane;
 import goryachev.common.ui.CTextFieldWithPrompt;
@@ -34,13 +34,13 @@ import javax.swing.event.ListSelectionListener;
 
 
 public class OptionPanel
-	extends CPanel
+	extends CPanel3
 {
 	public final CTextFieldWithPrompt filter;
 	public final JLabel buttonLabel;
-	public final CPanel filterPanel;
+	public final CPanel3 filterPanel;
 	public final CTreeTable<OptionTreeNode> tree;
-	public final CPanel detailPanel;
+	public final CPanel3 detailPanel;
 	public final JLabel titleField;
 	public final CSplitPane split;
 	public final DelayedAction delayed;
@@ -85,7 +85,7 @@ public class OptionPanel
 			}
 		});
 
-		filterPanel = new CPanel();
+		filterPanel = new CPanel3();
 		filterPanel.setCenter(filter);
 		filterPanel.setEast(buttonLabel);
 		filterPanel.setBorder(new CBorder(2, 2, 2, 2));
@@ -117,7 +117,7 @@ public class OptionPanel
 		titleField.setBackground(Theme.panelBG());
 		titleField.setOpaque(true);
 
-		detailPanel = new CPanel();
+		detailPanel = new CPanel3();
 		detailPanel.setNorth(titleField);
 		
 		CScrollPane scroll = new CScrollPane(tree, CScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, CScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -125,7 +125,7 @@ public class OptionPanel
 		scroll.getViewport().setBackground(Theme.fieldBG());
 		scroll.setBackground(Theme.fieldBG());
 		
-		CPanel left = new CPanel();
+		CPanel3 left = new CPanel3();
 		left.setNorth(filterPanel);
 		left.setCenter(scroll);
 		left.setPreferredSize(new Dimension(200, -1));
@@ -275,25 +275,16 @@ public class OptionPanel
 	// override to construct custom panel
 	public static JComponent constructPanel(OptionEntry[] items)
 	{
-		// standard panel supports multiple options
-		double[] rows = new double[items.length];
-		Arrays.fill(rows, CPanel.PREFERRED);
-
-		CPanel p = new CPanel();
+		CPanel3 p = new CPanel3();
 		p.setOpaque(true);
-		//p.setBackground(Theme.fieldBG());
-		p.setLayout
+		p.setGaps(10, 2);
+		p.addColumns
 		(
-			new double[] 
-			{
-				10,
-				10,
-				CPanel.PREFERRED, 
-				CPanel.FILL,
-				10
-			}, 
-			rows, 
-			10, 2
+			10,
+			10,
+			CPanel3.PREFERRED, 
+			CPanel3.FILL,
+			10
 		);
 
 		CBorder labelBorder = new CBorder(3, 5, 0, 0);
@@ -310,7 +301,7 @@ public class OptionPanel
 			if(en.isSection())
 			{
 				// section label
-				p.add(1, row, 3, row, createSectionLabel(name));
+				p.add(1, row, 3, 1, createSectionLabel(name));
 			}
 			else
 			{
@@ -318,7 +309,7 @@ public class OptionPanel
 				if(fullWidth)
 				{
 					// full-width
-					p.add(0, row, 4, row, c);
+					p.add(0, row, 5, 1, c);
 				}
 				else
 				{
@@ -339,7 +330,7 @@ public class OptionPanel
 				float height = en.getPreferredHeight();
 				if(height == OptionEditorInterface.HEIGHT_MAX)
 				{
-					p.getTableLayout().setRow(row, CPanel.FILL);
+					p.tableLayout().setRow(row, CPanel3.FILL);
 					if(fullWidth)
 					{
 						bottomGap = false;
@@ -348,7 +339,7 @@ public class OptionPanel
 				}
 				else if(height > 0.0f)
 				{
-					p.getTableLayout().setRow(row, height);
+					p.tableLayout().setRow(row, height);
 				}
 			}
 

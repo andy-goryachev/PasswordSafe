@@ -1,12 +1,10 @@
 // Copyright (c) 2011-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
 import goryachev.common.ui.CAction;
-import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CButton;
-import goryachev.common.ui.CButtonPanel;
 import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CFocusTraversalPolicy;
-import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.Dialogs;
 import goryachev.common.ui.Menus;
 import goryachev.common.util.CKit;
@@ -50,7 +48,7 @@ public class ChangeDatabasePassphraseDialog
 		this.oldPass = oldPass;
 
 		setTitle(TXT.get("ChangeDatabasePassphraseDialog.title", "Change Database Passphrase"));
-		setMinimumSize(500, 300);
+		setMinimumSize(500, 400);
 		
 		oldPassField = new CPasswordField();
 
@@ -74,28 +72,31 @@ public class ChangeDatabasePassphraseDialog
 
 		verifier = new PasswordVerifier2(clearPassField, passField, verifyField, hidePassField, matchField)
 		{
-			protected void onPasswordsMatch(boolean have, boolean match)
+			protected void onPasswordUpdate()
 			{
-				commitAction.setEnabled(have && match);
+				updateActions();
 			}
 		};
 
 		keyboard = Styles.createKeyboard();
 		
-		changeButton = new CButton(TXT.get("ChangeDatabasePassphraseDialog.button.change password", "Change"), commitAction);
-		changeButton.setHighlight();
+		changeButton = new CButton(TXT.get("ChangeDatabasePassphraseDialog.button.change password", "Change"), commitAction, true);
 		
-		cancelButton = new CButton(Menus.Cancel, closeAction);
+		cancelButton = new CButton(Menus.Cancel, closeDialogAction);
 		
 		setShowPassword(true);
 		hidePassField.setSelected(false);
 
-		CButtonPanel bp = new CButtonPanel(10, cancelButton, changeButton);
-		getContentPanel().setSouth(bp);
+		buttonPanel().addButton(cancelButton);
+		buttonPanel().addButton(changeButton);
 		
-		commitAction.setEnabled(false);
-		
-		pack();
+		updateActions();
+	}
+	
+	
+	protected void updateActions()
+	{
+		commitAction.setEnabled(verifier.hasData() && verifier.hasMatch());
 	}
 	
 
@@ -109,56 +110,44 @@ public class ChangeDatabasePassphraseDialog
 	{
 		this.showPassword = on;
 		
-		CPanel p = new CPanel();
-		p.setBorder(new CBorder(0, 0, 10, 0));
-		p.setLayout
+		// TODO carry over password
+		
+		CPanel3 p = new CPanel3();
+		p.setGaps(10, 5);
+		p.addColumns
 		(
-			new double[]
-			{
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.FILL,
-				CPanel.PREFERRED
-			},
-			new double[]
-			{
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.FILL
-			},
-			10, 5
+			CPanel3.PREFERRED,
+			CPanel3.PREFERRED,
+			CPanel3.FILL,
+			CPanel3.PREFERRED
 		);
 		
-		int ix = 0;
-		p.add(0, ix, p.label(TXT.get("ChangeDatabasePassphraseDialog.label.old passphrase", "Old Passphrase:")));
-		p.add(1, ix, 3, ix, oldPassField);
-		ix++;
-		p.add(0, ix, p.label(TXT.get("ChangeDatabasePassphraseDialog.label.passphrase", "Passphrase:")));
+		p.row(0, p.label(TXT.get("ChangeDatabasePassphraseDialog.label.old passphrase", "Old Passphrase:")));
+		p.row(1, 3, oldPassField);
+		p.nextRow();
+		p.row(0, p.label(TXT.get("ChangeDatabasePassphraseDialog.label.passphrase", "Passphrase:")));
 		if(showPassword)
 		{
-			p.add(1, ix, 3, ix, clearPassField);
+			p.row(1, 3, clearPassField);
 		}
 		else
 		{
-			p.add(1, ix, 2, ix, passField);
+			p.row(1, 2, passField);
 		}
 		
 		if(!showPassword)
 		{
-			ix++;
-			p.getTableLayout().insertRow(ix, CPanel.PREFERRED);
-			p.add(0, ix, p.label(TXT.get("ChangeDatabasePassphraseDialog.label.verify password", "Verify:")));
-			p.add(1, ix, 2, ix, verifyField);
-			p.add(3, ix, matchField);
+			p.nextRow();
+			p.row(0, p.label(TXT.get("ChangeDatabasePassphraseDialog.label.verify password", "Verify:")));
+			p.row(1, 2, verifyField);
+			p.row(3, matchField);
 		}
-		ix++;
-		p.add(1, ix, keyboard);
-		ix++;
-		p.add(1, ix, 3, ix, hidePassField);
+		p.nextRow();
+		p.row(1, keyboard);
+		p.nextRow();
+		p.row(1, 3, hidePassField);
 		
-		setContent(p);
+		panel().setCenter(p);
 		
 		CFocusTraversalPolicy tp = new CFocusTraversalPolicy();
 		tp.add(oldPassField);

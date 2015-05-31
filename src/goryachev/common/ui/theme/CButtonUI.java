@@ -3,13 +3,11 @@ package goryachev.common.ui.theme;
 import goryachev.common.ui.CSkin;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.UI;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.Rectangle;
-
 import javax.swing.AbstractButton;
 import javax.swing.JComponent;
 import javax.swing.UIDefaults;
@@ -39,7 +37,7 @@ public class CButtonUI
 	{
 		defs.put("ButtonUI", CButtonUI.class.getName());
 		defs.put("Button.showMnemonics", Boolean.TRUE);
-		defs.put("Button.shadow", UI.mix(127, Theme.textFG(), Theme.textBG()));
+		defs.put("Button.shadow", UI.mix(Theme.textFG(), 0.5, Theme.textBG()));
 		defs.put("Button.disabledShadow", new Color(255, 255, 255, 224));
 	}
 	

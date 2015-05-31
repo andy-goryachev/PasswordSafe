@@ -1,14 +1,13 @@
 // Copyright (c) 2008-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.options.edit;
 import goryachev.common.ui.Accelerator;
-import goryachev.common.ui.BaseDialog;
-import goryachev.common.ui.BasePanel;
 import goryachev.common.ui.CAction;
-import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CButton;
-import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CDialog;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.KeyNames;
 import goryachev.common.ui.Menus;
+import goryachev.common.ui.Theme;
 import goryachev.common.ui.text.CDocumentFilter;
 import goryachev.common.util.TXT;
 import java.awt.event.KeyAdapter;
@@ -20,7 +19,7 @@ import javax.swing.KeyStroke;
 
 /** Allows to enter almost all key strokes, except for Tab and Modifier keys. */
 public class KeyEditorDialog
-	extends BaseDialog
+	extends CDialog
 {
 	public final CAction clearAction = new CAction() { public void action() { actionClear(); } };
 	public final CAction cancelAction = new CAction() { public void action() { actionCancel(); } };
@@ -71,39 +70,27 @@ public class KeyEditorDialog
 		
 		warningLabel = new JLabel();
 		
-		CPanel p = new CPanel();
-		p.setBorder(new CBorder(10));
-		p.setLayout
+		CPanel3 p = new CPanel3();
+		p.setBorder(10);
+		p.setGaps(10, 5);
+		p.addColumns
 		(
-			new double[]
-			{
-				CPanel.PREFERRED,
-				CPanel.FILL
-			},
-			new double[]
-			{
-				CPanel.PREFERRED,
-				CPanel.PREFERRED,
-				CPanel.FILL
-			},
-			10, 5
+			CPanel3.PREFERRED,
+			CPanel3.FILL
 		);
 
-		int ix = 0;
-		p.add(1, ix, p.info(TXT.get("KeyEditorDialog.info.select new key for FUNCTION", "Type new key for {0}.", ac.getFullName())));
-		ix++;
-		p.add(0, ix, p.label(TXT.get("KeyEditorDialog.label.new key", "New key:")));
-		p.add(1, ix, keyField);
-		ix++;
-		p.add(1, ix, warningLabel);
+		p.row(1,  p.info(TXT.get("KeyEditorDialog.info.select new key for FUNCTION", "Type new key for {0}.", ac.getFullName())));
+		p.nextRow();
+		p.row(0, p.label(TXT.get("KeyEditorDialog.label.new key", "New key:")));
+		p.row(1, keyField);
+		p.nextFillRow();
+		p.row(1, warningLabel);
 		
-		BasePanel bp = new BasePanel();
-		bp.setCenter(p);
-		bp.buttonPanel().add(new CButton(Menus.Cancel, cancelAction));
-		bp.buttonPanel().add(new CButton(TXT.get("KeyEditorDialog.clear keystroke", "Clear"), clearAction));
-		bp.buttonPanel().add(new CButton(Menus.OK, okAction, true));
+		p.buttonPanel().add(new CButton(Menus.Cancel, cancelAction));
+		p.buttonPanel().add(new CButton(TXT.get("KeyEditorDialog.clear keystroke", "Clear"), clearAction, Theme.alternativeButtonHighlight()));
+		p.buttonPanel().add(new CButton(Menus.OK, okAction, true));
 		
-		setCenter(bp);
+		setCenter(p);
 		
 		setKeyStroke(en.getKey());
 	}

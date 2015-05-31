@@ -1,12 +1,11 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.wizard;
-import goryachev.common.ui.BasePanel;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CButton;
-import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.Menus;
+import goryachev.common.ui.Panels;
 import goryachev.common.ui.UI;
-import goryachev.common.ui.dialogs.StandardDialogPanel;
 import goryachev.common.ui.icons.CIcons;
 import goryachev.common.util.CKit;
 import goryachev.common.util.HasPrompts;
@@ -18,7 +17,7 @@ import javax.swing.JComponent;
 
 
 public class WizardPanel2
-	extends CPanel
+	extends CPanel3
 {
 	public final CAction backAction = new CAction() { public void action() { actionBack(); }};
 	private Stack<Entry> stack = new Stack();
@@ -94,7 +93,7 @@ public class WizardPanel2
 	}
 	
 	
-	public BasePanel setErrorCard(Object messageOrThrowable, boolean allowBackButton, Action closeAction)
+	public CPanel3 setErrorCard(Object messageOrThrowable, boolean allowBackButton, Action closeAction)
 	{
 		String s;
 		if(messageOrThrowable instanceof Throwable)
@@ -113,11 +112,11 @@ public class WizardPanel2
 			s = messageOrThrowable.toString();
 		}
 		
-		StandardDialogPanel c = new StandardDialogPanel();
-		c.setIcon(CIcons.Error96);
-		c.setText(s);
 		
-		BasePanel p = new BasePanel(c);
+		CPanel3 p = new CPanel3();
+		p.setLeading(Panels.iconField(CIcons.Error96));
+		p.setCenter(Panels.textPane(s));
+		
 		if(allowBackButton)
 		{
 			p.buttonPanel().add(new CButton(Menus.Back, backAction));

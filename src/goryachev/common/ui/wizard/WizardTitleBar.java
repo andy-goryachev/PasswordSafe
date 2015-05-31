@@ -1,13 +1,13 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.wizard;
 import goryachev.common.ui.CBorder;
-import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.Theme;
 import javax.swing.JLabel;
 
 
 public class WizardTitleBar
-	extends CPanel
+	extends CPanel3
 {
 	public final JLabel titleField;
 	

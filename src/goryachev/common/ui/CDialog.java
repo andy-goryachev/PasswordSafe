@@ -1,31 +1,27 @@
 // Copyright (c) 2005-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.ui.theme.AssignMnemonic;
+import goryachev.common.util.CList;
 import goryachev.common.util.Log;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import javax.swing.border.Border;
 
 
 public class CDialog
 	extends JDialog
 {
-	protected void onOk() { }
-	
 	/** called after window appears on screen */
 	public void onWindowOpened() { }
 	
@@ -36,7 +32,8 @@ public class CDialog
 	public boolean onWindowClosing() { return true; }
 	
 	// no client code: called from a constructor
-	public boolean closeOnEscape() { return true; }
+	@Deprecated // TODO kill
+	protected final boolean closeOnEscape(boolean x) { return true; }
 	
 	//
 	
@@ -44,19 +41,16 @@ public class CDialog
 	public static final int DEFAULT_HEIGHT = 550;
 	public static final int MARGIN = 10;
 
-	public final CAction closeAction = new CAction() { public void action() { actionWindowClose(); } };
-	public final CAction okAction = new CAction() { public void action() { onOk(); } };
-	public static final Border defaultBorder = new CBorder(MARGIN);
+	public final CAction closeDialogAction = new CAction() { public void action() { actionWindowClose(); } };
 	
 	private Component defaultFocusComponent;
-	protected final CPanel3 contentPanel;
 
 	//
 	
 	public CDialog(Component parent, String name, boolean modal)
 	{
 		super(UI.getParentWindow(parent));
-		setMinimumSize(300, 200);
+		setMinimumSize(400, 300);
 		setIcon(Application.getIcon());
 		setModal(modal);
 		setName(name);
@@ -64,13 +58,13 @@ public class CDialog
 		
 		addWindowListener(new WindowAdapter()
 		{
-			public void windowOpened(WindowEvent e)
+			public void windowOpened(WindowEvent ev)
 			{
 				focusDefaultComponent();
 				onWindowOpened();
 			}
 
-			public void windowClosing(WindowEvent e)
+			public void windowClosing(WindowEvent ev)
 			{
 				if(onWindowClosing())
 				{
@@ -80,21 +74,16 @@ public class CDialog
 		});
 		
 		getContentPane().setLayout(new BorderLayout());
-		
-		contentPanel = new CPanel3();
-		contentPanel.setGaps(10, 10);
-		contentPanel.setBorder(defaultBorder);
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		
-		if(closeOnEscape())
-		{
-			UI.whenAncestorOfFocusedComponent(getRootPane(), KeyEvent.VK_ESCAPE, closeAction);
-		}
 	}
 	
 	
-	// AppTitle
-	// Title - AppTitle
+	public void setCloseOnEscape()
+	{
+		UI.whenAncestorOfFocusedComponent(this, KeyEvent.VK_ESCAPE, closeDialogAction);
+	}
+	
+	
+	/** sets dialog title to app title (s==null) or "s - app title" */
 	public void setDialogTitle(String s)
 	{
 		String appTitle = Application.getTitle();
@@ -131,6 +120,24 @@ public class CDialog
 		getRootPane().setDefaultButton(b);
 	}
 	
+
+	public void setDefaultButton()
+	{
+		CList<CButtonPanel3> ps = UI.collectChildrenOfType(CButtonPanel3.class, this);
+		if(ps.size() == 1)
+		{
+			CButtonPanel3 bp = ps.get(0);
+			JButton b = bp.getLastButton();
+			if(b != null)
+			{
+				setDefaultButton(b);
+				
+				// not sure about this
+				setDefaultFocusComponent(b);
+			}
+		}
+	}
+	
 	
 	protected void focusDefaultComponent()
 	{
@@ -156,49 +163,49 @@ public class CDialog
 	}
 	
 	
-	public CPanel3 getContentPanel()
-	{
-		return contentPanel;
-	}
+//	public CPanel3 getContentPanel()
+//	{
+//		return contentPanel;
+//	}
+//	
+//	
+//	public CButtonPanel3 getButtonPanel()
+//	{
+//		return contentPanel.buttonPanel();
+//	}
+//	
+//	
+//	public CButton addButton(Action a)
+//	{
+//		return getButtonPanel().addButton(a);
+//	}
+//	
+//	
+//	public CButton addButton(Action a, boolean highlight)
+//	{
+//		return getButtonPanel().addButton(a, highlight);
+//	}
 	
 	
-	public CButtonPanel3 getButtonPanel()
-	{
-		return contentPanel.buttonPanel();
-	}
+//	public void setContent(Component c)
+//	{
+//		getContentPanel().setCenter(c);
+//	}
+//	
+//	
+//	public void setContentPanel(Component c)
+//	{
+//		BorderLayout layout = (BorderLayout)getContentPane().getLayout();
+//		Component old = layout.getLayoutComponent(getContentPane(), BorderLayout.CENTER);
+//		if(old != null)
+//		{
+//			getContentPane().remove(old);
+//		}
+//		getContentPane().add(c, BorderLayout.CENTER);
+//	}
 	
 	
-	public CButton addButton(Action a)
-	{
-		return getButtonPanel().addButton(a);
-	}
-	
-	
-	public CButton addButton(Action a, boolean highlight)
-	{
-		return getButtonPanel().addButton(a, highlight);
-	}
-	
-	
-	public void setContent(Component c)
-	{
-		getContentPanel().setCenter(c);
-	}
-	
-	
-	public void setContentPanel(Component c)
-	{
-		BorderLayout layout = (BorderLayout)getContentPane().getLayout();
-		Component old = layout.getLayoutComponent(getContentPane(), BorderLayout.CENTER);
-		if(old != null)
-		{
-			getContentPane().remove(old);
-		}
-		getContentPane().add(c, BorderLayout.CENTER);
-	}
-	
-	
-	public Window open()
+	public CDialog open()
 	{
 		GlobalSettings.opening(this);
 		AssignMnemonic.assign(getRootPane());
@@ -251,95 +258,69 @@ public class CDialog
 		UI.setPreferredMinimumSize(this, getRootPane());
 	}
 	
-	
-	public CTextArea textArea()
-	{
-		CTextArea t = new CTextArea();
-		t.setLineWrap(true);
-		t.setWrapStyleWord(true);
-		t.setFont(Theme.plainFont());
-		t.setBorder(Theme.BORDER_FIELD);
-		return t;
-	}
-	
-	
-	public CScrollPane scroll(JComponent c)
-	{
-		CScrollPane sc = new CScrollPane(c);
-		sc.getViewport().setBackground(Theme.textBG());
-		return sc;
-	}
-	
-	
-	public CButton addButton(String text, Action a)
-	{
-		CButton b = new CButton(text, a);
-		addButton(b);
-		return b;
-	}
-	
-	
-	public void addButton(String text, Action a, boolean highlight)
-	{
-		addButton(new CButton(text, a, highlight));
-	}
-	
-	
-	public void addButton(String text, Action a, Color highlight)
-	{
-		addButton(new CButton(text, a, highlight));
-	}
-	
-	
-	public void addButton(JButton b)
-	{
-		getButtonPanel().addButton(b);
-	}
-	
-	
-	public void addSpace()
-	{
-		getButtonPanel().space();
-	}
-	
 
-	public void setDefaultButton()
+	/** sets borderless mode.  should be called prior to invoking panel() or buttonPanel() */
+	public void borderless()
 	{
-		JButton b = getButtonPanel().getLastButton();
-		if(b != null)
+		CPanel3 p = new CPanel3()
 		{
-			setDefaultButton(b);
-			setDefaultFocusComponent(b);
+			public CButtonPanel3 buttonPanel()
+			{
+				CButtonPanel3 p = super.buttonPanel();				
+				if(p.getBorder() == null)
+				{
+					p.setBorder(new CBorder(10));
+				}
+				return p;
+			}
+		};
+		
+		setCenter(p);
+	}
+	
+	
+	/** returns center CPanel3, creating it if necessary */ 
+	public CPanel3 panel()
+	{
+		Container cp = getContentPane();
+		BorderLayout la = (BorderLayout)cp.getLayout();
+		
+		Component c = la.getLayoutComponent(BorderLayout.CENTER);
+		if(c instanceof CPanel3)
+		{
+			return (CPanel3)c;
 		}
+		else
+		{
+			CPanel3 p = new CPanel3();
+			p.setGaps(MARGIN, MARGIN);
+			p.setBorder(MARGIN);
+
+			setCenter(p);
+			
+			return p;
+		}
+	}
+	
+	
+	public CButtonPanel3 buttonPanel()
+	{
+		return panel().buttonPanel();
 	}
 	
 	
 	public void setCenter(Component c)
 	{
-		contentPanel.setCenter(c);
-	}
-	
-	
-	public void setNorth(Component c)
-	{
-		contentPanel.setNorth(c);
-	}
-	
-	
-	public void setWest(Component c)
-	{
-		contentPanel.setWest(c);
-	}
-	
-	
-	public void setEast(Component c)
-	{
-		contentPanel.setEast(c);
-	}
-	
-	
-	public void setSouth(Component c)
-	{
-		contentPanel.setSouth(c);
+		Container cp = getContentPane();
+		BorderLayout la = (BorderLayout)cp.getLayout();
+		
+		Component old = la.getLayoutComponent(BorderLayout.CENTER);
+		if(old != null)
+		{
+			cp.remove(old);
+		}
+		
+		cp.add(c, BorderLayout.CENTER);
+		UI.validateAndRepaint(this);
 	}
 }

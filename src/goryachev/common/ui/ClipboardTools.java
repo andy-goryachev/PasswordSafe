@@ -38,4 +38,16 @@ public class ClipboardTools
 		StringSelection sel = new StringSelection(s);
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(sel, null);
 	}
+
+
+	public static CAction copyAction(final String s)
+	{
+		return new CAction(Menus.Copy)
+		{
+			public void action() throws Exception
+			{
+				ClipboardTools.copy(s);
+			}
+		};
+	}
 }

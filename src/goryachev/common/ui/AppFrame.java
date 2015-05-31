@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.Window;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
@@ -366,5 +367,11 @@ public class AppFrame
 				((AppFrame)w).close();
 			}
 		}
+	}
+	
+	
+	public void setCloseOnEscape()
+	{
+		UI.whenAncestorOfFocusedComponent(this, KeyEvent.VK_ESCAPE, closeAction);
 	}
 }

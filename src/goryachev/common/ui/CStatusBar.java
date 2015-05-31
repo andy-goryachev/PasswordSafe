@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 
 
 public class CStatusBar
-	extends HorizontalLayoutPanel
+	extends HorizontalPanel
 {
 	public CStatusBar()
 	{

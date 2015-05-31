@@ -10,20 +10,21 @@ import java.awt.LayoutManager2;
 
 
 /** 
- * A new table layout, to be replaced with a BorderLayout+TableLayout hybrid.
+ * A new table layout, combination of BorderLayout and TableLayout.
  * 
  * Column spec:
  *   float 0.0 ... 1.0: preferred size as a fraction of total size
  *   float > 1.0 fixed size in pixels
  *   PREFERRED, MINIMUM, FILL
- *   SPEC(minw [pixels,%,dlu], prefw, maxw, group)
+ *   
+ *   TODO SPEC(minw [pixels,%,dlu], prefw, maxw, group)
  *   
  * unless explicitly set, row or column spec defaults to PREFERRED.
  */
 public class CTableLayout3
 	implements LayoutManager2
 {
-	public static final float MINIMUM = -1.0f;
+	//public static final float MINIMUM = -1.0f;
 	public static final float PREFERRED = -2.0f;
 	public static final float FILL = -3.0f;
 	
@@ -89,7 +90,7 @@ public class CTableLayout3
 	}
 
 	
-	public void insertColumn(int ix, double spec)
+	public void insertColumn(int ix, float spec)
 	{
 		// TODO
 	}
@@ -124,6 +125,13 @@ public class CTableLayout3
 	}
 	
 	
+	public void setColumnSpec(int col, float spec)
+	{
+		LC c = getColumnSpec(col);
+		c.width = spec;
+	}
+	
+	
 	public LC getRowSpec(int row)
 	{
 		while(getRowCount() <= row)
@@ -138,6 +146,13 @@ public class CTableLayout3
 	{
 		LC c = getRowSpec(row);
 		c.min = size;
+	}
+	
+	
+	public void setRow(int row, float spec)
+	{
+		LC c = getRowSpec(row);
+		c.width = spec;
 	}
 	
 	
@@ -187,7 +202,7 @@ public class CTableLayout3
 		}
 		else
 		{
-			throw new IllegalArgumentException("illegal component constraint");
+			throw new IllegalArgumentException("illegal component constraint: " + constraints);
 		}
 		
 		synchronized(comp.getTreeLock())
@@ -350,7 +365,6 @@ public class CTableLayout3
 		}
 
 
-		@Deprecated // FIX kill
 		public boolean isScaled()
 		{
 			return isFill() || isPercent();
@@ -482,7 +496,7 @@ public class CTableLayout3
 		protected int fixed(int ix)
 		{
 			float w = specs.get(ix).width;
-			if(w > 1.0f)
+			if(w >= 1.0f)
 			{
 				return (int)w;
 			}
@@ -742,8 +756,6 @@ public class CTableLayout3
 		private int bottom;
 		private int left;
 		private int right;
-		private Axis horHelper;
-		private Axis verHelper;
 		private int tableLeft;
 		private int tableRight;
 		private int tableTop;
@@ -849,31 +861,23 @@ public class CTableLayout3
 		
 		protected Axis createHorAxis()
 		{
-			if(horHelper == null)
+			return new Axis(cols, hgap)
 			{
-				horHelper = new Axis(cols, hgap)
-				{
-					public int start(CC cc) { return cc.col; }
-					public int end(CC cc) { return cc.col2; }
-					public int size(Dimension d) { return d.width; }
-				};
-			}
-			return horHelper;
+				public int start(CC cc) { return cc.col; }
+				public int end(CC cc) { return cc.col2; }
+				public int size(Dimension d) { return d.width; }
+			};
 		}
 		
 		
 		protected Axis createVerAxis()
 		{
-			if(verHelper == null)
+			return new Axis(rows, vgap)
 			{
-				verHelper = new Axis(rows, vgap)
-				{
-					public int start(CC cc) { return cc.row; }
-					public int end(CC cc) { return cc.row2; }
-					public int size(Dimension d) { return d.height; }
-				};
-			}
-			return verHelper;
+				public int start(CC cc) { return cc.row; }
+				public int end(CC cc) { return cc.row2; }
+				public int size(Dimension d) { return d.height; }
+			};
 		}
 		
 			

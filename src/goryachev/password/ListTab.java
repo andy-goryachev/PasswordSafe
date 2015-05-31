@@ -2,7 +2,10 @@
 package goryachev.password;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
+import goryachev.common.ui.CMenuItem;
 import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPopupMenu;
+import goryachev.common.ui.CPopupMenuController;
 import goryachev.common.ui.CScrollPane;
 import goryachev.common.ui.CSplitPane;
 import goryachev.common.ui.Dialogs;
@@ -19,6 +22,7 @@ import goryachev.common.util.CComparator;
 import goryachev.common.util.CList;
 import goryachev.common.util.TXT;
 import java.awt.event.KeyEvent;
+import javax.swing.JPopupMenu;
 
 
 public class ListTab
@@ -58,12 +62,20 @@ public class ListTab
 				onSelectionChange();
 			}
 		};
-		
+
 		filter = new ZFilterLogic(table);
 		UI.whenFocused(filter.getField(), KeyEvent.VK_DOWN, focusTableAction);
 
 		CScrollPane scroll = new CScrollPane(table, CScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, CScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.getViewport().setBackground(Theme.textBG());
+
+		new CPopupMenuController(table, scroll)
+		{
+			public JPopupMenu constructPopupMenu()
+			{
+				return createPopupMenu();
+			}
+		};
 
 		// detail
 		
@@ -87,6 +99,16 @@ public class ListTab
 	}
 	
 	
+	public JPopupMenu createPopupMenu()
+	{
+		CPopupMenu m = new CPopupMenu();
+		m.add(new CMenuItem(TXT.get("ListTab.menu.add entry", "Add Entry"), addEntryAction));
+		m.addSeparator();
+		m.add(new CMenuItem(TXT.get("ListTab.menu.delete entry", "Delete"), deleteEntryAction));
+		return m;
+	}
+	
+	
 	protected void onSelectionChange()
 	{
 		selector.ensureSelection();
@@ -97,6 +119,7 @@ public class ListTab
 
 	public void updateActions()
 	{
+		deleteEntryAction.setEnabled(selector.isNotEmpty());
 	}
 
 	
@@ -211,7 +234,7 @@ public class ListTab
 	
 	public void actionDeleteEntry()
 	{
-		if(Dialogs.confirm(this, Menus.Delete, TXT.get("ListTab.delete entries", "Delete selected entries?")))
+		if(Dialogs.confirm(this, Menus.Delete, TXT.get("ListTab.delete entries", "Delete selected entries?"), Menus.Delete))
 		{
 			CList<PassEntry> sel = model.getSelectedEntries(selector);
 			for(PassEntry en: sel)

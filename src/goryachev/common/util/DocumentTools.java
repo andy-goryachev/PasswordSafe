@@ -327,4 +327,20 @@ public class DocumentTools
 			Log.err(e);
 		}
 	}
+
+
+	public static String toString(Document d)
+	{
+		if(d != null)
+		{
+			try
+            {
+	            return d.getText(0, d.getLength());
+            }
+            catch(Exception ignore)
+            {
+            }
+		}
+		return null;
+	}
 }

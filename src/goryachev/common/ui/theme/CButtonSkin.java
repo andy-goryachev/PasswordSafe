@@ -15,14 +15,10 @@ public class CButtonSkin
 {
 	public void paint(Graphics g, JComponent c)
 	{
-		//Insets m = c.getInsets();
-		//int w = c.getWidth();
-		//int h = c.getHeight();
-		
 		Color center = getBackground(c);
 		Color top = Theme.brighter(center);
 		Color bottom = Theme.darker(center);
-		//GradientPainter.paintVertical(g, m.left, m.top, w-m.left-m.right, h-m.top-m.bottom, center, 50, top, 50, bottom);
+
 		GradientPainter.paintVertical(g, 0, 0, c.getWidth(), c.getHeight(), center, 50, top, 50, bottom);
 	}
 	
@@ -37,7 +33,7 @@ public class CButtonSkin
 				Color c = b.getHighlight();
 				if(c != null)
 				{
-					return UI.mix(92, c, x.getBackground());
+					return UI.mix(c, 0.5f, x.getBackground());
 				}
 			}
 		}

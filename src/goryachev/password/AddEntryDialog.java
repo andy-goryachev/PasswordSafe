@@ -11,6 +11,7 @@ import goryachev.common.ui.CTextField;
 import goryachev.common.ui.Dialogs;
 import goryachev.common.ui.Menus;
 import goryachev.common.ui.Theme;
+import goryachev.common.util.CKit;
 import goryachev.common.util.TXT;
 import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.ui.CPasswordField;
@@ -25,10 +26,10 @@ import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 
-public class AddEntryDialog extends CDialog
+public class AddEntryDialog
+	extends CDialog
 {
 	public final CAction addAction = new CAction() { public void action() { onAdd(); } };
 	protected CTextField nameField;
@@ -81,10 +82,9 @@ public class AddEntryDialog extends CDialog
 
 		verifier = new PasswordVerifier2(clearPassField, passField, verifyField, hidePassField, matchField)
 		{
-			protected void onPasswordsMatch(boolean have, boolean match)
+			protected void onPasswordUpdate()
 			{
-				// FIX allow empty password
-				addAction.setEnabled(have && match);
+				updateActions();
 			}
 		};
 
@@ -104,19 +104,43 @@ public class AddEntryDialog extends CDialog
 
 		setShowPassword(true);
 		hidePassField.setSelected(false);
-
-		addAction.setEnabled(true);
+		
+		updateActions();
+	}
+	
+	
+	protected void updateActions()
+	{
+		boolean on;
+		if(verifier.hasData())
+		{
+			on = verifier.hasMatch();
+		}
+		else
+		{
+			on = true;
+		}
+		
+		addAction.setEnabled(on); 
+	}
+	
+	
+	public void onWindowClosed()
+	{
+		verifier.clear();
 	}
 
 
 	protected void setShowPassword(boolean on)
 	{
 		this.showPassword = on;
+		
+		// TODO carry password over
 
 		CPanel3 p = new CPanel3();
 		p.setGaps(5);
-		p.setBorder(new CBorder(0, 0, 10, 0));
-		p.addColumns(CPanel3.PREFERRED, CPanel3.PREFERRED, CPanel3.FILL, CPanel3.PREFERRED);
+		p.setBorder();
+		p.addColumns(CPanel3.PREFERRED, CPanel3.PREFERRED, CPanel3.FILL );
 
 		p.row(0, p.label(TXT.get("AddEntryDialog.label.name", "Name:")));
 		p.row(1, 3, nameField);
@@ -147,11 +171,12 @@ public class AddEntryDialog extends CDialog
 		p.row(1, 3, hidePassField);
 		p.nextFillRow();
 		p.row(0, notesLabel);
-		p.row(1, 4, scroll);
+		p.row(1, 3, scroll);
 
 		CButton addButton = new CButton(Menus.OK, addAction, true);
-		CButton cancelButton = new CButton(Menus.Cancel, closeAction);
+		CButton cancelButton = new CButton(Menus.Cancel, closeDialogAction);
 
+		p.buttonPanel().setBorder(new CBorder(5, 0, 0, 0));
 		p.buttonPanel().addButton(cancelButton);
 		p.buttonPanel().addButton(addButton);
 
@@ -172,7 +197,7 @@ public class AddEntryDialog extends CDialog
 		tp.add(cancelButton);
 		tp.apply(this);
 
-		setContent(p);
+		setCenter(p);
 
 		validate();
 		repaint();
@@ -197,10 +222,16 @@ public class AddEntryDialog extends CDialog
 	{
 		try
 		{
+			String name = nameField.getText();
+			if(CKit.isBlank(name))
+			{
+				name = TXT.get("AddEntryDialog.unnamed entry", "<Unnamed>");
+			}
+			
 			OpaqueChars pass = verifier.getPassword();
 
 			entry = dataFile.addEntry();
-			entry.setName(nameField.getText());
+			entry.setName(name);
 			entry.setUserName(usernameField.getText());
 			entry.setPassword(pass);
 			entry.setNotes(notesField.getText());

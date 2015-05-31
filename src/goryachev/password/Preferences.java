@@ -17,7 +17,7 @@ public class Preferences
 {
 	public static final LongOption licenseAcceptedOption = new LongOption("license.accepted", -1);
 	public static final FileOption dataFileOption = new FileOption("data.file");
-	public static final IntegerOption lockTimeoutOption = new IntegerOption("lock.timeout", 15*60000);
+	public static final IntegerOption lockTimeoutOption = new IntegerOption("lock.timeout2", 5);
 
 	
 	public static void openPreferences(JFrame parent)
@@ -32,7 +32,8 @@ public class Preferences
 		
 		// security
 		b.addChild(TXT.get("Preferences.group.security", "Security"));
-		b.addOption(TXT.get("Preferences.security.lock timeout", "Lock timeout (milliseconds)"), new IntegerOptionEditor(lockTimeoutOption));
+		b.addOption(TXT.get("Preferences.security.lock timeout in minutes", "Lock timeout (minutes)"), new IntegerOptionEditor(lockTimeoutOption));
+		b.setRestartRequired();
 		b.end();
 		
 		// keys

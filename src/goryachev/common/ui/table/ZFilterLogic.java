@@ -1,7 +1,7 @@
 // Copyright (c) 2008-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.table;
 import goryachev.common.ui.CBorder;
-import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.CTextFieldWithPrompt;
 import goryachev.common.ui.Menus;
 import goryachev.common.ui.Theme;
@@ -46,7 +46,7 @@ public class ZFilterLogic
 	public final ZTable table;
 	public final CTextFieldWithPrompt textField;
 	protected ZStringRowFilter filter;
-	public final CPanel panel;
+	public final CPanel3 panel;
 	public final JLabel buttonLabel;
 	protected Timer timer;
 	protected boolean isFiltering;
@@ -124,7 +124,7 @@ public class ZFilterLogic
 			public void mousePressed(MouseEvent e) { clear(); }
 		});
 			
-		panel = new CPanel()
+		panel = new CPanel3()
 		{
 			public void paintComponent(Graphics g)
 			{
@@ -145,7 +145,7 @@ public class ZFilterLogic
 					g.fillRect(0,0,x,h);
 					
 					// filtered
-					c = UI.mix(192, Theme.hoverColor(), Theme.textBG());
+					c = UI.mix(Theme.hoverColor(), 0.25, Theme.textBG());
 					g.setColor(c);
 					g.fillRect(x,0,w,h);
 				}

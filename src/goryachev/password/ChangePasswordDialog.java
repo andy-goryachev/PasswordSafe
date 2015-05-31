@@ -62,9 +62,9 @@ public class ChangePasswordDialog
 		
 		verifier = new PasswordVerifier2(clearPassField, passField, verifyField, hidePassField, matchField)
 		{
-			protected void onPasswordsMatch(boolean have, boolean match)
+			protected void onPasswordUpdate()
             {
-				commitAction.setEnabled(have && match);
+				updateActions();
             }
 		};
 		
@@ -73,10 +73,16 @@ public class ChangePasswordDialog
 		setShowPassword(true);
 		hidePassField.setSelected(false);
 
-		commitAction.setEnabled(false);
+		updateActions();
 		
 		setMinimumSize(500, 300);
 		setSize(500, 300);
+	}
+	
+	
+	protected void updateActions()
+	{
+		commitAction.setEnabled(verifier.hasData() && verifier.hasMatch());
 	}
 	
 
@@ -124,7 +130,7 @@ public class ChangePasswordDialog
 		p.nextRow();
 		p.add(1, 3, hidePassField);
 		
-		CButton cancelButton = new CButton(Menus.Cancel, closeAction);
+		CButton cancelButton = new CButton(Menus.Cancel, closeDialogAction);
 		CButton changeButton = new CButton(Tx.Change, commitAction, true);
 
 		CFocusTraversalPolicy tp = new CFocusTraversalPolicy();
@@ -143,7 +149,8 @@ public class ChangePasswordDialog
 		
 		p.buttonPanel().addButton(cancelButton);
 		p.buttonPanel().addButton(changeButton);
-		setContent(p);
+		
+		panel().setCenter(p);
 				
 		validate();
 		repaint();

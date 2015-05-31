@@ -2,7 +2,6 @@
 		============
 		
 - open dialogs on the same monitor as the parent window
-- preferences: incorrectly prompts to save even if no changes were made
 - jar should be signed
 
 
@@ -10,7 +9,13 @@
 		RELEASE NOTES
 		=============
 
-3.00.38
+3.01.39
+- TODO carry over passwords when toggling 'hide password' checkbox
+- lock timeout in minutes
+- right-click menus
+- allowing empty passwords in Add Entry
+- fixed create database workflow
+- migrated away from info.clearthought.layout.TableLayout
 - ui improvements
 
 3.00.37

@@ -12,13 +12,13 @@ import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
 
 
-/** A convenient JPanel with CTableLayout3, a hybrid between BorderLayout and TableLayout. */
+/** A convenient JPanel with CTableLayout3, a hybrid of BorderLayout and TableLayout. */
 public class CPanel3
 	extends JPanel
 	implements Scrollable
 {
 	public static final float FILL = CTableLayout3.FILL;
-	public static final float MINIMUM = CTableLayout3.MINIMUM;
+	//public static final float MINIMUM = CTableLayout3.MINIMUM;
 	public static final float PREFERRED = CTableLayout3.PREFERRED;
 	
 	private boolean trackWidth = true;
@@ -29,6 +29,13 @@ public class CPanel3
 	public CPanel3()
 	{
 		super(new CTableLayout3());
+	}
+	
+	
+	public CPanel3(Component c)
+	{
+		super(new CTableLayout3());
+		setCenter(c);
 	}
 	
 	
@@ -292,15 +299,27 @@ public class CPanel3
 	}
 	
 	
-	public void setBorder(int gap)
+	public CBorder setBorder(int gap)
 	{
-		setBorder(new CBorder(gap));
+		CBorder b = new CBorder(gap);
+		setBorder(b);
+		return b;
 	}
 	
 	
-	public void setBorder(int vertGap, int horGap)
+	public CBorder setBorder(int vertGap, int horGap)
 	{
-		setBorder(new CBorder(vertGap, horGap));
+		CBorder b = new CBorder(vertGap, horGap); 
+		setBorder(b);
+		return b;
+	}
+	
+	
+	public CBorder setBorder(int top, int left, int bottom, int right)
+	{
+		CBorder b = new CBorder(top, left, bottom, right);
+		setBorder(b);
+		return b;
 	}
 	
 	
@@ -423,6 +442,12 @@ public class CPanel3
 	}
 	
 	
+	public void addFillColumn()
+	{
+		addColumn(FILL);
+	}
+	
+	
 	public void addColumns(float ... specs)
 	{
 		for(float cs: specs)
@@ -460,6 +485,13 @@ public class CPanel3
 	{
 		int r = row();
 		add(c, new CTableLayout3.CC(col, r, col + colSpan - 1, r + rowSpan - 1));
+	}
+	
+	
+	public Component add(Component c)
+	{
+		setCenter(c);
+		return c;
 	}
 	
 	

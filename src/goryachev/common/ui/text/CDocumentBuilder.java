@@ -300,8 +300,6 @@ public class CDocumentBuilder
 	}
 	
 	
-	// FIX
-	@Deprecated // not editable, vertical alignment is probably wrong
 	public void link(String url)
 	{
 		link(url, null);
@@ -310,7 +308,6 @@ public class CDocumentBuilder
 	
 	// FIX link handler property
 	// FIX special element type and view
-	@Deprecated // not editable, vertical alignment is probably wrong
 	public void link(final String url, String text)
 	{
 		SB sb = new SB();

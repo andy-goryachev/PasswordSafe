@@ -14,10 +14,11 @@ import java.util.Arrays;
 import javax.swing.JCheckBox;
 
 
+/** logic that deals with verifying password input and updating the corresponding ui indicators */ 
 public abstract class PasswordVerifier2
 	extends InputTracker
 {
-	protected abstract void onPasswordsMatch(boolean havePassword, boolean match);
+	protected abstract void onPasswordUpdate();
 	
 	//
 	
@@ -26,6 +27,8 @@ public abstract class PasswordVerifier2
 	private final CPasswordField field2;
 	private final JCheckBox hideField;
 	private final MatchLabel matchField;
+	private boolean hasData;
+	private boolean hasMatch;
 	
 	
 	public PasswordVerifier2(SecureTextField clearPassword, CPasswordField f1, CPasswordField f2, JCheckBox hideField, MatchLabel m)
@@ -35,7 +38,7 @@ public abstract class PasswordVerifier2
 		this.field2 = f2;
 		this.hideField = hideField;
 		this.matchField = m;
-		
+
 		add(f1);
 		add(f2);
 		if(clearPassword != null)
@@ -67,30 +70,31 @@ public abstract class PasswordVerifier2
 		return ((clearPassword != null) && (hideField != null) && (!hideField.isSelected()));
 	}
 	
-	
+
 	public void verify()
 	{
+		Boolean eq = null;
+
 		if(isClearPassword())
 		{
-			boolean have = (clearPassword.getDocument().getLength() > 0);
-			updateMatchLabel(have, true);
+			hasData = (clearPassword.getDocument().getLength() > 0);
+			eq = true;
 		}
 		else
 		{
 			char[] p1 = null;
 			char[] p2 = null;
-			Boolean match = null;
-			boolean have = false;
 			
 			try
 			{
 				p1 = field1.getPassword();
 				p2 = field2.getPassword();
 				
+				hasData = (p1.length > 0) || (p2.length > 0);
+				
 				if((p1.length != 0) || (p2.length != 0))
 				{
-					have = Arrays.equals(p1, p2);
-					match = have;
+					eq = Arrays.equals(p1, p2);
 				}
 			}
 			finally
@@ -98,19 +102,14 @@ public abstract class PasswordVerifier2
 				Crypto.zero(p1);
 				Crypto.zero(p2);
 			}
-			
-			updateMatchLabel(have, match);
 		}
+		
+		hasMatch = Boolean.TRUE.equals(eq);
+		matchField.setMatch(eq);
+		
+		onPasswordUpdate();
 	}
 
-	
-	protected void updateMatchLabel(boolean have, Boolean match)
-	{
-		matchField.setMatch(match);
-		
-		onPasswordsMatch(have, Boolean.TRUE.equals(match));
-	}
-	
 	
 	public final OpaqueChars getPassword() throws Exception
 	{
@@ -157,5 +156,17 @@ public abstract class PasswordVerifier2
 		{
 			clearPassword.getSecretDocument().clear();
 		}
+	}
+	
+	
+	public boolean hasMatch()
+	{
+		return hasMatch;
+	}
+	
+	
+	public boolean hasData()
+	{
+		return hasData;
 	}
 }

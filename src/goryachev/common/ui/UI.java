@@ -9,6 +9,7 @@ import goryachev.common.util.CPlatform;
 import goryachev.common.util.Clearable;
 import goryachev.common.util.Log;
 import goryachev.common.util.Obj;
+import goryachev.common.util.Rex;
 import goryachev.common.util.SB;
 import goryachev.common.util.TXT;
 import java.awt.Color;
@@ -56,6 +57,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.MenuElement;
+import javax.swing.RootPaneContainer;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.ToolTipManager;
@@ -104,82 +106,71 @@ public class UI
 	}
 
 	
-	/** fraction 0..255 (255=a, 0=b) */
-	public static Color mix(int fraction, Color a, Color b)
+	/** mixes colors using intensity values (RGB squared) */
+	public static Color mix(Color a, double fractionA, Color b)
 	{
-		int other = 255 - fraction;
-		return new Color
-		(
-			(fraction * a.getRed()  )/255 + (other * b.getRed()  )/255,
-			(fraction * a.getGreen())/255 + (other * b.getGreen())/255,
-			(fraction * a.getBlue() )/255 + (other * b.getBlue() )/255,
-			(fraction * a.getAlpha())/255 + (other * b.getAlpha())/255
-		);
-	}
+		if(fractionA < 0.0)
+		{
+			fractionA = 0.0;
+		}
+		else if(fractionA > 1.0)
+		{
+			fractionA = 1.0;
+		}
 
-	
-	/** calculate gradient color between  a(d=0.0) and b (d=1.0) */
-	public static Color mix(double d, Color a, Color b)
-	{
-		if(d < 0.0)
+		if((a.getAlpha() == 255) && (b.getAlpha() == 255))
 		{
-			d = 0.0;
+			// no transparency
+			return new Color
+			(
+				mixPrivate(a.getRed(), fractionA, b.getRed()),
+				mixPrivate(a.getGreen(), fractionA, b.getGreen()),
+				mixPrivate(a.getBlue(), fractionA, b.getBlue())
+			);
 		}
-		else if(d > 1.0)
+		else
 		{
-			d = 1.0;
+			double aa = a.getAlpha() / 255f;
+			double ba = b.getAlpha() / 255f;
+			
+			return new Color
+			(
+				mixPrivate(a.getRed(), aa, fractionA, b.getRed(), ba),
+				mixPrivate(a.getGreen(), aa, fractionA, b.getGreen(), ba),
+				mixPrivate(a.getBlue(), aa, fractionA, b.getBlue(), ba),
+				limit(CKit.round(255 * (aa * fractionA + ba * (1 - fractionA))))
+			);
 		}
-		
-		return new Color
-		(
-			gradient(d, a.getRed(),   b.getRed()),
-			gradient(d, a.getGreen(), b.getGreen()),
-			gradient(d, a.getBlue(),  b.getBlue()),
-			gradient(d, a.getAlpha(), b.getAlpha())
-		);
 	}
 	
 	
-	/** 
-	 * Calculates gradient color between a(d=0.0) and b(d=1.0)
-	 * with specified alpha (255 - opaque, 0 - transparent)
-	 */
-	public static Color gradient(double d, Color a, Color b, int alpha)
+	private static int mixPrivate(int a, double fractionA, int b)
 	{
-		if(d < 0.0)
-		{
-			d = 0.0;
-		}
-		else if(d > 1.0)
-		{
-			d = 1.0;
-		}
-		
-		return new Color
-		(
-			gradient(d,a.getRed(),  b.getRed()),
-			gradient(d,a.getGreen(),b.getGreen()),
-			gradient(d,a.getBlue(), b.getBlue()),
-			alpha
-		);
+		int c = CKit.round(Math.sqrt((a * a) * fractionA + (b * b) * (1 - fractionA)));
+		return limit(c);
 	}
 	
 	
-	/** Computes gradient color between a (d=0.0) and b (d=1.0) */
-	public static int gradient(double d, int a, int b)
+	private static int mixPrivate(int a, double alphaA, double fractionA, int b, double alphaB)
 	{
-		int c = (int)Math.round((b - a) * d + a);
-		if(c < 0)
+		int c = CKit.round(Math.sqrt((a * a) * fractionA + (b * b) * (1 - fractionA)));
+		return limit(c);
+	}
+	
+	
+	private static int limit(int x)
+	{
+		if(x < 0)
 		{
 			return 0;
 		}
-		else if(c > 255)
+		else if(x > 255)
 		{
 			return 255;
 		}
 		else
 		{
-			return c;
+			return x;
 		}
 	}
 
@@ -326,10 +317,24 @@ public class UI
 	}
 
 	
-	private static void setAction(JComponent c, Action a, int condition, KeyStroke k)
+	private static void setAction(Container comp, Action a, int condition, KeyStroke k)
 	{
 		if(k != null)
 		{
+			JComponent c;
+			if(comp instanceof JComponent)
+			{
+				c = (JComponent)comp;
+			}
+			else if(comp instanceof RootPaneContainer)
+			{
+				c = ((RootPaneContainer)comp).getRootPane();
+			}
+			else
+			{
+				throw new Rex();
+			}
+			
 			if(a == null)
 			{
 				c.getInputMap(condition).remove(k);
@@ -344,49 +349,49 @@ public class UI
 
 
 	// KeyEvent.VK_Z, InputEvent.CTRL_MASK
-	public static void whenFocused(JComponent c, int keyCode, int mask, Action a)
+	public static void whenFocused(Container c, int keyCode, int mask, Action a)
 	{
 		setAction(c, a, JComponent.WHEN_FOCUSED, KeyStroke.getKeyStroke(keyCode, mask));
 	}
 	
 
-	public static void whenFocused(JComponent c, KeyStroke k, Action a)
+	public static void whenFocused(Container c, KeyStroke k, Action a)
 	{
 		setAction(c, a, JComponent.WHEN_FOCUSED, k);
 	}
 
 
-	public static void whenFocused(JComponent c, int keyCode, Action a)
+	public static void whenFocused(Container c, int keyCode, Action a)
 	{
 		setAction(c, a, JComponent.WHEN_FOCUSED, KeyStroke.getKeyStroke(keyCode, 0));
 	}
 
 
-	public static void whenInFocusedWindow(JComponent c, int keyCode, int mask, Action a)
+	public static void whenInFocusedWindow(Container c, int keyCode, int mask, Action a)
 	{
 		setAction(c, a, JComponent.WHEN_IN_FOCUSED_WINDOW, KeyStroke.getKeyStroke(keyCode, mask));
 	}
 
 
-	public static void whenInFocusedWindow(JComponent c, int keyCode, Action a)
+	public static void whenInFocusedWindow(Container c, int keyCode, Action a)
 	{
 		setAction(c, a, JComponent.WHEN_IN_FOCUSED_WINDOW, KeyStroke.getKeyStroke(keyCode, 0));
 	}
 	
 	
-	public static void whenInFocusedWindow(JComponent c, KeyStroke k, Action a)
+	public static void whenInFocusedWindow(Container c, KeyStroke k, Action a)
 	{
 		setAction(c, a, JComponent.WHEN_IN_FOCUSED_WINDOW, k);
 	}
 
 
-	public static void whenAncestorOfFocusedComponent(JComponent c, int keyCode, int mask, Action a)
+	public static void whenAncestorOfFocusedComponent(Container c, int keyCode, int mask, Action a)
 	{
 		setAction(c, a, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT, KeyStroke.getKeyStroke(keyCode, mask));
 	}
 
 
-	public static void whenAncestorOfFocusedComponent(JComponent c, int keyCode, Action a)
+	public static void whenAncestorOfFocusedComponent(Container c, int keyCode, Action a)
 	{
 		setAction(c, a, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT, KeyStroke.getKeyStroke(keyCode, 0));
 	}
