@@ -10,6 +10,7 @@ import goryachev.common.util.CSettings;
 import goryachev.common.util.CSettingsProvider;
 import goryachev.common.util.Log;
 import goryachev.common.util.Obj;
+import goryachev.common.util.Rex;
 import goryachev.common.util.SB;
 import goryachev.common.util.WeakList;
 import java.awt.Component;
@@ -24,6 +25,7 @@ import javax.swing.JComponent;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.JTree;
 
 
@@ -402,11 +404,17 @@ public class GlobalSettings
 			sb.append('.');
 		}
 	}
-	
-	
-	public static boolean getBoolean(String key, boolean defaultValue)
+
+
+	public static boolean getBool(String key, boolean defaultValue)
 	{
-		return settings.getBoolean(key,defaultValue);
+		return settings.getBool(key, defaultValue);
+	}
+
+
+	public static Boolean getBoolean(String key)
+	{
+		return settings.getBoolean(key);
 	}
 	
 	
@@ -514,5 +522,38 @@ public class GlobalSettings
 	public static void registerPreferenceListener(PreferenceListener li)
 	{
 		preferenceListeners.add(li);
+	}
+	
+	
+	/** allows automatic settings storing/restoring of component settings using a global key */
+	public static void setKey(JComponent c, final String key)
+	{
+		if(c instanceof JToggleButton)
+		{
+			final JToggleButton t = (JToggleButton)c;
+	
+			// using global key to set property
+			new ComponentSettings(key)
+			{
+				public void store(String prefix, CSettings s)
+				{
+					s.setBoolean(key, t.isSelected());
+				}
+
+
+				public void restore(String prefix, CSettings s)
+				{
+					Boolean v = s.getBoolean(key);
+					if(v != null)
+					{
+						t.setSelected(v.booleanValue());
+					}
+				}
+			}.attach(c);
+		}
+		else
+		{
+			throw new Rex();
+		}
 	}
 }

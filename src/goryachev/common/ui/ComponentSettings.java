@@ -7,6 +7,7 @@ import java.awt.Component;
 import javax.swing.JComponent;
 
 
+/** per-component settings logic, allows for chaining */
 public abstract class ComponentSettings
 {
 	public abstract void store(String prefix, CSettings s);
@@ -15,19 +16,23 @@ public abstract class ComponentSettings
 	
 	//
 	
-	private static final Object KEY_COMPONENT_SETTINGS = new Obj("KEY_COMPONENT_SETTINGS");
-	private String id;
+	public static final Object KEY = new Obj("ComponentSettings.KEY");
+	public final String id;
 	private ComponentSettings next;
 	
 	
-	public ComponentSettings(String id, JComponent c)
+	public ComponentSettings(String id)
 	{
 		this.id = id;
-		
-		Object x = c.getClientProperty(KEY_COMPONENT_SETTINGS);
+	}
+	
+	
+	public void attach(JComponent c)
+	{
+		Object x = c.getClientProperty(KEY);
 		if(x == null)
 		{
-			c.putClientProperty(KEY_COMPONENT_SETTINGS, this);
+			c.putClientProperty(KEY, this);
 		}
 		else if(x instanceof ComponentSettings)
 		{
@@ -55,7 +60,7 @@ public abstract class ComponentSettings
 	{
 		if(c instanceof JComponent)
 		{
-			Object v = ((JComponent)c).getClientProperty(KEY_COMPONENT_SETTINGS);
+			Object v = ((JComponent)c).getClientProperty(KEY);
 			if(v instanceof ComponentSettings)
 			{
 				return (ComponentSettings)v;

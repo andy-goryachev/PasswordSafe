@@ -281,13 +281,7 @@ public class Parsers
 	}
 	
 	
-	public static boolean parseBool(Object x)
-	{
-		return parseBool(x, false);
-	}
-	
-	
-	public static boolean parseBool(Object x, boolean defaultValue)
+	public static Boolean parseBoolean(Object x)
 	{
 		if(x instanceof Boolean)
 		{
@@ -296,10 +290,29 @@ public class Parsers
 		else if(x != null)
 		{
 			String s = x.toString();
-			return "true".equalsIgnoreCase(s) || "y".equalsIgnoreCase(s);
+			return "true".equalsIgnoreCase(s) || "y".equalsIgnoreCase(s) || "1".equals(s);
 		}
-
-		return defaultValue;
+		return null;
+	}
+	
+	
+	public static boolean parseBool(Object x, boolean defaultValue)
+	{
+		Boolean v = parseBoolean(x);
+		if(v == null)
+		{
+			return defaultValue;
+		}
+		else
+		{
+			return v.booleanValue();
+		}
+	}
+	
+	
+	public static boolean parseBool(Object x)
+	{
+		return parseBool(x, false);
 	}
 	
 	

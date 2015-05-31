@@ -8,6 +8,7 @@ import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CFocusTraversalPolicy;
 import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.Dialogs;
+import goryachev.common.ui.GlobalSettings;
 import goryachev.common.ui.Menus;
 import goryachev.common.ui.UI;
 import goryachev.crypto.OpaqueChars;
@@ -53,6 +54,7 @@ public class ChangePasswordDialog
 
 		hidePassField = new CCheckBox(Tx.HidePasswordInThisDialog);
 		hidePassField.setBorder(null);
+		GlobalSettings.setKey(hidePassField, "ChangePasswordDialog.hide");
 		hidePassField.addItemListener(new ItemListener()
 		{
 			public void itemStateChanged(ItemEvent ev)

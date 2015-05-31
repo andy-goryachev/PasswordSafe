@@ -7,6 +7,7 @@ import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CFocusTraversalPolicy;
 import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.Dialogs;
+import goryachev.common.ui.GlobalSettings;
 import goryachev.common.ui.Menus;
 import goryachev.common.ui.UI;
 import goryachev.common.util.CKit;
@@ -63,6 +64,7 @@ public class ChangeDatabasePassphraseDialog
 
 		hidePassField = new CCheckBox(TXT.get("ChangeDatabasePassphraseDialog.check.hide passphrase", "hide passphrase in this dialog"));
 		hidePassField.setBorder(null);
+		GlobalSettings.setKey(hidePassField, "ChangeDatabasePassphraseDialog.hide");
 		hidePassField.addItemListener(new ItemListener()
 		{
 			public void itemStateChanged(ItemEvent ev)

@@ -11,6 +11,7 @@ import goryachev.common.ui.CScrollPane;
 import goryachev.common.ui.CTextArea;
 import goryachev.common.ui.CTextField;
 import goryachev.common.ui.Dialogs;
+import goryachev.common.ui.GlobalSettings;
 import goryachev.common.ui.Menus;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.UI;
@@ -75,6 +76,7 @@ public class AddEntryDialog
 		matchField = new MatchLabel();
 
 		hidePassField = new CCheckBox(Tx.HidePasswordInThisDialog);
+		GlobalSettings.setKey(hidePassField, "AddEntryDialog.hide");
 		hidePassField.setBorder(null);
 		hidePassField.addItemListener(new ItemListener()
 		{
