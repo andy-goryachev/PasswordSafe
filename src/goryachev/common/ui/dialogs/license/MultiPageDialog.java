@@ -2,7 +2,6 @@
 package goryachev.common.ui.dialogs.license;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CDialog;
-import goryachev.common.ui.CPanel;
 import goryachev.common.ui.CScrollPane;
 import goryachev.common.ui.CSplitPane;
 import goryachev.common.ui.CTextFieldWithPrompt;
@@ -30,7 +29,6 @@ public class MultiPageDialog
 	public final ZTable table;
 	public final CTableSelector selector;
 	public final JTextPane textField;
-	public final CPanel panel;
 	public final CSplitPane split;
 	
 	//
@@ -48,6 +46,7 @@ public class MultiPageDialog
 		super(parent, name, true);
 		
 		setSize(700, 700);
+		borderless();
 		
 		searchField = new CTextFieldWithPrompt();
 		searchField.setPrompt(Menus.find);
@@ -88,10 +87,7 @@ public class MultiPageDialog
 		split.setDividerLocation(200);
 		split.setBorder(null);
 		
-		panel = new CPanel();
-		panel.setCenter(split);
-		
-		getContentPane().add(panel);
+		panel().setCenter(split);
 	}
 	
 
@@ -103,7 +99,7 @@ public class MultiPageDialog
 
 	protected void setToolbar(JComponent c)
 	{
-		panel.setNorth(c);
+		panel().setNorth(c);
 	}
 	
 	

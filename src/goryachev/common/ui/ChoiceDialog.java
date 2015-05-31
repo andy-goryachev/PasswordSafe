@@ -3,31 +3,32 @@ package goryachev.common.ui;
 import goryachev.common.ui.icons.CIcons;
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.text.JTextComponent;
 
 
-public class ChoiceDialog
+public class ChoiceDialog<T>
 	extends CDialog
 {
-	public final BasePanel panel;
-	private int choice = -1;
+	private T choice;
 	
 	
 	public ChoiceDialog(Component parent, String title, String text)
 	{
 		super(parent, "ChoiceDialog", true);
 		setTitle(title);
-		getContentPanel().setBorder(null);
-		setMinimumSize(450, 250);
+		Dialogs.size(this);
+		borderless();
+		setCloseOnEscape();
 		
-		panel = new BasePanel();
-		panel.setBackground(Theme.fieldBG());
-		panel.setCenterText(text);
-		panel.setIcon(CIcons.Question96);
-		setCenter(panel);		
+		panel().setLeading(Panels.iconField(CIcons.Question96));
+
+		JTextComponent t = Panels.textComponent(text);
+		t.setBorder(new CBorder(20));
+		panel().setCenter(Panels.scroll(t));
 	}
 	
 	
-	protected CAction createAction(final int choice)
+	protected CAction createAction(final T choice)
 	{
 		return new CAction()
 		{
@@ -39,48 +40,47 @@ public class ChoiceDialog
 	}
 	
 	
-	protected void setChoice(int choice)
+	protected void setChoice(T choice)
 	{
 		this.choice = choice;
 		close();
 	}
 	
-	
-	protected CButtonPanel createButtonPanel()
-	{
-		CButtonPanel p = new CButtonPanel();
-		p.setBorder(new CBorder(MARGIN));
-		return p;
-	}
-	
 
-	public void addButton(String text, int choice)
+	public void addButton(String text, T choice)
 	{
-		getButtonPanel().addButton(new CButton(text, createAction(choice)));
+		buttonPanel().addButton(new CButton(text, createAction(choice)));
 	}
 	
 	
-	public void addButton(String text, int choice, Color buttonColor)
+	public void addButton(String text, T choice, Color buttonColor)
 	{
-		getButtonPanel().addButton(new CButton(text, createAction(choice), buttonColor));
+		buttonPanel().addButton(new CButton(text, createAction(choice), buttonColor));
 	}
 	
 	
-	public void addButton(String text, int choice, boolean highlight)
+	public void addButton(String text, T choice, boolean highlight)
 	{
-		getButtonPanel().addButton(new CButton(text, createAction(choice), highlight));
+		buttonPanel().addButton(new CButton(text, createAction(choice), highlight));
 	}
 	
 	
-	/** returns choice set by one of the buttons, or -1 if dialog was closed by the user (meaning "Cancel" */
-	public int getChoice()
+	/** returns choice set by one of the buttons, or default choice if set, or null */
+	public T getChoice()
 	{
 		return choice;
 	}
 	
 	
-	public int openChoiceDialog()
+	public void setChoiceDefault(T def)
 	{
+		choice = def;
+	}
+	
+	
+	public T openChoiceDialog()
+	{
+		setDefaultButton();
 		open();
 		return getChoice();
 	}

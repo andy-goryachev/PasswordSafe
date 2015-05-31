@@ -16,8 +16,8 @@ public class CTableRenderer<T>
 	extends DefaultTableCellRenderer
 {
 	private JTable table;
-	private int selectedMix = 72;
-	private int selectedFocusedMix = 210;
+	private double selectedMix = 0.28125;
+	private double selectedFocusedMix = 0.8203125;
 	protected int row;
 	protected int column;
 	public final CTableRendererBorder BORDER = new CTableRendererBorder();
@@ -138,7 +138,7 @@ public class CTableRenderer<T>
 				JTable.DropLocation d = table.getDropLocation();
 				if(d != null && !d.isInsertRow() && !d.isInsertColumn() && (d.getRow() == row) && (d.getColumn() == col))
 				{
-					mixBackground(48, Color.black);
+					mixBackground(Color.black, 0.1875);
 					selected = true;
 					// fg = DefaultLookup.getColor(this, ui, "Table.dropCellForeground");
 					// bg = DefaultLookup.getColor(this, ui, "Table.dropCellBackground");
@@ -155,11 +155,11 @@ public class CTableRenderer<T>
 					setForeground(table.getSelectionForeground());
 					if(focus)
 					{
-						setBackground(UI.mix(selectedFocusedMix, table.getSelectionBackground(), bg));
+						setBackground(UI.mix(table.getSelectionBackground(), selectedFocusedMix, bg));
 					}
 					else
 					{
-						setBackground(UI.mix(selectedMix, table.getSelectionBackground(), bg));
+						setBackground(UI.mix(table.getSelectionBackground(), selectedMix, bg));
 					}
 				}
 				else
@@ -197,20 +197,20 @@ public class CTableRenderer<T>
 	}
 	
 	
-	protected void mixForeground(int fraction, Color c)
+	protected void mixForeground(Color c, double fraction)
 	{
 		if(c != null)
 		{
-			setForeground(UI.mix(fraction, c, getForeground()));
+			setForeground(UI.mix(c, fraction, getForeground()));
 		}
 	}
 	
 	
-	protected void mixBackground(int fraction, Color c)
+	protected void mixBackground(Color c, double fraction)
 	{
 		if(c != null)
 		{
-			setBackground(UI.mix(fraction, c, getBackground()));
+			setBackground(UI.mix(c, fraction, getBackground()));
 		}
 	}
 	

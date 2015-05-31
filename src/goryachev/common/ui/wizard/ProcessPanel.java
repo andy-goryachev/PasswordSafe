@@ -1,12 +1,12 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.wizard;
 import goryachev.common.ui.BackgroundThread;
-import goryachev.common.ui.BasePanel;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CIcon;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.CScrollPane;
-import goryachev.common.ui.Dialogs;
+import goryachev.common.ui.ChoiceDialog;
 import goryachev.common.ui.InfoField;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.icons.CIcons;
@@ -23,7 +23,7 @@ import javax.swing.text.Document;
 
 
 public abstract class ProcessPanel
-	extends BasePanel 
+	extends CPanel3 
 {
 	protected abstract void execute() throws Exception;
 	
@@ -209,19 +209,18 @@ public abstract class ProcessPanel
 	
 	protected void actionCancel()
 	{
-		int rv = Dialogs.choice
+		ChoiceDialog<Boolean> d = new ChoiceDialog
 		(
-			this, 
+			this,
 			TXT.get("ProcessPanel.interrupt.title", "Interrupt?"), 
-			TXT.get("ProcessPanel.interrupt.d", "Do you want to interrupt the current operation?"),
-			new String[] 
-			{ 
-				TXT.get("ProcessPanel.button.allow", "Allow to Continue"),
-				TXT.get("ProcessPanel.button.interrupt", "Interrupt")
-			}
+			TXT.get("ProcessPanel.interrupt.d", "Do you want to interrupt the current operation?")
 		);
 		
-		if(rv == 1)
+		d.addButton(TXT.get("ProcessPanel.button.interrupt", "Interrupt"), Boolean.TRUE, Theme.alternativeButtonHighlight());
+		d.addButton(TXT.get("ProcessPanel.button.allow", "Allow to Continue"), null, true);
+		
+		Object rv = d.openChoiceDialog();
+		if(Boolean.TRUE.equals(rv))
 		{
 			cancel();
 		}

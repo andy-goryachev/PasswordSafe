@@ -1,32 +1,27 @@
 // Copyright (c) 2008-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
-import goryachev.common.ui.dialogs.StandardDialog;
 import goryachev.common.ui.dialogs.options.COptionDialog;
 import goryachev.common.ui.dialogs.options.OptionTreeNode;
 import goryachev.common.ui.icons.CIcons;
 import goryachev.common.util.CKit;
+import goryachev.common.util.CancelledException;
 import goryachev.common.util.Log;
 import goryachev.common.util.TXT;
 import goryachev.common.util.UserException;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.io.File;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
+import javax.swing.text.JTextComponent;
 
 
 /** Standard dialogs - replacement for JOptionPane */
 public class Dialogs
 {
-	public static enum DiscardChanges
+	public static enum Choice
 	{
 		CANCEL,
 		DISCARD,
@@ -34,6 +29,10 @@ public class Dialogs
 	}
 	
 	//
+	
+	
+	public static final Dimension DEFAULT_SIZE = new Dimension(550, 300);
+	
 	
 	public static void startupError(ImageIcon icon, String title, Object exceptionOrMessage)
 	{
@@ -43,22 +42,29 @@ public class Dialogs
 	}
 	
 	
+	public static void size(Window d)
+	{
+		d.setSize(DEFAULT_SIZE);
+		d.setMinimumSize(DEFAULT_SIZE);
+	}
+	
+	
 	public static void err(Component parent, Object exceptionOrMessage)
 	{
 		error(parent, exceptionOrMessage);
 	}
-	
-	
+
+
 	public static void error(Component parent, Object exceptionOrMessage)
 	{
 		if(exceptionOrMessage instanceof UserException)
 		{
-			String title = TXT.get("Dialogs.error.sorry","Sorry");
+			String title = TXT.get("Dialogs.error.sorry", "Sorry");
 			error(parent, title, exceptionOrMessage);
 		}
 		else
 		{
-			String title = TXT.get("Dialogs.error.unexpected","Unexpected Error");
+			String title = TXT.get("Dialogs.error.unexpected", "Unexpected Error");
 			error(parent, title, exceptionOrMessage);
 		}
 	}
@@ -66,12 +72,61 @@ public class Dialogs
 	
 	public static void error(Component parent, String title, Object exceptionOrMessage)
 	{
-		StandardDialog d = constructDialog(parent, CIcons.Error96, title, exceptionOrMessage);
+		CDialog d = new CDialog(parent, "ErrorDialog", true);
+		d.setDialogTitle(title);
+		d.setCloseOnEscape();
+		d.borderless();
+		size(d);
+		
+		String msg;
+		JTextComponent t;
+		CScrollPane s;
+		
+		if(exceptionOrMessage instanceof Throwable)
+		{
+			if(exceptionOrMessage instanceof UserException)
+			{
+				msg = ((UserException)exceptionOrMessage).getMessage();
+				t = Panels.textComponent(msg);
+				s = Panels.scroll(t);
+			}
+			else
+			{
+				Throwable e = (Throwable)exceptionOrMessage;
+				
+				if(e instanceof CancelledException)
+				{
+					// ignore
+				}
+				else if(e instanceof InterruptedException)
+				{
+					// ignore
+				}
+				else
+				{
+					Log.err(e);
+				}
+				
+				msg = CKit.stackTrace(e);
+				t = Panels.textArea(msg, false);
+				s = Panels.scroll(t, true);
+			}
+		}
+		else
+		{
+			msg = String.valueOf(exceptionOrMessage);
+			t = Panels.textComponent(msg);
+			s = Panels.scroll(t);
+		}
+		
+		t.setBorder(new CBorder(20));
+		
+		d.panel().setLeading(Panels.iconField(CIcons.Error96));
+		d.panel().setCenter(s);
 
-		// can't get a pointer
-		//d.addButton(new CButton(TXT.get("Dialogs.error.button.copy","Copy to Clipboard"), d.copyToClipboardAction));
-		d.addButton(new CButton(Menus.OK, d.closeAction));
-		d.setButtonHighlight();
+		d.buttonPanel().addButton(Menus.CopyToClipboard, ClipboardTools.copyAction(msg));
+		d.buttonPanel().fill();
+		d.buttonPanel().addButton(Menus.OK, d.closeDialogAction, true);
 		d.setDefaultButton();
 		d.open();
 	}
@@ -85,10 +140,9 @@ public class Dialogs
 	
 	public static void info(Component parent, String title, String message)
 	{
-		StandardDialog d = constructDialog(parent, CIcons.Info96, title, message);
+		CDialog d = constructDialog(parent, "InfoDialog", CIcons.Info96, title, message);
 		
-		d.addButton(new CButton(Menus.OK, d.closeAction));
-		d.setButtonHighlight();
+		d.buttonPanel().addButton(Menus.OK, d.closeDialogAction, true);
 		d.setDefaultButton();
 		d.open();
 	}
@@ -96,130 +150,37 @@ public class Dialogs
 
 	public static void warn(Component parent, String title, String message)
 	{
-		StandardDialog d = constructDialog(parent, CIcons.Warning96, title, message);
+		CDialog d = constructDialog(parent, "WarnDialog", CIcons.Warning96, title, message);
 		
-		d.addButton(new CButton(Menus.OK, d.closeAction));
-		d.setButtonHighlight();
+		d.buttonPanel().addButton(Menus.OK, d.closeDialogAction, true);
 		d.setDefaultButton();
 		d.open();
 	}
 	
 	
-	@Deprecated // use confirm2
-	public static boolean confirm(Component parent, String title, String message)
+	public static boolean confirm(Component parent, String title, String message, String confirmButton)
 	{
-		final StandardDialog d = constructDialog(parent, CIcons.Question96, title, message);
-		final AtomicBoolean confirmed = new AtomicBoolean();
-		
-		CAction okAction = new CAction()
-		{
-			public void action()
-			{
-				confirmed.set(true);
-				d.close();
-			}
-		};
-		
-		d.addButton(new CButton(Menus.Cancel, d.closeAction));
-		d.addButton(new CButton(Menus.OK, okAction));
-		d.setButtonHighlight();
-		d.setDefaultButton();
-		d.open();
-		
-		return confirmed.get();
+		ChoiceDialog<Boolean> d = new ChoiceDialog(parent, title, message);
+		d.addButton(Menus.Cancel, null);
+		d.addButton(confirmButton, Boolean.TRUE, true);
+		return Boolean.TRUE.equals(d.openChoiceDialog());
 	}
 	
 	
-	public static boolean confirm2(Component parent, String title, String message, String confirmButton)
+	private static CDialog constructDialog(Component parent, String name, Icon icon, String title, String msg)
 	{
-		final StandardDialog d = constructDialog(parent, CIcons.Question96, title, message);
-		final AtomicBoolean confirmed = new AtomicBoolean();
+		CDialog d = new CDialog(parent, name, true);
+		d.borderless();
+		d.setDialogTitle(title);
+		d.setCloseOnEscape();
+		size(d);
 		
-		CAction okAction = new CAction()
-		{
-			public void action()
-			{
-				confirmed.set(true);
-				d.close();
-			}
-		};
+		d.panel().setLeading(Panels.iconField(icon));
 		
-		d.addButton(new CButton(confirmButton, okAction));
-		d.setButtonHighlight();
-		d.setDefaultButton();
-		d.addButton(new CButton(Menus.Cancel, d.closeAction));
-		d.open();
+		JTextComponent t = Panels.textComponent(msg);
+		t.setBorder(new CBorder(20));
+		d.panel().setCenter(Panels.scroll(t));
 		
-		return confirmed.get();
-	}
-
-	
-	@Deprecated // use ChoiceDialog, please
-	public static int choice(Component parent, String title, String message, String[] choices)
-	{
-		final StandardDialog d = constructDialog(parent, CIcons.Question96, title, message);
-		final AtomicInteger result = new AtomicInteger(-1);
-		
-		int ix = 0;
-		for(String choice: choices)
-		{
-			final int rv = ix;
-			CAction a = new CAction()
-			{
-				public void action()
-				{
-					result.set(rv);
-					d.close();
-				}
-			};
-			
-			d.addButton(new CButton(choice, a));
-			
-			ix++;
-		}
-		
-		d.setButtonHighlight();
-		d.setDefaultButton();
-		d.open();
-		
-		return result.get();
-	}
-	
-	
-	public static StandardDialog constructDialog(Component parent, Icon icon, String title, Object exceptionOrMessage)
-	{
-		StandardDialog d = new StandardDialog(parent);
-		
-		if(exceptionOrMessage instanceof Throwable)
-		{
-			Throwable err = (Throwable)exceptionOrMessage;
-			if(!(err instanceof UserException))
-			{
-				Log.err(err);
-			}
-			
-			d.setTextError(err);
-		}
-		else if(exceptionOrMessage != null)
-		{
-			String s = exceptionOrMessage.toString();
-			if(CKit.startsWithIgnoreCase(s, "<html>"))
-			{
-				d.setTextHtml(s);
-			}
-			else
-			{
-				d.setTextPlain(s);
-			}
-		}
-		
-		d.setLogo(icon);
-		
-		String ti = (title == null ? Application.getTitle() : title + " - " + Application.getTitle());
-		d.setTitle(ti);
-		
-		d.setSize(550, 300);
-		//d.setMinimumSize(500, 300);		
 		return d;
 	}
 
@@ -229,58 +190,6 @@ public class Dialogs
 		return CFocusMonitor.getLastWindow();
 	}
 	
-	
-	@Deprecated // FIX
-	public static JTextArea createTextArea(String message)
-	{
-		JTextArea t = new JTextArea(message);
-		t.setWrapStyleWord(true);
-		t.setLineWrap(true);
-		t.setOpaque(false);
-		t.setEditable(false);
-		t.setFont(Theme.plainFont());
-		return t;
-	}
-	
-	
-	public static CPanel createInfoPanel(String title, ImageIcon icon, String text)
-	{
-		JTextArea t = createTextArea(text);
-		return createContentPanel(title, icon, t);
-	}
-	
-	
-	public static CPanel createHtmlPanel(String title, ImageIcon icon, String html)
-	{
-		CHtmlPane t = new CHtmlPane();
-		t.setOpaque(false);
-		t.setText(html);
-		
-		return createContentPanel(title, icon, t);
-	}
-	
-
-	public static CPanel createContentPanel(String title, ImageIcon icon, JComponent content)
-	{
-		JLabel titleLabel = new JLabel(title);
-		titleLabel.setFont(Theme.titleFont());
-		titleLabel.setBackground(Theme.panelBG().brighter());
-		titleLabel.setOpaque(true);
-		titleLabel.setBorder(new CBorder(0, 0, 1, 0, Color.gray, 20));
-
-		JLabel iconLabel = new JLabel(icon);
-		iconLabel.setBorder(new CBorder(10, 0, 0, 10));
-		iconLabel.setPreferredSize(new Dimension(96, 96));
-
-		content.setBorder(new CBorder(10, 10, 0, 10));
-
-		CPanel p = new CPanel();
-		p.setNorth(titleLabel);
-		p.setWest(iconLabel);
-		p.setCenter(content);
-		return p;
-	}
-
 
 	public static void openOptions(Component parent, String title, OptionTreeNode root, String id, int width, int height)
 	{
@@ -291,24 +200,21 @@ public class Dialogs
 	}
 
 
-	public static DiscardChanges discardChanges(Component parent)
+	public static Choice discardChanges(Component parent)
 	{
-		int rv = Dialogs.choice
+		ChoiceDialog<Choice> d = new ChoiceDialog
 		(
 			parent, 
 			TXT.get("Dialogs.discard changes.title", "Discard changes?"), 
-			TXT.get("Dialogs.discard changes.message", "The changes you've made will be lost.  Do you want to save the changes?"),
-			new String[] { Menus.Save, Menus.DiscardChanges, Menus.Cancel }
+			TXT.get("Dialogs.discard changes.message", "The changes you've made will be lost.  Do you want to save the changes?")
 		);
-		switch(rv)
-		{
-		case 0:
-			return DiscardChanges.SAVE;
-		case 1:
-			return DiscardChanges.DISCARD;
-		default:
-			return DiscardChanges.CANCEL;
-		}
+		
+		d.setChoiceDefault(Choice.CANCEL);
+		d.addButton(Menus.Cancel, Choice.CANCEL);
+		d.addButton(Menus.DiscardChanges, Choice.DISCARD, Theme.alternativeButtonHighlight());
+		d.addButton(Menus.Save, Choice.SAVE, true);
+		
+		return d.openChoiceDialog();
 	}
 
 
@@ -317,22 +223,37 @@ public class Dialogs
 	{
 		if(f.exists())
 		{
-			ChoiceDialog d = new ChoiceDialog
+			ChoiceDialog<Boolean> d = new ChoiceDialog
 			(
 				parent,
 				TXT.get("Dialogs.file exists.title", "File Exists"),
 				TXT.get("Dialogs.file exists.message", "File {0} exists.  Do you want to overwrite it?", f)
 			);
-			d.addButton(Menus.Overwrite, 1, Theme.alternativeButtonHighlight());
-			d.addButton(Menus.Cancel, 0, true);
-			int rv = d.openChoiceDialog();
-			switch(rv)
-			{
-			case 0:
-			case -1:
-				return false;
-			}
+			d.addButton(Menus.Overwrite, Boolean.TRUE, Theme.alternativeButtonHighlight());
+			d.addButton(Menus.Cancel, Boolean.FALSE);
+			Boolean rv = d.openChoiceDialog();
+			return Boolean.TRUE.equals(rv);
 		}
 		return true;
 	}
+
+
+	public static boolean confirmInterruption(Component parent)
+    {
+		return confirmInterruption
+		(
+			parent,
+			TXT.get("Dialogs.interrupt.title", "Operation Interrupted"), 
+			TXT.get("Dialogs.interrupt.description", "Do you want to interrupt the ongoing operation?")
+		);
+    }
+	
+	
+	public static boolean confirmInterruption(Component parent, String title, String message)
+    {
+		ChoiceDialog<Boolean> d = new ChoiceDialog(parent, title, message);
+		d.addButton(TXT.get("Dialogs.interrupt.button.interrupt", "Interrupt"), Boolean.TRUE, Theme.alternativeButtonHighlight());
+		d.addButton(TXT.get("Dialogs.interrupt.button.allow", "Allow to Continue"), null, true);
+		return Boolean.TRUE.equals(d.openChoiceDialog());
+    }
 }

@@ -3,6 +3,7 @@ package goryachev.common.ui;
 import goryachev.common.ui.dialogs.license.StandardLicense;
 import goryachev.common.util.CJob;
 import goryachev.common.util.CKit;
+import goryachev.common.util.DocumentTools;
 import goryachev.common.util.Log;
 import goryachev.common.util.TXT;
 import goryachev.common.util.platform.ApplicationSupport;
@@ -15,6 +16,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Properties;
 import javax.swing.ImageIcon;
+import javax.swing.text.Document;
 
 
 public abstract class Application
@@ -485,16 +487,21 @@ public abstract class Application
 			{
 				StandardLicense lic = new StandardLicense();
 				
-				BaseDialog d = new BaseDialog(getSourceWindow(), "ApplicationLicenseDialog", true);
+				CDialog d = new CDialog(getSourceWindow(), "ApplicationLicenseDialog", true);
+				d.setSize(500, 700);
+				d.borderless();
+				d.setCloseOnEscape();
 				d.setTitle(lic.getTitle() + " - " + getTitle() + " " + getVersion());
 				
-				BasePanel p = new BasePanel();
-				CTextPane t = p.setCenterCTextPane();
-				t.setDocument(lic.getDocument());
-				t.setCaretPosition(0);
-				p.buttonPanel().add(new CButton(Menus.OK, d.closeDialogAction, true));
-				d.setCenter(p);
-				d.closeOnEscape(p);
+				Document ld = lic.getDocument();
+				d.panel().setCenter(Panels.scrollDocument(ld));
+
+				// TODO copy rich text as well
+				String s = DocumentTools.toString(ld);
+				d.buttonPanel().addButton(Menus.CopyToClipboard, ClipboardTools.copyAction(s));
+				d.buttonPanel().fill();
+				d.buttonPanel().addButton(Menus.OK, d.closeDialogAction, true);
+				
 				d.open();
 			}
 		};

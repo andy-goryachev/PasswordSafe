@@ -45,7 +45,7 @@ public class MainWindow
 	public final CAction changeDataPassAction = new CAction() { public void action() { onChangeDatabasePassword(); } };
 	public final CAction checkForUpdatesAction = new CAction() { public void action() { actionCheckForUpdates(); } };
 	public final CAction clearClipboardAction = new CAction() { public void action() { onClearClipboard(); } };
-	public final CAction createDatabaseAction = new CAction() { public void action() { createDatabase(); } };
+	public final CAction createDatabaseAction = new CAction() { public void action() { actionCreateDatabase(); } };
 	public final CAction exitAction = new CAction() { public void action() { onExit(); } };
 	public final CAction focusAddAction = new CAction() { public void action() { focusAddButton(); } };
 	public final CAction lockAction = new CAction() { public void action() { lock(); } };
@@ -72,7 +72,7 @@ public class MainWindow
 	{
 		super("MainWindow");
 		
-		activityMonitor = new ActivityMonitor(Preferences.lockTimeoutOption.get())
+		activityMonitor = new ActivityMonitor(Preferences.lockTimeoutOption.get() * CKit.MS_IN_A_MINUTE)
 		{
 			protected void onNoActivity()
 			{
@@ -322,23 +322,9 @@ public class MainWindow
 				{
 					f = CKit.ensureExtension(f, PasswordSafeApp.EXTENSION);
 					
-					if(f.exists())
+					if(Dialogs.checkFileExistsOverwrite(this, f) == false)
 					{
-						int rv = Dialogs.choice
-						(
-							this, 
-							TXT.get("MainWindow.save.overwrite file?", "Overwrite?"), 
-							TXT.get("MainWindow.save.file exists", "File {0} exists.  Do you want to overwrite it?", f), 
-							new String[] 
-							{
-								Menus.Overwrite, 
-								Menus.Cancel
-							}
-						);
-						if(rv != 0)
-						{
-							return;
-						}
+						return;
 					}
 					
 					setFile(f);
@@ -424,7 +410,7 @@ public class MainWindow
 	}
 	
 	
-	protected void createDatabase()
+	protected void actionCreateDatabase()
 	{
 		saveIfModified();
 		new CreateDataFileDialog(this).open();

@@ -1,13 +1,13 @@
 // Copyright (c) 2012-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
 import goryachev.common.ui.Application;
-import goryachev.common.ui.BasePanel;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CButton;
 import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.CheckForUpdate;
 import goryachev.common.ui.GlobalSettings;
 import goryachev.common.ui.Menus;
+import goryachev.common.ui.Panels;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.dialogs.CFileChooser;
 import goryachev.common.ui.dialogs.license.StandardLicense;
@@ -99,8 +99,8 @@ public class WelcomeWizard
 		StandardLicense lic = new StandardLicense();
 		lic.setMilitaryClause(true);
 		
-		BasePanel p = new BasePanel();
-		p.setCenterTextArea().setDocument(lic.getDocument());
+		CPanel3 p = new CPanel3();
+		p.setCenter(Panels.scrollDocument(lic.getDocument()));
 		
 		p.buttonPanel().addButton(closeAction);
 		p.buttonPanel().addButton(backAction);
@@ -157,9 +157,7 @@ public class WelcomeWizard
 		String check = 
 			TXT.get("WelcomeDialog.check.1", "To make sure that you're protected by the latest security updates, {0} will make a one time attempt to detect if a new version is available.", Application.getTitle()) +
 			"\n\n" +
-			TXT.get("WelcomeDialog.check.1", "Only your public IP address, and Java version is transmitted to the web server as it happens with any HTTP request.  No personally identifiable information whatsoever is or will be sent.") +
-			"\n\n" +
-			TXT.get("WelcomeDialog.check.3", "You can always check for updates from the main menu by selecting {0} -> {1}.", Menus.Help, Menus.CheckForUpdates);
+			TXT.get("WelcomeDialog.check.2", "You can always check for updates from the main menu by selecting {0} -> {1}.", Menus.Help, Menus.CheckForUpdates);
 		
 		CPanel3 p = new CPanel3();
 		p.setBorder();
@@ -178,7 +176,7 @@ public class WelcomeWizard
 		p.nextRow();
 		p.row(0, new CButton(openExistingAction, Theme.alternativeButtonHighlight()));
 		p.row(1, new JLabel(TXT.get("WelcomeDialog.open existing database", "Open existing password database")));
-		p.nextRow(20);
+		p.nextRow(10);
 		p.nextRow();
 		p.row(0, 2, p.info(check));
 		p.nextFillRow();

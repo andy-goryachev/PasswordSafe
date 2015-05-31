@@ -24,7 +24,7 @@ public abstract class OptionEditor<T>
 	
 	//
 	
-	public static final Color BORDER_COLOR = UI.mix(64, Color.black, Theme.panelBG()); 
+	public static final Color BORDER_COLOR = UI.mix(Color.black, 0.25, Theme.panelBG()); 
 	public static final CBorder BORDER_EDITOR = new CBorder(1, BORDER_COLOR, 2, 2);
 	public static final CBorder BORDER_THIN = new CBorder(1, BORDER_COLOR);
 	private COption<T> option;

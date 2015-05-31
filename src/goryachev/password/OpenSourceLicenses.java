@@ -2,15 +2,11 @@
 package goryachev.password;
 import goryachev.common.ui.Application;
 import goryachev.common.ui.CAction;
-import goryachev.common.ui.CBorder;
-import goryachev.common.ui.CButton;
-import goryachev.common.ui.CButtonPanel;
 import goryachev.common.ui.Menus;
 import goryachev.common.ui.dialogs.license.MultiPageDialog;
 import goryachev.common.util.CKit;
 import goryachev.common.util.img.jhlabs.PixelUtils;
 import goryachev.common.util.img.mortennobel.Lanczos3Filter;
-import info.clearthought.layout.TableLayout;
 import java.awt.Component;
 import org.bouncycastle.LICENSE;
 
@@ -24,8 +20,6 @@ public class OpenSourceLicenses
 	{
 		d.addPage("BouncyCastle", LICENSE.licenseText);
 		
-		d.addPage("Clearthought Table Layout", CKit.readStringQuiet(TableLayout.class, "License.txt"));
-		
 		d.addPage("java-image-scaling", CKit.readStringQuiet(Lanczos3Filter.class, "license.txt"));
 		
 		d.addPage("JH Labs Image Filters", CKit.readStringQuiet(PixelUtils.class, "License.txt"));
@@ -36,17 +30,16 @@ public class OpenSourceLicenses
 	{
 		MultiPageDialog d = new MultiPageDialog(parent, "OpenSourceLicenses");
 
-		CButtonPanel bp = new CButtonPanel(10);
-		bp.setBorder(new CBorder(10));
-		bp.add(new CButton(Menus.OK, d.closeAction, true));
-		d.panel.setSouth(bp);
+		d.buttonPanel().addButton(Menus.OK, d.closeDialogAction, true);
 		
 		d.setTitle(Menus.OpenSourceLicenses + " - " + Application.getTitle());
-		d.setSize(900, 500);
+		d.setSize(800, 500);
+		d.split.setDividerLocation(300);
 		
 		licenses(d);
 		
 		d.autoResizeSplit();
+		
 		d.open();
 	}
 }

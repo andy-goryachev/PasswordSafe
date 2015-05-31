@@ -67,6 +67,7 @@ public class CheckForUpdatesDialog
 				closeOnEscape();
 			}
 		};
+		p.buttonPanel().setBorder(10);
 		p.buttonPanel().add(new CButton(Menus.Cancel, p.cancelAction));
 		p.buttonPanel().add(new CButton(Menus.Close, closeDialogAction, true));
 		setCard(p, null);

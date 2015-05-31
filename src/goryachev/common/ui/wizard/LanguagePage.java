@@ -1,7 +1,6 @@
 // Copyright (c) 2012-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.wizard;
 import goryachev.common.ui.Appearance;
-import goryachev.common.ui.BasePanel;
 import goryachev.common.ui.CComboBox;
 import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.InfoField;
@@ -20,7 +19,7 @@ import javax.swing.JLabel;
 
 
 public class LanguagePage
-	extends BasePanel
+	extends CPanel3
 	implements HasPrompts
 {
 	public final JLabel logoField;

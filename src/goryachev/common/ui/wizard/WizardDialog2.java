@@ -1,8 +1,8 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.wizard;
-import goryachev.common.ui.BaseDialog;
-import goryachev.common.ui.BasePanel;
 import goryachev.common.ui.CAction;
+import goryachev.common.ui.CDialog;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.UI;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
@@ -10,7 +10,7 @@ import javax.swing.JComponent;
 
 
 public class WizardDialog2
-	extends BaseDialog
+	extends CDialog
 {
 	public final CAction backAction;
 	public final WizardPanel2 panel;
@@ -19,11 +19,12 @@ public class WizardDialog2
 	public WizardDialog2(Component parent, String name, boolean modal)
 	{
 		super(parent, name, modal);
+		borderless();
 		
 		panel = new WizardPanel2();
 		backAction = panel.backAction;
 		
-		setCenter(panel);
+		panel().setCenter(panel);
 	}
 	
 	
@@ -48,13 +49,13 @@ public class WizardDialog2
 	}
 	
 	
-	public BasePanel setErrorCard(Object message, boolean allowBackButton)
+	public CPanel3 setErrorCard(Object message, boolean allowBackButton)
 	{
 		return panel.setErrorCard(message, allowBackButton, closeDialogAction);
 	}
 	
 	
-	public BasePanel setErrorCard(Object message)
+	public CPanel3 setErrorCard(Object message)
 	{
 		return panel.setErrorCard(message, true, closeDialogAction);
 	}

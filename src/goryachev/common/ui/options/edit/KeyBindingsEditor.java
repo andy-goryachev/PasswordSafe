@@ -5,7 +5,7 @@ import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CButton;
 import goryachev.common.ui.CMenuItem;
-import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.CPopupMenu;
 import goryachev.common.ui.CPopupMenuController;
 import goryachev.common.ui.CScrollPane;
@@ -30,11 +30,11 @@ import javax.swing.KeyStroke;
 
 /** global key bindings editor */
 public class KeyBindingsEditor
-	extends CPanel
+	extends CPanel3
 	implements OptionEditorInterface
 {
 	public final CAction clearAction = new CAction(TXT.get("KeyBindingsEditor.clear key binding", "Clear")) { public void action() { actionClear(); } };
-	public final CAction modifyAction = new CAction(TXT.get("KeyBindingsEditor.modify key binding","Modify")) { public void action() { actionModify(); } };
+	public final CAction modifyAction = new CAction(TXT.get("KeyBindingsEditor.modify key binding", "Modify")) { public void action() { actionModify(); } };
 	public final KeyBindingsTableModel model;
 	public final ZTable table;
 	public final ZFilterLogic filter;
@@ -79,8 +79,6 @@ public class KeyBindingsEditor
 			}
 		};		
 
-		// bottom panel
-		
 		infoLabel = new JLabel();
 		
 		setNorth(createToolbar());

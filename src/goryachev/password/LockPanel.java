@@ -88,6 +88,7 @@ public class LockPanel
 		row(1, 2, progressField);
 		
 		buttonPanel().addButton(createButton);
+		buttonPanel().space(10);
 		buttonPanel().addButton(exitButton);
 		buttonPanel().addButton(okButton);
 		

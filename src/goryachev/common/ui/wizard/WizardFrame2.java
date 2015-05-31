@@ -1,8 +1,8 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.wizard;
 import goryachev.common.ui.AppFrame;
-import goryachev.common.ui.BasePanel;
 import goryachev.common.ui.CAction;
+import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.UI;
 import java.awt.event.KeyEvent;
 import javax.swing.JComponent;
@@ -53,13 +53,13 @@ public class WizardFrame2
 	}
 	
 	
-	public BasePanel setErrorCard(Object message, boolean allowBackButton)
+	public CPanel3 setErrorCard(Object message, boolean allowBackButton)
 	{
 		return panel.setErrorCard(message, allowBackButton, closeAction);
 	}
 	
 	
-	public BasePanel setErrorCard(Object message)
+	public CPanel3 setErrorCard(Object message)
 	{
 		return panel.setErrorCard(message, true, closeAction);
 	}

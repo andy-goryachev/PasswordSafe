@@ -157,7 +157,7 @@ public class CButtonPanel3
 	}
 
 
-	public void space()
+	public void fill()
 	{
 		buttonPanelLayout().addSpace(CButtonPanelLayout3.FILL);
 	}

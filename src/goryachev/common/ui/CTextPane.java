@@ -31,6 +31,18 @@ public class CTextPane
 		
 		addKeyListener(new Handler());
 	}
+	
+	
+	public void setBorder(int sz)
+	{
+		setBorder(new CBorder(sz));
+	}
+	
+	
+	public void setBorder(int v, int h)
+	{
+		setBorder(new CBorder(v, h));
+	}
 
 
 	protected EditorKit createDefaultEditorKit()

@@ -4,7 +4,7 @@ import javax.swing.JLabel;
 
 
 public class CToolBar
-	extends HorizontalLayoutPanel
+	extends HorizontalPanel
 {
 	public CToolBar()
 	{

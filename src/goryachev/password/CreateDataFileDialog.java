@@ -3,7 +3,6 @@ package goryachev.password;
 import goryachev.common.ui.BackgroundThread;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CButton;
-import goryachev.common.ui.CButtonPanel;
 import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CFocusTraversalPolicy;
 import goryachev.common.ui.CPanel3;
@@ -30,7 +29,8 @@ import java.io.File;
 public class CreateDataFileDialog
 	extends CDialog
 {
-	public final CAction browseAction = new CAction() { public void action() { onBrowse(); } };
+	public final CAction createAction = new CAction() { public void action() { actionCreate(); } };
+	public final CAction browseAction = new CAction() { public void action() { actionBrowse(); } };
 	private final CTextField fileField;
 	private final CPasswordField passField;
 	private final CPasswordField verifyField;
@@ -39,6 +39,7 @@ public class CreateDataFileDialog
 	private final OnScreenKeyboard keyboard;
 	private final CProgressField progressField;
 	protected boolean created;
+	protected boolean progress;
 	
 	
 	public CreateDataFileDialog(Component parent)
@@ -58,9 +59,9 @@ public class CreateDataFileDialog
 
 		verifier = new PasswordVerifier2(null, passField, verifyField, null, matchField)
 		{
-			protected void onPasswordsMatch(boolean have, boolean match)
+			protected void onPasswordUpdate()
 			{
-				okAction.setEnabled(have && match);
+				updateActions();
 			}
 		};
 		
@@ -69,14 +70,10 @@ public class CreateDataFileDialog
 		keyboard = Styles.createKeyboard();
 		
 		CButton browseButton = new CButton(Menus.Browse, browseAction);
+		CButton okButton = new CButton(TXT.get("CreateDataFileDialog.button.create file", "Create"), createAction, true);
+		CButton cancelButton = new CButton(Menus.Cancel, closeDialogAction);
 		
-		okAction.setEnabled(false);
-		CButton okButton = new CButton(TXT.get("CreateDataFileDialog.button.create file", "Create"), okAction);
-		okButton.setHighlight(Theme.buttonHighlight());
-		
-		CButton cancelButton = new CButton(Menus.Cancel, closeAction);
-		
-		CPanel3 p = new CPanel3();
+		CPanel3 p = panel();
 		p.addColumns
 		(
 			CPanel3.PREFERRED,
@@ -87,7 +84,7 @@ public class CreateDataFileDialog
 		p.setColumnMinimumSize(3, Theme.minimumButtonWidth());
 
 		p.setGaps(10, 5);
-		p.row(1, 2,createInfoField());
+		p.row(1, 2, createInfoField());
 		p.nextRow(10);
 		p.nextRow();
 		p.row(0, p.label(TXT.get("CreateDataFileDialog.file", "File:")));
@@ -105,10 +102,9 @@ public class CreateDataFileDialog
 		p.nextRow();
 		p.add(1, 2, progressField);
 	
-		p.setSouth(new CButtonPanel(10, cancelButton, okButton));
+		p.buttonPanel().addButton(cancelButton);
+		p.buttonPanel().addButton(okButton);
 	
-		setContent(p);
-
 		String path = PasswordSafeApp.getDefaultDataFile().getAbsolutePath();
 		fileField.setText(path);
 
@@ -129,7 +125,9 @@ public class CreateDataFileDialog
 		}
 		tp.apply(this);
 		
-		verifier.verify();		
+		verifier.verify();	
+		
+		updateActions();
 	}
 
 
@@ -166,7 +164,23 @@ public class CreateDataFileDialog
 	
 	protected void setProgress(boolean on)
 	{
-		progressField.setAnimation(on);
+		progress = on;
+		updateActions();
+	}
+	
+	
+	protected void updateActions()
+	{
+		createAction.setEnabled(verifier.hasData() && verifier.hasMatch());
+
+		progressField.setAnimation(progress);
+		
+		boolean en = !progress;
+		createAction.setEnabled(en && verifier.hasData() && verifier.hasMatch());
+		browseAction.setEnabled(en);
+		fileField.setEditable(en);
+		passField.setEditable(en);
+		verifyField.setEditable(en);
 	}
 	
 	
@@ -183,7 +197,7 @@ public class CreateDataFileDialog
 	}
 	
 
-	protected void onOk()
+	protected void actionCreate()
 	{
 		try
 		{
@@ -197,7 +211,6 @@ public class CreateDataFileDialog
 				}
 				
 				if(!Dialogs.checkFileExistsOverwrite(this, f))
-				//if(Dialogs.confirm(this, "File exists", TXT.get("CreateDataFileDialog.err.overwrite", "Do you want t overwrite existing file {0}?", f)) == false)
 				{
 					return;
 				}
@@ -247,37 +260,7 @@ public class CreateDataFileDialog
 	}
 
 	
-	protected void openFile()
-	{
-		CFileChooser fc = new CFileChooser(this, MainWindow.KEY_LAST_FOLDER);
-		fc.setDialogType(CFileChooser.CUSTOM_DIALOG);
-		fc.setApproveButtonText(Menus.Create);
-		fc.setFileFilter(Styles.createFileFilter());
-		File f = fc.openFileChooser();
-		if(f == null)
-		{
-			close();
-			return;
-		}
-		else
-		{
-			f = CKit.ensureExtension(f, PasswordSafeApp.EXTENSION);
-			
-			if(f.exists())
-			{
-				if(Dialogs.confirm(this, TXT.get("MainWindow.err.file exists.title", "File Exists"), TXT.get("MainWindow.err.file exists", "File {0} exists, do you want to overwrite it?", f)) == false)
-				{
-					openFile();
-					return;
-				}
-			}
-			
-			fileField.setText(f.getAbsolutePath());
-		}
-	}
-	
-	
-	protected void onBrowse()
+	protected void actionBrowse()
 	{
 		File f = new File(fileField.getText());
 		CFileChooser fc = new CFileChooser(this, null);

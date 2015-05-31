@@ -189,7 +189,7 @@ public class Theme
 		defs.put("Tree.selectionBackground", c);
 		
 		// inactive color
-		c = UI.mix(127, textFG(), textBG());
+		c = UI.mix(textFG(), 0.5, textBG());
 		defs.put("TextField.inactiveForeground", c);
 		
 		if(CPlatform.isMac())
