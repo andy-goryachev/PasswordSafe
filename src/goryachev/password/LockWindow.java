@@ -21,8 +21,8 @@ public class LockWindow
 		lockPanel = new LockPanel(f);
 		
 		setContent(lockPanel);
-		setMinimumSize(600, 420);
-		setSize(600, 420);
+		setMinimumSize(700, 420);
+		setSize(700, 420);
 		
 		setTitle(Application.getTitle() + " " + Application.getVersion());
 		EntropyGatherer.start();
