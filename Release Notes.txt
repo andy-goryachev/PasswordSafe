@@ -10,7 +10,7 @@
 		=============
 
 3.01.39
-- TODO carry over passwords when toggling 'hide password' checkbox
+- carry over passwords when toggling 'hide password' checkbox
 - lock timeout in minutes
 - right-click menus
 - allowing empty passwords in Add Entry

@@ -1,9 +1,15 @@
 // Copyright (c) 2012-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.ui;
+import goryachev.common.util.Log;
 import goryachev.crypto.OpaqueChars;
 import javax.swing.text.PlainDocument;
 
 
+/** 
+ * Attempted implementation of an opaque Document. 
+ * However, due to the nature of Document interface, it leaks sensitive material via String objects.
+ * More work is needed, perhaps implement our own text components.
+ */
 public class SecretDocument
 	extends PlainDocument
 {
@@ -15,24 +21,40 @@ public class SecretDocument
 	
 	public final void clear()
 	{
-		// TODO
+		replace(null);
 	}
 	
 	
-	public final void replace(char[] cs) throws Exception
+	public final void replace(char[] cs)
 	{
-		if(cs == null)
+		try
 		{
-			cs = new char[0];
+			if(cs == null)
+			{
+				cs = new char[0];
+			}
+			
+			// WARNING
+			// leaks cleartext through a String 
+			replace(0, getLength(), new String(cs), null);
 		}
-		
-		// FIX creates a non-opaque string
-		replace(0, getLength(), new String(cs), null);
+		catch(Exception e)
+		{
+			Log.err(e);
+		}
 	}
 	
 	
-	public final OpaqueChars getOpaqueChars() throws Exception
+	public final OpaqueChars getOpaqueChars()
 	{
-		return ((SecretContent)getContent()).getOpaqueChars(0, getLength());
+		try
+		{
+			return ((SecretContent)getContent()).getOpaqueChars(0, getLength());
+		}
+		catch(Exception e)
+		{
+			Log.err(e);
+			return new OpaqueChars();
+		}
 	}
 }

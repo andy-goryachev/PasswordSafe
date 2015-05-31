@@ -3,11 +3,13 @@ package goryachev.password;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CButton;
+import goryachev.common.ui.CCheckBox;
 import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CFocusTraversalPolicy;
 import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.Dialogs;
 import goryachev.common.ui.Menus;
+import goryachev.common.ui.UI;
 import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.ui.CPasswordField;
 import goryachev.crypto.ui.MatchLabel;
@@ -18,7 +20,6 @@ import goryachev.password.ui.PasswordVerifier2;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import javax.swing.JCheckBox;
 
 
 public class ChangePasswordDialog
@@ -29,7 +30,7 @@ public class ChangePasswordDialog
 	protected SecureTextField clearPassField;
 	protected CPasswordField verifyField;
 	protected MatchLabel matchField;
-	protected JCheckBox hidePassField;
+	protected CCheckBox hidePassField;
 	protected final PasswordVerifier2 verifier;
 	protected OnScreenKeyboard keyboard;
 	private OpaqueChars entered;
@@ -41,14 +42,16 @@ public class ChangePasswordDialog
 		super(parent, "ChangePasswordDialog", true);
 
 		setTitle(Tx.ChangePassword);
+		setCloseOnEscape();
 
 		clearPassField = new SecureTextField();
+		UI.installDefaultPopupMenu(clearPassField);
 		
 		passField = new CPasswordField();
 
 		verifyField = new CPasswordField();
 
-		hidePassField = new JCheckBox(Tx.HidePasswordInThisDialog);
+		hidePassField = new CCheckBox(Tx.HidePasswordInThisDialog);
 		hidePassField.setBorder(null);
 		hidePassField.addItemListener(new ItemListener()
 		{
@@ -95,6 +98,8 @@ public class ChangePasswordDialog
 	protected void setShowPassword(boolean on)
 	{
 		this.showPassword = on;
+		
+		PassTools.copyPassword(clearPassField, passField, verifyField, on);
 		
 		CPanel3 p = new CPanel3();
 		p.setBorder(new CBorder(0, 0, 10, 0));

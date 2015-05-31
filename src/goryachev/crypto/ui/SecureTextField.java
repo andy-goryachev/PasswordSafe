@@ -1,5 +1,8 @@
 // Copyright (c) 2011-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.ui;
+import goryachev.common.util.Log;
+import goryachev.crypto.Crypto;
+import goryachev.crypto.OpaqueChars;
 import javax.swing.JTextField;
 import javax.swing.text.Document;
 
@@ -28,5 +31,30 @@ public class SecureTextField
 	public SecretDocument getSecretDocument()
 	{
 		return (SecretDocument)super.getDocument();
+	}
+
+
+	public OpaqueChars getOpaquePassword()
+	{
+		return getSecretDocument().getOpaqueChars();
+	}
+
+
+	public void setText(OpaqueChars pw)
+	{
+		char[] cs = null;
+		try
+		{
+			cs = pw.getChars();
+			getSecretDocument().replace(cs);
+		}
+		catch(Exception e)
+		{
+			Log.err(e);
+		}
+		finally
+		{
+			Crypto.zero(cs);
+		}
 	}
 }

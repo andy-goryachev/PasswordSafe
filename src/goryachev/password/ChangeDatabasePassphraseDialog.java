@@ -2,11 +2,13 @@
 package goryachev.password;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CButton;
+import goryachev.common.ui.CCheckBox;
 import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CFocusTraversalPolicy;
 import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.Dialogs;
 import goryachev.common.ui.Menus;
+import goryachev.common.ui.UI;
 import goryachev.common.util.CKit;
 import goryachev.common.util.TXT;
 import goryachev.common.util.UserException;
@@ -19,7 +21,6 @@ import goryachev.password.ui.PasswordVerifier2;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import javax.swing.JCheckBox;
 
 
 public class ChangeDatabasePassphraseDialog
@@ -31,7 +32,7 @@ public class ChangeDatabasePassphraseDialog
 	protected final SecureTextField clearPassField;
 	protected final CPasswordField verifyField;
 	protected final MatchLabel matchField;
-	protected final JCheckBox hidePassField;
+	protected final CCheckBox hidePassField;
 	protected final PasswordVerifier2 verifier;
 	protected OnScreenKeyboard keyboard;
 	protected CButton changeButton;
@@ -44,6 +45,7 @@ public class ChangeDatabasePassphraseDialog
 	public ChangeDatabasePassphraseDialog(Component parent, OpaqueChars oldPass)
 	{
 		super(parent, "ChangeDatabasePassphraseDialog", true);
+		setCloseOnEscape();
 		
 		this.oldPass = oldPass;
 
@@ -53,12 +55,13 @@ public class ChangeDatabasePassphraseDialog
 		oldPassField = new CPasswordField();
 
 		clearPassField = new SecureTextField();
+		UI.installDefaultPopupMenu(clearPassField);
 		
 		passField = new CPasswordField();
 
 		verifyField = new CPasswordField();
 
-		hidePassField = new JCheckBox(TXT.get("ChangeDatabasePassphraseDialog.check.hide passphrase", "hide passphrase in this dialog"));
+		hidePassField = new CCheckBox(TXT.get("ChangeDatabasePassphraseDialog.check.hide passphrase", "hide passphrase in this dialog"));
 		hidePassField.setBorder(null);
 		hidePassField.addItemListener(new ItemListener()
 		{
@@ -110,7 +113,7 @@ public class ChangeDatabasePassphraseDialog
 	{
 		this.showPassword = on;
 		
-		// TODO carry over password
+		PassTools.copyPassword(clearPassField, passField, verifyField, on);
 		
 		CPanel3 p = new CPanel3();
 		p.setGaps(10, 5);

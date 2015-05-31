@@ -3,14 +3,17 @@ package goryachev.password;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CButton;
+import goryachev.common.ui.CCheckBox;
 import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CFocusTraversalPolicy;
 import goryachev.common.ui.CPanel3;
 import goryachev.common.ui.CScrollPane;
+import goryachev.common.ui.CTextArea;
 import goryachev.common.ui.CTextField;
 import goryachev.common.ui.Dialogs;
 import goryachev.common.ui.Menus;
 import goryachev.common.ui.Theme;
+import goryachev.common.ui.UI;
 import goryachev.common.util.CKit;
 import goryachev.common.util.TXT;
 import goryachev.crypto.OpaqueChars;
@@ -22,10 +25,8 @@ import goryachev.password.prompts.Tx;
 import goryachev.password.ui.PasswordVerifier2;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 
 
 public class AddEntryDialog
@@ -34,13 +35,13 @@ public class AddEntryDialog
 	public final CAction addAction = new CAction() { public void action() { onAdd(); } };
 	protected CTextField nameField;
 	protected CTextField usernameField;
-	protected CPasswordField passField;
 	protected SecureTextField clearPassField;
+	protected CPasswordField passField;
 	protected CPasswordField verifyField;
 	protected MatchLabel matchField;
-	protected JCheckBox hidePassField;
+	protected CCheckBox hidePassField;
 	protected final PasswordVerifier2 verifier;
-	protected JTextArea notesField;
+	protected CTextArea notesField;
 	protected CScrollPane scroll;
 	protected JLabel notesLabel;
 	private OnScreenKeyboard keyboard;
@@ -63,6 +64,7 @@ public class AddEntryDialog
 		usernameField = new CTextField();
 
 		clearPassField = new SecureTextField();
+		UI.installDefaultPopupMenu(clearPassField);
 
 		passField = new CPasswordField();
 
@@ -70,7 +72,7 @@ public class AddEntryDialog
 
 		matchField = new MatchLabel();
 
-		hidePassField = new JCheckBox(Tx.HidePasswordInThisDialog);
+		hidePassField = new CCheckBox(Tx.HidePasswordInThisDialog);
 		hidePassField.setBorder(null);
 		hidePassField.addItemListener(new ItemListener()
 		{
@@ -90,7 +92,7 @@ public class AddEntryDialog
 
 		keyboard = Styles.createKeyboard();
 
-		notesField = new JTextArea();
+		notesField = new CTextArea();
 		notesField.setWrapStyleWord(true);
 		notesField.setLineWrap(true);
 		notesField.setFont(Theme.plainFont());
@@ -135,7 +137,7 @@ public class AddEntryDialog
 	{
 		this.showPassword = on;
 		
-		// TODO carry password over
+		PassTools.copyPassword(clearPassField, passField, verifyField, on);
 
 		CPanel3 p = new CPanel3();
 		p.setGaps(5);
