@@ -40,6 +40,7 @@ public class PassEditor
 	public final CButton copyPassButton;
 	public final CButton editPassButton;
 	public final CTextArea notesField;
+	public final CScrollPane scroll;
 	public final Color userColor = new Color(0x8500c8);
 	public final Color passColor = new Color(0x00cc00);
 	private PassEntry entry;
@@ -81,7 +82,6 @@ public class PassEditor
 		
 		notesField = new CTextArea();
 		notesField.setFont(Theme.monospacedFont());
-		notesField.setBorder(Theme.BORDER_FIELD);
 		notesField.setWrapStyleWord(true);
 		notesField.setLineWrap(true);
 		tracker.add(notesField);
@@ -99,7 +99,8 @@ public class PassEditor
 		
 		editPassButton = new CButton(TXT.get("PassEditor.button.change password", "Change Password"), TXT.get("PassEditor.button tooltip.change password", "Change password"), changePasswordAction);
 
-		CScrollPane scroll = new CScrollPane(notesField, false);
+		scroll = new CScrollPane(notesField, false);
+		scroll.setBorder(Theme.BORDER_FIELD);
 		
 		setGaps(5, 5);
 		addColumns(PREFERRED, PREFERRED, FILL, PREFERRED, PREFERRED);
