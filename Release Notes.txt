@@ -9,7 +9,7 @@
 		RELEASE NOTES
 		=============
 
-3.01.39
+3.01.40
 - carry over passwords when toggling 'hide password' checkbox
 - lock timeout in minutes
 - right-click menus
