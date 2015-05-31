@@ -1,5 +1,5 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
-package goryachev.password;
+package goryachev.password.data;
 import goryachev.common.util.CKit;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;

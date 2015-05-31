@@ -11,6 +11,8 @@ import goryachev.common.util.TXT;
 import goryachev.common.util.log.FileLogWriter;
 import goryachev.common.util.log.LogWriter;
 import goryachev.crypto.OpaqueChars;
+import goryachev.password.data.DataFile;
+import goryachev.password.data.DataFormat;
 import goryachev.password.data.v1.DataFormatV1;
 import goryachev.password.data.v2.DataFormatV2;
 import goryachev.password.img.PasswordSafeIcons;

@@ -21,6 +21,7 @@ import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.ui.CPasswordField;
 import goryachev.crypto.ui.MatchLabel;
 import goryachev.crypto.ui.OnScreenKeyboard;
+import goryachev.password.data.DataFile;
 import goryachev.password.ui.PasswordVerifier2;
 import java.awt.Component;
 import java.io.File;

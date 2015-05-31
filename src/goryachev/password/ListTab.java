@@ -21,6 +21,8 @@ import goryachev.common.ui.table.ZTable;
 import goryachev.common.util.CComparator;
 import goryachev.common.util.CList;
 import goryachev.common.util.TXT;
+import goryachev.password.data.DataFile;
+import goryachev.password.data.PassEntry;
 import java.awt.event.KeyEvent;
 import javax.swing.JPopupMenu;
 

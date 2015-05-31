@@ -25,6 +25,8 @@ import goryachev.common.util.SB;
 import goryachev.common.util.TXT;
 import goryachev.crypto.EntropyGatherer;
 import goryachev.crypto.OpaqueChars;
+import goryachev.password.data.DataFile;
+import goryachev.password.data.PassEntry;
 import goryachev.password.img.PasswordSafeIcons;
 import goryachev.password.ui.ActivityMonitor;
 import goryachev.password.ui.ClipboardHandler;

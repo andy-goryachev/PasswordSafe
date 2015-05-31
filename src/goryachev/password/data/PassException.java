@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2015 Andy Goryachev <andy@goryachev.com>
-package goryachev.password;
+package goryachev.password.data;
 import goryachev.common.util.TXT;
 
 

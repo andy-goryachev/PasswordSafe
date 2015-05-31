@@ -19,6 +19,7 @@ import goryachev.common.util.TXT;
 import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.ui.CPasswordField;
 import goryachev.crypto.ui.OnScreenKeyboard;
+import goryachev.password.data.DataFile;
 import java.awt.event.KeyEvent;
 import java.io.File;
 

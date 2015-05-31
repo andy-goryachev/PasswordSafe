@@ -21,6 +21,7 @@ import goryachev.common.util.TXT;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.ui.CPasswordField;
+import goryachev.password.data.PassEntry;
 import goryachev.password.ui.ClipboardHandler;
 import java.awt.Color;
 import javax.swing.JPopupMenu;
