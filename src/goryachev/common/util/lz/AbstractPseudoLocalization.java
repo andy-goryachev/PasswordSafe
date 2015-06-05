@@ -1,7 +1,7 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util.lz;
-import goryachev.common.util.CException;
 import goryachev.common.util.CMap;
+import goryachev.common.util.Rex;
 import goryachev.common.util.SB;
 import java.util.Random;
 
@@ -129,7 +129,7 @@ public abstract class AbstractPseudoLocalization
 			String s = ss[i++];
 			if(s.length() < 2)
 			{
-				throw new CException("must contain at least two characters: " + s);
+				throw new Rex("must contain at least two characters: " + s);
 			}
 			
 			char k = s.charAt(0);

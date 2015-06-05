@@ -1,7 +1,7 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
-import goryachev.common.util.CException;
 import goryachev.common.util.Log;
+import goryachev.common.util.Rex;
 import goryachev.common.util.img.jhlabs.GaussianFilter;
 import goryachev.common.util.img.mortennobel.ResampleOp;
 import java.awt.Color;
@@ -305,7 +305,7 @@ public class ImageScaler
 			}
 			else if(dx < 0)
 			{
-				throw new CException("dx=" + dx);
+				throw new Rex("dx=" + dx);
 			}
 			
 			if(dy > 0)
@@ -324,7 +324,7 @@ public class ImageScaler
 			}
 			else if(dy < 0)
 			{
-				throw new CException("dy=" + dy);
+				throw new Rex("dy=" + dy);
 			}
 			
 			// shadow			
@@ -381,7 +381,7 @@ public class ImageScaler
 		{
 			if(throwException)
 			{
-				throw new CException(e);
+				throw new Rex(e);
 			}
 			
 			// make it obvious

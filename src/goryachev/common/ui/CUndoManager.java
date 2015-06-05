@@ -1,8 +1,8 @@
 // Copyright (c) 2012-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
-import goryachev.common.util.CException;
 import goryachev.common.util.CKit;
 import goryachev.common.util.Log;
+import goryachev.common.util.Rex;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
@@ -73,7 +73,7 @@ public class CUndoManager
 				}
 				else
 				{
-					throw new CException("unable to attach undo manager to " + CKit.simpleName(x));
+					throw new Rex("unable to attach undo manager to " + CKit.simpleName(x));
 				}
 			}
 		}

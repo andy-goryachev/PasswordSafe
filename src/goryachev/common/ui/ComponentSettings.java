@@ -1,8 +1,8 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
-import goryachev.common.util.CException;
 import goryachev.common.util.CSettings;
 import goryachev.common.util.Obj;
+import goryachev.common.util.Rex;
 import java.awt.Component;
 import javax.swing.JComponent;
 
@@ -40,7 +40,7 @@ public abstract class ComponentSettings
 		}
 		else
 		{
-			throw new CException("unable to attach, " + x);
+			throw new Rex("unable to attach, " + x);
 		}
 	}
 	

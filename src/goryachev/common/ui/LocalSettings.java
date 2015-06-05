@@ -1,8 +1,8 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
-import goryachev.common.util.CException;
 import goryachev.common.util.CMap;
 import goryachev.common.util.Obj;
+import goryachev.common.util.Rex;
 import java.awt.Component;
 import java.awt.Container;
 import javax.swing.JComponent;
@@ -41,7 +41,7 @@ public class LocalSettings
 		JComponent c = getJComponent(x);
 		if(c == null)
 		{
-			throw new CException("JFrame, JDialog, or JComponent");
+			throw new Rex("JFrame, JDialog, or JComponent");
 		}
 		c.putClientProperty(KEY, this);
 	}
@@ -83,7 +83,7 @@ public class LocalSettings
 	{
 		if(components.put(prop, c) != null)
 		{
-			throw new CException("name already present: " + prop); 
+			throw new Rex("name already present: " + prop); 
 		}
 	}
 

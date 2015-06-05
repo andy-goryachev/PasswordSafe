@@ -10,10 +10,10 @@ import goryachev.common.ui.ChoiceDialog;
 import goryachev.common.ui.InfoField;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.icons.CIcons;
-import goryachev.common.util.CException;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CancelledException;
 import goryachev.common.util.Log;
+import goryachev.common.util.Rex;
 import goryachev.common.util.TXT;
 import goryachev.common.util.UserException;
 import javax.swing.Action;
@@ -113,7 +113,7 @@ public abstract class ProcessPanel
 	{
 		if(thread != null)
 		{
-			throw new CException("already started");
+			throw new Rex("already started");
 		}
 		
 		thread = new BackgroundThread("ProcessPage")

@@ -135,7 +135,15 @@ public class Panels
 	
 	public static CTextArea textArea(String message, boolean wrap)
 	{
-		CTextArea t = new CTextArea(message);
+		CTextArea t = textArea(wrap);
+		t.setText0(message);
+		return t;
+	}
+	
+	
+	public static CTextArea textArea(boolean wrap)
+	{
+		CTextArea t = new CTextArea();
 		t.setMinimumSize(new Dimension(20, 1));
 		if(wrap)
 		{

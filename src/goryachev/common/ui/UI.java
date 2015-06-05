@@ -2,7 +2,6 @@
 package goryachev.common.ui;
 import goryachev.common.ui.dialogs.ZeroFrame;
 import goryachev.common.ui.theme.InsetsResource;
-import goryachev.common.util.CException;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
 import goryachev.common.util.CPlatform;
@@ -115,7 +114,13 @@ public class UI
 		}
 		else if(fractionA > 1.0)
 		{
-			fractionA = 1.0;
+			// assume it's 0..255 for compatibility with legacy code
+			fractionA /= 255;
+			
+			if(fractionA > 1.0)
+			{
+				fractionA = 1.0;
+			}
 		}
 
 		if((a.getAlpha() == 255) && (b.getAlpha() == 255))
@@ -566,7 +571,7 @@ public class UI
 	{
 		if(!EventQueue.isDispatchThread())
 		{
-			throw new CException("must be in EDT");
+			throw new Rex("must be in EDT");
 		}
 	}
 

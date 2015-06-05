@@ -1,14 +1,12 @@
 // Copyright (c) 2011-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto;
-import goryachev.common.util.CException;
 import goryachev.common.util.CKit;
 import goryachev.common.util.Log;
-
+import goryachev.common.util.Rex;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.Arrays;
-
 import org.bouncycastle.asn1.ASN1InputStream;
 import org.bouncycastle.asn1.ASN1Object;
 import org.bouncycastle.asn1.ASN1Primitive;
@@ -48,7 +46,7 @@ public class Crypto
 				else
 				{
 					// should not see this in production
-					throw new CException("unknown " + p.getClass());
+					throw new Rex("unknown " + p.getClass());
 				}
 			}
 		}

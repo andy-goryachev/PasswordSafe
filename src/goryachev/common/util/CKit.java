@@ -1404,7 +1404,7 @@ public class CKit
 	
 	public static void todo()
 	{
-		throw new CException("(to be implemented)");
+		throw new Rex("(to be implemented)");
 	}
 	
 	

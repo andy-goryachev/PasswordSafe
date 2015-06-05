@@ -1,9 +1,9 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.test;
-import goryachev.common.util.CException;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
 import goryachev.common.util.Dump;
+import goryachev.common.util.Rex;
 import goryachev.common.util.SB;
 
 
@@ -15,7 +15,7 @@ public class TF
 	{
 		if(CKit.notEquals(value, expected))
 		{
-			throw new CException
+			throw new Rex
 			(
 				"Unexpected value=" + 
 				Dump.describe(value) + 
@@ -31,7 +31,7 @@ public class TF
 	{
 		if(x == null)
 		{
-			throw new CException("expecting a non-null value");
+			throw new Rex("expecting a non-null value");
 		}
 	}
 	
@@ -41,7 +41,7 @@ public class TF
 	{
 		if(x != null)
 		{
-			throw new CException("expecting a null value");
+			throw new Rex("expecting a null value");
 		}
 	}
 	
@@ -50,14 +50,14 @@ public class TF
 	{
 		if(!x)
 		{
-			throw new CException("expression is not true");
+			throw new Rex("expression is not true");
 		}
 	}
 	
 	
 	public static void fail()
 	{
-		throw new CException("test failed");
+		throw new Rex("test failed");
 	}
 
 	

@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto;
-import goryachev.common.util.CException;
+import goryachev.common.util.Rex;
 
 
 /**
@@ -45,7 +45,7 @@ abstract class OpaqueMemObject
 			catch(Exception e)
 			{
 				// should not happen
-				throw new CException(e);
+				throw new Rex(e);
 			}
 		}
 	}
@@ -65,7 +65,7 @@ abstract class OpaqueMemObject
 			catch(Exception e)
 			{
 				// should not happen
-				throw new CException(e);
+				throw new Rex(e);
 			}
 		}
 		finally
@@ -100,7 +100,7 @@ abstract class OpaqueMemObject
 			catch(Exception e)
 			{
 				// should not happen
-				throw new CException(e);
+				throw new Rex(e);
 			}
 		}
 	}

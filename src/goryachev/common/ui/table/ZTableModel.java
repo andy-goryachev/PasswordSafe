@@ -1,8 +1,8 @@
 // Copyright (c) 2012-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.table;
-import goryachev.common.util.CException;
 import goryachev.common.util.CList;
 import goryachev.common.util.CMap;
+import goryachev.common.util.Rex;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
@@ -232,7 +232,7 @@ public abstract class ZTableModel<K,V>
 	{
 		if(t.getModel() != this)
 		{
-			throw new CException("wrong table");
+			throw new Rex("wrong table");
 		}
 		
 		int ix = t.convertRowIndexToModel(viewRow);

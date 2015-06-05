@@ -54,4 +54,11 @@ public class CTextArea
 		UI.installDefaultPopupMenu(this);
 		setFont(Theme.plainFont());
     }
+	
+	
+	public void setText0(String text)
+	{
+		super.setText(text);
+		setCaretPosition(0);
+	}
 }

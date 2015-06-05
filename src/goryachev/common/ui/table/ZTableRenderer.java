@@ -22,8 +22,8 @@ public class ZTableRenderer
 	protected transient Object value;
 	protected transient int row;
 	protected transient ZTableModelCommon model;
-	private float selectedMix = 0.28235294117647058823529411764706f;
-	private float selectedFocusedMix = 0.82352941176470588235294117647059f;
+	private double selectedMix = 0.4;
+	private double selectedFocusedMix = 0.9;
 	
 	
 	public ZTableRenderer()

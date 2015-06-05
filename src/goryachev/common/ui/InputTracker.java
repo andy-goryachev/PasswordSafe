@@ -1,6 +1,6 @@
 // Copyright (c) 2006-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
-import goryachev.common.util.CException;
+import goryachev.common.util.Rex;
 import java.awt.ItemSelectable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -82,7 +82,7 @@ public abstract class InputTracker
 		}
 		else
 		{
-			throw new CException("ignored: " + c);
+			throw new Rex("ignored: " + c);
 		}
 	}
 	

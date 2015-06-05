@@ -1,7 +1,7 @@
 // Copyright (c) 2008-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util.text;
-import goryachev.common.util.CException;
 import goryachev.common.util.IntHashtable;
+import goryachev.common.util.Rex;
 import goryachev.common.util.SB;
 
 
@@ -225,7 +225,7 @@ public class AccentedCharacters
 		{
 			if(h.put(s.charAt(0), s) != null)
 			{
-				throw new CException(s);
+				throw new Rex(s);
 			}
 		}
 		return h;

@@ -1,11 +1,11 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.test;
-import goryachev.common.util.CException;
 import goryachev.common.util.CJob;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
 import goryachev.common.util.CSorter;
 import goryachev.common.util.Log;
+import goryachev.common.util.Rex;
 import goryachev.common.util.SW;
 import goryachev.common.util.log.ConsoleLogWriter;
 import goryachev.common.util.log.LogWriter;
@@ -88,7 +88,7 @@ public class TestRunner
 		}
 		catch(Exception e)
 		{
-			throw new CException("Test class must define a single no-arg constructor: " + CKit.simpleName(c), e);
+			throw new Rex("Test class must define a single no-arg constructor: " + CKit.simpleName(c), e);
 		}
 	}
 	
@@ -107,11 +107,11 @@ public class TestRunner
 					{
 						if(needsStatic)
 						{
-							throw new CException("method " + CKit.simpleName(c) + "." + m.getName() + "() must be static");
+							throw new Rex("method " + CKit.simpleName(c) + "." + m.getName() + "() must be static");
 						}
 						else
 						{
-							throw new CException("method " + CKit.simpleName(c) + "." + m.getName() + "() must not be static");
+							throw new Rex("method " + CKit.simpleName(c) + "." + m.getName() + "() must not be static");
 						}
 					}
 

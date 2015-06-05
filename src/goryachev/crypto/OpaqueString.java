@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto;
-import goryachev.common.util.CException;
 import goryachev.common.util.CKit;
+import goryachev.common.util.Rex;
 
 
 /**
@@ -36,7 +36,7 @@ public final class OpaqueString
 		catch(Exception e)
 		{
 			// should not happen
-			throw new CException(e);
+			throw new Rex(e);
 		}
 	}
 }

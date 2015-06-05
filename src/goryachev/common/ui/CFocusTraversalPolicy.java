@@ -1,9 +1,9 @@
 // Copyright (c) 2009-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
-import goryachev.common.util.CException;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
 import goryachev.common.util.Log;
+import goryachev.common.util.Rex;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FocusTraversalPolicy;
@@ -50,7 +50,7 @@ public class CFocusTraversalPolicy
 		Component c = UI.findByAction(parent, a);
 		if(c == null)
 		{
-			throw new CException("unable to find component by action " + a);
+			throw new Rex("unable to find component by action " + a);
 		}
 			
 		add(c);
