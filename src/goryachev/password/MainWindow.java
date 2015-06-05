@@ -40,6 +40,7 @@ import javax.swing.JMenuBar;
 
 
 // TODO recentFiles
+// TODO incognito mode
 public class MainWindow
 	extends AppFrame
 {
@@ -105,6 +106,7 @@ public class MainWindow
 		
 		setContent(panel);
 		setSize(700, 500);
+		setMinimumSize(500, 300);
 		
 		CFocusTraversalPolicy tp = new CFocusTraversalPolicy();
 		tp.add(listTab.passEditor.nameField);
