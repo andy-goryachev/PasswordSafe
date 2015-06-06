@@ -4,7 +4,7 @@ import goryachev.common.ui.Accelerator;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CButton;
 import goryachev.common.ui.CDialog;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.KeyNames;
 import goryachev.common.ui.Menus;
 import goryachev.common.ui.Theme;
@@ -70,13 +70,13 @@ public class KeyEditorDialog
 		
 		warningLabel = new JLabel();
 		
-		CPanel3 p = new CPanel3();
+		CPanel p = new CPanel();
 		p.setBorder(10);
 		p.setGaps(10, 5);
 		p.addColumns
 		(
-			CPanel3.PREFERRED,
-			CPanel3.FILL
+			CPanel.PREFERRED,
+			CPanel.FILL
 		);
 
 		p.row(1,  p.info(TXT.get("KeyEditorDialog.info.select new key for FUNCTION", "Type new key for {0}.", ac.getFullName())));

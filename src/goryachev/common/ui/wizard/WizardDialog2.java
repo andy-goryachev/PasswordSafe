@@ -2,7 +2,7 @@
 package goryachev.common.ui.wizard;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CDialog;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.UI;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
@@ -49,13 +49,13 @@ public class WizardDialog2
 	}
 	
 	
-	public CPanel3 setErrorCard(Object message, boolean allowBackButton)
+	public CPanel setErrorCard(Object message, boolean allowBackButton)
 	{
 		return panel.setErrorCard(message, allowBackButton, closeDialogAction);
 	}
 	
 	
-	public CPanel3 setErrorCard(Object message)
+	public CPanel setErrorCard(Object message)
 	{
 		return panel.setErrorCard(message, true, closeDialogAction);
 	}

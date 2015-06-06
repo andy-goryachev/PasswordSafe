@@ -6,7 +6,7 @@ import goryachev.common.ui.CButton;
 import goryachev.common.ui.CCheckBox;
 import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CFocusTraversalPolicy;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.CScrollPane;
 import goryachev.common.ui.CTextArea;
 import goryachev.common.ui.CTextField;
@@ -143,10 +143,10 @@ public class AddEntryDialog
 		
 		PassTools.copyPassword(clearPassField, passField, verifyField, on);
 
-		CPanel3 p = new CPanel3();
+		CPanel p = new CPanel();
 		p.setGaps(5);
 		p.setBorder();
-		p.addColumns(CPanel3.PREFERRED, CPanel3.PREFERRED, CPanel3.FILL );
+		p.addColumns(CPanel.PREFERRED, CPanel.PREFERRED, CPanel.FILL );
 
 		p.row(0, p.label(TXT.get("AddEntryDialog.label.name", "Name:")));
 		p.row(1, 3, nameField);

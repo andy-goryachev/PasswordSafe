@@ -3,7 +3,7 @@ package goryachev.password;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CMenuItem;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.CPopupMenu;
 import goryachev.common.ui.CPopupMenuController;
 import goryachev.common.ui.CScrollPane;
@@ -28,7 +28,7 @@ import javax.swing.JPopupMenu;
 
 
 public class ListTab
-	extends CPanel3
+	extends CPanel
 {
 	public final CAction addEntryAction = new CAction() { public void action() { actionAddEntry(); } };
 	public final CAction deleteEntryAction = new CAction() { public void action() { actionDeleteEntry(); } };
@@ -40,7 +40,7 @@ public class ListTab
 	public final ZFilterLogic filter;
 	public final PassEditor passEditor;
 	public final CTableSelector selector;
-	protected CPanel3 detailPanel;
+	protected CPanel detailPanel;
 	protected boolean handleEvents;
 	private DataFile dataFile;
 
@@ -83,7 +83,7 @@ public class ListTab
 		
 		passEditor = new PassEditor();
 		
-		detailPanel = new CPanel3();
+		detailPanel = new CPanel();
 		detailPanel.setName("detail");
 		detailPanel.setBackground(Theme.textBG());
 		

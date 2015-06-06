@@ -13,7 +13,7 @@ import javax.swing.SwingConstants;
 
 
 /** A convenient JPanel with CTableLayout3, a hybrid of BorderLayout and TableLayout. */
-public class CPanel3
+public class CPanel
 	extends JPanel
 	implements Scrollable
 {
@@ -26,34 +26,34 @@ public class CPanel3
 	private int currentRow;
 	
 	
-	public CPanel3()
+	public CPanel()
 	{
 		super(new CTableLayout3());
 	}
 	
 	
-	public CPanel3(Component c)
+	public CPanel(Component c)
 	{
 		super(new CTableLayout3());
 		setCenter(c);
 	}
 	
 	
-	public CPanel3(int hgap, int vgap)
+	public CPanel(int hgap, int vgap)
 	{
 		super(new CTableLayout3());
 		setGaps(hgap, vgap);
 	}
 	
 	
-	public CPanel3(boolean opaque)
+	public CPanel(boolean opaque)
 	{
 		super(new CTableLayout3());
 		setOpaque(opaque);
 	}
 	
 	
-	public CPanel3(int hgap, int vgap, boolean opaque)
+	public CPanel(int hgap, int vgap, boolean opaque)
 	{
 		super(new CTableLayout3());
 		setGaps(hgap, vgap);

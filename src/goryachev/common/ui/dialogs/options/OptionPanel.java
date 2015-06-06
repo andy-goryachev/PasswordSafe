@@ -2,7 +2,7 @@
 package goryachev.common.ui.dialogs.options;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.CScrollPane;
 import goryachev.common.ui.CSplitPane;
 import goryachev.common.ui.CTextFieldWithPrompt;
@@ -34,13 +34,13 @@ import javax.swing.event.ListSelectionListener;
 
 
 public class OptionPanel
-	extends CPanel3
+	extends CPanel
 {
 	public final CTextFieldWithPrompt filter;
 	public final JLabel buttonLabel;
-	public final CPanel3 filterPanel;
+	public final CPanel filterPanel;
 	public final CTreeTable<OptionTreeNode> tree;
-	public final CPanel3 detailPanel;
+	public final CPanel detailPanel;
 	public final JLabel titleField;
 	public final CSplitPane split;
 	public final DelayedAction delayed;
@@ -85,7 +85,7 @@ public class OptionPanel
 			}
 		});
 
-		filterPanel = new CPanel3();
+		filterPanel = new CPanel();
 		filterPanel.setCenter(filter);
 		filterPanel.setEast(buttonLabel);
 		filterPanel.setBorder(new CBorder(2, 2, 2, 2));
@@ -117,7 +117,7 @@ public class OptionPanel
 		titleField.setBackground(Theme.panelBG());
 		titleField.setOpaque(true);
 
-		detailPanel = new CPanel3();
+		detailPanel = new CPanel();
 		detailPanel.setNorth(titleField);
 		
 		CScrollPane scroll = new CScrollPane(tree, CScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, CScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -125,7 +125,7 @@ public class OptionPanel
 		scroll.getViewport().setBackground(Theme.fieldBG());
 		scroll.setBackground(Theme.fieldBG());
 		
-		CPanel3 left = new CPanel3();
+		CPanel left = new CPanel();
 		left.setNorth(filterPanel);
 		left.setCenter(scroll);
 		left.setPreferredSize(new Dimension(200, -1));
@@ -275,15 +275,15 @@ public class OptionPanel
 	// override to construct custom panel
 	public static JComponent constructPanel(OptionEntry[] items)
 	{
-		CPanel3 p = new CPanel3();
+		CPanel p = new CPanel();
 		p.setOpaque(true);
 		p.setGaps(10, 2);
 		p.addColumns
 		(
 			10,
 			10,
-			CPanel3.PREFERRED, 
-			CPanel3.FILL,
+			CPanel.PREFERRED, 
+			CPanel.FILL,
 			10
 		);
 
@@ -330,7 +330,7 @@ public class OptionPanel
 				float height = en.getPreferredHeight();
 				if(height == OptionEditorInterface.HEIGHT_MAX)
 				{
-					p.tableLayout().setRow(row, CPanel3.FILL);
+					p.tableLayout().setRow(row, CPanel.FILL);
 					if(fullWidth)
 					{
 						bottomGap = false;

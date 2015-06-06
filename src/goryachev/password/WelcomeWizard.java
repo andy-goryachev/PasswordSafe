@@ -3,7 +3,7 @@ package goryachev.password;
 import goryachev.common.ui.Application;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CButton;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.CheckForUpdate;
 import goryachev.common.ui.GlobalSettings;
 import goryachev.common.ui.Menus;
@@ -99,7 +99,7 @@ public class WelcomeWizard
 		StandardLicense lic = new StandardLicense();
 		lic.setMilitaryClause(true);
 		
-		CPanel3 p = new CPanel3();
+		CPanel p = new CPanel();
 		p.setCenter(Panels.scrollDocument(lic.getDocument()));
 		
 		p.buttonPanel().addButton(closeAction);
@@ -159,13 +159,13 @@ public class WelcomeWizard
 			"\n\n" +
 			TXT.get("WelcomeDialog.check.2", "You can always check for updates from the main menu by selecting {0} -> {1}.", Menus.Help, Menus.CheckForUpdates);
 		
-		CPanel3 p = new CPanel3();
+		CPanel p = new CPanel();
 		p.setBorder();
 		p.setGaps(10);
 		p.addColumns
 		(
-			CPanel3.PREFERRED,
-			CPanel3.FILL
+			CPanel.PREFERRED,
+			CPanel.FILL
 		);
 		p.setColumnMinimumSize(0, Theme.minimumButtonWidth());
 		

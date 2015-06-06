@@ -4,7 +4,7 @@ import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CButtonPanel3;
 import goryachev.common.ui.CDialog;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.Dialogs;
 import goryachev.common.ui.Menus;
 import java.awt.Component;
@@ -32,7 +32,7 @@ public class COptionDialog
 		buttonPanel.addButton(Menus.OK, okAction, true);
 		buttonPanel.setBorder(new CBorder(10));
 
-		CPanel3 p = new CPanel3();
+		CPanel p = new CPanel();
 		p.setCenter(optionPanel);
 		p.setSouth(buttonPanel);
 

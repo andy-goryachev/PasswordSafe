@@ -6,7 +6,7 @@ import goryachev.common.ui.BackgroundThread;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CButton;
 import goryachev.common.ui.CFocusTraversalPolicy;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.CProgressField;
 import goryachev.common.ui.CTextField;
 import goryachev.common.ui.Dialogs;
@@ -25,7 +25,7 @@ import java.io.File;
 
 
 public class LockPanel
-	extends CPanel3
+	extends CPanel
 {
 	public final CAction browseAction = new CAction() { public void action() { onBrowse(); } };
 	public final CAction createAction = new CAction() { public void action() { onCreate(); } };

@@ -4,7 +4,7 @@ import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CButton;
 import goryachev.common.ui.CMenuItem;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.CPopupMenu;
 import goryachev.common.ui.CPopupMenuController;
 import goryachev.common.ui.CScrollPane;
@@ -28,7 +28,7 @@ import javax.swing.JPopupMenu;
 
 
 public class PassEditor
-	extends CPanel3
+	extends CPanel
 {
 	public final CAction changePasswordAction = new CAction() { public void action() { actionChangePassword(); } };
 	public final CAction copyPasswordAction = new CAction() { public void action() { actionCopyPassword(); } };

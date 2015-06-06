@@ -4,7 +4,7 @@ import goryachev.common.ui.BackgroundThread;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CIcon;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.CScrollPane;
 import goryachev.common.ui.ChoiceDialog;
 import goryachev.common.ui.InfoField;
@@ -23,7 +23,7 @@ import javax.swing.text.Document;
 
 
 public abstract class ProcessPanel
-	extends CPanel3 
+	extends CPanel 
 {
 	protected abstract void execute() throws Exception;
 	

@@ -8,7 +8,7 @@ import goryachev.common.ui.CButton;
 import goryachev.common.ui.CFocusTraversalPolicy;
 import goryachev.common.ui.CMenu;
 import goryachev.common.ui.CMenuItem;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.CToolBar;
 import goryachev.common.ui.CUndoManager;
 import goryachev.common.ui.ContactSupport;
@@ -64,7 +64,7 @@ public class MainWindow
 	public final CButton exitButton;
 	
 	public static final String KEY_LAST_FOLDER = "last.folder";
-	public final CPanel3 panel;
+	public final CPanel panel;
 	public final ListTab listTab;
 	private File file;
 	private boolean modified;
@@ -95,7 +95,7 @@ public class MainWindow
 		lockButton = new CButton(TXT.get("MainWindow.toolbar.lock program", "Lock"), TXT.get("MainWindow.toolbar.lock.tooltip", "Lock the program"), lockAction);
 		exitButton = new CButton(Menus.Exit, exitAction);
 		
-		panel = new CPanel3();
+		panel = new CPanel();
 		panel.setNorth(createToolbar());
 		panel.setCenter(listTab);
 		panel.setSouth(createStatusBar(true));

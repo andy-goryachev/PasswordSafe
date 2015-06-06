@@ -2,7 +2,7 @@
 package goryachev.common.ui.wizard;
 import goryachev.common.ui.Appearance;
 import goryachev.common.ui.CComboBox;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.InfoField;
 import goryachev.common.ui.theme.AssignMnemonic;
 import goryachev.common.util.CKit;
@@ -19,7 +19,7 @@ import javax.swing.JLabel;
 
 
 public class LanguagePage
-	extends CPanel3
+	extends CPanel
 	implements HasPrompts
 {
 	public final JLabel logoField;
@@ -51,8 +51,8 @@ public class LanguagePage
 		
 		addColumns
 		(
-			CPanel3.PREFERRED,
-			CPanel3.FILL
+			CPanel.PREFERRED,
+			CPanel.FILL
 		);
 
 		row(1, logoField);

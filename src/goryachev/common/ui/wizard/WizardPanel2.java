@@ -2,7 +2,7 @@
 package goryachev.common.ui.wizard;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CButton;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.Menus;
 import goryachev.common.ui.Panels;
 import goryachev.common.ui.UI;
@@ -17,7 +17,7 @@ import javax.swing.JComponent;
 
 
 public class WizardPanel2
-	extends CPanel3
+	extends CPanel
 {
 	public final CAction backAction = new CAction() { public void action() { actionBack(); }};
 	private Stack<Entry> stack = new Stack();
@@ -93,7 +93,7 @@ public class WizardPanel2
 	}
 	
 	
-	public CPanel3 setErrorCard(Object messageOrThrowable, boolean allowBackButton, Action closeAction)
+	public CPanel setErrorCard(Object messageOrThrowable, boolean allowBackButton, Action closeAction)
 	{
 		String s;
 		if(messageOrThrowable instanceof Throwable)
@@ -113,7 +113,7 @@ public class WizardPanel2
 		}
 		
 		
-		CPanel3 p = new CPanel3();
+		CPanel p = new CPanel();
 		p.setLeading(Panels.iconField(CIcons.Error96));
 		p.setCenter(Panels.textPane(s));
 		

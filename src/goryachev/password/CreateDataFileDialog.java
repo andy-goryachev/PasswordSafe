@@ -5,7 +5,7 @@ import goryachev.common.ui.CAction;
 import goryachev.common.ui.CButton;
 import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CFocusTraversalPolicy;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.CProgressField;
 import goryachev.common.ui.CTextField;
 import goryachev.common.ui.Dialogs;
@@ -74,13 +74,13 @@ public class CreateDataFileDialog
 		CButton okButton = new CButton(TXT.get("CreateDataFileDialog.button.create file", "Create"), createAction, true);
 		CButton cancelButton = new CButton(Menus.Cancel, closeDialogAction);
 		
-		CPanel3 p = panel();
+		CPanel p = panel();
 		p.addColumns
 		(
-			CPanel3.PREFERRED,
-			CPanel3.PREFERRED,
-			CPanel3.FILL,
-			CPanel3.PREFERRED
+			CPanel.PREFERRED,
+			CPanel.PREFERRED,
+			CPanel.FILL,
+			CPanel.PREFERRED
 		);
 		p.setColumnMinimumSize(3, Theme.minimumButtonWidth());
 

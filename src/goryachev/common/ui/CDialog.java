@@ -163,7 +163,7 @@ public class CDialog
 	}
 	
 	
-//	public CPanel3 getContentPanel()
+//	public CPanel getContentPanel()
 //	{
 //		return contentPanel;
 //	}
@@ -262,7 +262,7 @@ public class CDialog
 	/** sets borderless mode.  should be called prior to invoking panel() or buttonPanel() */
 	public void borderless()
 	{
-		CPanel3 p = new CPanel3()
+		CPanel p = new CPanel()
 		{
 			public CButtonPanel3 buttonPanel()
 			{
@@ -279,20 +279,20 @@ public class CDialog
 	}
 	
 	
-	/** returns center CPanel3, creating it if necessary */ 
-	public CPanel3 panel()
+	/** returns center CPanel, creating it if necessary */ 
+	public CPanel panel()
 	{
 		Container cp = getContentPane();
 		BorderLayout la = (BorderLayout)cp.getLayout();
 		
 		Component c = la.getLayoutComponent(BorderLayout.CENTER);
-		if(c instanceof CPanel3)
+		if(c instanceof CPanel)
 		{
-			return (CPanel3)c;
+			return (CPanel)c;
 		}
 		else
 		{
-			CPanel3 p = new CPanel3();
+			CPanel p = new CPanel();
 			p.setGaps(MARGIN, MARGIN);
 			p.setBorder(MARGIN);
 

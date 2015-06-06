@@ -1,6 +1,6 @@
 // Copyright (c) 2007-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.table;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.icons.CIcons;
 import java.awt.Color;
@@ -17,7 +17,7 @@ import javax.swing.table.TableCellRenderer;
 
 
 public class CTreeTableRendererEditor
-	extends CPanel3
+	extends CPanel
 	implements TableCellRenderer, TableCellEditor
 {
 	public final static int LEFT_GAP = 2;

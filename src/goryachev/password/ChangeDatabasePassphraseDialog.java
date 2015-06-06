@@ -5,7 +5,7 @@ import goryachev.common.ui.CButton;
 import goryachev.common.ui.CCheckBox;
 import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CFocusTraversalPolicy;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.Dialogs;
 import goryachev.common.ui.GlobalSettings;
 import goryachev.common.ui.Menus;
@@ -117,14 +117,14 @@ public class ChangeDatabasePassphraseDialog
 		
 		PassTools.copyPassword(clearPassField, passField, verifyField, on);
 		
-		CPanel3 p = new CPanel3();
+		CPanel p = new CPanel();
 		p.setGaps(10, 5);
 		p.addColumns
 		(
-			CPanel3.PREFERRED,
-			CPanel3.PREFERRED,
-			CPanel3.FILL,
-			CPanel3.PREFERRED
+			CPanel.PREFERRED,
+			CPanel.PREFERRED,
+			CPanel.FILL,
+			CPanel.PREFERRED
 		);
 		
 		p.row(0, p.label(TXT.get("ChangeDatabasePassphraseDialog.label.old passphrase", "Old Passphrase:")));

@@ -5,7 +5,7 @@ import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CButton;
 import goryachev.common.ui.CMenuItem;
-import goryachev.common.ui.CPanel3;
+import goryachev.common.ui.CPanel;
 import goryachev.common.ui.CPopupMenu;
 import goryachev.common.ui.CPopupMenuController;
 import goryachev.common.ui.CScrollPane;
@@ -30,7 +30,7 @@ import javax.swing.KeyStroke;
 
 /** global key bindings editor */
 public class KeyBindingsEditor
-	extends CPanel3
+	extends CPanel
 	implements OptionEditorInterface
 {
 	public final CAction clearAction = new CAction(TXT.get("KeyBindingsEditor.clear key binding", "Clear")) { public void action() { actionClear(); } };
