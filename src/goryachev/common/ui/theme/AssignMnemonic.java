@@ -1,6 +1,6 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
-import goryachev.common.ui.CButtonPanel3;
+import goryachev.common.ui.CButtonPanel;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CUnique;
 import goryachev.common.util.SB;
@@ -29,7 +29,7 @@ public class AssignMnemonic
 		{
 			assignPopupMenu((JPopupMenu)x);
 		}
-		else if(x instanceof CButtonPanel3) 
+		else if(x instanceof CButtonPanel) 
 		{
 			assignButtonPanel((Container)x);
 		}

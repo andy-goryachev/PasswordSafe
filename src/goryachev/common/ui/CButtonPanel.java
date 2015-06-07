@@ -1,6 +1,6 @@
 // Copyright (c) 2007-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
-import goryachev.common.ui.theme.CButtonPanelLayout3;
+import goryachev.common.ui.theme.CButtonPanelLayout;
 import goryachev.common.util.Rex;
 import java.awt.Color;
 import java.awt.Component;
@@ -17,28 +17,28 @@ import javax.swing.JRootPane;
 // TODO
 // - check default button in dialog/frame
 // - right-align buttons if no FILL and no PERCENT
-public class CButtonPanel3
+public class CButtonPanel
 	extends JPanel
 {
 	public static final int DEFAULT_GAP = 10;
 	private JButton defaultButton;
 	
 	
-	public CButtonPanel3()
+	public CButtonPanel()
 	{
 		this(DEFAULT_GAP, true);
 	}
 	
 	
-	public CButtonPanel3(int gap)
+	public CButtonPanel(int gap)
 	{
 		this(gap, true);
 	}
 	
 	
-	public CButtonPanel3(int gap, boolean opaque)
+	public CButtonPanel(int gap, boolean opaque)
 	{
-		super(new CButtonPanelLayout3(gap));
+		super(new CButtonPanelLayout(gap));
 		setOpaque(opaque);
 		setMinimumButtonSize(Theme.minimumButtonWidth());
 	}
@@ -68,15 +68,15 @@ public class CButtonPanel3
 	}
 	
 	
-	protected CButtonPanelLayout3 buttonPanelLayout()
+	protected CButtonPanelLayout buttonPanelLayout()
 	{
-		return (CButtonPanelLayout3)getLayout();
+		return (CButtonPanelLayout)getLayout();
 	}
 	
 	
 	public void setLayout(LayoutManager m)
 	{
-		if(m instanceof CButtonPanelLayout3)
+		if(m instanceof CButtonPanelLayout)
 		{
 			super.setLayout(m);
 		}
@@ -159,7 +159,7 @@ public class CButtonPanel3
 
 	public void fill()
 	{
-		buttonPanelLayout().addSpace(CButtonPanelLayout3.FILL);
+		buttonPanelLayout().addSpace(CButtonPanelLayout.FILL);
 	}
 
 

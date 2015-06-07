@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;

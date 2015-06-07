@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.data.v1;
-import goryachev.common.util.CException;
 import goryachev.common.util.CKit;
+import goryachev.common.util.Rex;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.SecretByteArrayInputStream;
@@ -604,7 +604,7 @@ public final class DataFormatV1
 		PaddedBufferedBlockCipher c = new PaddedBufferedBlockCipher(new CBCBlockCipher(new AESFastEngine()));
 		if(iv.length != c.getBlockSize())
 		{
-			throw new CException("invalid block size");
+			throw new Rex("invalid block size");
 		}
 		CipherParameters p = new ParametersWithIV(new KeyParameter(key), iv);
 		return new XCipherInputStream(c, p, is);
@@ -616,7 +616,7 @@ public final class DataFormatV1
 		PaddedBufferedBlockCipher c = new PaddedBufferedBlockCipher(new CBCBlockCipher(new AESFastEngine()));
 		if(iv.length != c.getBlockSize())
 		{
-			throw new CException("invalid block size");
+			throw new Rex("invalid block size");
 		}
 		CipherParameters p = new ParametersWithIV(new KeyParameter(key), iv);
 		return new XCipherOutputStream(c, p, os);

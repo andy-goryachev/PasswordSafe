@@ -8,7 +8,7 @@ import java.awt.Insets;
 import java.awt.LayoutManager2;
 
 
-public class CButtonPanelLayout3
+public class CButtonPanelLayout
 	implements LayoutManager2
 {
 	protected static class Entry
@@ -26,12 +26,12 @@ public class CButtonPanelLayout3
 	private CList<Entry> entries = new CList();
 	
 	
-	public CButtonPanelLayout3()
+	public CButtonPanelLayout()
 	{
 	}
 	
 	
-	public CButtonPanelLayout3(int gap)
+	public CButtonPanelLayout(int gap)
 	{
 		this.gap = gap;
 	}

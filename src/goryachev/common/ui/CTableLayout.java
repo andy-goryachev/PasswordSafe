@@ -21,7 +21,7 @@ import java.awt.LayoutManager2;
  *   
  * unless explicitly set, row or column spec defaults to PREFERRED.
  */
-public class CTableLayout3
+public class CTableLayout
 	implements LayoutManager2
 {
 	//public static final float MINIMUM = -1.0f;
@@ -41,7 +41,7 @@ public class CTableLayout3
 	protected CList<LC> rows = new CList();
 
 
-	public CTableLayout3()
+	public CTableLayout()
 	{
 	}
 	

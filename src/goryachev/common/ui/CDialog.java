@@ -123,10 +123,10 @@ public class CDialog
 
 	public void setDefaultButton()
 	{
-		CList<CButtonPanel3> ps = UI.collectChildrenOfType(CButtonPanel3.class, this);
+		CList<CButtonPanel> ps = UI.collectChildrenOfType(CButtonPanel.class, this);
 		if(ps.size() == 1)
 		{
-			CButtonPanel3 bp = ps.get(0);
+			CButtonPanel bp = ps.get(0);
 			JButton b = bp.getLastButton();
 			if(b != null)
 			{
@@ -161,48 +161,6 @@ public class CDialog
 	{
 		return UI.getParentWindow(getParent());
 	}
-	
-	
-//	public CPanel getContentPanel()
-//	{
-//		return contentPanel;
-//	}
-//	
-//	
-//	public CButtonPanel3 getButtonPanel()
-//	{
-//		return contentPanel.buttonPanel();
-//	}
-//	
-//	
-//	public CButton addButton(Action a)
-//	{
-//		return getButtonPanel().addButton(a);
-//	}
-//	
-//	
-//	public CButton addButton(Action a, boolean highlight)
-//	{
-//		return getButtonPanel().addButton(a, highlight);
-//	}
-	
-	
-//	public void setContent(Component c)
-//	{
-//		getContentPanel().setCenter(c);
-//	}
-//	
-//	
-//	public void setContentPanel(Component c)
-//	{
-//		BorderLayout layout = (BorderLayout)getContentPane().getLayout();
-//		Component old = layout.getLayoutComponent(getContentPane(), BorderLayout.CENTER);
-//		if(old != null)
-//		{
-//			getContentPane().remove(old);
-//		}
-//		getContentPane().add(c, BorderLayout.CENTER);
-//	}
 	
 	
 	public CDialog open()
@@ -264,9 +222,9 @@ public class CDialog
 	{
 		CPanel p = new CPanel()
 		{
-			public CButtonPanel3 buttonPanel()
+			public CButtonPanel buttonPanel()
 			{
-				CButtonPanel3 p = super.buttonPanel();				
+				CButtonPanel p = super.buttonPanel();				
 				if(p.getBorder() == null)
 				{
 					p.setBorder(new CBorder(10));
@@ -303,7 +261,7 @@ public class CDialog
 	}
 	
 	
-	public CButtonPanel3 buttonPanel()
+	public CButtonPanel buttonPanel()
 	{
 		return panel().buttonPanel();
 	}

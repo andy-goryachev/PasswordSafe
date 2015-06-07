@@ -17,9 +17,9 @@ public class CPanel
 	extends JPanel
 	implements Scrollable
 {
-	public static final float FILL = CTableLayout3.FILL;
+	public static final float FILL = CTableLayout.FILL;
 	//public static final float MINIMUM = CTableLayout3.MINIMUM;
-	public static final float PREFERRED = CTableLayout3.PREFERRED;
+	public static final float PREFERRED = CTableLayout.PREFERRED;
 	
 	private boolean trackWidth = true;
 	private boolean trackHeight;
@@ -28,34 +28,34 @@ public class CPanel
 	
 	public CPanel()
 	{
-		super(new CTableLayout3());
+		super(new CTableLayout());
 	}
 	
 	
 	public CPanel(Component c)
 	{
-		super(new CTableLayout3());
+		super(new CTableLayout());
 		setCenter(c);
 	}
 	
 	
 	public CPanel(int hgap, int vgap)
 	{
-		super(new CTableLayout3());
+		super(new CTableLayout());
 		setGaps(hgap, vgap);
 	}
 	
 	
 	public CPanel(boolean opaque)
 	{
-		super(new CTableLayout3());
+		super(new CTableLayout());
 		setOpaque(opaque);
 	}
 	
 	
 	public CPanel(int hgap, int vgap, boolean opaque)
 	{
-		super(new CTableLayout3());
+		super(new CTableLayout());
 		setGaps(hgap, vgap);
 		setOpaque(opaque);
 	}
@@ -76,7 +76,7 @@ public class CPanel
 	
 	public void setLayout(LayoutManager m)
 	{
-		if(m instanceof CTableLayout3)
+		if(m instanceof CTableLayout)
 		{
 			super.setLayout(m);
 		}
@@ -87,7 +87,7 @@ public class CPanel
 	}
 	
 	
-	private Component set(Component c, CTableLayout3.CC cc)
+	private Component set(Component c, CTableLayout.CC cc)
 	{
 		Component old = tableLayout().getBorderComponent(cc);
 		if(old != null)
@@ -105,13 +105,13 @@ public class CPanel
 
 	public Component setCenter(Component c)
 	{
-		return set(c, CTableLayout3.CENTER);
+		return set(c, CTableLayout.CENTER);
 	}
 
 
 	public Component getCenter()
 	{
-		return tableLayout().getBorderComponent(CTableLayout3.CENTER);
+		return tableLayout().getBorderComponent(CTableLayout.CENTER);
 	}
 
 
@@ -123,13 +123,13 @@ public class CPanel
 	
 	public Component setTrailing(Component c)
 	{
-		return set(c, CTableLayout3.TRAILING);
+		return set(c, CTableLayout.TRAILING);
 	}
 
 
 	public Component getTrailing()
 	{
-		return tableLayout().getBorderComponent(CTableLayout3.TRAILING);
+		return tableLayout().getBorderComponent(CTableLayout.TRAILING);
 	}
 
 
@@ -141,13 +141,13 @@ public class CPanel
 	
 	public Component setLeading(Component c)
 	{
-		return set(c, CTableLayout3.LEADING);
+		return set(c, CTableLayout.LEADING);
 	}
 
 
 	public Component getLeading()
 	{
-		return tableLayout().getBorderComponent(CTableLayout3.LEADING);
+		return tableLayout().getBorderComponent(CTableLayout.LEADING);
 	}
 
 
@@ -159,13 +159,13 @@ public class CPanel
 
 	public Component setTop(Component c)
 	{
-		return set(c, CTableLayout3.TOP);
+		return set(c, CTableLayout.TOP);
 	}
 
 
 	public Component getTop()
 	{
-		return tableLayout().getBorderComponent(CTableLayout3.TOP);
+		return tableLayout().getBorderComponent(CTableLayout.TOP);
 	}
 
 
@@ -177,13 +177,13 @@ public class CPanel
 	
 	public Component setBottom(Component c)
 	{
-		return set(c, CTableLayout3.BOTTOM);
+		return set(c, CTableLayout.BOTTOM);
 	}
 
 
 	public Component getBottom()
 	{
-		return tableLayout().getBorderComponent(CTableLayout3.BOTTOM);
+		return tableLayout().getBorderComponent(CTableLayout.BOTTOM);
 	}
 
 
@@ -323,9 +323,9 @@ public class CPanel
 	}
 	
 	
-	public CTableLayout3 tableLayout()
+	public CTableLayout tableLayout()
 	{
-		return (CTableLayout3)getLayout();
+		return (CTableLayout)getLayout();
 	}
 	
 	
@@ -470,21 +470,21 @@ public class CPanel
 	public void row(int col, Component c)
 	{
 		int r = row();
-		add(c, new CTableLayout3.CC(col, r));
+		add(c, new CTableLayout.CC(col, r));
 	}
 	
 	
 	public void row(int col, int colSpan, Component c)
 	{
 		int r = row();
-		add(c, new CTableLayout3.CC(col, r, col + colSpan - 1, r));
+		add(c, new CTableLayout.CC(col, r, col + colSpan - 1, r));
 	}
 	
 	
 	public void row(int col, int colSpan, int rowSpan, Component c)
 	{
 		int r = row();
-		add(c, new CTableLayout3.CC(col, r, col + colSpan - 1, r + rowSpan - 1));
+		add(c, new CTableLayout.CC(col, r, col + colSpan - 1, r + rowSpan - 1));
 	}
 	
 	
@@ -503,20 +503,37 @@ public class CPanel
 	
 	public void add(int col, int row, int colSpan, int rowSpan, Component c)
 	{
-		add(c, new CTableLayout3.CC(col, row, col + colSpan - 1, row + rowSpan - 1));
+		add(c, new CTableLayout.CC(col, row, col + colSpan - 1, row + rowSpan - 1));
 	}
-	
-	
-	public CButtonPanel3 buttonPanel()
+
+
+	public CToolBar toolbar()
 	{
-		Component c = getBottom();
-		if(c instanceof CButtonPanel3)
+		Component c = getTop();
+		if(c instanceof CToolBar)
 		{
-			return (CButtonPanel3)c;
+			return (CToolBar)c;
 		}
 		else
 		{
-			CButtonPanel3 p = new CButtonPanel3();
+			CToolBar t = Theme.toolbar();
+			setTop(t);
+			UI.validateAndRepaint(this);
+			return t;
+		}
+	}
+
+
+	public CButtonPanel buttonPanel()
+	{
+		Component c = getBottom();
+		if(c instanceof CButtonPanel)
+		{
+			return (CButtonPanel)c;
+		}
+		else
+		{
+			CButtonPanel p = new CButtonPanel();
 			setBottom(p);
 			UI.validateAndRepaint(this);
 			return p;
@@ -527,7 +544,7 @@ public class CPanel
 	public boolean hasButtonPanel()
 	{
 		Component c = getBottom();
-		return (c instanceof CButtonPanel3);
+		return (c instanceof CButtonPanel);
 	}
 }
 
