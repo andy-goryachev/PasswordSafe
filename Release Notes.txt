@@ -1,13 +1,16 @@
 ﻿		KNOWN ISSUES
 		============
 		
-- open dialogs on the same monitor as the parent window
+- should open dialogs on the same monitor as the parent window
 - jar should be signed
 
 
 
 		RELEASE NOTES
 		=============
+
+3.01.40
+- color theme selection
 
 3.01.40
 - carry over passwords when toggling 'hide password' checkbox
