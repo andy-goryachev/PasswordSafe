@@ -102,4 +102,10 @@ public class CMenu
 		}
 		return -1;
 	}
+
+
+	public void separator()
+	{
+		addSeparator();
+	}
 }

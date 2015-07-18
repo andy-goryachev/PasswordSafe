@@ -618,4 +618,26 @@ public class SB
 		}
 		return false;
 	}
+
+
+	public void padLeading(char c, int max, Object v)
+	{
+		String s = (v == null ? "" : v.toString());
+		for(int i=s.length(); i<max; i++)
+		{
+			sb.append(c);
+		}
+		sb.append(s);
+	}
+	
+	
+	public void padTrailing(char c, int max, Object v)
+	{
+		String s = (v == null ? "" : v.toString());
+		sb.append(s);
+		for(int i=s.length(); i<max; i++)
+		{
+			sb.append(c);
+		}
+	}
 }

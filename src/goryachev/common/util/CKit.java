@@ -456,6 +456,12 @@ public class CKit
 	}
 	
 	
+	public static String readString(File f, int max, Charset cs) throws Exception
+	{
+		return readString(new FileInputStream(f), max, cs);
+	}
+	
+	
 	public static String readString(File f) throws Exception
 	{
 		return readString(f, CHARSET_UTF8);
@@ -464,9 +470,15 @@ public class CKit
 	
 	public static String readStringQuiet(File f)
 	{
+		return readStringQuiet(f, Integer.MAX_VALUE);
+	}
+	
+	
+	public static String readStringQuiet(File f, int max)
+	{
 		try
 		{
-			return readString(f, CHARSET_UTF8);
+			return readString(f, max, CHARSET_UTF8);
 		}
 		catch(Exception e)
 		{
@@ -477,6 +489,12 @@ public class CKit
 	
 	public static String readString(InputStream is, Charset cs) throws Exception
 	{
+		return readString(is, Integer.MAX_VALUE, cs);
+	}
+	
+	
+	public static String readString(InputStream is, int max, Charset cs) throws Exception
+	{
 		if(!(is instanceof BufferedInputStream))
 		{
 			is = new BufferedInputStream(is);
@@ -485,7 +503,7 @@ public class CKit
 		Reader in = new InputStreamReader(is, cs);
 		try
 		{
-			return readString(in);
+			return readString(in, max);
 		}
 		finally
 		{
@@ -495,6 +513,12 @@ public class CKit
 	
 	
 	public static String readString(Reader in) throws Exception
+	{
+		return readString(in, Integer.MAX_VALUE);
+	}
+	
+	
+	public static String readString(Reader in, int max) throws Exception
 	{
 		try
 		{
@@ -510,6 +534,11 @@ public class CKit
 					{
 						continue;
 					}
+				}
+				
+				if(sb.length() >= max)
+				{
+					break;
 				}
 				
 				sb.append((char)c);

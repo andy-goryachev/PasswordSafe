@@ -18,4 +18,11 @@ public class HorizontalPanel
 	{
 		super(true);
 	}
+	
+	
+	public HorizontalPanel(boolean opaque)
+	{
+		this();
+		setOpaque(opaque);
+	}
 }

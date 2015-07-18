@@ -22,7 +22,7 @@ import javax.swing.JSplitPane;
 public class CSplitPaneLayoutManager
 	implements LayoutManager2
 {
-	protected final CSplitPaneUI ui;
+	protected final AgSplitPaneUI ui;
 	/* left, right, divider. (in this exact order) */
 	protected int[] sizes;
 	protected Component[] components;
@@ -33,7 +33,7 @@ public class CSplitPaneLayoutManager
 	private boolean horizontalAxis;
 
 
-	public CSplitPaneLayoutManager(CSplitPaneUI ui, boolean horizontalAxis)
+	public CSplitPaneLayoutManager(AgSplitPaneUI ui, boolean horizontalAxis)
 	{
 		this.ui = ui;
 		this.horizontalAxis = horizontalAxis;

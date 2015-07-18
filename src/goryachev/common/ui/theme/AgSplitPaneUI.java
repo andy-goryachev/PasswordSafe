@@ -15,7 +15,7 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
 
 // TODO needs to honor component orientation in horizontal split mode!
 // http://bugs.sun.com/view_bug.do?bug_id=4265389
-public class CSplitPaneUI
+public class AgSplitPaneUI
 	extends BasicSplitPaneUI
 {
 	private static int dividerSize = 5;
@@ -26,15 +26,29 @@ public class CSplitPaneUI
 	protected CSplitPaneLayoutManager layoutManagerHack;
 	
 
-	public CSplitPaneUI()
+	public AgSplitPaneUI()
 	{
 	}
 	
 	
-	public static void init(UIDefaults defs)
+	public static void init(UIDefaults d)
 	{
-		defs.put("SplitPaneUI", CSplitPaneUI.class.getName());
-		defs.put("SplitPane.continuousLayout", Boolean.TRUE);
+		d.put("SplitPaneUI", AgSplitPaneUI.class.getName());
+		d.put("SplitPane.continuousLayout", Boolean.TRUE);
+		
+//		SplitPane.ancestorInputMap = InputMapUIResource
+//		SplitPane.background = ColorUIResource(EEEEEE)
+//		SplitPane.border = javax.swing.plaf.basic.BasicBorders$SplitPaneBorder
+//		SplitPane.centerOneTouchButtons = false
+//		SplitPane.darkShadow = ColorUIResource(7A8A99)
+//		SplitPane.dividerFocusColor = ColorUIResource(C8DDF2)
+//		SplitPane.dividerSize = 10
+//		SplitPane.highlight = ColorUIResource(FFFFFF)
+//		SplitPane.oneTouchButtonsOpaque = false
+//		SplitPane.shadow = ColorUIResource(B8CFE5)
+//		SplitPaneDivider.border = javax.swing.plaf.basic.BasicBorders$SplitPaneDividerBorder
+//		SplitPaneDivider.draggingColor = ColorUIResource(404040)
+//		SplitPaneUI = "javax.swing.plaf.metal.MetalSplitPaneUI"
 	}
 
 
@@ -159,7 +173,7 @@ public class CSplitPaneUI
 
 	public static ComponentUI createUI(JComponent x)
 	{
-		return new CSplitPaneUI();
+		return new AgSplitPaneUI();
 	}
 
 

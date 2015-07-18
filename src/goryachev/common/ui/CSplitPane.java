@@ -1,6 +1,6 @@
 // Copyright (c) 2008-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
-import goryachev.common.ui.theme.CSplitPaneUI;
+import goryachev.common.ui.theme.AgSplitPaneUI;
 import java.awt.Component;
 import javax.swing.JSplitPane;
 
@@ -24,7 +24,7 @@ public class CSplitPane
 	
 	public void updateUI()
 	{
-		setUI(new CSplitPaneUI());
+		setUI(new AgSplitPaneUI());
 	}
 	
 	

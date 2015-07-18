@@ -23,6 +23,7 @@ import java.util.Properties;
 import javax.swing.ActionMap;
 import javax.swing.Icon;
 import javax.swing.InputMap;
+import javax.swing.JLabel;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
@@ -254,13 +255,7 @@ public class SysInfo
 		else if(x instanceof Insets)
 		{
 			sb.a(x.getClass().getSimpleName());
-			
-			Insets m = (Insets)x;
-			sb.a("(t=").a(m.top);
-			sb.a(",l=").a(m.left);
-			sb.a(",b=").a(m.bottom);
-			sb.a(",r=").a(m.right);
-			sb.a(")");
+			describeInsets(sb, (Insets)x);
 		}
 		else if(x instanceof Icon)
 		{
@@ -274,6 +269,7 @@ public class SysInfo
 		else if(x instanceof Border)
 		{
 			sb.a(x.getClass().getName());
+			describeInsets(sb, ((Border)x).getBorderInsets(new JLabel()));
 		}
 		else if(x instanceof InputMap)
 		{
@@ -305,6 +301,16 @@ public class SysInfo
 		{
 			sb.a(x);
 		}
+	}
+	
+	
+	protected void describeInsets(SB sb, Insets m)
+	{
+		sb.a("(t=").a(m.top);
+		sb.a(",l=").a(m.left);
+		sb.a(",b=").a(m.bottom);
+		sb.a(",r=").a(m.right);
+		sb.a(")");
 	}
 	
 	

@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.ui.theme.CScrollBar;
-import goryachev.common.ui.theme.CScrollPaneUI;
+import goryachev.common.ui.theme.AgScrollPaneUI;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -44,7 +44,7 @@ public class CScrollPane
 	
 	public void updateUI()
 	{
-		setUI(new CScrollPaneUI());
+		setUI(new AgScrollPaneUI());
 	}
 	
 
@@ -141,8 +141,21 @@ public class CScrollPane
 	/** sets scrollpane and its viewport background */ 
 	public void setBackground2(Color c)
 	{
-		c = UI.clone(c);
 		setBackground(c);
 		getViewport().setBackground(c);
+	}
+	
+	
+	/** sets opaque flag on both the scroll pane and its viewport */
+	public void setOpaque2(boolean on)
+	{
+		setOpaque(on);
+		getViewport().setOpaque(on);
+	}
+	
+	
+	public void noBorder()
+	{
+		setBorder(CBorder.NONE);
 	}
 }

@@ -4,6 +4,7 @@ import goryachev.common.ui.AppFrame;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CPanel;
 import goryachev.common.ui.UI;
+import goryachev.common.ui.theme.AssignMnemonic;
 import java.awt.event.KeyEvent;
 import javax.swing.JComponent;
 
@@ -11,8 +12,8 @@ import javax.swing.JComponent;
 public class WizardFrame2
 	extends AppFrame
 {
-	public final CAction backAction;
 	public final WizardPanel2 panel;
+	public final CAction backAction;
 	
 	
 	public WizardFrame2(String name)
@@ -42,6 +43,15 @@ public class WizardFrame2
 	public void setCard(JComponent c, String title)
 	{
 		panel.setCard(c, title);
+		AssignMnemonic.assign(this);
+	}
+	
+	
+	/** Replaces current card (if any) with the specified component. */
+	public void setCard(JComponent c)
+	{
+		setCard(c, null);
+		AssignMnemonic.assign(this);
 	}
 	
 	

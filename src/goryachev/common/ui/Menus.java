@@ -117,6 +117,7 @@ public class Menus
 	public static final String Subscript = TXT.get("Menus.text subscript", "Subscript");
 	public static final String Superscript = TXT.get("Menus.text superscript", "Superscript");
 	// t
+	public static final String Theme = TXT.get("Menus.interface theme", "Theme");
 	public static final String TimeFormat = TXT.get("Menus.time format", "Time Format");
 	public static final String Toggle = TXT.get("Menus.toggle selection", "Toggle");
 	public static final String Tools = TXT.get("Menus.tools", "Tools");

@@ -909,4 +909,23 @@ public class FileTools
 		}
 		return false;
 	}
+
+
+	/** returns canonical path.  this is for presentation only, to avoid exception */
+	public static String getCanonicalPath(File f)
+	{
+		if(f == null)
+		{
+			return null;
+		}
+		
+		try
+		{
+			return f.getCanonicalPath();
+		}
+		catch(Exception e)
+		{
+			return f.getAbsolutePath();
+		}
+	}
 }

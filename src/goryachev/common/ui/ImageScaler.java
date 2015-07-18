@@ -135,6 +135,12 @@ public class ImageScaler
 	}
 	
 	
+	public int getShadowAngle()
+	{
+		return shadowAngle;
+	}
+	
+	
 	/** Sets vertical image alignment */
 	public void setVerticalAlignment(CAlignment a)
 	{

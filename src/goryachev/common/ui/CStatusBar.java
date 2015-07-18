@@ -16,7 +16,7 @@ public class CStatusBar
 		}
 		else
 		{
-			setBorder(new CBorder(2, 1, 0, 1));
+			setBorder(new CBorder(2, 1, 1, 5));
 		}
 	}
 

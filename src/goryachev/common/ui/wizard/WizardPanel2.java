@@ -34,14 +34,28 @@ public class WizardPanel2
 	{
 		titleField.setText(s);
 	}
-	
-	
-	/** 
-	 * Replaces current card (if any) with the specified component.
-	 */
+
+
+	protected void actionBack()
+	{
+		if(stack.size() > 1)
+		{
+			stack.pop();
+
+			Entry en = stack.pop();
+			setCard(en.component, en.title);
+
+			updatePrompts(en.component);
+			updatePrompts(UI.getParentWindow(this));
+		}
+	}
+
+
+	/** Replaces current card (if any) with the specified component. */
 	public void setCard(JComponent c, String title)
 	{
 		stack.add(new Entry(c, title));
+		
 		setCenter(c);
 		
 		titleField.setText(title);
@@ -59,6 +73,7 @@ public class WizardPanel2
 		repaint();
 		
 		// TODO set focus to an appropriate component (which?)
+		// TODO do we need updatePrompts?
 	}
 	
 	
@@ -66,21 +81,6 @@ public class WizardPanel2
 	{
 		Entry en = stack.peek();
 		return en.component;
-	}
-	
-	
-	protected void actionBack()
-	{
-		if(stack.size() >= 2)
-		{
-			stack.pop();
-			
-			Entry en = stack.pop();
-			setCard(en.component, en.title);
-			
-			updatePrompts(en.component);
-			updatePrompts(UI.getParentWindow(this));
-		}
 	}
 	
 	
@@ -131,7 +131,7 @@ public class WizardPanel2
 	//
 	
 	
-	public static class Entry
+	protected static class Entry
 	{
 		public JComponent component;
 		public String title;

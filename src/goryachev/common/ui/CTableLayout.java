@@ -752,10 +752,6 @@ public class CTableLayout
 		public Component bottomComp;
 		public Component leadingComp;
 		public Component trailingComp;
-		private int top;
-		private int bottom;
-		private int left;
-		private int right;
 		private int tableLeft;
 		private int tableRight;
 		private int tableTop;

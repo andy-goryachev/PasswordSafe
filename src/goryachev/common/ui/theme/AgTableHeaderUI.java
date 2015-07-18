@@ -17,28 +17,28 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 
-public class CTableHeaderUI
+public class AgTableHeaderUI
 	extends BasicTableHeaderUI 
 	implements ListSelectionListener
 {
-	private JTable listenOn;
+	private JTable table;
 	
 	
-	public static void init(UIDefaults defs)
+	public AgTableHeaderUI()
 	{
-		defs.put("TableHeaderUI", CTableHeaderUI.class.getName());
 	}
 	
 	
-	public CTableHeaderUI()
+	public static void init(UIDefaults d)
 	{
+		d.put("TableHeaderUI", AgTableHeaderUI.class.getName());
 	}
 	
 	
 	// gets called by reflection from UIManager.getUI()
 	public static ComponentUI createUI(JComponent h)
 	{
-		return new CTableHeaderUI();
+		return new AgTableHeaderUI();
 	}
 
 
@@ -52,7 +52,7 @@ public class CTableHeaderUI
 	public void uninstallUI(JComponent c)
 	{
 		super.uninstallUI(c);
-		listenOn = null;
+		table = null;
 	}
 	
 	
@@ -116,12 +116,12 @@ public class CTableHeaderUI
 
 	public void paint(Graphics g, JComponent c)
 	{
-		if(listenOn == null)
+		if(table == null)
 		{
-			listenOn = header.getTable();
-			if(listenOn != null)
+			table = header.getTable();
+			if(table != null)
 			{
-				listenOn.getSelectionModel().addListSelectionListener(this);
+				table.getSelectionModel().addListSelectionListener(this);
 			}
 		}
 

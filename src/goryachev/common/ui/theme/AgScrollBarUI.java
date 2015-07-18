@@ -1,8 +1,8 @@
 // Copyright (c) 2009-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
 import goryachev.common.ui.CBorder;
-import goryachev.common.ui.ColorTools;
 import goryachev.common.ui.Theme;
+import goryachev.common.ui.ThemeKey;
 import goryachev.common.ui.UI;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -16,42 +16,51 @@ import javax.swing.JComponent;
 import javax.swing.JScrollBar;
 import javax.swing.UIDefaults;
 import javax.swing.border.Border;
-import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.DimensionUIResource;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
 
-public class CScrollBarUI
+public class AgScrollBarUI
 	extends BasicScrollBarUI
 {
 	private static int trackThickness = 7;
 	private static int thumbGap = 3;
-	private static int hoverAlpha = 128;
 	private static final Border BORDER = new CBorder.UIResource();
 	private static final BasicStroke STROKE = new BasicStroke(trackThickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
-	private static final Color THUMB_COLOR = new Color(0, 0, 0, 48);
+	private static final Color THUMB_COLOR = ThemeColor.shadow(ThemeKey.COLOR_TEXT_BG, 128);
+	private static final Color DIRECTION_COLOR = ThemeColor.create(ThemeKey.COLOR_TARGET, 0.5, ThemeKey.COLOR_TEXT_BG);
 	
 	
-	public CScrollBarUI()
+	public AgScrollBarUI()
 	{
 	}
 
 
-	public static void init(UIDefaults defs)
+	public static void init(UIDefaults d)
 	{
-		defs.put("ScrollBarUI", CScrollBarUI.class.getName());
-		defs.put("ScrollBar.minimumThumbSize", new DimensionUIResource(10, 10));
-		defs.put("ScrollBar.maximumThumbSize", new DimensionUIResource(4096, 4096));
-		defs.put("ScrollBar.border", BORDER);
-		defs.put("ScrollBar.track", new ColorUIResource(Theme.fieldBG()));
+		d.put("ScrollBarUI", AgScrollBarUI.class.getName());
+		d.put("ScrollBar.minimumThumbSize", new DimensionUIResource(10, 10));
+		d.put("ScrollBar.maximumThumbSize", new DimensionUIResource(4096, 4096));
+		d.put("ScrollBar.border", BORDER);
+		d.put("ScrollBar.track", ThemeColor.shadow(ThemeKey.COLOR_TEXT_BG, 0.05));
+		
+		d.put("ScrollBar.background", Theme.textBG());
+		d.put("ScrollBar.foreground", Theme.textFG());
+		
+		//thumbHighlightColor = UIManager.getColor("ScrollBar.thumbHighlight");
+		//thumbLightShadowColor = UIManager.getColor("ScrollBar.thumbShadow");
+		//thumbDarkShadowColor = UIManager.getColor("ScrollBar.thumbDarkShadow");
+		//thumbColor = UIManager.getColor("ScrollBar.thumb");
+		//trackColor = UIManager.getColor("ScrollBar.track");
+		//trackHighlightColor = UIManager.getColor("ScrollBar.trackHighlight");
 	}
 
 
 	// UIManager.getUI(JComponent) uses reflection to invoke this method.  not nice.
 	public static ComponentUI createUI(JComponent c)
 	{
-		return new CScrollBarUI();
+		return new AgScrollBarUI();
 	}
 
 
@@ -177,7 +186,7 @@ public class CScrollBarUI
 			h = scrollbar.getHeight() - (m.top + m.bottom);
 		}
 
-		g.setColor(ColorTools.alpha(Theme.hoverColor(), hoverAlpha));
+		g.setColor(DIRECTION_COLOR);
 		g.fillRect(x, y, w, h);
 	}
 
@@ -207,7 +216,7 @@ public class CScrollBarUI
 			h = scrollbar.getHeight() - (m.top + m.bottom);
 		}
 
-		g.setColor(ColorTools.alpha(Theme.hoverColor(), hoverAlpha));
+		g.setColor(DIRECTION_COLOR);
 		g.fillRect(x, y, w, h);
 	}
 

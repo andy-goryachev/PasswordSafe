@@ -100,7 +100,7 @@ public class PassEditor
 		editPassButton = new CButton(TXT.get("PassEditor.button.change password", "Change Password"), TXT.get("PassEditor.button tooltip.change password", "Change password"), changePasswordAction);
 
 		scroll = new CScrollPane(notesField, false);
-		scroll.setBorder(Theme.BORDER_FIELD);
+		scroll.setBorder(Theme.fieldBorder());
 		
 		setGaps(5, 5);
 		addColumns(PREFERRED, PREFERRED, FILL, PREFERRED, PREFERRED);

@@ -1,6 +1,9 @@
 // Copyright (c) 2010-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.options;
+import goryachev.common.ui.CCheckBox;
 import goryachev.common.util.CSettings;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Collection;
 
 
@@ -45,5 +48,23 @@ public class BooleanOption
 	public void toggle()
 	{
 		set(!get());
+	}
+	
+	
+	/** creates checkbox that controls this boolean option directly */
+	public CCheckBox createCheckBox(String text)
+	{
+		final CCheckBox c = new CCheckBox(text);
+		c.setSelected(get());
+
+		c.addItemListener(new ItemListener()
+		{
+			public void itemStateChanged(ItemEvent ev)
+			{
+				set(c.isSelected());
+			}
+		});
+
+		return c;
 	}
 }

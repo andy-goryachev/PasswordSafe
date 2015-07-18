@@ -1,9 +1,10 @@
 // Copyright (c) 2011-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
 import goryachev.common.ui.Appearance;
+import goryachev.common.ui.Dialogs;
 import goryachev.common.ui.Menus;
-import goryachev.common.ui.dialogs.options.COptionDialog;
 import goryachev.common.ui.dialogs.options.OptionTreeBuilder;
+import goryachev.common.ui.dialogs.options.ThemeOptionEditor;
 import goryachev.common.ui.options.FileOption;
 import goryachev.common.ui.options.IntegerOption;
 import goryachev.common.ui.options.LongOption;
@@ -26,8 +27,17 @@ public class Preferences
 		
 		// appearance
 		b.addChild(Menus.Appearance);
-		b.addOption(Menus.InterfaceLanguage, Appearance.getLanguageEditor());
-		b.setRestartRequired();
+		{
+			// theme
+			b.addChild(Menus.Theme);
+			{
+				b.addOption(new ThemeOptionEditor());
+			}
+			b.end();
+			
+			b.addOption(Menus.InterfaceLanguage, Appearance.getLanguageEditor());
+			b.setRestartRequired();
+		}
 		b.end();
 		
 		// security
@@ -42,6 +52,6 @@ public class Preferences
 		b.setRestartRequired();
 		b.end();
 		
-		new COptionDialog(parent, Menus.Preferences, b.getRoot(), "Preferences").open();
+		Dialogs.openOptions(parent, Menus.Preferences, b.getRoot(), "Preferences", 700, 500);
 	}
 }

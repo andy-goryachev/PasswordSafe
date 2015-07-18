@@ -1,7 +1,7 @@
 // Copyright (c) 2008-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.ui.theme.CButtonBorder;
-import goryachev.common.ui.theme.CButtonUI;
+import goryachev.common.ui.theme.AgButtonUI;
 import java.awt.Color;
 import java.awt.Insets;
 import javax.swing.Action;
@@ -92,6 +92,17 @@ public class CButton
 		this(text, a);
 		setIcon(icon);
 		setHighlight(highlight);
+	}
+	
+	
+	public CButton(Icon icon, String text, Action a, boolean highlight)
+	{
+		this(text, a);
+		setIcon(icon);
+		if(highlight)
+		{
+			setHighlight();
+		}
 	}
 	
 	
@@ -193,7 +204,7 @@ public class CButton
 	
 	public void updateUI()
 	{
-		setUI(new CButtonUI());
+		setUI(new AgButtonUI());
 	}
 	
 	

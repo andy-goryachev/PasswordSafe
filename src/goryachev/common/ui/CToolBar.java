@@ -8,8 +8,6 @@ public class CToolBar
 {
 	public CToolBar()
 	{
-		// TODO needs fill(), space(), ...
-		//setLayout(new ToolbarLayout());
 		setOpaque(true);
 		setBorder(new CBorder(1,0));
 		setBackground(Theme.toolbarColor());

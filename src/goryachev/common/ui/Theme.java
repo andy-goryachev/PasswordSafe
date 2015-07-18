@@ -1,24 +1,33 @@
 // Copyright (c) 2008-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
-import goryachev.common.ui.theme.CButtonUI;
-import goryachev.common.ui.theme.CCheckBoxUI;
-import goryachev.common.ui.theme.CComboBoxUI;
+import goryachev.common.ui.theme.ATheme;
+import goryachev.common.ui.theme.AgButtonUI;
+import goryachev.common.ui.theme.AgCheckBoxUI;
+import goryachev.common.ui.theme.AgComboBoxUI;
+import goryachev.common.ui.theme.AgMenuBarUI;
+import goryachev.common.ui.theme.AgMenuItemUI;
+import goryachev.common.ui.theme.AgPanelUI;
+import goryachev.common.ui.theme.AgPopupMenuUI;
+import goryachev.common.ui.theme.AgPopupSeparatorUI;
+import goryachev.common.ui.theme.AgRadioButtonUI;
+import goryachev.common.ui.theme.AgScrollBarUI;
+import goryachev.common.ui.theme.AgScrollPaneUI;
+import goryachev.common.ui.theme.AgSeparatorUI;
+import goryachev.common.ui.theme.AgSplitPaneUI;
+import goryachev.common.ui.theme.AgTabbedPaneUI;
+import goryachev.common.ui.theme.AgTableHeaderUI;
+import goryachev.common.ui.theme.AgToolBarUI;
+import goryachev.common.ui.theme.AgToolTipUI;
+import goryachev.common.ui.theme.AgTreeUI;
 import goryachev.common.ui.theme.CFieldBorder;
-import goryachev.common.ui.theme.CMenuBarUI;
-import goryachev.common.ui.theme.CMenuItemUI;
-import goryachev.common.ui.theme.CRadioButtonUI;
-import goryachev.common.ui.theme.CScrollBarUI;
-import goryachev.common.ui.theme.CScrollPaneUI;
-import goryachev.common.ui.theme.CSplitPaneUI;
-import goryachev.common.ui.theme.CTabbedPaneUI;
-import goryachev.common.ui.theme.CTableHeaderUI;
-import goryachev.common.ui.theme.CTreeUI;
 import goryachev.common.ui.theme.SpinningGearIcon;
+import goryachev.common.ui.theme.ThemeColor;
 import goryachev.common.ui.theme.ThemeOptions;
 import goryachev.common.ui.theme.TimePeriodFormatter;
-import goryachev.common.util.CFactory;
+import goryachev.common.util.CList;
 import goryachev.common.util.CPlatform;
 import goryachev.common.util.Log;
+import goryachev.common.util.Rex;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -28,34 +37,42 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.ToolTipManager;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.InsetsUIResource;
 
 
+/** defines color/font theme and forces a platform-independent look and feel */
 public class Theme
 {
-	private static float gradientFactor = 0.84f;
-	private static float BORDER_FACTOR = 0.75f;
+	public static final ThemeColor COLOR_PANEL_BG = ThemeColor.create(ThemeKey.COLOR_PANEL_BG);
+	public static final ThemeColor COLOR_PANEL_FG = ThemeColor.create(ThemeKey.COLOR_PANEL_FG);
+	public static final ThemeColor COLOR_TOOLBAR = ThemeColor.create(ThemeKey.COLOR_TOOLBAR);
+	public static final ThemeColor COLOR_TEXT_BG = ThemeColor.create(ThemeKey.COLOR_TEXT_BG);
+	public static final ThemeColor COLOR_TEXT_FG = ThemeColor.create(ThemeKey.COLOR_TEXT_FG);
+	public static final ThemeColor COLOR_TARGET = ThemeColor.create(ThemeKey.COLOR_TARGET);
+	public static final ThemeColor COLOR_FOCUS = ThemeColor.create(ThemeKey.COLOR_FOCUS);
+	public static final ThemeColor COLOR_LINE = ThemeColor.create(ThemeKey.COLOR_LINE);
+	public static final ThemeColor COLOR_LINK = ThemeColor.create(ThemeKey.COLOR_LINK);
+	public static final ThemeColor COLOR_FIELD_BG = ThemeColor.create(ThemeKey.COLOR_FIELD_BG);
+	public static final ThemeColor COLOR_FIELD_FG = ThemeColor.create(ThemeKey.COLOR_FIELD_FG);
+	public static final ThemeColor COLOR_BUTTON_AFFIRM = ThemeColor.create(ThemeKey.COLOR_BUTTON_AFFIRM);
+	public static final ThemeColor COLOR_BUTTON_DESTRUCTIVE = ThemeColor.create(ThemeKey.COLOR_BUTTON_DESTRUCTIVE);
+	public static final ThemeColor COLOR_GRID = ThemeColor.create(ThemeKey.COLOR_GRID);
+	public static final ThemeColor COLOR_TEXT_SELECTION_BG = ThemeColor.create(ThemeKey.COLOR_TEXT_SELECTION_BG);
+	public static final ThemeColor COLOR_TEXT_SELECTION_FG = ThemeColor.create(ThemeKey.COLOR_TEXT_SELECTION_FG);
+	public static final ThemeColor COLOR_TOOL_TIP_BG = ThemeColor.create(ThemeKey.COLOR_TOOL_TIP_BG);
 	
+	private static float gradientFactor = 0.84f;
+	
+	private static Border border10;
+	private static Border fieldBorder;
 	private static Border lineBorder;
-	private static Border normalBorder;
+	private static Border noBorder;
 	private static Border raisedBevelBorder;
 	private static Border loweredBevelBorder;
 
-	public static final Border BORDER_10 = new CBorder(10);
-	public static final Border BORDER_NONE = new CBorder(0);
-	public static final Border BORDER_EMPTY = new CBorder(2, 4);
-	public static final Border BORDER_FIELD = new CFieldBorder();
-	public static final Border BORDER_LINE = new CBorder(lineColor());
-
-	protected static CFactory<? extends CToolBar> toolbarFactory;
-	protected static CFactory<? extends JButton> toolbarButtonFactory;
 	protected static Dimension preferredToolbarDimensions;
 
 
@@ -67,10 +84,6 @@ public class Theme
 		}
 		catch(Exception e)
 		{ }
-
-		UIDefaults defs = UIManager.getLookAndFeelDefaults();
-		
-		fixFonts(defs);
 		
 		try
 		{
@@ -81,387 +94,268 @@ public class Theme
 			Log.err(e);
 		}
 		
-		// panel background
-		Color c = uiColor(panelBG());
-		defs.put("Button.background", c);
-		defs.put("Button.light", c);
-		defs.put("CheckBox.background", c);
-		defs.put("CheckBox.light", c);
-		defs.put("ColorChooser.background", c);
-		defs.put("ColorChooser.swatchesDefaultRecentColor", c);
-		defs.put("ComboBox.buttonBackground", c);
-		defs.put("ComboBox.disabledBackground", c);
-		defs.put("EditorPane.disabledBackground", c);
-		defs.put("FormattedTextField.disabledBackground", c);
-		defs.put("FormattedTextField.inactiveBackground", c);
-		defs.put("InternalFrame.activeBorderColor", c);
-		defs.put("InternalFrame.borderColor", c);
-		defs.put("InternalFrame.borderLight", c);
-		defs.put("InternalFrame.inactiveBorderColor", c);
-		defs.put("InternalFrame.inactiveTitleForeground", c);
-		defs.put("InternalFrame.minimizeIconBackground", c);
-		defs.put("InternalFrame.resizeIconHighlight", c);
-		defs.put("Label.background", c);
-		defs.put("Menu.background", c);
-		defs.put("MenuBar.background", c);
-		defs.put("OptionPane.background", c);
-		defs.put("Panel.background", c);
-		defs.put("PasswordField.disabledBackground", c);
-		defs.put("PasswordField.inactiveBackground", c);
-		defs.put("ProgressBar.background", c);
-		defs.put("ProgressBar.selectionForeground", c);
-		defs.put("RadioButton.background", c);
-		defs.put("RadioButton.light", c);
-		defs.put("RadioButtonMenuItem.background", c);
-		defs.put("ScrollBar.background", c);
-		defs.put("ScrollBar.foreground", c);
-		defs.put("ScrollBar.thumb", c);
-		defs.put("ScrollBar.trackForeground", c);
-		defs.put("ScrollPane.background", c);
-		defs.put("Slider.background", c);
-		defs.put("Slider.foreground", c);
-		defs.put("Spinner.background", c);
-		defs.put("Spinner.foreground", c);
-		defs.put("SplitPane.background", c);
-		defs.put("TabbedPane.background", c);
-		defs.put("TabbedPane.light", c);
-		defs.put("TabbedPane.contentAreaColor", c);
-		defs.put("Table.light", c);
-		defs.put("TableHeader.background", c);
-		defs.put("TextArea.disabledBackground", c);
-		defs.put("TextField.disabledBackground", c);
-		defs.put("TextField.inactiveBackground", c);
-		defs.put("TextField.light", c);
-		defs.put("TextPane.disabledBackground", c);
-		defs.put("ToggleButton.background", c);
-		defs.put("ToggleButton.light", c);
-		defs.put("ToolBar.background", c);
-		defs.put("ToolBar.dockingBackground", c);
-		defs.put("ToolBar.floatingBackground", c);
-		defs.put("ToolBar.light", c);
-		defs.put("Viewport.background", c);
-		defs.put("activeCaptionBorder", c);
-		defs.put("control", c);
-		defs.put("controlHighlight", c);
-		defs.put("inactiveCaptionBorder", c);
-		defs.put("inactiveCaptionText", c);
-		defs.put("menu", c);
-		defs.put("scrollbar", c);
+		// init default colors and borders
+		theme();
 		
-		// selection foreground
-		c = textFG();
-		defs.put("CheckBoxMenuItem.selectionForeground", c);
-		defs.put("ComboBox.selectionForeground", c);
-		defs.put("EditorPane.selectionForeground", c);
-		defs.put("FormattedTextField.selectionForeground", c);
-		defs.put("List.selectionForeground", c);
-		defs.put("Menu.selectionForeground", c);
-		defs.put("MenuBar.selectionForeground", c);
-		defs.put("MenuItem.selectionForeground", c);
-		defs.put("PasswordField.selectionForeground", c);
-		defs.put("PopupMenu.selectionForeground", c);
-		defs.put("ProgressBar.selectionForeground", c);
-		defs.put("RadioButtonMenuItem.selectionForeground", c);
-		defs.put("Table.selectionForeground", c);
-		defs.put("TextArea.selectionForeground", c);
-		defs.put("TextField.selectionForeground", c);
-		defs.put("TextPane.selectionForeground", c);
-		defs.put("Tree.selectionForeground", c);
+		// borders
+		fieldBorder = new CFieldBorder();
+		border10 = new CBorder(10);
+		noBorder = new CBorder(0);
+		lineBorder = new CBorder(COLOR_LINE);
 		
-		// selection background
-		c = selectionColor();
-		defs.put("CheckBoxMenuItem.selectionBackground", c);
-		defs.put("ComboBox.selectionBackground", c);
-		defs.put("EditorPane.selectionBackground", c);
-		defs.put("FormattedTextField.selectionBackground", c);
-		defs.put("List.selectionBackground", c);
-		defs.put("Menu.selectionBackground", c);
-		defs.put("MenuBar.selectionBackground", c);
-		defs.put("MenuItem.selectionBackground", c);
-		defs.put("PasswordField.selectionBackground", c);
-		defs.put("PopupMenu.selectionBackground", c);
-		defs.put("ProgressBar.selectionBackground", c);
-		defs.put("RadioButtonMenuItem.selectionBackground", c);
-		defs.put("Table.selectionBackground", c);
-		defs.put("TextArea.selectionBackground", c);
-		defs.put("TextField.selectionBackground", c);
-		defs.put("TextPane.selectionBackground", c);
-		defs.put("Tree.selectionBackground", c);
+		UIDefaults d = UIManager.getLookAndFeelDefaults();
 		
-		// inactive color
-		c = UI.mix(textFG(), 0.5, textBG());
-		defs.put("TextField.inactiveForeground", c);
-		
+		AgButtonUI.init(d);
+		AgCheckBoxUI.init(d);
+		AgComboBoxUI.init(d);
+		AgMenuBarUI.init(d);
+		AgMenuItemUI.init(d);
+		AgPanelUI.init(d);
+		AgPopupMenuUI.init(d);
+		AgPopupSeparatorUI.init(d);
+		AgRadioButtonUI.init(d);
+		AgScrollBarUI.init(d);
+		AgScrollPaneUI.init(d);
+		AgSeparatorUI.init(d);
+		AgSplitPaneUI.init(d);
+		AgTabbedPaneUI.init(d);
+		AgTableHeaderUI.init(d);
+		AgToolBarUI.init(d);
+		AgToolTipUI.init(d);
+		AgTreeUI.init(d);
+
 		if(CPlatform.isMac())
 		{
 			// margins
-			defs.put("EditorPane.margin", new InsetsUIResource(3, 3, 3, 3));
-			defs.put("TextPane.margin", new InsetsUIResource(3, 3, 3, 3));
+			d.put("EditorPane.margin", new InsetsUIResource(3, 3, 3, 3));
+			d.put("TextPane.margin", new InsetsUIResource(3, 3, 3, 3));
 			
 			// ui
-			defs.put("MenuBarUI", "javax.swing.plaf.basic.BasicMenuBarUI");
-			defs.put("MenuUI", "javax.swing.plaf.basic.BasicMenuUI");
-			defs.put("Menu.background", panelBG());
-			defs.put("Menu.useMenuBarBackgroundForTopLevel", Boolean.TRUE);
-			
-			// TODO
-			defs.put("ComboBox.background", Color.white);
-			
-			defs.put("Table.foreground", Color.black);
-			defs.put("Table.selectionForeground", Color.black);
-			
-			//defs.put("PopupMenu.background", panelBG());
-			defs.put("PopupMenu.foreground", textFG());
-			//"ComboBox.foreground", 
-			//"ComboBox.font"
-			
-			// no more aqua buttons
-			defs.put("ButtonUI", "javax.swing.plaf.basic.BasicButtonUI");
-			
-			CMenuItemUI.init(defs);
-			CMenuBarUI.init(defs);
+			d.put("MenuUI", "javax.swing.plaf.basic.BasicMenuUI");
+			d.put("Menu.background", Theme.panelBG());
+			d.put("Menu.useMenuBarBackgroundForTopLevel", Boolean.TRUE);
 		}
-		else if(CPlatform.isLinux())
-		{
-			defs.put("PopupMenu.border", new CBorder(Color.gray));
-			
-			// buttons
-			defs.put("ButtonUI", "javax.swing.plaf.basic.BasicButtonUI");
-		}
-
-		defs.put("MenuBar.border", new CBorder());
+		
+		// label
+		d.put("Label.background", Theme.panelBG());
+		d.put("Label.foreground", Theme.textFG());
+		
+		// menu
+		d.put("Menu.background", Theme.panelBG());
+		d.put("Menu.foreground", Theme.textFG());
 		
 		// table
-		defs.put("Table.gridColor", tableGridColor());
-		//defs.put("Table.cellNoFocusBorder", new CBorder.UIResource(2,1));
+		d.put("Table.background", Theme.COLOR_TEXT_BG);
+		d.put("Table.foreground", Theme.COLOR_TEXT_FG);
+		d.put("Table.selectionBackground", Theme.COLOR_TEXT_SELECTION_BG);
+		d.put("Table.selectionForeground", Theme.COLOR_TEXT_SELECTION_FG);
+		d.put("Table.gridColor", Theme.gridColor());
+		//d.put("Table.cellNoFocusBorder", new CBorder.UIResource(2,1));
 		
-		// text fields
-		//defs.put("PasswordFieldUI.border", BORDER_FIELD);
-		defs.put("TextField.border", BORDER_FIELD);
-		defs.put("ComboBox.border", BORDER_FIELD);
+		// text area
+		d.put("TextArea.background", Theme.textBG());
+		d.put("TextArea.foreground", Theme.textFG());
 		
-		CButtonUI.init(defs);
-		CCheckBoxUI.init(defs);
-		CComboBoxUI.init(defs);
-		CRadioButtonUI.init(defs);
-		CScrollPaneUI.init(defs);
-		CScrollBarUI.init(defs);
-		CSplitPaneUI.init(defs);
-		CTabbedPaneUI.init(defs);
-		CTableHeaderUI.init(defs);
-		CTreeUI.init(defs);
+		// text field
+		d.put("TextField.border", fieldBorder);
+		d.put("TextField.background", Theme.textBG());
+		d.put("TextField.foreground", Theme.textFG());
+		d.put("TextField.inactiveBackground", ThemeColor.create(ThemeKey.COLOR_TEXT_BG, 0.5, ThemeKey.COLOR_PANEL_BG));
+		d.put("TextField.inactiveForeground", ThemeColor.create(ThemeKey.COLOR_TEXT_FG, 0.5, ThemeKey.COLOR_PANEL_BG));
 		
-		// configure tooltips
-		ToolTipManager tm = ToolTipManager.sharedInstance();
-		tm.setInitialDelay(50);
-		tm.setDismissDelay(Integer.MAX_VALUE);
+		// text pane
+		d.put("TextPane.background", Theme.textBG());
+		d.put("TextPane.foreground", Theme.textFG());
 		
-		// standard factories
-		toolbarFactory = new CFactory<CToolBar>()
-		{
-			public CToolBar construct()
-			{
-				if(preferredToolbarDimensions == null)
-				{
-					CToolBar t = new CToolBar();
-					t.add(new CButton("W"));
-					t.add(new CComboBox());
-					t.add(new JLabel("W"));
-					preferredToolbarDimensions = t.getPreferredSize();
-					preferredToolbarDimensions.width = -1;
-				}
-				
-				CToolBar t = new CToolBar();
-				t.setMinimumSize(preferredToolbarDimensions);
-				t.setPreferredSize(preferredToolbarDimensions);
-				return t;
-			}
-		};
-		
-		toolbarButtonFactory = new CFactory<JButton>()
-		{
-			public JButton construct()
-			{
-				CButton t = new CButton();
-				t.setFocusable(false);
-				return t;
-			}
-		};
+		//d.put("PasswordFieldUI.border", BORDER_FIELD);
 	}
 		
-
-	private static void fixFonts(UIDefaults defs)
-	{
-		Font font = getPanelFont();
-		int size = font.getSize();
-
-		// force all fonts to have the same size and no bold attribute
-		for(Object key: defs.keySet())
-		{
-			if(key instanceof String)
-			{
-				String k = key.toString();
-				if(k.endsWith(".font"))
-				{
-					Font f = defs.getFont(key);
-					if(f != null)
-					{
-						f = f.deriveFont(Font.PLAIN, size);
-						defs.put(key, f);
-					}
-				}
-			}
-		}
-	}
-
 
 	public static Color panelBG()
 	{
-		return ThemeOptions.panelBG.get();
+		return COLOR_PANEL_BG;
 	}
 	
+
+	public static Color panelFG()
+	{
+		return COLOR_PANEL_FG;
+	}
+
 	
 	public static Color toolbarColor()
 	{
-		return ThemeOptions.toolbarBG.get();
-	}
-
-
-	/** secondary text on panel not as visible as normal FG */ 
-	public static Color panelFG()
-	{
-		return panelBG().darker();
+		return COLOR_TOOLBAR;
 	}
 
 
 	public static Color textBG()
 	{
-		return Color.white;
+		return COLOR_TEXT_BG;
 	}
 
 
 	public static Color textFG()
 	{
-		return Color.black;
+		return COLOR_TEXT_FG;
 	}
 	
 	
-	public static Color hoverColor()
+	/** indicates positional target: focused text field (TODO), current table row and column */
+	public static Color targetColor()
 	{
-		return ThemeOptions.hoverColor.get();
+		return COLOR_TARGET;
 	}
 	
 	
+	/** focus dotted border color */
 	public static Color focusColor()
 	{
-		return ThemeOptions.focusColor.get();
+		return COLOR_FOCUS;
 	}
 
 
-	/** darker than panel packground */
+	/** border line color */
 	public static Color lineColor()
 	{
-//		Color c = UI.mix(48, Color.black, panelBG());
-//		return c;
-		return ThemeOptions.lineColor.get();
+		return COLOR_LINE;
 	}
 
 
 	public static Color linkColor()
 	{
-		return ThemeOptions.linkColor.get();
+		return COLOR_LINK;
 	}
 	
 	
+	public static Color fieldBG()
+	{
+		return COLOR_FIELD_BG;
+	}
+	
+	
+	public static Color fieldFG()
+	{
+		return COLOR_FIELD_FG;
+	}
+	
+	
+	public static Color buttonHighlight()
+	{
+		return COLOR_BUTTON_AFFIRM;
+	}
+	
+	
+	public static Color alternativeButtonHighlight()
+	{
+		return COLOR_BUTTON_DESTRUCTIVE;
+	}
+	
+	
+	public static Color gridColor()
+	{
+		return COLOR_GRID;
+	}
+
+
+	public static Color textSelectionBG()
+	{
+		return COLOR_TEXT_SELECTION_BG;
+	}
+
+
+	public static Color textSelectionFG()
+	{
+		return COLOR_TEXT_SELECTION_FG;
+	}
+	
+	
+	public static Color toolTipBG()
+	{
+		return COLOR_TOOL_TIP_BG;
+	}
+	
+	
+	public static boolean isDark()
+	{
+		return theme().isDark();
+	}
+	
+	
+	// FIX use ThemeColor-derived colors
+	@Deprecated
+	public static Color darker(Color c)
+	{
+		return ColorTools.darker(c, gradientFactor);
+	}
+	@Deprecated
+	public static Color darker(Color c, float factor)
+	{
+		return ColorTools.darker(c, gradientFactor * factor);
+	}
+	@Deprecated
+	public static Color brighter(Color c)
+	{
+		return ColorTools.brighter(c, gradientFactor);
+	}
+	@Deprecated
+	public static Color brighter(Color c, float factor)
+	{
+		return ColorTools.brighter(c, gradientFactor * factor);
+	}
+	
+
 	public static float getGradientFactor()
 	{
 		return gradientFactor;
 	}
 	
 	
-	public static Color darker(Color c)
-	{
-		return ColorTools.darker(c, gradientFactor);
-	}
-	
-	
-	public static Color darker(Color c, float factor)
-	{
-		return ColorTools.darker(c, gradientFactor * factor);
-	}
-	
-	
-	public static Color brighter(Color c)
-	{
-		return ColorTools.brighter(c, gradientFactor);
-	}
-	
-	
-	public static Color brighter(Color c, float factor)
-	{
-		return ColorTools.brighter(c, gradientFactor * factor);
-	}
-	
-	
 	public static Border lineBorder()
 	{
-		if(lineBorder == null)
-		{
-			lineBorder = new LineBorder(lineColor(), 1); 
-		}
 		return lineBorder;
 	}
 	
 	
-	public static Border normalBorder()
+	public static Border fieldBorder()
 	{
-		if(normalBorder == null)
-		{
-			normalBorder = new CompoundBorder(lineBorder(), BORDER_EMPTY);
-		}
-		return normalBorder;
+		return fieldBorder;
 	}
-
-
-	public static Font getPanelFont()
+	
+	
+	public static Border border10()
 	{
-		Font f = UIManager.getLookAndFeelDefaults().getFont("Panel.font");
-		// strip UIResource and kill bold attribute
-		return f.deriveFont(Font.PLAIN, f.getSize2D());
+		return border10;
+	}
+	
+	
+	public static Border noBorder()
+	{
+		return noBorder;
 	}
 
 
 	public static Font plainFont()
 	{
-		return ThemeOptions.fontOption.get();
+		return theme().getFont(ThemeKey.FONT_BASE);
 	}
 
 
 	public static Font monospacedFont()
 	{
-		int size;
-		if(CPlatform.isWindows())
-		{
-			size = 12;
-		}
-		else
-		{
-			size = plainFont().getSize();
-		}
-		return new Font("Monospaced", Font.PLAIN, size);
+		return theme().getFont(ThemeKey.FONT_MONOSPACED);
 	}
 
 
 	public static Font boldFont()
 	{
-		return plainFont().deriveFont(Font.BOLD);
+		return theme().getFont(ThemeKey.FONT_BOLD);
 	}
 
 
 	public static Font titleFont()
 	{
-		Font f = plainFont();
-		return f.deriveFont(Font.BOLD, f.getSize() * 1.6f);
+		return theme().getFont(ThemeKey.FONT_TITLE);
 	}
 
 	
@@ -471,78 +365,45 @@ public class Theme
 	}
 	
 	
-	public static Color fieldBG()
-	{
-		return ThemeOptions.fieldBG.get();
-	}
-	
-	
-	public static Color fieldFG()
-	{
-		return ThemeOptions.fieldFG.get();
-	}
-	
-	
-	public static Color buttonHighlight()
-	{
-		return ThemeOptions.buttonHighlight.get();
-	}
-	
-	
-	public static Color alternativeButtonHighlight()
-	{
-		return ThemeOptions.buttonHighlightAlternative.get();
-	}
-	
-	
-	public static Color tableGridColor()
-	{
-		return ThemeOptions.tableGrid.get();
-	}
-	
-	
-	public static Color selectionColor()
-	{
-		return ThemeOptions.selectionColor.get();
-	}
-	
-	
-	public static Border raisedBevelBorder()
-	{
-		if(raisedBevelBorder == null)
-		{
-			raisedBevelBorder = new CBevelBorder(BORDER_FACTOR, false);
-		}
-		return raisedBevelBorder;
-	}
-	
-	
-	public static Border loweredBevelBorder()
-	{
-		if(loweredBevelBorder == null)
-		{
-			loweredBevelBorder = new CBevelBorder(BORDER_FACTOR, true);
-		}
-		return loweredBevelBorder;
-	}
-	
-	
-	public static void setToolbarFactory(CFactory<? extends CToolBar> f)
-	{
-		if(f == null)
-		{
-			throw new NullPointerException("null toolbar factory");
-		}
-		toolbarFactory = f;
-	}
+//	public static Border raisedBevelBorder()
+//	{
+//		if(raisedBevelBorder == null)
+//		{
+//			raisedBevelBorder = new CBevelBorder(BORDER_FACTOR, false);
+//		}
+//		return raisedBevelBorder;
+//	}
+//	
+//	
+//	public static Border loweredBevelBorder()
+//	{
+//		if(loweredBevelBorder == null)
+//		{
+//			loweredBevelBorder = new CBevelBorder(BORDER_FACTOR, true);
+//		}
+//		return loweredBevelBorder;
+//	}
 	
 
 	public static CToolBar toolbar()
 	{
-		return toolbarFactory.construct();
+		if(preferredToolbarDimensions == null)
+		{
+			CToolBar t = new CToolBar();
+			t.add(new CButton("W"));
+			t.add(new CComboBox());
+			t.add(new JLabel("W"));
+			preferredToolbarDimensions = t.getPreferredSize();
+			preferredToolbarDimensions.width = -1;
+		}
+
+		CToolBar t = new CToolBar();
+		t.setMinimumSize(preferredToolbarDimensions);
+		t.setPreferredSize(preferredToolbarDimensions);
+		return t;
 	}
-	
-	
+
+
 	public static CMenuBar menubar()
 	{
 		CMenuBar b = new CMenuBar();
@@ -551,19 +412,11 @@ public class Theme
 	}
 	
 	
-	public static void setToolbarButtonFactory(CFactory<? extends JButton> f)
-	{
-		if(f == null)
-		{
-			throw new NullPointerException("null toolbar factory");
-		}
-		toolbarButtonFactory = f;
-	}
-	
-	
 	public static JButton tbutton()
 	{
-		return toolbarButtonFactory.construct();
+		CButton t = new CButton();
+		t.setFocusable(false);
+		return t;
 	}
 
 
@@ -593,12 +446,6 @@ public class Theme
 		b.setText(text);
 		b.setToolTipText(tooltip);
 		return b;
-	}
-	
-	
-	protected static Color uiColor(Color c)
-	{
-		return new ColorUIResource(c);
 	}
 	
 	
@@ -714,5 +561,54 @@ public class Theme
 	{
 		// TODO depends on font size
 		return 70;
+	}
+	
+	
+	private static ATheme theme()
+	{
+		return ATheme.getTheme();
+	}
+
+
+	/** returns theme color specified either by a ThemeKey or a Color */
+	public static Color getColor(Object x)
+	{
+		if(x instanceof ThemeKey)
+		{
+			return theme().getColor((ThemeKey)x);
+		}
+		else if(x instanceof Color)
+		{
+			return (Color)x;
+		}
+		else
+		{
+			throw new Rex("must be ThemeKey or Color");
+		}
+	}
+
+
+	/** returns theme font specified by the key */
+	public static Font getFont(ThemeKey key)
+	{
+		return theme().getFont(key);
+	}
+	
+	
+	public static void setTheme(String name)
+	{
+		ATheme.setTheme(name, true);
+	}
+	
+	
+	public static String getTheme()
+	{
+		return ATheme.getTheme().getName();
+	}
+	
+	
+	public static CList<String> getAvailableThemes()
+	{
+		return ATheme.getAvailableThemeNames();
 	}
 }

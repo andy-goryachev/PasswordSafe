@@ -4,6 +4,7 @@ import goryachev.common.ui.theme.CButtonPanelLayout;
 import goryachev.common.util.Rex;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.LayoutManager;
 import javax.swing.Action;
@@ -44,9 +45,17 @@ public class CButtonPanel
 	}
 	
 	
+	/** sets standard theme border */
+	public void border()
+	{
+		setBorder(Theme.border10());
+	}
+	
+	
+	/** sets standard theme border */
 	public void setBorder()
 	{
-		setBorder(Theme.BORDER_10);
+		border();
 	}
 	
 	
@@ -251,5 +260,17 @@ public class CButtonPanel
 				}
 			}
 		}
+	}
+	
+	
+	public void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+	}
+	
+	
+	public void setBackground(Color c)
+	{
+		super.setBackground(c);
 	}
 }

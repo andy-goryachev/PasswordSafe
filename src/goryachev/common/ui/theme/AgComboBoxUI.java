@@ -1,8 +1,8 @@
 // Copyright (c) 2009-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
 import goryachev.common.ui.CBorder;
-import goryachev.common.ui.CSkin;
 import goryachev.common.ui.Theme;
+import goryachev.common.ui.ThemeKey;
 import goryachev.common.ui.UI;
 import java.awt.Color;
 import java.awt.Container;
@@ -18,58 +18,52 @@ import javax.swing.JComponent;
 import javax.swing.ListCellRenderer;
 import javax.swing.UIDefaults;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.ComboPopup;
 
 
-public class CComboBoxUI
+public class AgComboBoxUI
 	extends BasicComboBoxUI
 {
 	public static final Border BORDER_EDITOR = new CFieldBorder(false);
-	public static final CButtonBorder BORDER_BUTTON = new CButtonBorder(false,true,false,false);
+	public static final Border BORDER_ARROW = new CBorder(3);
+	public static final CButtonBorder BORDER_BUTTON = new CButtonBorder(false, false, false, false);
 	public static final int DEFAULT_BUTTON_WIDTH = 7;
-	
-	protected static int arrowButtonWidth = DEFAULT_BUTTON_WIDTH;
-	protected static Insets arrowButtonInsets = new Insets(1,1,1,1);
-	public static CSkin SKIN = new CButtonSkin();
-	public static final String IS_TABLE_CELL_EDITOR = "JComboBox.isTableCellEditor"; // should not be declared private in the base class
-	private boolean inTable;
-	
-	
-	public static void init(UIDefaults defs)
-	{
-		defs.put("ComboBoxUI", CComboBoxUI.class.getName());
-		defs.put("ComboBox.padding", new Insets(0,0,0,0));
-		defs.put("ComboBox.border", new CBorder(Theme.lineColor()));
-	}
-	
-	
-//	protected void installDefaults()
-//	{
-//    	// FIX 
-//		LookAndFeel.installColorsAndFont(comboBox, "ComboBox.background", "ComboBox.foreground", "ComboBox.font");
-//		LookAndFeel.installBorder(comboBox, "ComboBox.border");
-//		LookAndFeel.installProperty(comboBox, "opaque", Boolean.TRUE);
-//		Insets ins = UIManager.getInsets("ComboBox.padding");
-//	}
 
-	
-	public CComboBoxUI()
-	{ }
-	
+	protected static int arrowButtonWidth = DEFAULT_BUTTON_WIDTH;
+	protected static Insets arrowButtonInsets = new Insets(1, 1, 1, 1);
+	protected static Color buttonAreaBG = ThemeColor.shadow(ThemeKey.COLOR_TEXT_BG, 0.1);
+	public static final String IS_TABLE_CELL_EDITOR = "JComboBox.isTableCellEditor"; // should be public in the base class
+	private boolean inTable;
+
+
+	public static void init(UIDefaults d)
+	{
+		d.put("ComboBoxUI", AgComboBoxUI.class.getName());
+		d.put("ComboBox.padding", new Insets(0, 0, 0, 0));
+		d.put("ComboBox.border", Theme.lineBorder());
+		d.put("ComboBox.background", Theme.textBG());
+		d.put("ComboBox.foreground", Theme.textFG());
+		d.put("ComboBox.opaque", Boolean.TRUE);
+	}
+
+
+	public AgComboBoxUI()
+	{
+	}
+
 
 	protected JButton createArrowButton()
 	{
 		return createDefaultArrowButton();
 	}
-	
-	
+
+
 	public static JButton createDefaultArrowButton()
 	{
-		JButton b = new CArrowButton(CArrowButton.SOUTH)
+		JButton b = new AgArrowButton(AgArrowButton.SOUTH)
 		{
 			public void paint(Graphics g)
 			{
@@ -78,21 +72,10 @@ public class CComboBoxUI
 				Color origColor = g.getColor();
 				boolean isPressed = getModel().isPressed();
 				boolean isEnabled = isEnabled();
-
-				SKIN.paint(g, this);
-				//GradientPainter.paint(g, true, w, h, getBackground(), 50, 50, Theme.getGradientFactor(), false, false);
-				//GradientPainter.paintVertical(g, 0, 0, w, h, getBackground(), 50, )
-
-				// FIX partial button border
-//				if(isPressed)
-//				{
-//					Theme.loweredBevelBorder().paintBorder(this, g, 0, 0, w, h);
-//				}
-//				else
-//				{
-//					Theme.raisedBevelBorder().paintBorder(this, g, 0, 0, w, h);
-//				}
 				
+				g.setColor(buttonAreaBG);
+				g.fillRect(0, 0, w, h);
+
 				BORDER_BUTTON.setPressed(isPressed);
 				BORDER_BUTTON.paintBorder(this, g, 0, 0, w, h);
 
@@ -115,10 +98,10 @@ public class CComboBoxUI
 				g.setColor(origColor);
 			}
 		};
+
 		b.setName("ComboBox.arrowButton");
 		b.setMargin(arrowButtonInsets);
-		b.setBorder(new EmptyBorder(3,3,3,3));
-		CSkin.set(b, SKIN);
+		b.setBorder(BORDER_ARROW);
 		return b;
 	}
 	
@@ -131,7 +114,7 @@ public class CComboBoxUI
 
 	public static ComponentUI createUI(JComponent c)
 	{
-		return new CComboBoxUI();
+		return new AgComboBoxUI();
 	}
 
 
@@ -225,24 +208,24 @@ public class CComboBoxUI
 		int height = c.getHeight();
 
 		Insets insets = getInsets();
-		int buttonHeight = height - (insets.top + insets.bottom);
-		int buttonWidth = arrowButtonWidth;
+		int bh = height - (insets.top + insets.bottom);
+		int bw = arrowButtonWidth;
 		
 		if(arrowButton != null)
 		{
-			Insets arrowInsets = arrowButton.getInsets();
-			buttonWidth = arrowButtonWidth + arrowInsets.left + arrowInsets.right;
+			Insets buttonInsets = arrowButton.getInsets();
+			bw = arrowButtonWidth + buttonInsets.left + buttonInsets.right;
 		}
 
 		if(arrowButton != null)
 		{
 			if(UI.isLeftToRight(c))
 			{
-				arrowButton.setBounds(width - (insets.right + buttonWidth), insets.top, buttonWidth, buttonHeight);
+				arrowButton.setBounds(width - (insets.right + bw), insets.top, bw, bh);
 			}
 			else
 			{
-				arrowButton.setBounds(insets.left, insets.top, buttonWidth, buttonHeight);
+				arrowButton.setBounds(insets.left, insets.top, bw, bh);
 			}
 		}
 		
@@ -274,7 +257,6 @@ public class CComboBoxUI
 
 	protected ListCellRenderer createRenderer()
 	{
-		BasicComboBoxRenderer r = new BasicComboBoxRenderer();
-		return r;
+		return new BasicComboBoxRenderer();
 	}
 }

@@ -165,7 +165,6 @@ public class CButtonBorder
 		
 		if(pressed)
 		{
-			//g.setColor(Theme.darker(Theme.panelBG()));
 			g.setColor(Theme.panelBG().darker().darker());
 			
 			g.drawLine

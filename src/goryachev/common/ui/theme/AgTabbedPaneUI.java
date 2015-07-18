@@ -2,40 +2,79 @@
 package goryachev.common.ui.theme;
 import goryachev.common.ui.Theme;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.KeyboardFocusManager;
+import java.awt.Rectangle;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
-import javax.swing.LookAndFeel;
 import javax.swing.UIDefaults;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
+import javax.swing.text.View;
 
 
-public class CTabbedPaneUI
+public class AgTabbedPaneUI
 	extends BasicTabbedPaneUI
 {
 	private static Set managingFocusForwardTraversalKeys;
 	private static Set managingFocusBackwardTraversalKeys;
 
 
-	public static void init(UIDefaults defs)
+	public static void init(UIDefaults d)
 	{
-		defs.put("TabbedPane.contentOpaque", Boolean.TRUE);	
+		d.put("TabbedPaneUI", AgTabbedPaneUI.class.getName());
+		d.put("TabbedPane.contentOpaque", Boolean.TRUE);
+		d.put("TabbedPane.opaque", Boolean.FALSE);
+		d.put("TabbedPane.selectedForeground", Theme.textFG());
+		d.put("TabbedPane.foreground", Theme.textFG());
+		
+//		TabbedPane.ancestorInputMap = InputMapUIResource
+//		TabbedPane.background = ColorUIResource(B8CFE5)
+//		TabbedPane.borderHightlightColor = ColorUIResource(6382BF)
+//		TabbedPane.contentAreaColor = ColorUIResource(C8DDF2)
+//		TabbedPane.contentBorderInsets = Insets(t=4,l=2,b=3,r=3)
+//		TabbedPane.contentOpaque = true
+//		TabbedPane.darkShadow = ColorUIResource(7A8A99)
+//		TabbedPane.focus = ColorUIResource(6382BF)
+//		TabbedPane.focusInputMap = InputMapUIResource
+//		TabbedPane.font = FontUIResource(Dialog,12,bold)
+//		TabbedPane.foreground = PrintColorUIResource(333333)
+//		TabbedPane.highlight = ColorUIResource(FFFFFF)
+//		TabbedPane.labelShift = 1
+//		TabbedPane.light = ColorUIResource(EEEEEE)
+//		TabbedPane.selected = ColorUIResource(C8DDF2)
+//		TabbedPane.selectedLabelShift = -1
+//		TabbedPane.selectedTabPadInsets = InsetsUIResource(t=2,l=2,b=2,r=1)
+//		TabbedPane.selectHighlight = ColorUIResource(FFFFFF)
+//		TabbedPane.selectionFollowsFocus = true
+//		TabbedPane.shadow = ColorUIResource(B8CFE5)
+//		TabbedPane.tabAreaBackground = ColorUIResource(DADADA)
+//		TabbedPane.tabAreaInsets = Insets(t=2,l=2,b=0,r=6)
+//		TabbedPane.tabInsets = InsetsUIResource(t=0,l=9,b=1,r=9)
+//		TabbedPane.tabRunOverlay = 2
+//		TabbedPane.tabsOpaque = true
+//		TabbedPane.tabsOverlapBorder = false
+//		TabbedPane.textIconGap = 4
+//		TabbedPane.unselectedBackground = ColorUIResource(EEEEEE)
 	}
 	
-	
+
+	public static ComponentUI createUI(JComponent c)
+	{
+		return new AgTabbedPaneUI();
+	}
+
+
 	protected void installDefaults()
 	{
 		super.installDefaults();
-		
-		// fixes for OS X
-		LookAndFeel.installProperty(tabPane, "opaque", Boolean.FALSE);
 		
 		tabInsets = new Insets(0, 4, 1, 4);
 		selectedTabPadInsets = new Insets(2, 2, 2, 1);
@@ -66,12 +105,6 @@ public class CTabbedPaneUI
 		tabPane.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);
 		tabPane.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, null);
 		super.uninstallDefaults();
-	}
-
-
-	public static ComponentUI createUI(JComponent c)
-	{
-		return new CTabbedPaneUI();
 	}
 
 
@@ -143,5 +176,39 @@ public class CTabbedPaneUI
 	public void setContentBorderInsets(Insets m)
 	{
 		contentBorderInsets = m;
+	}
+
+
+	protected void paintText(Graphics g, int place, Font f, FontMetrics fm, int index, String title, Rectangle r, boolean sel)
+	{
+		g.setFont(f);
+
+		View v = getTextViewForTab(index);
+		if(v != null)
+		{
+			// html
+			v.paint(g, r);
+		}
+		else
+		{
+			// plain text
+			int ix = tabPane.getDisplayedMnemonicIndexAt(index);
+
+			if(tabPane.isEnabled() && tabPane.isEnabledAt(index))
+			{
+				Color fg = tabPane.getForegroundAt(index);
+				g.setColor(fg);
+				ThemeTools.drawStringUnderlineCharAt(tabPane, g, title, ix, r.x, r.y + fm.getAscent());
+			}
+			else
+			{ 
+				// disabled
+				g.setColor(AgButtonUI.DISABLED_SHADOW);
+				ThemeTools.drawStringUnderlineCharAt(tabPane, g, title, ix, r.x, r.y + fm.getAscent());
+				
+				g.setColor(AgButtonUI.DISABLED_FOREGROUND);
+				ThemeTools.drawStringUnderlineCharAt(tabPane, g, title, ix, r.x - 1, r.y + fm.getAscent() - 1);
+			}
+		}
 	}
 }

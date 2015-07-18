@@ -4,7 +4,7 @@ import goryachev.common.ui.CBorder;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.UI;
 import goryachev.common.ui.icons.CIcons;
-import goryachev.common.ui.theme.CTableHeaderUI;
+import goryachev.common.ui.theme.AgTableHeaderUI;
 import goryachev.common.ui.theme.GradientPainter;
 import java.awt.Color;
 import java.awt.Component;
@@ -51,7 +51,7 @@ public class CTableHeaderRenderer
 		Icon sortIcon = null;
 		sorted = false;
 		
-		SortOrder sortOrder = CTableHeaderUI.getColumnSortOrder(table, col);
+		SortOrder sortOrder = AgTableHeaderUI.getColumnSortOrder(table, col);
 		if(sortOrder != null)
 		{
 			switch(sortOrder)

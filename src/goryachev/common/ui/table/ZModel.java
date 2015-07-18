@@ -369,7 +369,19 @@ public class ZModel<V>
 	}
 	
 	
-	public CList<V> getItems()
+	public void removeItems(Iterable<V> items)
+	{
+		if(items != null)
+		{
+			for(V item: items)
+			{
+				removeItem(item);
+			}
+		}
+	}
+	
+	
+	public CList<V> asList()
 	{
 		return new CList(rows);
 	}

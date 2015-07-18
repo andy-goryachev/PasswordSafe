@@ -185,6 +185,16 @@ public class Log
 
 	public static void init(File dir)
 	{
+		// write startup log first
+		try
+		{
+			writeStartupLog(new File(dir, "startup.log"));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
 		// TODO read "logger.config"
 		// configure
 		
@@ -202,15 +212,6 @@ public class Log
 				onShutdown();
 			}
 		});
-		
-		try
-		{
-			writeStartupLog(new File(dir, "startup.log"));
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
 	}
 	
 	

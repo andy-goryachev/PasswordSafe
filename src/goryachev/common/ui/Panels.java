@@ -91,6 +91,14 @@ public class Panels
 	}
 	
 	
+	public static CScrollPane scrollTransparent(Component c)
+	{
+		CScrollPane p = new CScrollPane(c, false);
+		p.setOpaque2(false);
+		return p;
+	}
+	
+	
 	public static CScrollPane scroll(Component c, boolean horScrollBar)
 	{
 		CScrollPane p = new CScrollPane(c, horScrollBar);
@@ -220,4 +228,21 @@ public class Panels
 //		t.setBorder(Theme.BORDER_FIELD);
 //		return t;
 //	}
+	
+	
+	// perhaps this needs own component to be able to set borders, colors
+	public static CPanel info(Icon icon, String text)
+	{
+		JLabel ic = new JLabel(icon);
+		ic.setVerticalAlignment(JLabel.TOP);
+
+		JTextComponent t = textComponent(text);
+		t.setOpaque(false);
+		
+		CPanel p = new CPanel(10, 10);
+		p.border();
+		p.setLeading(ic);
+		p.setCenter(scrollTransparent(t));
+		return p;
+	}
 }

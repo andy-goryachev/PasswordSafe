@@ -1,5 +1,6 @@
 // Copyright (c) 2007-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
+import goryachev.common.ui.theme.AssignMnemonic;
 import goryachev.common.util.Log;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -104,6 +105,8 @@ public class AppFrame
 		UI.resize(this,0.8f);
 		GlobalSettings.opening(this);
 		
+		AssignMnemonic.assign(getRootPane());
+		
 		// TODO open on the monitor where the last focused component is
 		setVisible(true);
 		
@@ -193,6 +196,8 @@ public class AppFrame
 		{
 			cp.add(c, constraints);
 		}
+		
+		UI.validateAndRepaint(this);
 	}
 	
 	

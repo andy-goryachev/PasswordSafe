@@ -1,7 +1,10 @@
 // Copyright (c) 2011-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.ui;
 import goryachev.common.ui.CBorder;
+import goryachev.common.ui.Theme;
+import goryachev.common.ui.ThemeKey;
 import goryachev.common.ui.UI;
+import goryachev.common.ui.theme.ThemeColor;
 import goryachev.common.util.CLanguage;
 import goryachev.common.util.CLanguageCode;
 import java.awt.Color;
@@ -18,6 +21,14 @@ public class OnScreenKeyboard
 	public static final int REGISTER_UPPER  = 1;
 	public static final int REGISTER_ALT    = 2;
 	
+	public static final Color KEY_COLOR = Theme.textBG();
+	public static final Color CTRL_COLOR = ThemeColor.shadow(ThemeKey.COLOR_TEXT_BG, 0.25f);
+	public static final Color HOVER_COLOR = Theme.textBG();
+	public static final Color BORDER_COLOR = Theme.lineColor();
+	public static final Color BACKGROUND_COLOR = ThemeColor.shadow(ThemeKey.COLOR_PANEL_BG, 0.2);
+	public static final Border NORMAL_BORDER = new CBorder(Theme.lineColor());
+	public static final Border HOVER_BORDER = new CBorder(Theme.textFG());
+	
 	// 0 - normal
 	// 1 - shift
 	// 2 - alt graph
@@ -25,17 +36,12 @@ public class OnScreenKeyboard
 	private boolean shift;
 	private boolean capsLock;
 	private boolean altGraph;
-	private Color keyColor = new Color(255, 255, 240);
-	private Color ctrlColor = UI.darker(keyColor, 0.85f);
-	private Color hoverColor = Color.white;
-	private Border normalBorder = new CBorder(Color.gray);
-	private Border hoverBorder = new CBorder(Color.black);
-
+	
 
 	public OnScreenKeyboard()
 	{
-		setBorder(new CBorder(new Color(0, 0, 0, 32), 5, 5));
-		setBackground(new Color(0, 0, 0, 16));
+		setBorder(new CBorder(BORDER_COLOR, 5, 5));
+		setBackground(BACKGROUND_COLOR);
 	}
 	
 	
@@ -50,31 +56,31 @@ public class OnScreenKeyboard
 	
 	public Color getHoverColor()
 	{
-		return hoverColor;
+		return HOVER_COLOR;
 	}
 	
 	
 	public Color getNormalColor()
 	{
-		return hoverColor;
+		return KEY_COLOR;
 	}
 	
 	
 	public Color getCtrlColor()
 	{
-		return ctrlColor;
+		return CTRL_COLOR;
 	}
 	
 	
 	public Border getNormalBorder()
 	{
-		return normalBorder;
+		return NORMAL_BORDER;
 	}
 	
 	
 	public Border getHoverBorder()
 	{
-		return hoverBorder;
+		return HOVER_BORDER;
 	}
 
 

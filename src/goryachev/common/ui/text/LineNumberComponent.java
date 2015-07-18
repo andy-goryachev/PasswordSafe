@@ -1,7 +1,8 @@
 // Copyright (c) 2009-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.text;
 import goryachev.common.ui.CBorder;
-import goryachev.common.ui.Gray;
+import goryachev.common.ui.ThemeKey;
+import goryachev.common.ui.theme.ThemeColor;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -30,6 +31,9 @@ public class LineNumberComponent
 	extends JPanel
 	implements CaretListener, DocumentListener, PropertyChangeListener
 {
+	public static final Color COLOR_BG = ThemeColor.shadow(ThemeKey.COLOR_TEXT_BG, 0.2);
+	public static final Color COLOR_FG = ThemeColor.highlight(ThemeKey.COLOR_TEXT_FG, 0.2);
+	
 	private final static int HEIGHT = Integer.MAX_VALUE - 1000000;
 
 	protected JTextComponent component;
@@ -55,8 +59,8 @@ public class LineNumberComponent
 		component.addCaretListener(this);
 		component.addPropertyChangeListener("font", this);
 		
-		setBackground(new Gray(232));
-		setForeground(Color.gray);
+		setBackground(COLOR_BG);
+		setForeground(COLOR_FG);
 	}
 
 

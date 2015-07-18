@@ -1,6 +1,7 @@
 // Copyright (c) 2009-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
 import goryachev.common.ui.Theme;
+import goryachev.common.ui.ThemeKey;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -8,19 +9,18 @@ import javax.swing.JButton;
 import javax.swing.plaf.UIResource;
 
 
-public class CArrowButton
+public class AgArrowButton
 	extends JButton
 {
 	protected int direction;
 	
-	// TODO derived colors
-	private Color shadow = Theme.darker(Theme.panelBG());
-	private Color darkShadow = Theme.darker(Theme.darker(shadow));
-	private Color highlight = Theme.brighter(Theme.panelBG());
+	private static Color shadow = ThemeColor.shadow(ThemeKey.COLOR_PANEL_BG, 0.2);
+	private static Color darkShadow = ThemeColor.shadow(ThemeKey.COLOR_PANEL_BG, 0.4);
+	private static Color highlight = ThemeColor.highlight(ThemeKey.COLOR_PANEL_BG, 0.2);
 
 
 
-	public CArrowButton(int direction)
+	public AgArrowButton(int direction)
 	{
 		super();
 		setRequestFocusEnabled(false);

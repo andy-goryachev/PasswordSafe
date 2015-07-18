@@ -5,6 +5,7 @@ import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CPanel;
 import goryachev.common.ui.UI;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.event.KeyEvent;
 import javax.swing.JComponent;
 
@@ -44,7 +45,12 @@ public class WizardDialog2
 	/** allows the current card to close the wizard on ESC key */
 	public void closeOnEscape()
 	{
-		JComponent c = panel.getCurrentCard();
+		closeOnEscape(panel.getCurrentCard());
+	}
+	
+	
+	public void closeOnEscape(Container c)
+	{
 		UI.whenInFocusedWindow(c, KeyEvent.VK_ESCAPE, closeDialogAction);
 	}
 	

@@ -2,6 +2,7 @@
 package goryachev.common.ui;
 import goryachev.common.util.FileTools;
 import goryachev.common.util.Log;
+import goryachev.common.util.Reflector;
 import goryachev.common.util.TextTools;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -11,6 +12,7 @@ import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.ByteLookupTable;
 import java.awt.image.ColorConvertOp;
+import java.awt.image.ColorModel;
 import java.awt.image.LookupOp;
 import java.awt.image.RenderedImage;
 import java.awt.image.VolatileImage;
@@ -19,7 +21,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import sun.awt.image.ToolkitImage;
 
 
 public class ImageTools
@@ -211,11 +212,6 @@ public class ImageTools
 		{
 			return false;
 		}
-		else if(im instanceof ToolkitImage)
-		{
-			// FIX gives off warning (use reflection?)
-			return ((ToolkitImage)im).getColorModel().hasAlpha();
-		}
 		else if(im instanceof BufferedImage)
 		{
 			return ((BufferedImage)im).getColorModel().hasAlpha();
@@ -232,11 +228,18 @@ public class ImageTools
 				return false;
 			}
 		}
-		else
+		
+		if("sun.awt.image.ToolkitImage".equals(im.getClass().getName()))
 		{
-			Log.err(new Exception("don't know how to get alpha from " + im.getClass()));
-			return false;
+			ColorModel cm = Reflector.invoke(ColorModel.class, "getColorModel", im);
+			if(cm != null)
+			{
+				return cm.hasAlpha();
+			}
 		}
+		
+		Log.err(new Exception("don't know how to get alpha from " + im.getClass()));
+		return false;
 	}
 	
 	

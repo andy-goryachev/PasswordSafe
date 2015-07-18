@@ -594,13 +594,16 @@ public class CTreeTable<T extends CTreeNode>
 
 	public int rowForItem(T item)
 	{
-		String[] itemPath = item.getPathKeys();
-		int sz = getRowCount();
-		for(int i=0; i<sz; i++)
+		if(item != null)
 		{
-			if(CKit.equals(itemPath, getItem(i).getPathKeys()))
+			String[] itemPath = item.getPathKeys();
+			int sz = getRowCount();
+			for(int i=0; i<sz; i++)
 			{
-				return i;
+				if(CKit.equals(itemPath, getItem(i).getPathKeys()))
+				{
+					return i;
+				}
 			}
 		}
 		return -1;

@@ -1,5 +1,6 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
+import goryachev.common.ui.Theme;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -19,13 +20,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.swing.table.TableCellRenderer;
 
 
 public class ThemeTools
 {
-	//public static final FontRenderContext FRC = new FontRenderContext(null, false, false);
 	private static final int CHAR_BUFFER_SIZE = 128;
 	private static final Object charsBufferLock = new Object();
 	private static char[] charsBuffer = new char[CHAR_BUFFER_SIZE];
@@ -183,52 +182,44 @@ public class ThemeTools
 	}
 	
 	
-	public static void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text, int textShiftOffset)
+	public static void paintText(Graphics g, AbstractButton b, Rectangle r, String text, int shiftOffset)
 	{
 		FontMetrics fm = ThemeTools.getFontMetrics(b, g);
-		int mnemIndex = b.getDisplayedMnemonicIndex();
-		paintClassicText(b, g, textRect.x + textShiftOffset, textRect.y + fm.getAscent() + textShiftOffset, text, mnemIndex);
+		int ix = b.getDisplayedMnemonicIndex();
+		paintText(b, g, r.x + shiftOffset, r.y + fm.getAscent() + shiftOffset, text, ix);
 	}
 
 
-	public static void paintClassicText(AbstractButton b, Graphics g, int x, int y, String text, int mnemIndex)
+	public static void paintText(AbstractButton b, Graphics g, int x, int y, String text, int mnemonicsIndex)
 	{
-		ButtonModel model = b.getModel();
-		Color color = b.getForeground();
-		if(model.isEnabled())
+		ButtonModel m = b.getModel();
+		Color c = b.getForeground();
+		if(m.isEnabled())
 		{
-			if(!(b instanceof JMenuItem && model.isArmed()) && !(b instanceof JMenu && (model.isSelected() || model.isRollover())))
+			if(!(b instanceof JMenuItem && m.isArmed()) && !(b instanceof JMenu && (m.isSelected() || m.isRollover())))
 			{
 				g.setColor(b.getForeground());
 			}
-			drawStringUnderlineCharAt(b, g, text, mnemIndex, x, y);
+			
+			drawStringUnderlineCharAt(b, g, text, mnemonicsIndex, x, y);
 		}
 		else
 		{
-			color = UIManager.getColor("Button.shadow");
-			Color shadow = UIManager.getColor("Button.disabledShadow");
-			if(model.isArmed())
+			if(m.isArmed())
 			{
-				color = UIManager.getColor("Button.disabledForeground");
+				c = AgButtonUI.DISABLED_FOREGROUND;
 			}
 			else
 			{
-				if(shadow == null)
-				{
-					shadow = b.getBackground().darker();
-				}
-				g.setColor(shadow);
-
-				drawStringUnderlineCharAt(b, g, text, mnemIndex, x + 1, y + 1);
+				// shadow
+				g.setColor(AgButtonUI.DISABLED_SHADOW);
+				drawStringUnderlineCharAt(b, g, text, mnemonicsIndex, x + 1, y + 1);
+				
+				c = AgButtonUI.BUTTON_SHADOW;
 			}
 
-			if(color == null)
-			{
-				color = b.getBackground().brighter();
-			}
-			g.setColor(color);
-
-			drawStringUnderlineCharAt(b, g, text, mnemIndex, x, y);
+			g.setColor(c);
+			drawStringUnderlineCharAt(b, g, text, mnemonicsIndex, x, y);
 		}
 	}
 }

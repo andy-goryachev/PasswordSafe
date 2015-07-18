@@ -17,15 +17,15 @@ import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreePath;
 
 
-public class CTreeUI
+public class AgTreeUI
 	extends BasicTreeUI
 {
-	private static Color hashLineColor = new Color(180,180,180);
-	
-	
+	private static Color hashLineColor = new Color(180, 180, 180);
+
+
 	public static void init(UIDefaults defs)
 	{
-		defs.put("TreeUI", CTreeUI.class.getName());
+		defs.put("TreeUI", AgTreeUI.class.getName());
 //		defs.put("Tree.expandedIcon", Img.get("tree-expanded.png"));
 //		defs.put("Tree.collapsedIcon", Img.get("tree-collapsed.png"));
 		defs.put("Tree.paintLines", true);
@@ -40,7 +40,7 @@ public class CTreeUI
 
 	public static ComponentUI createUI(JComponent c)
 	{
-		return new CTreeUI();
+		return new AgTreeUI();
 	}
 	
 	
@@ -106,14 +106,14 @@ public class CTreeUI
 	{
 		if(tree != null && beginRow >= 0 && endRow < getRowCount(tree))
 		{
-			Rectangle visRect = tree.getVisibleRect();
+			Rectangle r = tree.getVisibleRect();
 			if(beginRow == endRow)
 			{
 				Rectangle scrollBounds = getPathBounds(tree, getPathForRow(tree, beginRow));
 				if(scrollBounds != null)
 				{
-					scrollBounds.x = visRect.x;
-					scrollBounds.width = visRect.width;
+					scrollBounds.x = r.x;
+					scrollBounds.width = r.width;
 					tree.scrollRectToVisible(scrollBounds);
 				}
 			}
@@ -122,7 +122,7 @@ public class CTreeUI
 				Rectangle beginRect = getPathBounds(tree, getPathForRow(tree, beginRow));
 				Rectangle testRect = beginRect;
 				int beginY = beginRect.y;
-				int maxY = beginY + visRect.height;
+				int maxY = beginY + r.height;
 
 				for(int counter = beginRow + 1; counter <= endRow; counter++)
 				{
@@ -132,7 +132,7 @@ public class CTreeUI
 						counter = endRow;
 					}
 				}
-				tree.scrollRectToVisible(new Rectangle(visRect.x, beginY, 1, testRect.y + testRect.height - beginY));
+				tree.scrollRectToVisible(new Rectangle(r.x, beginY, 1, testRect.y + testRect.height - beginY));
 			}
 		}
 	}
@@ -144,32 +144,22 @@ public class CTreeUI
 	}
 	
 	
-	// This method is slow -- revisit when Java2D is ready.
-	// assumes x1 <= x2
 	protected void drawDashedHorizontalLine(Graphics g, int y, int x1, int x2)
 	{
-		// Drawing only even coordinates helps join line segments so they
-		// appear as one line.  This can be defeated by translating the
-		// Graphics by an odd amount.
 		x1 += (x1 % 2);
 
-		for(int x = x1; x <= x2; x += 2)
+		for(int x=x1; x<=x2; x+=2)
 		{
 			g.drawLine(x, y, x, y);
 		}
 	}
 
 
-	// This method is slow -- revisit when Java2D is ready.
-	// assumes y1 <= y2
 	protected void drawDashedVerticalLine(Graphics g, int x, int y1, int y2)
 	{
-		// Drawing only even coordinates helps join line segments so they
-		// appear as one line.  This can be defeated by translating the
-		// Graphics by an odd amount.
 		y1 += (y1 % 2);
 
-		for(int y = y1; y <= y2; y += 2)
+		for(int y=y1; y<=y2; y+=2)
 		{
 			g.drawLine(x, y, x, y);
 		}
@@ -186,7 +176,7 @@ public class CTreeUI
 			public void paintComponent(Graphics g, Component c, Container p, int x, int y, int w, int h, boolean shouldValidate) 
 			{
 				w = p.getWidth() - x;
-				// insets
+
 				Insets m = p.getInsets();
 				if(m != null)
 				{

@@ -145,7 +145,7 @@ public class ZFilterLogic
 					g.fillRect(0,0,x,h);
 					
 					// filtered
-					c = UI.mix(Theme.hoverColor(), 0.25, Theme.textBG());
+					c = UI.mix(Theme.targetColor(), 0.25, Theme.textBG());
 					g.setColor(c);
 					g.fillRect(x,0,w,h);
 				}

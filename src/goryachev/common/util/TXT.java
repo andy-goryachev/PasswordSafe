@@ -56,12 +56,20 @@ import java.util.Locale;
  *   Add the following JVM command line option:<pre>
  *     -Di18n.test=dot      adds a unicode dot prefix to internationalized prompts.
  *     -Di18n.test=pseudo   turns on pseudolocalization.
+ *     -Di18n.test=pd       turns on pseudolocalization with dot prefix.
  */
 public class TXT
 {
-	enum Mode { OFF, DOT, PSEUDO };
+	enum Mode 
+	{
+		OFF, 
+		DOT, 
+		PSEUDO,
+		PSEUDO_DOT
+	};
+	
 	public static final String PROPERTY_KEY = "i18n.test";
-	public static final char TEST_CHAR = '\u2022';
+	public static final char TEST_DOT_CHAR = '\u2022';
 	private static PromptProvider provider = createDefaultProvider();
 	private static Character testChar;
 	private static Mode mode = Mode.OFF;
@@ -80,8 +88,10 @@ public class TXT
 			s = master;
 		}
 		
-		if(mode == Mode.DOT)
+		switch(mode)
 		{
+		case DOT:
+		case PSEUDO_DOT:
 			// mark internationalized untranslated prompts with a bullet
 			String html = "<html>";
 			if(CKit.startsWithIgnoreCase(s, html))
@@ -150,17 +160,30 @@ public class TXT
 		
 		switch(m)
 		{
-		case PSEUDO:
-			PseudoLocalizationPromptProvider p = new PseudoLocalizationPromptProvider();
-			p.setLanguage(getLanguage());
-			setTestChar(null);
-			setPromptProvider(p);
+		case PSEUDO_DOT:
+			{
+				PseudoLocalizationPromptProvider p = new PseudoLocalizationPromptProvider();
+				p.setLanguage(getLanguage());
+				setTestChar(TEST_DOT_CHAR);
+				setPromptProvider(p);
+			}
 			break;
+			
+		case PSEUDO:
+			{
+				PseudoLocalizationPromptProvider p = new PseudoLocalizationPromptProvider();
+				p.setLanguage(getLanguage());
+				setTestChar(null);
+				setPromptProvider(p);
+			}
+			break;
+			
 		case OFF:
 			setTestChar(null);
 			break;
+			
 		case DOT:
-			setTestChar(TEST_CHAR);
+			setTestChar(TEST_DOT_CHAR);
 			break;
 		}
 	}
@@ -177,6 +200,10 @@ public class TXT
 		else if("pseudo".equals(s))
 		{
 			setTestMode(Mode.PSEUDO);
+		}
+		else if("pd".equals(s))
+		{
+			setTestMode(Mode.PSEUDO_DOT);
 		}
 		else
 		{

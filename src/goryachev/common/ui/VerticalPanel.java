@@ -18,4 +18,11 @@ public class VerticalPanel
 	{
 		super(false);
 	}
+	
+	
+	public VerticalPanel(boolean opaque)
+	{
+		this();
+		setOpaque(opaque);
+	}
 }

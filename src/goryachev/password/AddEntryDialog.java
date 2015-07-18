@@ -102,7 +102,7 @@ public class AddEntryDialog
 		notesField.setFont(Theme.monospacedFont());
 
 		scroll = new CScrollPane(notesField, false);
-		scroll.setBorder(Theme.BORDER_FIELD);
+		scroll.setBorder(Theme.fieldBorder());
 
 		notesLabel = new JLabel(TXT.get("AddEntryDialog.label.notes", "Notes:"));
 		notesLabel.setVerticalAlignment(JLabel.TOP);

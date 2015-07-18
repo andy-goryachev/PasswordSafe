@@ -14,7 +14,7 @@ public final class CPasswordField
 	public CPasswordField()
 	{
 		super(new SecretDocument(), null, 0);
-		setBorder(Theme.BORDER_FIELD);
+		setBorder(Theme.fieldBorder());
 	}
 	
 

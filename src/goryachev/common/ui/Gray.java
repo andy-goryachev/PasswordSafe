@@ -3,6 +3,7 @@ package goryachev.common.ui;
 import java.awt.Color;
 
 
+// TODO Theme.isDark()
 public class Gray
 	extends Color
 {

@@ -10,7 +10,7 @@ public class CComboBoxEditor
 	protected JTextField createEditorComponent()
 	{
 		JTextField editor = super.createEditorComponent();
-		editor.setBorder(CComboBoxUI.BORDER_EDITOR);
+		editor.setBorder(AgComboBoxUI.BORDER_EDITOR);
 		editor.setOpaque(false);
 		return editor;
 	}

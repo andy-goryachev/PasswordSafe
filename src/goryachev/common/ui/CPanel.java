@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.LayoutManager;
 import java.awt.Rectangle;
+import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Scrollable;
@@ -61,15 +62,15 @@ public class CPanel
 	}
 	
 	
-	/** creates standard 10-pixel border */
-	public void border()
+	public void noBorder()
 	{
-		setBorder(Theme.BORDER_10);
+		setBorder(CBorder.NONE);
 	}
 	
 	
 	public void borderNoBottomGap()
 	{
+		// TODO use theme
 		setBorder(new CBorder(10, 10, 0, 10));
 	}
 	
@@ -293,12 +294,28 @@ public class CPanel
 	}
 	
 	
+	public JLabel icon(Icon ic)
+	{
+		JLabel t = new JLabel(ic);
+		t.setVerticalAlignment(JLabel.TOP);
+		return t;
+	}
+
+
+	/** creates standard 10-pixel border */
+	public void border()
+	{
+		setBorder();
+	}
+
+
+	/** creates standard 10-pixel border */
 	public void setBorder()
 	{
-		setBorder(Theme.BORDER_10);
+		setBorder(Theme.border10());
 	}
-	
-	
+
+
 	public CBorder setBorder(int gap)
 	{
 		CBorder b = new CBorder(gap);
@@ -426,6 +443,12 @@ public class CPanel
 	public void nextRow(float spec)
 	{
 		addRow(spec);
+		currentRow++;
+	}
+	
+	
+	public void skipRow()
+	{
 		currentRow++;
 	}
 	

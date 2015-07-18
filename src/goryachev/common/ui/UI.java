@@ -434,15 +434,15 @@ public class UI
 	}
 	
 
-	public static Color darker(Color c, float factor)
-	{
-		return new Color
-		(
-			Math.max(0, (int)(c.getRed()   * factor)), 
-			Math.max(0, (int)(c.getGreen() * factor)), 
-			Math.max(0, (int)(c.getBlue()  * factor))
-		);
-	}
+//	public static Color darker(Color c, float factor)
+//	{
+//		return new Color
+//		(
+//			Math.max(0, (int)(c.getRed()   * factor)), 
+//			Math.max(0, (int)(c.getGreen() * factor)), 
+//			Math.max(0, (int)(c.getBlue()  * factor))
+//		);
+//	}
 	
 
 	public static void later(Runnable r)
@@ -986,27 +986,38 @@ public class UI
 	{
 		return (Graphics2D)g.create();
 	}
-
-
-	public static void setAntiAliasing(Graphics g)
+	
+	
+	public static Graphics2D createAntiAliasingAndQualityGraphics(Graphics g)
 	{
-		((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		return setAntiAliasingAndQuality(g.create());
+	}
+
+
+	public static Graphics2D setAntiAliasing(Graphics gg)
+	{
+		Graphics2D g = (Graphics2D)gg;
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		return g;
 	}
 	
 	
-	public static void setQualityRendering(Graphics g)
+	public static Graphics2D setQualityRendering(Graphics gg)
 	{
-		((Graphics2D)g).setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		Graphics2D g = (Graphics2D)gg;
+		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		return g;
 	}
 	
 	
-	public static void setAntiAliasingAndQuality(Graphics gg)
+	public static Graphics2D setAntiAliasingAndQuality(Graphics gg)
 	{
 		Graphics2D g = (Graphics2D)gg;
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+		return g;
 	}
 
 

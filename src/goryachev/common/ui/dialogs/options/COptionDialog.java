@@ -7,6 +7,7 @@ import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CPanel;
 import goryachev.common.ui.Dialogs;
 import goryachev.common.ui.Menus;
+import goryachev.common.ui.options.OptionEditorInterface;
 import java.awt.Component;
 
 
@@ -127,5 +128,11 @@ public class COptionDialog
 		{
 			Dialogs.err(this, e);
 		}	
+	}
+	
+	
+	public void setSelected(OptionEditorInterface ed)
+	{
+		optionPanel.setSelected(ed);
 	}
 }

@@ -50,4 +50,11 @@ public class CTextField extends JTextField
 	{
 		setText(null);
 	}
+	
+	
+	public void setText0(String s)
+	{
+		setText(s);
+		setCaretPosition(0);
+	}
 }

@@ -5,6 +5,7 @@ import goryachev.common.ui.CComboBox;
 import goryachev.common.ui.CPanel;
 import goryachev.common.ui.InfoField;
 import goryachev.common.ui.theme.AssignMnemonic;
+import goryachev.common.util.Broadcast;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CLanguage;
 import goryachev.common.util.CList;
@@ -22,6 +23,9 @@ public class LanguagePage
 	extends CPanel
 	implements HasPrompts
 {
+	/** this event is broadcast when the user changes languages in this page */
+	public static final Object LANGUAGE_CHANGED = new Object();
+	
 	public final JLabel logoField;
 	public final CComboBox languageField;
 	public final JLabel selectLanguageLabel;
@@ -35,6 +39,8 @@ public class LanguagePage
 		super(false);
 
 		setName("LanguagePage");
+		setBorder();
+		setGaps(10);
 		
 		logoField = new JLabel();
 		
@@ -52,12 +58,13 @@ public class LanguagePage
 		addColumns
 		(
 			CPanel.PREFERRED,
+			CPanel.PREFERRED,
 			CPanel.FILL
 		);
 
 		row(1, logoField);
 		nextRow();
-		row(0, 2, infoField);
+		row(1, 2, infoField);
 		nextRow();
 		row(0, selectLanguageLabel = label(" "));
 		row(1, languageField);
@@ -108,6 +115,7 @@ public class LanguagePage
 					
 					Appearance.setLanguage(la);
 					TXT.setLanguage(la);
+					Broadcast.fire(LANGUAGE_CHANGED);
 					
 					handleEvents = true;
 				}

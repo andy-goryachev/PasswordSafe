@@ -206,7 +206,7 @@ public class KeyBindingsEditor
 
 	public boolean isModified()
 	{
-		for(KeyBindingEntry en: model.getItems())
+		for(KeyBindingEntry en: model.asList())
 		{
 			if(en.isModified())
 			{
@@ -219,7 +219,7 @@ public class KeyBindingsEditor
 
 	public void commit()
 	{
-		for(KeyBindingEntry en: model.getItems())
+		for(KeyBindingEntry en: model.asList())
 		{
 			en.commit();
 		}
