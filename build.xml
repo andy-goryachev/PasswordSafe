@@ -32,7 +32,7 @@ To change the build for another application:
 
 
 	
-	<target name="all" depends="clean,compile,copyresources,target" />
+	<target name="all" depends="clean,compile,copyresources,target,copyjar" />
 	
 	
 	
@@ -100,5 +100,10 @@ To change the build for another application:
 		<copy file="${JAR}" todir="${PACKAGE}/${TARGET}.app/Contents/Resources/Java" />
 		<copy file="build/apple/apple.zip" tofile="build/deploy/${TARGET}.zip" />
 		<zip destfile="build/deploy/${TARGET}.zip" update="true" basedir="${PACKAGE}" />
+	</target>
+	
+	
+	<target name="copyjar" depends="target">
+		<copy file="${JAR}" todir="." />
 	</target>	
 </project>
