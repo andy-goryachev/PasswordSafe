@@ -14,9 +14,9 @@ public class AgArrowButton
 {
 	protected int direction;
 	
-	private static Color shadow = ThemeColor.shadow(ThemeKey.COLOR_PANEL_BG, 0.2);
-	private static Color darkShadow = ThemeColor.shadow(ThemeKey.COLOR_PANEL_BG, 0.4);
-	private static Color highlight = ThemeColor.highlight(ThemeKey.COLOR_PANEL_BG, 0.2);
+	private static Color shadow = ThemeColor.shadow(ThemeKey.PANEL_BG, 0.2);
+	private static Color darkShadow = ThemeColor.shadow(ThemeKey.PANEL_BG, 0.4);
+	private static Color highlight = ThemeColor.highlight(ThemeKey.PANEL_BG, 0.2);
 
 
 
@@ -25,7 +25,7 @@ public class AgArrowButton
 		super();
 		setRequestFocusEnabled(false);
 		setDirection(direction);
-		setBackground(Theme.panelBG());
+		setBackground(Theme.PANEL_BG);
 	}
 
 

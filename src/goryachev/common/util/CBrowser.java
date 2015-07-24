@@ -46,7 +46,7 @@ public class CBrowser
 	}
 
 
-	protected static void openLink(URI uri) throws Exception
+	public static void openLink(URI uri) throws Exception
 	{
 		Desktop.getDesktop().browse(uri);
 	}

@@ -20,14 +20,14 @@ public class AgPopupMenuUI
 	public static void init(UIDefaults d)
 	{
 		d.put("PopupMenuUI", AgPopupMenuUI.class.getName());
-		d.put("PopupMenu.background", Theme.panelBG());
-		d.put("PopupMenu.foreground", Theme.textFG());
+		d.put("PopupMenu.background", Theme.PANEL_BG);
+		d.put("PopupMenu.foreground", Theme.TEXT_FG);
 		d.put("PopupMenu.opaque", Boolean.TRUE);
 		
 		// TODO better border for all platforms
 		if(CPlatform.isLinux())
 		{
-			d.put("PopupMenu.border", new CBorder(Theme.lineColor()));
+			d.put("PopupMenu.border", new CBorder(Theme.LINE_COLOR));
 		}
 	}
 

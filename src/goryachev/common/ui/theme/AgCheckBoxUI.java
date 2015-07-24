@@ -24,8 +24,8 @@ public class AgCheckBoxUI
 		d.put("CheckBoxUI", AgCheckBoxUI.class.getName());
 		d.put("CheckBoxUI.contentAreaFilled", Boolean.FALSE);
 		d.put("CheckBox.icon", new AgCheckBoxIcon());
-		d.put("CheckBox.foreground", Theme.textFG());
-		d.put("CheckBox.background", Theme.panelBG());
+		d.put("CheckBox.foreground", Theme.TEXT_FG);
+		d.put("CheckBox.background", Theme.PANEL_BG);
 	}
 
 
@@ -44,7 +44,7 @@ public class AgCheckBoxUI
 	
 	protected Color getFocusColor()
 	{
-		return Theme.focusColor();
+		return Theme.FOCUS_COLOR;
 	}
 
 

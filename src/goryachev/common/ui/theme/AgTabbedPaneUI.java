@@ -32,8 +32,8 @@ public class AgTabbedPaneUI
 		d.put("TabbedPaneUI", AgTabbedPaneUI.class.getName());
 		d.put("TabbedPane.contentOpaque", Boolean.TRUE);
 		d.put("TabbedPane.opaque", Boolean.FALSE);
-		d.put("TabbedPane.selectedForeground", Theme.textFG());
-		d.put("TabbedPane.foreground", Theme.textFG());
+		d.put("TabbedPane.selectedForeground", Theme.TEXT_FG);
+		d.put("TabbedPane.foreground", Theme.TEXT_FG);
 		
 //		TabbedPane.ancestorInputMap = InputMapUIResource
 //		TabbedPane.background = ColorUIResource(B8CFE5)
@@ -95,8 +95,8 @@ public class AgTabbedPaneUI
 		}
 		tabPane.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, managingFocusBackwardTraversalKeys);
 
-		shadow = Theme.panelBG().darker();
-		darkShadow = shadow.darker();
+		shadow = ThemeTools.DARKER;
+		darkShadow = ThemeTools.DARKER_DARKER;
 	}
 
 

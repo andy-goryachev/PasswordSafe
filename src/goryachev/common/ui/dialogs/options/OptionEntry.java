@@ -97,4 +97,13 @@ public class OptionEntry
 	{
 		editor.commit();
 	}
+	
+	
+	public void revert()
+	{
+		if(editor != null)
+		{
+			editor.revert();
+		}
+	}
 }

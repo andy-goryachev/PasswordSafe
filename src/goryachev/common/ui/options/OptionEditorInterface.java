@@ -21,7 +21,11 @@ public interface OptionEditorInterface
 	
 	public boolean isModified();
 	
+	/** saves the user choice */
 	public void commit() throws Exception;
+	
+	/** revert any changes that were done for preview */
+	public void revert();
 
 	public String getSearchString();
 }

@@ -18,10 +18,10 @@ public class AgCheckBoxIcon
 	implements Icon
 {
 	public static final int SIZE = 13;
-	public static final Color outerBorderColor = ThemeColor.create(ThemeKey.COLOR_TEXT_FG, 0.5, ThemeKey.COLOR_PANEL_BG);
-	public static final Color innerBorderColor = ThemeColor.create(ThemeKey.COLOR_TEXT_BG, 0.8, ThemeKey.COLOR_PANEL_BG);
-	public static final Color normalControlColor = ThemeColor.create(ThemeKey.COLOR_TEXT_FG, 0.9, ThemeKey.COLOR_PANEL_BG);
-	public static final Color disabledControlColor = ThemeColor.create(ThemeKey.COLOR_TEXT_FG, 0.4, ThemeKey.COLOR_PANEL_BG);
+	public static final Color outerBorderColor = ThemeColor.create(ThemeKey.TEXT_FG, 0.5, ThemeKey.PANEL_BG);
+	public static final Color innerBorderColor = ThemeColor.create(ThemeKey.TEXT_BG, 0.8, ThemeKey.PANEL_BG);
+	public static final Color normalControlColor = ThemeColor.create(ThemeKey.TEXT_FG, 0.9, ThemeKey.PANEL_BG);
+	public static final Color disabledControlColor = ThemeColor.create(ThemeKey.TEXT_FG, 0.4, ThemeKey.PANEL_BG);
 	public static final BasicStroke stroke = new BasicStroke(1.9f, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER);
 	public static final Path2D.Float check = createCheck();
 	
@@ -52,11 +52,11 @@ public class AgCheckBoxIcon
 			// background
 			if((m.isPressed() && m.isArmed()) || !m.isEnabled())
 			{
-				g.setColor(Theme.panelBG());
+				g.setColor(Theme.PANEL_BG);
 			}
 			else
 			{
-				g.setColor(Theme.textBG());
+				g.setColor(Theme.TEXT_BG);
 			}
 			g.fillRect(x, y, SIZE, SIZE);
 			

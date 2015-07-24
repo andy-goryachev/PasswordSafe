@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
+import goryachev.common.ui.theme.ThemeTools;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -15,7 +16,7 @@ public class CBorder
 	implements Cloneable
 {
 	public static final CBorder NONE = new CBorder();
-	public static final CBorder LINE = new CBorder(1, Theme.panelBG().darker());
+	//public static final CBorder LINE = new CBorder(1, ThemeTools.DARKER);
 	
 	private short padLeft;
 	private short padRight;

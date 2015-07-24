@@ -25,6 +25,10 @@ import javax.swing.table.TableCellRenderer;
 
 public class ThemeTools
 {
+	public static final ThemeColor BRIGHTER = ThemeColor.highlight(Theme.PANEL_BG, 0.15);
+	public static final ThemeColor DARKER = ThemeColor.shadow(Theme.PANEL_BG, 0.15);
+	public static final ThemeColor DARKER_DARKER = ThemeColor.shadow(Theme.PANEL_BG, 0.3);
+
 	private static final int CHAR_BUFFER_SIZE = 128;
 	private static final Object charsBufferLock = new Object();
 	private static char[] charsBuffer = new char[CHAR_BUFFER_SIZE];

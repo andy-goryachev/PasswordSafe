@@ -211,7 +211,7 @@ public class Dialogs
 		
 		d.setChoiceDefault(Choice.CANCEL);
 		d.addButton(Menus.Cancel, Choice.CANCEL);
-		d.addButton(Menus.DiscardChanges, Choice.DISCARD, Theme.alternativeButtonHighlight());
+		d.addButton(Menus.DiscardChanges, Choice.DISCARD, Theme.DESTRUCTIVE_BUTTON_COLOR);
 		d.addButton(Menus.Save, Choice.SAVE, true);
 		
 		return d.openChoiceDialog();
@@ -229,7 +229,7 @@ public class Dialogs
 				TXT.get("Dialogs.file exists.title", "File Exists"),
 				TXT.get("Dialogs.file exists.message", "File {0} exists.  Do you want to overwrite it?", f)
 			);
-			d.addButton(Menus.Overwrite, Boolean.TRUE, Theme.alternativeButtonHighlight());
+			d.addButton(Menus.Overwrite, Boolean.TRUE, Theme.DESTRUCTIVE_BUTTON_COLOR);
 			d.addButton(Menus.Cancel, Boolean.FALSE);
 			Boolean rv = d.openChoiceDialog();
 			return Boolean.TRUE.equals(rv);
@@ -252,7 +252,7 @@ public class Dialogs
 	public static boolean confirmInterruption(Component parent, String title, String message)
     {
 		ChoiceDialog<Boolean> d = new ChoiceDialog(parent, title, message);
-		d.addButton(TXT.get("Dialogs.interrupt.button.interrupt", "Interrupt"), Boolean.TRUE, Theme.alternativeButtonHighlight());
+		d.addButton(TXT.get("Dialogs.interrupt.button.interrupt", "Interrupt"), Boolean.TRUE, Theme.DESTRUCTIVE_BUTTON_COLOR);
 		d.addButton(TXT.get("Dialogs.interrupt.button.allow", "Allow to Continue"), null, true);
 		return Boolean.TRUE.equals(d.openChoiceDialog());
     }

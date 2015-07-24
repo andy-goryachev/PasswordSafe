@@ -51,7 +51,7 @@ public abstract class ProcessPanel
 		
 		statusField = new JLabel(new CIcon(32));
 		statusField.setBorder(new CBorder(5));
-		statusField.setBackground(Theme.fieldBG());
+		statusField.setBackground(Theme.FIELD_BG);
 		statusField.setVerticalAlignment(JLabel.TOP);
 		statusField.setOpaque(true);
 		
@@ -216,7 +216,7 @@ public abstract class ProcessPanel
 			TXT.get("ProcessPanel.interrupt.d", "Do you want to interrupt the current operation?")
 		);
 		
-		d.addButton(TXT.get("ProcessPanel.button.interrupt", "Interrupt"), Boolean.TRUE, Theme.alternativeButtonHighlight());
+		d.addButton(TXT.get("ProcessPanel.button.interrupt", "Interrupt"), Boolean.TRUE, Theme.DESTRUCTIVE_BUTTON_COLOR);
 		d.addButton(TXT.get("ProcessPanel.button.allow", "Allow to Continue"), null, true);
 		
 		Object rv = d.openChoiceDialog();

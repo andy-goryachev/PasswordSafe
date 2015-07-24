@@ -46,7 +46,7 @@ public class CTableRendererBorder
 
 		if(focused && focusEnabled)
 		{
-			g.setColor(Theme.focusColor());
+			g.setColor(Theme.FOCUS_COLOR);
 			BasicGraphicsUtils.drawDashedRect(g, x, y, w, h);
 		}
 	}

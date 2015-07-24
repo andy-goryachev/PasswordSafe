@@ -15,12 +15,12 @@ public class CTButtonBorder
 	
 	protected Color getLeftLineColor()
 	{
-		return Theme.brighter(Theme.panelBG());
+		return ThemeTools.BRIGHTER;
 	}
 	
 	
 	protected Color getRightLineColor()
 	{
-		return Theme.darker(Theme.lineColor());
+		return ThemeTools.DARKER;
 	}
 }

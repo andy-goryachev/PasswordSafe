@@ -43,7 +43,7 @@ public class InfoField
 		setFont(Theme.plainFont());
 		setEditable(false);
 		setFocusable(false);
-		setForeground(Theme.fieldFG());
+		setForeground(Theme.FIELD_FG);
 		setOpaque(false);
 		
 		addHyperlinkListener(new HyperlinkListener()

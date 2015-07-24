@@ -46,7 +46,7 @@ public class CFieldBorder
 	{
 		// text field does not repaint border when focus changes...
 		//Color col = c.hasFocus() ? Theme.focusColor() :  Theme.lineColor();
-		Color col = Theme.lineColor();
+		Color col = Theme.LINE_COLOR;
 		
 		// line around
 		if(drawLine)

@@ -89,7 +89,7 @@ public class OptionPanel
 		filterPanel.setCenter(filter);
 		filterPanel.setEast(buttonLabel);
 		filterPanel.setBorder(new CBorder(2, 2, 2, 2));
-		filterPanel.setBackground(Theme.panelBG());
+		filterPanel.setBackground(Theme.PANEL_BG);
 		
 		tree = new CTreeTable<OptionTreeNode>();
 		tree.setRoot(root, false);
@@ -112,9 +112,9 @@ public class OptionPanel
 		});
 		
 		titleField = new JLabel(" ");
-		titleField.setBorder(new CBorder(0, 0, 1, 0, Theme.panelBG().darker(), 10));
+		titleField.setBorder(new CBorder(0, 0, 1, 0, Theme.LINE_COLOR, 10));
 		titleField.setFont(Theme.titleFont());
-		titleField.setBackground(Theme.panelBG());
+		titleField.setBackground(Theme.PANEL_BG);
 		titleField.setOpaque(true);
 
 		detailPanel = new CPanel();
@@ -122,7 +122,7 @@ public class OptionPanel
 		
 		CScrollPane scroll = new CScrollPane(tree, CScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, CScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setViewportBorder(new CBorder());
-		scroll.setBackground2(Theme.fieldBG());
+		scroll.setBackground2(Theme.FIELD_BG);
 		
 		CPanel left = new CPanel();
 		left.setNorth(filterPanel);
@@ -130,7 +130,7 @@ public class OptionPanel
 		left.setPreferredSize(new Dimension(200, -1));
 
 		split = new CSplitPane(true, left, detailPanel);
-		split.setBorder(new CBorder(0, 0, 1, 0, Theme.panelBG().darker()));
+		split.setBorder(new CBorder(0, 0, 1, 0, Theme.LINE_COLOR));
 		
 		setCenter(split);
 		
@@ -244,6 +244,29 @@ public class OptionPanel
 				TXT.get("COptionPanel.warning.restart.title", "Restart Required"), 
 				TXT.get("COptionPanel.warning.restart.message", "Please restart the application for the changes to take effect.")
 			);
+		}
+	}
+	
+	
+	public void revert()
+	{
+		revertRecursively(root);
+	}
+	
+	
+	protected void revertRecursively(OptionTreeNode nd)
+	{
+		for(OptionEntry en: nd.getOptionEntries())
+		{
+			en.revert();
+		}
+		
+		for(Object x: nd.getChildren())
+		{
+			if(x instanceof OptionTreeNode)
+			{
+				revertRecursively((OptionTreeNode)x);
+			}
 		}
 	}
 	

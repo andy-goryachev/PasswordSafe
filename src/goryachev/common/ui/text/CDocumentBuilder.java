@@ -289,7 +289,7 @@ public class CDocumentBuilder
 		Color fg = StyleConstants.getForeground(a);
 		
 		StyleConstants.setUnderline(a, true);
-		StyleConstants.setForeground(a, Theme.linkColor());
+		StyleConstants.setForeground(a, Theme.LINK_COLOR);
 		a.addAttribute(CDocument.AttributeLink, link);
 		
 		insert(text, a);
@@ -324,7 +324,7 @@ public class CDocumentBuilder
 
 		JLabel b = new JLabel(sb.toString());
 		b.setBorder(CBorder.NONE);
-		b.setForeground(Theme.linkColor());
+		b.setForeground(Theme.LINK_COLOR);
 		b.setMaximumSize(b.getPreferredSize());
 		b.setBackground(Color.red);
 		b.setCursor(Cursors.HAND);

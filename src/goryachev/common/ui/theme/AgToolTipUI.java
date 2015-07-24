@@ -12,7 +12,7 @@ import javax.swing.plaf.basic.BasicToolTipUI;
 public class AgToolTipUI
 	extends BasicToolTipUI
 {
-	protected static final CBorder BORDER = new CBorder(1, Theme.textFG());
+	protected static final CBorder BORDER = new CBorder(1, Theme.TEXT_FG);
 	protected static AgToolTipUI instance = new AgToolTipUI();
 	
 	
@@ -33,12 +33,12 @@ public class AgToolTipUI
 		d.put("ToolTipUI", AgToolTipUI.class.getName());
 		d.put("ToolTipManager.enableToolTipMode", "activeApplication");
 		
-		d.put("ToolTip.background", Theme.toolTipBG());
-		d.put("ToolTip.backgroundInactive", Theme.toolTipBG());
+		d.put("ToolTip.background", Theme.TOOL_TIP_BG);
+		d.put("ToolTip.backgroundInactive", Theme.TOOL_TIP_BG);
 		d.put("ToolTip.border", BORDER);
 		d.put("ToolTip.borderInactive", BORDER);
-		d.put("ToolTip.foreground", Theme.textFG());
-		d.put("ToolTip.foregroundInactive", Theme.fieldFG());
+		d.put("ToolTip.foreground", Theme.TEXT_FG);
+		d.put("ToolTip.foregroundInactive", Theme.FIELD_FG);
 		d.put("ToolTip.hideAccelerator", Boolean.FALSE);
 		
 		// defs.put("ToolTip.font" // set by ATheme

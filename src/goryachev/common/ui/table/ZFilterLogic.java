@@ -5,9 +5,11 @@ import goryachev.common.ui.CPanel;
 import goryachev.common.ui.CTextFieldWithPrompt;
 import goryachev.common.ui.Menus;
 import goryachev.common.ui.Theme;
+import goryachev.common.ui.ThemeKey;
 import goryachev.common.ui.UI;
 import goryachev.common.ui.icons.CIcons;
 import goryachev.common.ui.theme.CFieldBorder;
+import goryachev.common.ui.theme.ThemeColor;
 import goryachev.common.util.CKit;
 import goryachev.common.util.TXT;
 import java.awt.Color;
@@ -42,6 +44,7 @@ public class ZFilterLogic
 	//
 	
 	public static final int DEFAULT_DELAY = 500;
+	public static final Color FRACTION_COLOR = ThemeColor.create(ThemeKey.TARGET_COLOR, 0.25, ThemeKey.TEXT_BG);
 	
 	public final ZTable table;
 	public final CTextFieldWithPrompt textField;
@@ -140,18 +143,18 @@ public class ZFilterLogic
 					Color c;
 					
 					// displayed
-					c = Theme.textBG();
+					c = Theme.TEXT_BG;
 					g.setColor(c);
 					g.fillRect(0,0,x,h);
 					
 					// filtered
-					c = UI.mix(Theme.targetColor(), 0.25, Theme.textBG());
+					c = FRACTION_COLOR;
 					g.setColor(c);
 					g.fillRect(x,0,w,h);
 				}
 				else
 				{
-					g.setColor(Theme.textBG());
+					g.setColor(Theme.TEXT_BG);
 					g.fillRect(0,0,w,h);
 				}
 			}

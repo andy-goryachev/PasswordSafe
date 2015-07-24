@@ -1,6 +1,5 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
-import goryachev.common.ui.Theme;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -36,7 +35,6 @@ public class CSplitPaneBorder
 		// The above shows (rather excessively) what this looks like for
 		// a horizontal orientation. This border then draws the x's, with
 		// the SplitPaneDividerBorder drawing its own border.
-
 		Component child;
 		Rectangle cBounds;
 		JSplitPane splitPane = (JSplitPane)c;
@@ -120,12 +118,12 @@ public class CSplitPaneBorder
 
 	protected Color getShadowColor()
 	{
-		return Theme.darker(Theme.panelBG());
+		return ThemeTools.DARKER;
 	}
 
 
 	protected Color getHighlightColor()
 	{
-		return Theme.brighter(Theme.panelBG());
+		return ThemeTools.BRIGHTER;
 	}
 }

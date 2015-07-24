@@ -18,12 +18,12 @@ public class AgToolBarUI
 	public static void init(UIDefaults d)
 	{
 		d.put("ToolBarUI", AgToolBarUI.class.getName());
-		d.put("ToolBarUI.background", Theme.toolbarColor());
-		d.put("ToolBarUI.foreground", Theme.panelFG());
-		d.put("ToolBarUI.dockingBackground", Theme.panelBG());
-		d.put("ToolBarUI.dockingForeground", Theme.panelFG());
-		d.put("ToolBarUI.floatingBackground", Theme.panelBG());
-		d.put("ToolBarUI.floatingForeground", Theme.panelFG());
+		d.put("ToolBarUI.background", Theme.TOOLBAR_BG);
+		d.put("ToolBarUI.foreground", Theme.PANEL_FG);
+		d.put("ToolBarUI.dockingBackground", Theme.PANEL_BG);
+		d.put("ToolBarUI.dockingForeground", Theme.PANEL_FG);
+		d.put("ToolBarUI.floatingBackground", Theme.PANEL_BG);
+		d.put("ToolBarUI.floatingForeground", Theme.PANEL_FG);
 		d.put("ToolBar.isRollover", Boolean.FALSE);
 		
 //		ToolBar.ancestorInputMap = InputMapUIResource

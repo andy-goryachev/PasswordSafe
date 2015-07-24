@@ -1,7 +1,7 @@
 // Copyright (c) 2008-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
-import goryachev.common.ui.theme.CButtonBorder;
 import goryachev.common.ui.theme.AgButtonUI;
+import goryachev.common.ui.theme.CButtonBorder;
 import java.awt.Color;
 import java.awt.Insets;
 import javax.swing.Action;
@@ -268,7 +268,7 @@ public class CButton
 	
 	public CButton setHighlight()
 	{
-		setHighlight(Theme.buttonHighlight());
+		setHighlight(Theme.AFFIRM_BUTTON_COLOR);
 		return this;
 	}
 	

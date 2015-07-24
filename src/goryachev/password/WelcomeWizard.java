@@ -104,7 +104,7 @@ public class WelcomeWizard
 		
 		p.buttonPanel().addButton(closeAction);
 		p.buttonPanel().addButton(backAction);
-		p.buttonPanel().addButton(acceptLicenseAction, Theme.alternativeButtonHighlight());
+		p.buttonPanel().addButton(acceptLicenseAction, Theme.DESTRUCTIVE_BUTTON_COLOR);
 		p.buttonPanel().addButton(showOptionsAction, true);
 		p.buttonPanel().setBorder(10);
 		
@@ -174,7 +174,7 @@ public class WelcomeWizard
 		p.row(0, new CButton(createNewAction, true));
 		p.row(1, new JLabel(TXT.get("WelcomeDialog.create new database", "Create new password database")));
 		p.nextRow();
-		p.row(0, new CButton(openExistingAction, Theme.alternativeButtonHighlight()));
+		p.row(0, new CButton(openExistingAction, Theme.DESTRUCTIVE_BUTTON_COLOR));
 		p.row(1, new JLabel(TXT.get("WelcomeDialog.open existing database", "Open existing password database")));
 		p.nextRow(10);
 		p.nextRow();

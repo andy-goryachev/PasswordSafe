@@ -18,7 +18,7 @@ public class AgScrollPaneUI
 	{
 		defs.put("ScrollPaneUI", AgScrollPaneUI.class.getName());
 		defs.put("ScrollPane.border", BORDER);
-		defs.put("ScrollPane.background", Theme.textBG());
+		defs.put("ScrollPane.background", Theme.TEXT_BG);
 		defs.put("Table.scrollPaneBorder", BORDER);
 	}
 	
@@ -32,6 +32,6 @@ public class AgScrollPaneUI
 			sp.setBorder(BORDER);
 		}
 		
-		sp.getViewport().setBackground(Theme.textBG());
+		sp.getViewport().setBackground(Theme.TEXT_BG);
 	}
 }

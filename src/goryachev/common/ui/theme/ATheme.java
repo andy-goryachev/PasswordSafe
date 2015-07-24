@@ -64,28 +64,28 @@ public class ATheme
 	{
 		setName(name);
 		
-		set(ThemeKey.COLOR_BUTTON_AFFIRM, Color.green);
-		set(ThemeKey.COLOR_BUTTON_DESTRUCTIVE, Color.magenta);
-		set(ThemeKey.COLOR_FIELD_BG, UI.mix(Color.white, 0.85, basePanelBG));
-		set(ThemeKey.COLOR_FIELD_FG, UI.mix(Color.white, 0.65, Color.black));
-		set(ThemeKey.COLOR_FOCUS, new Color(90, 90, 90));
-		set(ThemeKey.COLOR_GRID, new Color(242, 242, 242));
-		set(ThemeKey.COLOR_LINE, new Color(0xaca8a2));
-		set(ThemeKey.COLOR_LINK, new Color(0, 102, 0));
-		set(ThemeKey.COLOR_PANEL_BG, basePanelBG);
-		set(ThemeKey.COLOR_PANEL_FG, basePanelBG.darker());
-		set(ThemeKey.COLOR_TARGET, new Color(253, 178, 84));
-		set(ThemeKey.COLOR_TEXT_BG, baseTextBG);
-		set(ThemeKey.COLOR_TEXT_FG, baseTextFG);
-		set(ThemeKey.COLOR_TEXT_SELECTION_BG, baseSelectionBG);
-		set(ThemeKey.COLOR_TEXT_SELECTION_FG, baseSelectionFG);
-		set(ThemeKey.COLOR_TOOL_TIP_BG, new Color(255, 255, 225));
-		set(ThemeKey.COLOR_TOOLBAR, new Color(0xb2aea7));
+		set(ThemeKey.AFFIRM_BUTTON_COLOR, Color.green);
+		set(ThemeKey.DESTRUCTIVE_BUTTON_COLOR, Color.magenta);
+		set(ThemeKey.FIELD_BG, UI.mix(Color.white, 0.85, basePanelBG));
+		set(ThemeKey.FIELD_FG, UI.mix(Color.white, 0.65, Color.black));
+		set(ThemeKey.FOCUS_COLOR, new Color(90, 90, 90));
+		set(ThemeKey.GRID_COLOR, new Color(242, 242, 242));
+		set(ThemeKey.LINE_COLOR, new Color(0xaca8a2));
+		set(ThemeKey.LINK_COLOR, new Color(0, 102, 0));
+		set(ThemeKey.PANEL_BG, basePanelBG);
+		set(ThemeKey.PANEL_FG, basePanelBG.darker());
+		set(ThemeKey.TARGET_COLOR, new Color(253, 178, 84));
+		set(ThemeKey.TEXT_BG, baseTextBG);
+		set(ThemeKey.TEXT_FG, baseTextFG);
+		set(ThemeKey.TEXT_SELECTION_BG, baseSelectionBG);
+		set(ThemeKey.TEXT_SELECTION_FG, baseSelectionFG);
+		set(ThemeKey.TOOL_TIP_BG, new Color(255, 255, 225));
+		set(ThemeKey.TOOLBAR_COLOR, new Color(0xb2aea7));
 		
-		set(ThemeKey.FONT_BASE, basePlainFont);
-		set(ThemeKey.FONT_BOLD, basePlainFont.deriveFont(Font.BOLD));
-		set(ThemeKey.FONT_MONOSPACED, baseMonospacedFont);
-		set(ThemeKey.FONT_TITLE, UI.deriveFont(basePlainFont, true, TITLE_FONT_FACTOR));
+		set(ThemeKey.BASE_FONT, basePlainFont);
+		set(ThemeKey.BOLD_FONT, basePlainFont.deriveFont(Font.BOLD));
+		set(ThemeKey.MONOSPACED_FONT, baseMonospacedFont);
+		set(ThemeKey.TITLE_FONT, UI.deriveFont(basePlainFont, true, TITLE_FONT_FACTOR));
 	}
 	
 
@@ -249,7 +249,7 @@ public class ATheme
 		setValue
 		(
 			d, 
-			Theme.panelBG(),
+			Theme.PANEL_BG,
 			"Button.background",
 			"Button.light",
 			"CheckBox.background",
@@ -317,18 +317,18 @@ public class ATheme
 		);
 
 		// selection
-		setBySuffix(d, Theme.textSelectionFG(), ".selectionForeground");
-		setBySuffix(d, Theme.textSelectionBG(), ".selectionBackground");
+		setBySuffix(d, Theme.TEXT_SELECTION_FG, ".selectionForeground");
+		setBySuffix(d, Theme.TEXT_SELECTION_BG, ".selectionBackground");
 		
 		// caret
-		setBySuffix(d, Theme.textFG(), ".caretForeground");
+		setBySuffix(d, Theme.TEXT_FG, ".caretForeground");
 		
 		// password field
-		d.put("PasswordField.background", Theme.textBG());
+		d.put("PasswordField.background", Theme.TEXT_BG);
 		d.put("PasswordField.border", Theme.fieldBorder());
-		d.put("PasswordField.foreground", Theme.textFG());
-		d.put("PasswordField.inactiveBackground", Theme.fieldBG());
-		d.put("PasswordField.inactiveForeground", Theme.fieldFG());
+		d.put("PasswordField.foreground", Theme.TEXT_FG);
+		d.put("PasswordField.inactiveBackground", Theme.FIELD_BG);
+		d.put("PasswordField.inactiveForeground", Theme.FIELD_FG);
 	}
 	
 	
@@ -366,13 +366,13 @@ public class ATheme
 	
 	public static Color shadow(double alpha)
 	{
-		return ThemeColor.create(ThemeKey.COLOR_TEXT_FG, alpha);
+		return ThemeColor.create(ThemeKey.TEXT_FG, alpha);
 	}
 	
 	
 	public static Color highlight(double alpha)
 	{
-		return ThemeColor.create(ThemeKey.COLOR_TEXT_BG, alpha);
+		return ThemeColor.create(ThemeKey.TEXT_BG, alpha);
 	}
 	
 	
@@ -384,7 +384,7 @@ public class ATheme
 	
 	protected void prepare()
 	{
-		Color c = getColor(ThemeKey.COLOR_TEXT_BG);
+		Color c = getColor(ThemeKey.TEXT_BG);
 		int r = c.getRed();
 		int g = c.getGreen();
 		int b = c.getBlue();

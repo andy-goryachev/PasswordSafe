@@ -103,6 +103,12 @@ public class ThemeOptionEditor
 		String name = getThemeName();
 		Theme.setTheme(name);
 	}
+	
+	
+	public void revert()
+	{
+		Theme.setTheme(old);
+	}
 
 
 	public String getSearchString()

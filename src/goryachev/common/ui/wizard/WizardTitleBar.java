@@ -16,11 +16,11 @@ public class WizardTitleBar
 	{
 		titleField = new JLabel();
 		titleField.setFont(Theme.titleFont());
-		titleField.setForeground(Theme.fieldFG());
+		titleField.setForeground(Theme.FIELD_FG);
 		titleField.setBorder(new CBorder(10));
 		
 		setCenter(titleField);
-		setBorder(new CBorder(0, 0, 1, 0, Theme.lineColor()));
+		setBorder(new CBorder(0, 0, 1, 0, Theme.LINE_COLOR));
 	}
 
 

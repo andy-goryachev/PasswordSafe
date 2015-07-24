@@ -87,7 +87,7 @@ public class KeyEditorDialog
 		p.row(1, warningLabel);
 		
 		p.buttonPanel().add(new CButton(Menus.Cancel, cancelAction));
-		p.buttonPanel().add(new CButton(TXT.get("KeyEditorDialog.clear keystroke", "Clear"), clearAction, Theme.alternativeButtonHighlight()));
+		p.buttonPanel().add(new CButton(TXT.get("KeyEditorDialog.clear keystroke", "Clear"), clearAction, Theme.DESTRUCTIVE_BUTTON_COLOR));
 		p.buttonPanel().add(new CButton(Menus.OK, okAction, true));
 		
 		setCenter(p);

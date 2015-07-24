@@ -21,8 +21,8 @@ public class AgPanelUI
 	public static void init(UIDefaults d)
 	{
 		d.put("PanelUI", AgPanelUI.class.getName());
-		d.put("PanelUI.foreground", Theme.panelFG());
-		d.put("PanelUI.background", Theme.panelBG());
+		d.put("PanelUI.foreground", Theme.PANEL_FG);
+		d.put("PanelUI.background", Theme.PANEL_BG);
 	}
 	
 	

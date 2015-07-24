@@ -53,10 +53,10 @@ public class ThemePreviewPanel
 		(
 			textField,
 			"Text Field",
-			ThemeKey.COLOR_TEXT_BG,
-			ThemeKey.COLOR_TEXT_FG,
-			ThemeKey.COLOR_TEXT_SELECTION_BG,
-			ThemeKey.COLOR_TEXT_SELECTION_FG
+			ThemeKey.TEXT_BG,
+			ThemeKey.TEXT_FG,
+			ThemeKey.TEXT_SELECTION_BG,
+			ThemeKey.TEXT_SELECTION_FG
 		);
 		
 		// combo box
@@ -83,10 +83,10 @@ public class ThemePreviewPanel
 		(
 			comboBox,
 			"Combo Box",
-			ThemeKey.COLOR_TEXT_BG,
-			ThemeKey.COLOR_TEXT_FG,
-			ThemeKey.COLOR_TEXT_SELECTION_BG,
-			ThemeKey.COLOR_TEXT_SELECTION_FG
+			ThemeKey.TEXT_BG,
+			ThemeKey.TEXT_FG,
+			ThemeKey.TEXT_SELECTION_BG,
+			ThemeKey.TEXT_SELECTION_FG
 		);
 		
 		// checkbox
@@ -138,7 +138,7 @@ public class ThemePreviewPanel
 		tb.add("Buttons:");
 		tb.space(5);
 		tb.add(new CButton("Affirmative", dummyAction, true));
-		tb.add(new CButton("Destructive", dummyAction, Theme.alternativeButtonHighlight()));
+		tb.add(new CButton("Destructive", dummyAction, Theme.DESTRUCTIVE_BUTTON_COLOR));
 		tb.add(new CButton("Regular", dummyAction));
 
 		CPanel p = new CPanel();
@@ -169,10 +169,10 @@ public class ThemePreviewPanel
 
 		CPanel pp = new CPanel(false);
 		pp.setCenter(p);
-		pp.setBorder(new CompoundBorder(new CBorder(GAP), new CBorder(1, Theme.textFG())));
+		pp.setBorder(new CompoundBorder(new CBorder(GAP), new CBorder(1, Theme.TEXT_FG)));
 		pp.setNorth(tb);
 		
-		setBackground(Theme.fieldBG());
+		setBackground(Theme.FIELD_BG);
 		setCenter(pp);
 
 		setTopText(TXT.get("ThemePreviewPanel.title", "Preview"));

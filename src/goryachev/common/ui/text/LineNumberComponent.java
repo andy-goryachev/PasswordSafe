@@ -31,8 +31,8 @@ public class LineNumberComponent
 	extends JPanel
 	implements CaretListener, DocumentListener, PropertyChangeListener
 {
-	public static final Color COLOR_BG = ThemeColor.shadow(ThemeKey.COLOR_TEXT_BG, 0.2);
-	public static final Color COLOR_FG = ThemeColor.highlight(ThemeKey.COLOR_TEXT_FG, 0.2);
+	public static final Color COLOR_BG = ThemeColor.shadow(ThemeKey.TEXT_BG, 0.2);
+	public static final Color COLOR_FG = ThemeColor.highlight(ThemeKey.TEXT_FG, 0.2);
 	
 	private final static int HEIGHT = Integer.MAX_VALUE - 1000000;
 

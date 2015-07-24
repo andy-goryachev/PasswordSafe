@@ -18,6 +18,7 @@ public class COptionDialog
 	public final OptionPanel optionPanel;
 	public final CButtonPanel buttonPanel;
 	private boolean changed;
+	private boolean committed;
 	
 
 	public COptionDialog(Component parent, String title, OptionTreeNode root, String name)
@@ -57,6 +58,15 @@ public class COptionDialog
 		optionPanel.filter.requestFocus();
 	}
 	
+
+	public void onWindowClosed()
+	{
+		if(!committed)
+		{
+			optionPanel.revert();
+		}
+	}
+
 	
 	public void expandTree()
 	{
@@ -98,12 +108,6 @@ public class COptionDialog
 	}
 
 
-	protected void onCancel()
-	{
-		close();	
-	}
-	
-
 	protected void save() throws Exception
 	{
 		optionPanel.commit();
@@ -122,6 +126,7 @@ public class COptionDialog
 		try
 		{
 			save();
+			committed = true;
 			super.close();
 		}
 		catch(Exception e)

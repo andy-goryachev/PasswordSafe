@@ -69,7 +69,7 @@ public class ListTab
 		UI.whenFocused(filter.getField(), KeyEvent.VK_DOWN, focusTableAction);
 
 		CScrollPane scroll = new CScrollPane(table, CScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, CScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		scroll.getViewport().setBackground(Theme.textBG());
+		scroll.getViewport().setBackground(Theme.TEXT_BG);
 
 		new CPopupMenuController(table, scroll)
 		{
@@ -85,7 +85,7 @@ public class ListTab
 		
 		detailPanel = new CPanel();
 		detailPanel.setName("detail");
-		detailPanel.setBackground(Theme.textBG());
+		detailPanel.setBackground(Theme.TEXT_BG);
 		
 		// layout
 		

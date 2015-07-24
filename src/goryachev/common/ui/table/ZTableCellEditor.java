@@ -15,7 +15,7 @@ import javax.swing.border.Border;
 public class ZTableCellEditor
 	extends DefaultCellEditor
 {
-	public final Border border = new CBorder(Theme.focusColor(), 0/*CTableRendererBorder.VGAP - 1*/, CTableRendererBorder.HGAP - 1, 0, 0); 
+	public final Border border = new CBorder(Theme.FOCUS_COLOR, 0/*CTableRendererBorder.VGAP - 1*/, CTableRendererBorder.HGAP - 1, 0, 0); 
 	
 	
 	public ZTableCellEditor(JCheckBox c)

@@ -64,7 +64,7 @@ public class KeyBindingsEditor
 		CScrollPane scroll = new CScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setBorder(new CBorder());
 		scroll.setViewportBorder(CBorder.NONE);
-		scroll.getViewport().setBackground(Theme.fieldBG());
+		scroll.getViewport().setBackground(Theme.FIELD_BG);
 
 		new CPopupMenuController(table, scroll)
 		{
@@ -223,6 +223,11 @@ public class KeyBindingsEditor
 		{
 			en.commit();
 		}
+	}
+	
+	
+	public void revert()
+	{
 	}
 
 

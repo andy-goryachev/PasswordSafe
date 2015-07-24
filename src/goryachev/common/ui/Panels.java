@@ -1,5 +1,6 @@
 // Copyright (c) 2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
+import goryachev.common.ui.theme.ThemeColor;
 import goryachev.common.util.CKit;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -11,6 +12,9 @@ import javax.swing.text.JTextComponent;
 
 public class Panels
 {
+	private static final ThemeColor ICON_FIELD_BG = ThemeColor.create(ThemeKey.TEXT_FG, 0.04, ThemeKey.TEXT_BG);
+	
+	
 	public static JLabel iconField(Icon ic)
 	{
 		JLabel t = iconField();
@@ -25,7 +29,7 @@ public class Panels
 		t.setVerticalAlignment(JLabel.TOP);
 		t.setBorder(new CBorder(20));
 		t.setOpaque(true);
-		t.setBackground(UI.mix(Theme.textFG(), 0.04, Theme.textBG()));
+		t.setBackground(ICON_FIELD_BG);
 		return t;
 	}
 	
@@ -86,7 +90,7 @@ public class Panels
 	public static CScrollPane scroll(Component c)
 	{
 		CScrollPane p = new CScrollPane(c, false);
-		p.setBackground2(Theme.textBG());
+		p.setBackground2(Theme.TEXT_BG);
 		return p;
 	}
 	
@@ -102,7 +106,7 @@ public class Panels
 	public static CScrollPane scroll(Component c, boolean horScrollBar)
 	{
 		CScrollPane p = new CScrollPane(c, horScrollBar);
-		p.setBackground2(Theme.textBG());
+		p.setBackground2(Theme.TEXT_BG);
 		return p;
 	}
 	

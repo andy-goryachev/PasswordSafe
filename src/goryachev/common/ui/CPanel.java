@@ -289,7 +289,7 @@ public class CPanel
 	public InfoField text(String text)
 	{
 		InfoField t = new InfoField(text);
-		t.setForeground(Theme.textFG());
+		t.setForeground(Theme.TEXT_FG);
 		return t;
 	}
 	

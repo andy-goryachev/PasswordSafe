@@ -28,8 +28,8 @@ public class AgScrollBarUI
 	private static int thumbGap = 3;
 	private static final Border BORDER = new CBorder.UIResource();
 	private static final BasicStroke STROKE = new BasicStroke(trackThickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
-	private static final Color THUMB_COLOR = ThemeColor.shadow(ThemeKey.COLOR_TEXT_BG, 128);
-	private static final Color DIRECTION_COLOR = ThemeColor.create(ThemeKey.COLOR_TARGET, 0.5, ThemeKey.COLOR_TEXT_BG);
+	private static final Color THUMB_COLOR = ThemeColor.shadow(ThemeKey.TEXT_BG, 128);
+	private static final Color DIRECTION_COLOR = ThemeColor.create(ThemeKey.TARGET_COLOR, 0.5, ThemeKey.TEXT_BG);
 	
 	
 	public AgScrollBarUI()
@@ -43,10 +43,10 @@ public class AgScrollBarUI
 		d.put("ScrollBar.minimumThumbSize", new DimensionUIResource(10, 10));
 		d.put("ScrollBar.maximumThumbSize", new DimensionUIResource(4096, 4096));
 		d.put("ScrollBar.border", BORDER);
-		d.put("ScrollBar.track", ThemeColor.shadow(ThemeKey.COLOR_TEXT_BG, 0.05));
+		d.put("ScrollBar.track", ThemeColor.shadow(ThemeKey.TEXT_BG, 0.05));
 		
-		d.put("ScrollBar.background", Theme.textBG());
-		d.put("ScrollBar.foreground", Theme.textFG());
+		d.put("ScrollBar.background", Theme.TEXT_BG);
+		d.put("ScrollBar.foreground", Theme.TEXT_FG);
 		
 		//thumbHighlightColor = UIManager.getColor("ScrollBar.thumbHighlight");
 		//thumbLightShadowColor = UIManager.getColor("ScrollBar.thumbShadow");

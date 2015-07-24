@@ -44,7 +44,7 @@ public class CTableHeaderRenderer
 		}
 		if(c == null)
 		{
-			c = Theme.panelBG();
+			c = Theme.PANEL_BG;
 		}
 		setBackground(c);
 

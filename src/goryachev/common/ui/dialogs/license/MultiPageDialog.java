@@ -76,12 +76,12 @@ public class MultiPageDialog
 		CScrollPane tableScroll = new CScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		tableScroll.setBorder(CBorder.NONE);
 		tableScroll.setViewportBorder(CBorder.NONE);
-		tableScroll.getViewport().setBackground(Theme.textBG());
+		tableScroll.getViewport().setBackground(Theme.TEXT_BG);
 		
 		CScrollPane detailScroll = new CScrollPane(textField, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		detailScroll.setBorder(CBorder.NONE);
 		detailScroll.setViewportBorder(CBorder.NONE);
-		detailScroll.getViewport().setBackground(Theme.textBG());
+		detailScroll.getViewport().setBackground(Theme.TEXT_BG);
 		
 		split = new CSplitPane(true, tableScroll, detailScroll);
 		split.setDividerLocation(200);

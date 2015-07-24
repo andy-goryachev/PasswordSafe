@@ -91,25 +91,25 @@ public class CButtonBorder
 	
 	protected Color getTopLineColor()
 	{
-		return Theme.lineColor();
+		return Theme.LINE_COLOR;
 	}
 	
 	
 	protected Color getBottomLineColor()
 	{
-		return Theme.lineColor();
+		return Theme.LINE_COLOR;
 	}
 	
 	
 	protected Color getLeftLineColor()
 	{
-		return Theme.lineColor();
+		return Theme.LINE_COLOR;
 	}
 	
 	
 	protected Color getRightLineColor()
 	{
-		return Theme.lineColor();
+		return Theme.LINE_COLOR;
 	}
 
 
@@ -165,7 +165,7 @@ public class CButtonBorder
 		
 		if(pressed)
 		{
-			g.setColor(Theme.panelBG().darker().darker());
+			g.setColor(ThemeTools.DARKER_DARKER);
 			
 			g.drawLine
 			(

@@ -46,24 +46,25 @@ import javax.swing.plaf.InsetsUIResource;
 /** defines color/font theme and forces a platform-independent look and feel */
 public class Theme
 {
-	public static final ThemeColor COLOR_PANEL_BG = ThemeColor.create(ThemeKey.COLOR_PANEL_BG);
-	public static final ThemeColor COLOR_PANEL_FG = ThemeColor.create(ThemeKey.COLOR_PANEL_FG);
-	public static final ThemeColor COLOR_TOOLBAR = ThemeColor.create(ThemeKey.COLOR_TOOLBAR);
-	public static final ThemeColor COLOR_TEXT_BG = ThemeColor.create(ThemeKey.COLOR_TEXT_BG);
-	public static final ThemeColor COLOR_TEXT_FG = ThemeColor.create(ThemeKey.COLOR_TEXT_FG);
-	public static final ThemeColor COLOR_TARGET = ThemeColor.create(ThemeKey.COLOR_TARGET);
-	public static final ThemeColor COLOR_FOCUS = ThemeColor.create(ThemeKey.COLOR_FOCUS);
-	public static final ThemeColor COLOR_LINE = ThemeColor.create(ThemeKey.COLOR_LINE);
-	public static final ThemeColor COLOR_LINK = ThemeColor.create(ThemeKey.COLOR_LINK);
-	public static final ThemeColor COLOR_FIELD_BG = ThemeColor.create(ThemeKey.COLOR_FIELD_BG);
-	public static final ThemeColor COLOR_FIELD_FG = ThemeColor.create(ThemeKey.COLOR_FIELD_FG);
-	public static final ThemeColor COLOR_BUTTON_AFFIRM = ThemeColor.create(ThemeKey.COLOR_BUTTON_AFFIRM);
-	public static final ThemeColor COLOR_BUTTON_DESTRUCTIVE = ThemeColor.create(ThemeKey.COLOR_BUTTON_DESTRUCTIVE);
-	public static final ThemeColor COLOR_GRID = ThemeColor.create(ThemeKey.COLOR_GRID);
-	public static final ThemeColor COLOR_TEXT_SELECTION_BG = ThemeColor.create(ThemeKey.COLOR_TEXT_SELECTION_BG);
-	public static final ThemeColor COLOR_TEXT_SELECTION_FG = ThemeColor.create(ThemeKey.COLOR_TEXT_SELECTION_FG);
-	public static final ThemeColor COLOR_TOOL_TIP_BG = ThemeColor.create(ThemeKey.COLOR_TOOL_TIP_BG);
+	public static final ThemeColor AFFIRM_BUTTON_COLOR = ThemeColor.create(ThemeKey.AFFIRM_BUTTON_COLOR);
+	public static final ThemeColor DESTRUCTIVE_BUTTON_COLOR = ThemeColor.create(ThemeKey.DESTRUCTIVE_BUTTON_COLOR);
+	public static final ThemeColor FIELD_BG = ThemeColor.create(ThemeKey.FIELD_BG);
+	public static final ThemeColor FIELD_FG = ThemeColor.create(ThemeKey.FIELD_FG);
+	public static final ThemeColor FOCUS_COLOR = ThemeColor.create(ThemeKey.FOCUS_COLOR);
+	public static final ThemeColor GRID_COLOR = ThemeColor.create(ThemeKey.GRID_COLOR);
+	public static final ThemeColor LINE_COLOR = ThemeColor.create(ThemeKey.LINE_COLOR);
+	public static final ThemeColor LINK_COLOR = ThemeColor.create(ThemeKey.LINK_COLOR);
+	public static final ThemeColor PANEL_BG = ThemeColor.create(ThemeKey.PANEL_BG);
+	public static final ThemeColor PANEL_FG = ThemeColor.create(ThemeKey.PANEL_FG);
+	public static final ThemeColor TARGET_COLOR = ThemeColor.create(ThemeKey.TARGET_COLOR);
+	public static final ThemeColor TEXT_BG = ThemeColor.create(ThemeKey.TEXT_BG);
+	public static final ThemeColor TEXT_FG = ThemeColor.create(ThemeKey.TEXT_FG);
+	public static final ThemeColor TEXT_SELECTION_BG = ThemeColor.create(ThemeKey.TEXT_SELECTION_BG);
+	public static final ThemeColor TEXT_SELECTION_FG = ThemeColor.create(ThemeKey.TEXT_SELECTION_FG);
+	public static final ThemeColor TOOLBAR_BG = ThemeColor.create(ThemeKey.TOOLBAR_COLOR);
+	public static final ThemeColor TOOL_TIP_BG = ThemeColor.create(ThemeKey.TOOL_TIP_BG);
 	
+	@Deprecated
 	private static float gradientFactor = 0.84f;
 	
 	private static Border border10;
@@ -101,7 +102,7 @@ public class Theme
 		fieldBorder = new CFieldBorder();
 		border10 = new CBorder(10);
 		noBorder = new CBorder(0);
-		lineBorder = new CBorder(COLOR_LINE);
+		lineBorder = new CBorder(LINE_COLOR);
 		
 		UIDefaults d = UIManager.getLookAndFeelDefaults();
 		
@@ -132,147 +133,42 @@ public class Theme
 			
 			// ui
 			d.put("MenuUI", "javax.swing.plaf.basic.BasicMenuUI");
-			d.put("Menu.background", Theme.panelBG());
+			d.put("Menu.background", Theme.PANEL_BG);
 			d.put("Menu.useMenuBarBackgroundForTopLevel", Boolean.TRUE);
 		}
 		
 		// label
-		d.put("Label.background", Theme.panelBG());
-		d.put("Label.foreground", Theme.textFG());
+		d.put("Label.background", Theme.PANEL_BG);
+		d.put("Label.foreground", Theme.TEXT_FG);
 		
 		// menu
-		d.put("Menu.background", Theme.panelBG());
-		d.put("Menu.foreground", Theme.textFG());
+		d.put("Menu.background", Theme.PANEL_BG);
+		d.put("Menu.foreground", Theme.TEXT_FG);
 		
 		// table
-		d.put("Table.background", Theme.COLOR_TEXT_BG);
-		d.put("Table.foreground", Theme.COLOR_TEXT_FG);
-		d.put("Table.selectionBackground", Theme.COLOR_TEXT_SELECTION_BG);
-		d.put("Table.selectionForeground", Theme.COLOR_TEXT_SELECTION_FG);
-		d.put("Table.gridColor", Theme.gridColor());
+		d.put("Table.background", Theme.TEXT_BG);
+		d.put("Table.foreground", Theme.TEXT_FG);
+		d.put("Table.selectionBackground", Theme.TEXT_SELECTION_BG);
+		d.put("Table.selectionForeground", Theme.TEXT_SELECTION_FG);
+		d.put("Table.gridColor", Theme.GRID_COLOR);
 		//d.put("Table.cellNoFocusBorder", new CBorder.UIResource(2,1));
 		
 		// text area
-		d.put("TextArea.background", Theme.textBG());
-		d.put("TextArea.foreground", Theme.textFG());
+		d.put("TextArea.background", Theme.TEXT_BG);
+		d.put("TextArea.foreground", Theme.TEXT_FG);
 		
 		// text field
 		d.put("TextField.border", fieldBorder);
-		d.put("TextField.background", Theme.textBG());
-		d.put("TextField.foreground", Theme.textFG());
-		d.put("TextField.inactiveBackground", ThemeColor.create(ThemeKey.COLOR_TEXT_BG, 0.5, ThemeKey.COLOR_PANEL_BG));
-		d.put("TextField.inactiveForeground", ThemeColor.create(ThemeKey.COLOR_TEXT_FG, 0.5, ThemeKey.COLOR_PANEL_BG));
+		d.put("TextField.background", Theme.TEXT_BG);
+		d.put("TextField.foreground", Theme.TEXT_FG);
+		d.put("TextField.inactiveBackground", ThemeColor.create(ThemeKey.TEXT_BG, 0.5, ThemeKey.PANEL_BG));
+		d.put("TextField.inactiveForeground", ThemeColor.create(ThemeKey.TEXT_FG, 0.5, ThemeKey.PANEL_BG));
 		
 		// text pane
-		d.put("TextPane.background", Theme.textBG());
-		d.put("TextPane.foreground", Theme.textFG());
+		d.put("TextPane.background", Theme.TEXT_BG);
+		d.put("TextPane.foreground", Theme.TEXT_FG);
 		
 		//d.put("PasswordFieldUI.border", BORDER_FIELD);
-	}
-		
-
-	public static Color panelBG()
-	{
-		return COLOR_PANEL_BG;
-	}
-	
-
-	public static Color panelFG()
-	{
-		return COLOR_PANEL_FG;
-	}
-
-	
-	public static Color toolbarColor()
-	{
-		return COLOR_TOOLBAR;
-	}
-
-
-	public static Color textBG()
-	{
-		return COLOR_TEXT_BG;
-	}
-
-
-	public static Color textFG()
-	{
-		return COLOR_TEXT_FG;
-	}
-	
-	
-	/** indicates positional target: focused text field (TODO), current table row and column */
-	public static Color targetColor()
-	{
-		return COLOR_TARGET;
-	}
-	
-	
-	/** focus dotted border color */
-	public static Color focusColor()
-	{
-		return COLOR_FOCUS;
-	}
-
-
-	/** border line color */
-	public static Color lineColor()
-	{
-		return COLOR_LINE;
-	}
-
-
-	public static Color linkColor()
-	{
-		return COLOR_LINK;
-	}
-	
-	
-	public static Color fieldBG()
-	{
-		return COLOR_FIELD_BG;
-	}
-	
-	
-	public static Color fieldFG()
-	{
-		return COLOR_FIELD_FG;
-	}
-	
-	
-	public static Color buttonHighlight()
-	{
-		return COLOR_BUTTON_AFFIRM;
-	}
-	
-	
-	public static Color alternativeButtonHighlight()
-	{
-		return COLOR_BUTTON_DESTRUCTIVE;
-	}
-	
-	
-	public static Color gridColor()
-	{
-		return COLOR_GRID;
-	}
-
-
-	public static Color textSelectionBG()
-	{
-		return COLOR_TEXT_SELECTION_BG;
-	}
-
-
-	public static Color textSelectionFG()
-	{
-		return COLOR_TEXT_SELECTION_FG;
-	}
-	
-	
-	public static Color toolTipBG()
-	{
-		return COLOR_TOOL_TIP_BG;
 	}
 	
 	
@@ -303,8 +199,7 @@ public class Theme
 	{
 		return ColorTools.brighter(c, gradientFactor * factor);
 	}
-	
-
+	@Deprecated
 	public static float getGradientFactor()
 	{
 		return gradientFactor;
@@ -337,25 +232,25 @@ public class Theme
 
 	public static Font plainFont()
 	{
-		return theme().getFont(ThemeKey.FONT_BASE);
+		return theme().getFont(ThemeKey.BASE_FONT);
 	}
 
 
 	public static Font monospacedFont()
 	{
-		return theme().getFont(ThemeKey.FONT_MONOSPACED);
+		return theme().getFont(ThemeKey.MONOSPACED_FONT);
 	}
 
 
 	public static Font boldFont()
 	{
-		return theme().getFont(ThemeKey.FONT_BOLD);
+		return theme().getFont(ThemeKey.BOLD_FONT);
 	}
 
 
 	public static Font titleFont()
 	{
-		return theme().getFont(ThemeKey.FONT_TITLE);
+		return theme().getFont(ThemeKey.TITLE_FONT);
 	}
 
 	

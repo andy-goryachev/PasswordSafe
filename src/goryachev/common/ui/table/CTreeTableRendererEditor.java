@@ -30,7 +30,7 @@ public class CTreeTableRendererEditor
 	private TableCellEditor baseEditor;
 	private transient TreeEntry node;
 	private transient Component component;
-	private Color indentColor = Theme.fieldBG();
+	private Color indentColor = Theme.FIELD_BG;
 	
 	
 	public CTreeTableRendererEditor()

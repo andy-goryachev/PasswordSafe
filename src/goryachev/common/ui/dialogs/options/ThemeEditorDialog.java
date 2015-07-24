@@ -142,26 +142,26 @@ public class ThemeEditorDialog
 		
 		// fonts
 		
-		if(u.contains(ThemeKey.FONT_BASE))
+		if(u.contains(ThemeKey.BASE_FONT))
 		{
 			a(p, "Base font:", baseFontField, smaller(), larger());
 		}
 		
 		// colors
 		
-		if(u.contains(ThemeKey.COLOR_TEXT_FG))
+		if(u.contains(ThemeKey.TEXT_FG))
 		{
 			a(p, "Text foreground:", new CTextField(), new CTextField(10), new CTextField(10));
 		}
-		if(u.contains(ThemeKey.COLOR_TEXT_BG))
+		if(u.contains(ThemeKey.TEXT_BG))
 		{
 			a(p, "Text backround:", new CTextField(), new CTextField(10), new CTextField(10));
 		}
-		if(u.contains(ThemeKey.COLOR_TEXT_SELECTION_FG))
+		if(u.contains(ThemeKey.TEXT_SELECTION_FG))
 		{
 			a(p, "Selected text foreground:", new CTextField(), new CTextField(10), new CTextField(10));
 		}
-		if(u.contains(ThemeKey.COLOR_TEXT_SELECTION_BG))
+		if(u.contains(ThemeKey.TEXT_SELECTION_BG))
 		{
 			a(p, "Selected text backround:", new CTextField(), new CTextField(10), new CTextField(10));
 		}

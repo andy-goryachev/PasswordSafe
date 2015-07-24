@@ -34,7 +34,7 @@ public class AgComboBoxUI
 
 	protected static int arrowButtonWidth = DEFAULT_BUTTON_WIDTH;
 	protected static Insets arrowButtonInsets = new Insets(1, 1, 1, 1);
-	protected static Color buttonAreaBG = ThemeColor.shadow(ThemeKey.COLOR_TEXT_BG, 0.1);
+	protected static Color buttonAreaBG = ThemeColor.shadow(ThemeKey.TEXT_BG, 0.1);
 	public static final String IS_TABLE_CELL_EDITOR = "JComboBox.isTableCellEditor"; // should be public in the base class
 	private boolean inTable;
 
@@ -44,8 +44,8 @@ public class AgComboBoxUI
 		d.put("ComboBoxUI", AgComboBoxUI.class.getName());
 		d.put("ComboBox.padding", new Insets(0, 0, 0, 0));
 		d.put("ComboBox.border", Theme.lineBorder());
-		d.put("ComboBox.background", Theme.textBG());
-		d.put("ComboBox.foreground", Theme.textFG());
+		d.put("ComboBox.background", Theme.TEXT_BG);
+		d.put("ComboBox.foreground", Theme.TEXT_FG);
 		d.put("ComboBox.opaque", Boolean.TRUE);
 	}
 

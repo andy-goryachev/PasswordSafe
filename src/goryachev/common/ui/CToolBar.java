@@ -10,7 +10,7 @@ public class CToolBar
 	{
 		setOpaque(true);
 		setBorder(new CBorder(1,0));
-		setBackground(Theme.toolbarColor());
+		setBackground(Theme.TOOLBAR_BG);
 	}
 	
 	

@@ -21,13 +21,13 @@ public class OnScreenKeyboard
 	public static final int REGISTER_UPPER  = 1;
 	public static final int REGISTER_ALT    = 2;
 	
-	public static final Color KEY_COLOR = Theme.textBG();
-	public static final Color CTRL_COLOR = ThemeColor.shadow(ThemeKey.COLOR_TEXT_BG, 0.25f);
-	public static final Color HOVER_COLOR = Theme.textBG();
-	public static final Color BORDER_COLOR = Theme.lineColor();
-	public static final Color BACKGROUND_COLOR = ThemeColor.shadow(ThemeKey.COLOR_PANEL_BG, 0.2);
-	public static final Border NORMAL_BORDER = new CBorder(Theme.lineColor());
-	public static final Border HOVER_BORDER = new CBorder(Theme.textFG());
+	public static final Color KEY_COLOR = Theme.TEXT_BG;
+	public static final Color CTRL_COLOR = ThemeColor.shadow(ThemeKey.TEXT_BG, 0.25f);
+	public static final Color HOVER_COLOR = Theme.TEXT_BG;
+	public static final Color BORDER_COLOR = Theme.LINE_COLOR;
+	public static final Color BACKGROUND_COLOR = ThemeColor.shadow(ThemeKey.PANEL_BG, 0.2);
+	public static final Border NORMAL_BORDER = new CBorder(Theme.LINE_COLOR);
+	public static final Border HOVER_BORDER = new CBorder(Theme.TEXT_FG);
 	
 	// 0 - normal
 	// 1 - shift

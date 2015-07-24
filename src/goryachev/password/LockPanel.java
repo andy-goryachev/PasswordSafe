@@ -56,7 +56,7 @@ public class LockPanel
 		progressField = new CProgressField(16);
 		
 		CButton okButton = new CButton(Menus.OK, okAction);
-		okButton.setHighlight(Theme.buttonHighlight());
+		okButton.setHighlight(Theme.AFFIRM_BUTTON_COLOR);
 		
 		CButton exitButton = new CButton(Menus.Exit, exitAction);
 		CButton createButton = new CButton(TXT.get("LockPanel.create new data file", "Create New"), createAction);

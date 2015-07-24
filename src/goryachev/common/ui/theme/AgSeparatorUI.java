@@ -4,7 +4,6 @@ import javax.swing.JComponent;
 import javax.swing.UIDefaults;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSeparatorUI;
-import goryachev.common.ui.Theme;
 
 
 public class AgSeparatorUI 
@@ -19,10 +18,10 @@ public class AgSeparatorUI
 	public static void init(UIDefaults defs)
 	{
 		defs.put("SeparatorUI", AgSeparatorUI.class.getName());
-		defs.put("Separator.background", Theme.brighter(Theme.panelBG())); // FIX
-		defs.put("Separator.foreground", Theme.darker(Theme.panelBG()));
-		defs.put("Separator.highlight", Theme.brighter(Theme.panelBG()));
-		defs.put("Separator.shadow", Theme.darker(Theme.panelBG()));
+		defs.put("Separator.background", ThemeTools.BRIGHTER);
+		defs.put("Separator.foreground", ThemeTools.DARKER);
+		defs.put("Separator.highlight", ThemeTools.BRIGHTER);
+		defs.put("Separator.shadow", ThemeTools.DARKER);
 	}
 
 

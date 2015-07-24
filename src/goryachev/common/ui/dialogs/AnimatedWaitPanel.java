@@ -11,7 +11,7 @@ public class AnimatedWaitPanel
 	{
 		super(Theme.waitIcon(size), JLabel.CENTER);
 		setOpaque(true);
-		setBackground(Theme.textBG());
+		setBackground(Theme.TEXT_BG);
 		setIconTextGap(size/2);
 	}
 	

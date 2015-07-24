@@ -22,13 +22,13 @@ public class AgMenuItemUI
 	{
 		d.put("MenuItemUI", AgMenuItemUI.class.getName());
 		//defs.put("MenuItem.acceleratorFont", Theme.plainFont());
-		d.put("MenuItem.acceleratorForeground", Theme.panelFG());
-		d.put("MenuItem.acceleratorSelectionForeground", Theme.panelFG());
-		d.put("MenuItem.background", Theme.panelBG());
-		d.put("MenuItem.foreground", Theme.textFG());
-		d.put("MenuItem.selectionBackground", Theme.textSelectionBG());
-		d.put("MenuItem.selectionForeground", Theme.textSelectionFG());
-		d.put("MenuItem.disabledForeground", Theme.fieldFG());
+		d.put("MenuItem.acceleratorForeground", Theme.PANEL_FG);
+		d.put("MenuItem.acceleratorSelectionForeground", Theme.PANEL_FG);
+		d.put("MenuItem.background", Theme.PANEL_BG);
+		d.put("MenuItem.foreground", Theme.TEXT_FG);
+		d.put("MenuItem.selectionBackground", Theme.TEXT_SELECTION_BG);
+		d.put("MenuItem.selectionForeground", Theme.TEXT_SELECTION_FG);
+		d.put("MenuItem.disabledForeground", Theme.FIELD_FG);
         
 		d.put("MenuItem.border", new CBorder(2));
 		d.put("MenuItem.borderPainted", Boolean.TRUE);

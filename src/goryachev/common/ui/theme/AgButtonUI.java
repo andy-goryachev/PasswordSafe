@@ -21,10 +21,10 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
 public class AgButtonUI
 	extends BasicButtonUI
 {
-	public static final Color BUTTON_SHADOW = ThemeColor.create(ThemeKey.COLOR_TEXT_FG, 0.75, ThemeKey.COLOR_PANEL_BG);
-	public static final Color DISABLED_SHADOW = ThemeColor.create(ThemeKey.COLOR_TEXT_FG, 0.2, ThemeKey.COLOR_PANEL_BG);
-	public static final Color DISABLED_FOREGROUND = ThemeColor.create(ThemeKey.COLOR_TEXT_FG, 0.5, ThemeKey.COLOR_PANEL_BG);
-	public static final Color SELECTED_BG = ThemeColor.highlight(ThemeKey.COLOR_PANEL_BG, 0.85);
+	public static final Color BUTTON_SHADOW = ThemeColor.create(ThemeKey.TEXT_FG, 0.75, ThemeKey.PANEL_BG);
+	public static final Color DISABLED_SHADOW = ThemeColor.create(ThemeKey.TEXT_FG, 0.2, ThemeKey.PANEL_BG);
+	public static final Color DISABLED_FOREGROUND = ThemeColor.create(ThemeKey.TEXT_FG, 0.5, ThemeKey.PANEL_BG);
+	public static final Color SELECTED_BG = ThemeColor.highlight(ThemeKey.PANEL_BG, 0.85);
 	protected int dashedRectGapX;
 	protected int dashedRectGapY;
 	protected int dashedRectGapWidth;
@@ -39,8 +39,8 @@ public class AgButtonUI
 	public static void init(UIDefaults d)
 	{
 		d.put("ButtonUI", AgButtonUI.class.getName());
-		d.put("Button.background", Theme.panelBG());
-		d.put("Button.foreground", Theme.textFG());
+		d.put("Button.background", Theme.PANEL_BG);
+		d.put("Button.foreground", Theme.TEXT_FG);
 		d.put("Button.showMnemonics", Boolean.TRUE);
 		d.put("Button.shadow", BUTTON_SHADOW);
 		d.put("Button.disabledShadow", DISABLED_SHADOW);
@@ -104,7 +104,7 @@ public class AgButtonUI
 
 	protected Color getFocusColor()
 	{
-		return Theme.focusColor();
+		return Theme.FOCUS_COLOR;
 	}
 
 

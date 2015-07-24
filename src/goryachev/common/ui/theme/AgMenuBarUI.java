@@ -15,8 +15,8 @@ public class AgMenuBarUI
 	{
 		d.put("MenuBarUI", AgMenuBarUI.class.getName());
 		d.put("MenuBar.border", new CBorder());
-		d.put("MenuBar.background", Theme.panelBG());
-		d.put("MenuBar.foreground", Theme.textFG());
+		d.put("MenuBar.background", Theme.PANEL_BG);
+		d.put("MenuBar.foreground", Theme.TEXT_FG);
 	}
 
 
