@@ -1,5 +1,6 @@
 // Copyright (c) 2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.dialogs.options;
+import goryachev.common.ui.CAction;
 import goryachev.common.ui.CButton;
 import goryachev.common.ui.CComboBox;
 import goryachev.common.ui.CPanel;
@@ -9,7 +10,6 @@ import goryachev.common.ui.options.OptionEditorInterface;
 import goryachev.common.ui.theme.ATheme;
 import goryachev.common.util.CKit;
 import goryachev.common.util.TXT;
-import javax.swing.Action;
 import javax.swing.JComponent;
 
 
@@ -17,6 +17,7 @@ public class ThemeOptionEditor
 	extends CPanel
 	implements OptionEditorInterface
 {
+	public final CAction editThemeAction = new CAction() { public void action() { actionEditTheme(); }};
 	public final CComboBox selectorField;
 	protected ThemePreviewPanel preview;
 	private String old;
@@ -36,11 +37,10 @@ public class ThemeOptionEditor
 			}
 		};
 		
-		preview = new ThemePreviewPanel();
+		preview = new ThemePreviewPanel(false);
 		
 		// FIX
-		Action a = ThemeEditorDialog.openAction(this);
-		a.setEnabled(false);
+		editThemeAction.setEnabled(System.getProperty("edit.theme") != null);
 		
 		CPanel p = new CPanel(false);
 		p.addColumns
@@ -54,9 +54,7 @@ public class ThemeOptionEditor
 		p.setGaps(5, 5);
 		p.row(0, p.label(TXT.get("ThemeOptionEditor.theme name", "Name:")));
 		p.row(1, selectorField);
-		p.row(2, new CButton("Customize", a));
-//		p.nextRow();
-//		p.row(0, p.label(TXT.get("ThemeOptionEditor.theme preview", "Preview:")));
+		p.row(2, new CButton("Customize", editThemeAction));
 		
 		setNorth(p);
 		setCenter(preview);
@@ -121,5 +119,12 @@ public class ThemeOptionEditor
 	{
 		String name = getThemeName();
 		ATheme.setTheme(name, false);
+	}
+	
+	
+	protected void actionEditTheme()
+	{
+		String base = getThemeName();
+		new ThemeEditorDialog(this, base).open();
 	}
 }

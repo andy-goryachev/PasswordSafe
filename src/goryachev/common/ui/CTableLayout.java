@@ -15,7 +15,7 @@ import java.awt.LayoutManager2;
  * Column spec:
  *   float 0.0 ... 1.0: preferred size as a fraction of total size
  *   float > 1.0 fixed size in pixels
- *   PREFERRED, MINIMUM, FILL
+ *   PREFERRED, FILL
  *   
  *   TODO SPEC(minw [pixels,%,dlu], prefw, maxw, group)
  *   
@@ -606,6 +606,7 @@ public class CTableLayout
 							int start = start(cc);
 							
 							// layout does not need preferred sizes of components that span scaled columns
+							// FIX but needs minimum
 							boolean skip = doingLayout && spansScaled(start, end);
 							if(!skip)
 							{

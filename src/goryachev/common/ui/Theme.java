@@ -81,7 +81,7 @@ public class Theme
 	{
 		try
 		{
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			//UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		}
 		catch(Exception e)
 		{ }
@@ -478,7 +478,7 @@ public class Theme
 		}
 		else
 		{
-			throw new Rex("must be ThemeKey or Color");
+			return null;
 		}
 	}
 

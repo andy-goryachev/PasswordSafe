@@ -194,10 +194,4 @@ public class AgButtonUI
 			((CButtonBorder)br).setPressed(on);
 		}
 	}
-
-
-	protected void paintText(Graphics g, AbstractButton b, Rectangle r, String text)
-	{
-		ThemeTools.paintText(g, b, r, text, getTextShiftOffset());
-	}
 }

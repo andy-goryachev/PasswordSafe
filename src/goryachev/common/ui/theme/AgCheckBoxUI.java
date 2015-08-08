@@ -53,10 +53,4 @@ public class AgCheckBoxUI
 		g.setColor(getFocusColor());
 		BasicGraphicsUtils.drawDashedRect(g, textRect.x, textRect.y, textRect.width, textRect.height);
 	}
-	
-	
-	protected void paintText(Graphics g, AbstractButton b, Rectangle r, String text)
-	{
-		ThemeTools.paintText(g, b, r, text, getTextShiftOffset());
-	}
 }

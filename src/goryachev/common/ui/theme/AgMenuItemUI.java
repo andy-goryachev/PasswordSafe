@@ -2,14 +2,8 @@
 package goryachev.common.ui.theme;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.Theme;
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Insets;
-import java.awt.Rectangle;
-import javax.swing.ButtonModel;
 import javax.swing.JComponent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.swing.UIDefaults;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicMenuItemUI;
@@ -45,21 +39,5 @@ public class AgMenuItemUI
 	public static ComponentUI createUI(JComponent c)
 	{
 		return new AgMenuItemUI();
-	}
-
-
-	protected void paintText(Graphics g, JMenuItem mi, Rectangle r, String text)
-	{
-		ButtonModel m = mi.getModel();
-		Color old = g.getColor();
-
-		if(m.isEnabled() && (m.isArmed() || (mi instanceof JMenu && m.isSelected())))
-		{
-			g.setColor(selectionForeground);
-		}
-
-		ThemeTools.paintText(g, mi, r, text, 0);
-
-		g.setColor(old);
 	}
 }

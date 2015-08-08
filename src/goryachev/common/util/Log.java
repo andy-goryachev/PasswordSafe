@@ -160,9 +160,8 @@ public class Log
 				p.mkdirs();
 			}
 			
-			SysInfo s = new SysInfo();
 			// TODO logger errors?
-			CKit.write(f, s.getSystemInfo());
+			CKit.write(f, SysInfo.getSystemInfo());
 		}
 		catch(Exception e)
 		{

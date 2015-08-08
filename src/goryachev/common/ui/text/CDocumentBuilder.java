@@ -227,6 +227,23 @@ public class CDocumentBuilder
 		as.addAttribute(StyleConstants.IconAttribute, icon);
 		insert(" ", as);
 	}
+	
+	
+	public CDocumentBuilder tab()
+	{
+		append("\t");
+		return this;
+	}
+
+
+	public CDocumentBuilder tab(int n)
+	{
+		for(int i=0; i<n; i++)
+		{
+			append('\t');
+		}
+		return this;
+	}
 
 
 	public CDocumentBuilder nl()

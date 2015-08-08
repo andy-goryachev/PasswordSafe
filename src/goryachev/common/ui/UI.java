@@ -1298,19 +1298,7 @@ public class UI
 
 	public static boolean isLeftButton(InputEvent ev)
 	{
-		// SwingUtilities2
 		return ((ev.getModifiers() & InputEvent.BUTTON1_MASK) != 0);
-		/*
-		int mask = (InputEvent.BUTTON1_DOWN_MASK | InputEvent.BUTTON2_DOWN_MASK | InputEvent.BUTTON3_DOWN_MASK);
-		int ex = ev.getModifiersEx();
-		
-		if((ex & mask) == 0)
-		{
-			// I don't know why
-			return true;
-		}
-		return ((ex & mask) == InputEvent.BUTTON1_DOWN_MASK);
-		*/
 	}
 	
 	

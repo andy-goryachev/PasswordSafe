@@ -1,6 +1,11 @@
 // Copyright (c) 2009-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util.platform;
 import goryachev.common.ui.Application;
+import goryachev.common.ui.CBorder;
+import goryachev.common.ui.Theme;
+import goryachev.common.ui.UI;
+import goryachev.common.ui.text.CDocument;
+import goryachev.common.ui.text.CDocumentBuilder;
 import goryachev.common.util.CComparator;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
@@ -11,11 +16,14 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.SystemColor;
+import java.security.Security;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Map;
@@ -31,93 +39,64 @@ import javax.swing.border.Border;
 
 public class SysInfo
 {
-	private boolean ui;
-	private SB sb;
-	private String indent = "\t";
 	private DecimalFormat numberFormat = new DecimalFormat("#,##0.##");
+	private final Out out;
 	
 	
-	public SysInfo(boolean ui)
+	public SysInfo(Out out)
 	{
-		this.ui = ui;
+		this.out = out;
 	}
 	
 	
-	public SysInfo()
+	/** generates system information report as text string */
+	public static String getSystemInfo()
 	{
-		this(true);
+		return getSystemInfo(false);
 	}
 	
 	
-	public String getSystemInfo()
+	/** generates system information report as text string, with or without ui defaults part */
+	public static String getSystemInfo(boolean ui)
 	{
-		sb = new SB();
+		StringOut out = new StringOut();
+		SysInfo s = new SysInfo(out);
 		
-		extractApp();
-		extractGraphics();
-		extractEnvironment();
-		extractSystemProperties();
+		s.extractApp();
+		s.extractGraphics();
+		s.extractEnvironment();
+		s.extractSystemProperties();
 		
 		if(ui)
 		{
-			extractUIDefaults();
+			s.extractUIDefaults("UIManager.getLookAndFeelDefaults", null);
 		}
 		
-		return sb.getAndClear();
+		return out.getReport();
 	}
 	
 	
-	protected void extractApp()
+	protected void header(String title)
 	{
-		sb.a("Application\n");
-		sb.a(indent);
-		if(CKit.isNotBlank(Application.getTitle()))
-		{
-			sb.a(Application.getTitle()).a(" version ").a(Application.getVersion()).nl();
-		}
-		
-		sb.a(indent);
-		sb.a("Time: ").a(new SimpleDateFormat("yyyy-MMdd HH:mm:ss").format(System.currentTimeMillis())).nl();
-		
-		long max = Runtime.getRuntime().maxMemory();
-		long free = max - Runtime.getRuntime().totalMemory() + Runtime.getRuntime().freeMemory();
-		
-		sb.a(indent).a("Available Memory: ").append(number(max)).nl();
-		sb.a(indent).a("Free Memory: ").a(number(free)).nl();
-		
-		sb.nl();
-	}
-
-	
-	protected void extractEnvironment()
-	{
-		sb.a("Environment\n");
-		
-		Map<String,String> env = System.getenv();
-		CList<String> keys = new CList(env.keySet());
-		CSorter.sort(keys);
-		for(String key: keys)
-		{
-			sb.a(indent);
-			sb.a(key).append(" = ").append(safe(env.get(key))).nl();
-		}
-		sb.nl();
+		out.header(title);
 	}
 	
 	
-	protected void extractSystemProperties()
+	protected void nl()
 	{
-		sb.a("System Properties\n");
-		
-		Properties p = System.getProperties();
-		CList<String> keys = new CList(p.stringPropertyNames());
-		CSorter.sort(keys);
-		for(String key: keys)
-		{
-			sb.a(indent);
-			sb.a(key).append(" = ").append(safe(p.getProperty(key))).nl();
-		}
-		sb.nl();
+		out.nl();
+	}
+	
+	
+	protected void print(String x)
+	{
+		print(1, x);
+	}
+	
+	
+	protected void print(int indents, String x)
+	{
+		out.print(indents, x);
 	}
 	
 	
@@ -171,214 +150,597 @@ public class SysInfo
 	}
 	
 	
-	protected void describe(Object x)
+	public void extractApp()
 	{
-		if(x == null)
+		header("Application");
+		if(CKit.isNotBlank(Application.getTitle()))
 		{
-			return;
+			print("Title: " + Application.getTitle());
+			print("Version: " + Application.getVersion());
 		}
-		else if(x instanceof String)
+		
+		print("Time: " + new SimpleDateFormat("yyyy-MMdd HH:mm:ss").format(System.currentTimeMillis()));
+		
+		long max = Runtime.getRuntime().maxMemory();
+		long free = max - Runtime.getRuntime().totalMemory() + Runtime.getRuntime().freeMemory();
+		
+		print("Available Memory: " + number(max));
+		print("Free Memory:" + number(free));
+		nl();
+	}
+
+	
+	public void extractEnvironment()
+	{
+		header("Environment");
+		
+		Map<String,String> env = System.getenv();
+		CList<String> keys = new CList(env.keySet());
+		CSorter.sort(keys);
+		for(String key: keys)
 		{
-			sb.a('"');
-			sb.a(x);
-			sb.a('"');
+			print(key + " = " + safe(env.get(key)));
 		}
-		else if(x instanceof Color)
+		nl();
+	}
+	
+	
+	public void extractSystemProperties()
+	{
+		header("System Properties");
+		
+		Properties p = System.getProperties();
+		CList<String> keys = new CList(p.stringPropertyNames());
+		CSorter.sort(keys);
+		for(String key: keys)
 		{
-			sb.a(x.getClass().getSimpleName());
+			print(key + " = " + safe(p.getProperty(key)));
+		}
+		nl();
+	}
+	
+
+	public void extractUIDefaults(String name, UIDefaults defs)
+	{
+		header(name);
+
+		try
+		{
+			if(defs == null)
+			{
+				defs = UIManager.getLookAndFeelDefaults();
+			}
+
+			CList<Object> keys = new CList(defs.keySet());
+			new CComparator<Object>()
+			{
+				public int compare(Object a, Object b)
+				{
+					return compareText(a, b);
+				}
+			}.sort(keys);
+
+			for(Object key: keys)
+			{
+				Object v = defs.get(key);
+				out.describe(key, v);
+			}
+		}
+		catch(Throwable e)
+		{
+			print(CKit.stackTrace(e));
+		}
+		
+		nl();
+	}
+	
+	
+	protected void sc(String name, Color c)
+	{
+		out.describe(name, c);
+	}
+	
+	
+	public void extractSystemColors()
+	{
+		header("System Colors");
+		
+	    sc("activeCaption", SystemColor.activeCaption);
+	    sc("activeCaptionText", SystemColor.activeCaptionText);
+	    sc("activeCaptionBorder", SystemColor.activeCaptionBorder);
+	    sc("control", SystemColor.control);
+	    sc("controlDkShadow", SystemColor.controlDkShadow);
+	    sc("controlHighlight", SystemColor.controlHighlight);
+	    sc("controlLtHighlight", SystemColor.controlLtHighlight);
+	    sc("controlShadow", SystemColor.controlShadow);
+	    sc("controlText", SystemColor.controlText);
+		sc("desktop", SystemColor.desktop);
+	    sc("inactiveCaption", SystemColor.inactiveCaption);
+	    sc("inactiveCaptionText", SystemColor.inactiveCaptionText);
+	    sc("inactiveCaptionBorder", SystemColor.inactiveCaptionBorder);
+	    sc("info", SystemColor.info);
+	    sc("infoText", SystemColor.infoText);
+	    sc("menu", SystemColor.menu);
+	    sc("menuText", SystemColor.menuText);
+	    sc("scrollbar", SystemColor.scrollbar);
+	    sc("text", SystemColor.text);
+	    sc("textHighlight", SystemColor.textHighlight);
+	    sc("textHighlightText", SystemColor.textHighlightText);
+	    sc("textInactiveText", SystemColor.textInactiveText);
+	    sc("textText", SystemColor.textText);
+	    sc("window", SystemColor.window);
+	    sc("windowBorder", SystemColor.windowBorder);
+	    sc("windowText", SystemColor.windowText);
+		
+		nl();
+	}
+	
+
+	public void extractGraphics()
+	{
+		try
+		{
+			header("Graphics");
+
+			GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			for(GraphicsDevice dev: env.getScreenDevices())
+			{
+				print(dev.getIDstring() + ":");
+
+				for(GraphicsConfiguration gc: dev.getConfigurations())
+				{
+					Rectangle r = gc.getBounds();
+					print(2, r.width + "x" + r.height + " @(" + r.x + "," + r.y + ")");
+				}
+			}
+		}
+		catch(Throwable ignore)
+		{
+		}
+		
+		nl();
+	}
+	
+	
+	public void extractSecurity()
+	{
+		header("Security");
+		
+		listSecurityAlgorithms("Cipher");
+		listSecurityAlgorithms("KeyStore");
+		listSecurityAlgorithms("Mac");
+		listSecurityAlgorithms("MessageDigest");
+		listSecurityAlgorithms("Signature");
+		
+		nl();
+	}
+	
+	
+	protected void listSecurityAlgorithms(String name)
+	{
+		print(name);
+
+		try
+		{
+			CList<String> names = new CList(Security.getAlgorithms(name));
+			CSorter.sort(names);
 			
-			Color c = (Color)x;
-			sb.a("(");
-			sb.a(Hex.toHexByte(c.getRed()));
-			sb.a(Hex.toHexByte(c.getGreen()));
-			sb.a(Hex.toHexByte(c.getBlue()));
+			for(String s: names)
+			{
+				print(2, s);
+			}
+		}
+		catch(Exception e)
+		{
+			print(CKit.stackTrace(e));
+		}
+	}
+	
+	
+	//
+	
+	
+	public abstract static class Out
+	{
+		public abstract void header(String title);
+		
+		public abstract void nl();
+		
+		public abstract void print(int count, String x);
+		
+		public abstract void describe(Object key, Object v);
+		
+		protected abstract Out a(Object x);
+		
+		//
+		
+		
+		protected void describeInsets(Insets m)
+		{
+			a("(t=").a(m.top);
+			a(",l=").a(m.left);
+			a(",b=").a(m.bottom);
+			a(",r=").a(m.right);
+			a(")");
+		}
+
+		
+		protected void describeColor(Color c)
+		{
+			a("(");
+			a(Hex.toHexByte(c.getRed()));
+			a(Hex.toHexByte(c.getGreen()));
+			a(Hex.toHexByte(c.getBlue()));
 			
 			if(c.getAlpha() != 255)
 			{
-				sb.a(".").a(Hex.toHexByte(c.getAlpha()));
+				a(".").a(Hex.toHexByte(c.getAlpha()));
 			}
 			
-			sb.a(")");
+			a(")");
 		}
-		else if(x instanceof Font)
+		
+		
+		protected void describeFont(Font f)
 		{
-			sb.a(x.getClass().getSimpleName());
-			
-			Font f = (Font)x;
-			sb.a("(");
-			sb.a(f.getFamily());
+			a("(");
+			a(f.getFamily());
 			
 			if(CKit.notEquals(f.getFamily(), f.getName()))
 			{
-				sb.a("/");
-				sb.a(f.getName());
+				a("/");
+				a(f.getName());
 			}
 			
-			sb.a(",");
-			sb.a(f.getSize());
-			sb.a(",");
+			a(",");
+			a(f.getSize());
+			a(",");
 
 			if(f.isBold())
 			{
 				if(f.isItalic())
 				{
-					sb.a("bolditalic");
+					a("bolditalic");
 				}
 				else
 				{
-					sb.a("bold");
+					a("bold");
 				}
 			}
 			else
 			{
 				if(f.isItalic())
 				{
-					sb.a("italic");
+					a("italic");
 				}
 				else
 				{
-					sb.a("plain");
+					a("plain");
 				}
 			}
 			
-			sb.a(")");
+			a(")");
 		}
-		else if(x instanceof Dimension)
+
+		
+		protected void describeIcon(Icon ic)
 		{
-			sb.a(x.getClass().getSimpleName());
-			
-			Dimension d = (Dimension)x;
-			sb.a("(w=").a(d.getWidth());
-			sb.a(",h=").a(d.getHeight());
-			sb.a(")");
+			a("(w=").a(ic.getIconWidth());
+			a(",h=").a(ic.getIconHeight());
+			a(")");
 		}
-		else if(x instanceof Insets)
+
+		
+		protected void describeBorder(Border border)
 		{
-			sb.a(x.getClass().getSimpleName());
-			describeInsets(sb, (Insets)x);
+			describeInsets(border.getBorderInsets(new JLabel()));
 		}
-		else if(x instanceof Icon)
+		
+
+		protected void describe(Object x)
 		{
-			sb.a(x.getClass().getSimpleName());
-			
-			Icon d = (Icon)x;
-			sb.a("(w=").a(d.getIconWidth());
-			sb.a(",h=").a(d.getIconHeight());
-			sb.a(")");
+			if(x == null)
+			{
+			}
+			else if(x instanceof String)
+			{
+				a('"');
+				a(x);
+				a('"');
+			}
+			else if(x instanceof Color)
+			{
+				a(x.getClass().getSimpleName());
+				describeColor((Color)x);
+			}
+			else if(x instanceof Font)
+			{
+				a(x.getClass().getSimpleName());				
+				describeFont((Font)x);
+			}
+			else if(x instanceof Dimension)
+			{
+				a(x.getClass().getSimpleName());
+				
+				Dimension d = (Dimension)x;
+				a("(w=").a(d.getWidth());
+				a(",h=").a(d.getHeight());
+				a(")");
+			}
+			else if(x instanceof Insets)
+			{
+				a(x.getClass().getSimpleName());
+				describeInsets((Insets)x);
+			}
+			else if(x instanceof Icon)
+			{
+				a(x.getClass().getSimpleName());
+				describeIcon((Icon)x);
+			}
+			else if(x instanceof Border)
+			{
+				a(x.getClass().getName());
+				describeBorder((Border)x);
+			}
+			else if(x instanceof InputMap)
+			{
+				a(x.getClass().getSimpleName());
+			}
+			else if(x instanceof ActionMap)
+			{
+				a(x.getClass().getSimpleName());
+			}
+			else if(x instanceof Component)
+			{
+				a(x.getClass().getName());
+			}
+			else if(x instanceof Object[])
+			{
+				Object[] a = (Object[])x;
+				a("Object[");
+				a(a.length);
+				a("]");
+			}
+			else if(x instanceof int[])
+			{
+				int[] a = (int[])x;
+				a("int[");
+				a(a.length);
+				a("]");
+			}
+			else
+			{
+				a(x);
+			}
 		}
-		else if(x instanceof Border)
+	}
+	
+	
+	//
+	
+	
+	public static class StringOut
+		extends Out
+	{
+		private final SB sb;
+		private String indent = "\t";
+
+		
+		public StringOut()
 		{
-			sb.a(x.getClass().getName());
-			describeInsets(sb, ((Border)x).getBorderInsets(new JLabel()));
+			sb = new SB();
 		}
-		else if(x instanceof InputMap)
-		{
-			sb.a(x.getClass().getSimpleName());
-		}
-		else if(x instanceof ActionMap)
-		{
-			sb.a(x.getClass().getSimpleName());
-		}
-		else if(x instanceof Component)
-		{
-			sb.a(x.getClass().getName());
-		}
-		else if(x instanceof Object[])
-		{
-			Object[] a = (Object[])x;
-			sb.a("Object[");
-			sb.a(a.length);
-			sb.a("]");
-		}
-		else if(x instanceof int[])
-		{
-			int[] a = (int[])x;
-			sb.a("int[");
-			sb.a(a.length);
-			sb.a("]");
-		}
-		else
+
+		
+		protected Out a(Object x)
 		{
 			sb.a(x);
+			return this;
 		}
-	}
+		
 	
-	
-	protected void describeInsets(SB sb, Insets m)
-	{
-		sb.a("(t=").a(m.top);
-		sb.a(",l=").a(m.left);
-		sb.a(",b=").a(m.bottom);
-		sb.a(",r=").a(m.right);
-		sb.a(")");
-	}
-	
-	
-	protected void extractUIDefaults()
-	{
-		try
-            {
-	            sb.a("UIManager.getLookAndFeelDefaults");
-	            sb.nl();
-	            
-	            UIDefaults defs = UIManager.getLookAndFeelDefaults();
-	            
-	            CList<Object> keys = new CList(defs.keySet());
-	            new CComparator<Object>()
-	            {
-	            	public int compare(Object a, Object b)
-	            	{
-	            		return compareText(a, b);
-	            	}
-	            }.sort(keys);
-	            
-	            for(Object key: keys)
-	            {
-	            	sb.tab();
-	            	sb.a(key);
-	            	sb.a(" = ");
-	            	
-	            	Object v = defs.get(key);
-	            	describe(v);
-	            	
-	            	sb.nl();
-	            }
-            }
-            catch(Throwable ignore)
-            {
-            }
-	}
-	
-	
-	protected void extractGraphics()
-	{
-		try
-            {
-	            sb.a("Graphics");
+		public void header(String title)
+		{
+			sb.a(title).nl();
+		}
+		
+		
+		public void nl()
+		{
 			sb.nl();
-
-			GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			for(GraphicsDevice dev: env.getScreenDevices())
+		}
+		
+		
+		public void print(int count, String x)
+		{
+			for(int i=0; i<count; i++)
 			{
 				sb.a(indent);
-				sb.a(dev.getIDstring()).a(":");
-				sb.nl();
-				
-				for(GraphicsConfiguration gc: dev.getConfigurations())
-				{
-					Rectangle r = gc.getBounds();
-					sb.a(indent);
-					sb.a(indent);
-					sb.a(r.width).a("x").a(r.height);
-					sb.a(" @(").a(r.x).a(",").a(r.y).a(")");
-					sb.nl();
-				}
 			}
-			
+			sb.append(x);		
 			sb.nl();
 		}
-		catch(Throwable ignore)
+		
+		
+		public void describe(Object key, Object v)
 		{
-            }
+			sb.a(indent);
+			sb.a(key);
+			sb.a(" = ");
+			describe(sb, v);
+			sb.nl();
+		}
+		
+		
+		public String getReport()
+		{
+			return sb.getAndClear();
+		}
+	}
+	
+	
+	//
+	
+	
+	public static class DocumentOut
+		extends Out
+	{
+		private final CDocumentBuilder b;
+		private final Font font;
+		private String indent = "    ";
+
+		
+		public DocumentOut()
+		{
+			b = new CDocumentBuilder();
+			font = Theme.monospacedFont();
+			b.setFont(font);
+		}
+		
+		
+		public void header(String title)
+		{
+			b.setUnderline(true);
+			b.bold(title);
+			b.setUnderline(false);
+			b.nl();
+		}
+		
+		
+		public void nl()
+		{
+			b.nl();
+		}
+		
+		
+		public void print(int count, String x)
+		{
+			for(int i=0; i<count; i++)
+			{
+				b.a(indent);
+			}
+			b.append(x);		
+			b.nl();
+		}
+		
+		
+		public void describe(Object key, Object v)
+		{
+			b.a(indent);
+			b.a(key);
+			b.a(" = ");
+			describe(v);
+			b.nl();
+		}
+		
+		
+		protected Out a(Object x)
+		{
+			b.a(x);
+			return this;
+		}
+		
+		protected void describeColor(Color c)
+		{
+			super.describeColor(c);
+			
+			nl();
+			a(indent);
+			a(indent);
+
+			JLabel t = new JLabel("   ");
+			t.setOpaque(true);
+			t.setBorder(new CBorder(Theme.TEXT_FG));
+			t.setBackground(c);
+			t.setAlignmentY(1.0f);
+			b.addComponent(t);
+		}
+		
+		
+		protected void describeFont(Font f)
+		{
+			super.describeFont(f);
+			b.nl();
+			
+			a(indent);
+			a(indent);
+			
+			JLabel t = new JLabel("The quick brown fox jumped over the lazy dog 0123456789.");
+			t.setFont(f);
+			t.setOpaque(true);
+			t.setForeground(Color.black);
+			t.setBackground(UI.mix(Color.yellow, 0.2, Color.white));
+			t.setBorder(new CBorder(1));
+			b.addComponent(t);
+		}
+		
+		
+		protected void describeIcon(Icon ic)
+		{
+			super.describeIcon(ic);
+			
+			nl();
+			a(indent);
+			a(indent);
+			
+			JLabel t = new JLabel(ic)
+			{
+				public void paint(Graphics g)
+				{
+					try
+					{
+						super.paint(g);
+					}
+					catch(ClassCastException e)
+					{
+						setIcon(null);
+						setOpaque(true);
+						setBackground(UI.mix(Color.white, 0.5, Color.magenta));
+						setForeground(Color.black);
+						setText(e.getMessage());
+					}
+				}
+			};
+			b.addComponent(t);
+		}
+		
+		
+		protected void describeBorder(Border border)
+		{			
+			super.describeBorder(border);
+			
+			nl();
+			a(indent);
+			a(indent);
+			
+			JLabel t = new JLabel("   ")
+			{
+				public void paint(Graphics g)
+				{
+					try
+					{
+						super.paint(g);
+					}
+					catch(ClassCastException e)
+					{
+						setIcon(null);
+						setOpaque(true);
+						setBackground(UI.mix(Color.white, 0.5, Color.magenta));
+						setForeground(Color.black);
+						setText(e.getMessage());
+					}
+				}
+			};
+			t.setOpaque(true);
+			t.setBorder(border);
+			t.setBackground(Theme.TEXT_BG);
+			b.addComponent(t);
+		}
+		
+		
+		public CDocument getReport()
+		{
+			return b.getDocument();
+		}
 	}
 }
