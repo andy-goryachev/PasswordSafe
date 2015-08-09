@@ -27,7 +27,6 @@ import goryachev.common.ui.theme.TimePeriodFormatter;
 import goryachev.common.util.CList;
 import goryachev.common.util.CPlatform;
 import goryachev.common.util.Log;
-import goryachev.common.util.Rex;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -64,16 +63,12 @@ public class Theme
 	public static final ThemeColor TOOLBAR_BG = ThemeColor.create(ThemeKey.TOOLBAR_COLOR);
 	public static final ThemeColor TOOL_TIP_BG = ThemeColor.create(ThemeKey.TOOL_TIP_BG);
 	
-	@Deprecated
-	private static float gradientFactor = 0.84f;
-	
-	private static Border border10;
-	private static Border fieldBorder;
-	private static Border lineBorder;
-	private static Border noBorder;
-	private static Border raisedBevelBorder;
-	private static Border loweredBevelBorder;
-
+	protected static Border border10;
+	protected static Border fieldBorder;
+	protected static Border lineBorder;
+	protected static Border noBorder;
+	protected static Border raisedBevelBorder;
+	protected static Border loweredBevelBorder;
 	protected static Dimension preferredToolbarDimensions;
 
 
@@ -81,7 +76,10 @@ public class Theme
 	{
 		try
 		{
-			//UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			if(CPlatform.isWindows())
+			{
+				UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			}
 		}
 		catch(Exception e)
 		{ }
@@ -179,6 +177,9 @@ public class Theme
 	
 	
 	// FIX use ThemeColor-derived colors
+	@Deprecated
+	private static float gradientFactor = 0.84f;
+
 	@Deprecated
 	public static Color darker(Color c)
 	{
