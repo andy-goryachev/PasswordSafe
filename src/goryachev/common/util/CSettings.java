@@ -230,4 +230,33 @@ public class CSettings
 	{
 		setProperty(key, f == null ? null : f.getAbsolutePath());
 	}
+	
+	
+	public <T extends Enum> T getEnum(String key, Class<T> type)
+	{
+		return getEnum(key, type, null);
+	}
+	
+	
+	public <T extends Enum> T getEnum(String key, Class<T> type, T defaultValue)
+	{
+		String s = getProperty(key);
+		if(s != null)
+		{
+			try
+			{
+				return (T)Enum.valueOf(type, s);
+			}
+			catch(Exception ignore)
+			{
+			}
+		}
+		return defaultValue;
+	}
+	
+	
+	public <T extends Enum> void setEnum(String key, T value)
+	{
+		setProperty(key, value == null ? null : value.toString());
+	}
 }

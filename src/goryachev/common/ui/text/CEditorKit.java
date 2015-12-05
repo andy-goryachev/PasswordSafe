@@ -3,7 +3,6 @@ package goryachev.common.ui.text;
 import goryachev.common.util.CLanguage;
 import java.util.Locale;
 import javax.swing.text.AbstractDocument;
-import javax.swing.text.ComponentView;
 import javax.swing.text.Document;
 import javax.swing.text.Element;
 import javax.swing.text.IconView;
@@ -17,6 +16,7 @@ import javax.swing.text.ViewFactory;
 
 public class CEditorKit
 	extends StyledEditorKit
+	implements ViewFactory
 {
 	public static final CEditorBoldAction boldAction = new CEditorBoldAction();
 	public static final CEditorCopyAction copyAction = new CEditorCopyAction();
@@ -26,11 +26,12 @@ public class CEditorKit
 	public static final CEditorSelectAllAction selectAllAction = new CEditorSelectAllAction();
 	public static final CEditorSelectLineAction selectLineAction = new CEditorSelectLineAction();
 	public static final CEditorStrikethroughAction strikeThroughAction = new CEditorStrikethroughAction();
-	public static final CEditorSubscriptAction subscriptAction = new CEditorSubscriptAction();
-	public static final CEditorSuperscriptAction superscriptAction = new CEditorSuperscriptAction();
+	public static final CEditorSubscriptAction subScriptAction = new CEditorSubscriptAction();
+	public static final CEditorSuperscriptAction superScriptAction = new CEditorSuperscriptAction();
 	public static final CEditorToUpperCaseAction toUpperCaseAction = new CEditorToUpperCaseAction();
 	public static final CEditorToLowerCaseAction toLowerCaseAction = new CEditorToLowerCaseAction();
 	public static final CEditorUnderlineAction underlineAction = new CEditorUnderlineAction();
+	
 	private final ViewFactory viewFactory = createViewFactory();
 	private boolean noWrapMode;
 	protected int tabSize = 4;
@@ -44,13 +45,14 @@ public class CEditorKit
 	
 	private ViewFactory createViewFactory()
 	{
-		return new ViewFactory()
-		{
-			public View create(Element elem)
-			{
-				return createView(elem);
-			}
-		};
+		return this;
+	}
+	
+
+	// ViewFactory interface
+	public View create(Element elem)
+	{
+		return createView(elem);
 	}
 
 
@@ -64,38 +66,37 @@ public class CEditorKit
 	{
 		return tabSize;
 	}
-	
-	
-	protected View createView(Element elem)
-	{
-		String name = elem.getName();
-		if(name != null)
-		{
-			if(name.equals(AbstractDocument.ContentElementName))
-			{
-				// deals with breaking long words
-				return new XLabelView(elem);
-			}
-			else if(name.equals(AbstractDocument.ParagraphElementName))
-			{
-				// deals with breaking long words
-				return new XParagraphView(this, elem);
-			}
-			else if(name.equals(AbstractDocument.SectionElementName))
-			{
-				return new XBoxView(elem, View.Y_AXIS);
-			}
-			else if(name.equals(StyleConstants.ComponentElementName))
-			{
-				return new ComponentView(elem);
-			}
-			else if(name.equals(StyleConstants.IconElementName))
-			{
-				return new IconView(elem);
-			}
-		}
 
-		return new XLabelView(elem);
+
+	protected View createView(Element em)
+	{
+		String name = em.getName();
+		if(AbstractDocument.ContentElementName.equals(name))
+		{
+			// deals with breaking long words
+			return new XLabelView(em);
+		}
+		else if(AbstractDocument.ParagraphElementName.equals(name))
+		{
+			// deals with breaking long words
+			return new XParagraphView(this, em);
+		}
+		else if(AbstractDocument.SectionElementName.equals(name))
+		{
+			return new XBoxView(em, View.Y_AXIS);
+		}
+		else if(StyleConstants.ComponentElementName.equals(name))
+		{
+			return new XComponentView(em);
+		}
+		else if(StyleConstants.IconElementName.equals(name))
+		{
+			return new IconView(em);
+		}
+		else
+		{
+			return new XLabelView(em);
+		}
 	}
 
 
@@ -133,8 +134,8 @@ public class CEditorKit
 		italicAction.setSelected(StyleConstants.isItalic(a));
 		underlineAction.setSelected(StyleConstants.isUnderline(a));
 		strikeThroughAction.setSelected(StyleConstants.isStrikeThrough(a));
-		subscriptAction.setSelected(StyleConstants.isSubscript(a));
-		superscriptAction.setSelected(StyleConstants.isSuperscript(a));
+		subScriptAction.setSelected(StyleConstants.isSubscript(a));
+		superScriptAction.setSelected(StyleConstants.isSuperscript(a));
 	}
 
 

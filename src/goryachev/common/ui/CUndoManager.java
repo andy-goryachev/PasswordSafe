@@ -3,11 +3,16 @@ package goryachev.common.ui;
 import goryachev.common.util.CKit;
 import goryachev.common.util.Log;
 import goryachev.common.util.Rex;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JRootPane;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.Document;
@@ -19,10 +24,11 @@ import javax.swing.undo.UndoableEdit;
 public class CUndoManager
 	extends UndoManager
 {
+	public static final Object KEY_UNDO_MANAGER = new Object();
 	public final LocalUndoAction localUndoAction = new LocalUndoAction();
 	public final LocalRedoAction localRedoAction = new LocalRedoAction();
-	public static final UndoAction undoAction = new UndoAction();
-	public static final RedoAction redoAction = new RedoAction();
+	public static final GlobalUndoAction globalUndoAction = new GlobalUndoAction();
+	public static final GlobalRedoAction globalRedoAction = new GlobalRedoAction();
 	protected static CUndoManager last;
 	static
 	{
@@ -35,22 +41,74 @@ public class CUndoManager
 	}
 	
 	
+	public void attachTo(Container c)
+	{
+		JComponent jc = findJComponent(c);
+		jc.putClientProperty(KEY_UNDO_MANAGER, this);
+	}
+	
+	
 	private static void init()
 	{
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addPropertyChangeListener("focusOwner", new PropertyChangeListener()
 		{
 			public void propertyChange(PropertyChangeEvent ev)
 			{
-				JTextComponent x = CFocusMonitor.getLastTextComponent();
-				CUndoManager u = getUndoManager(x);
+				Component c = CFocusMonitor.getLastComponent();
+				if(c instanceof JRootPane)
+				{
+					return;
+				}
+				
+//				if(c != null)
+//				{
+//					D.p(c.isFocusable());
+//				}
+				//D.p(Dump.componentHierarchy(c));
+				
+				CUndoManager u = findUndoManager(c);
+				if(u == null)
+				{
+					// check for popup menu cases
+					if(c == null)
+					{
+						return;
+					}
+				}
+
 				if(u != last)
 				{
-					undoAction.setManager(u);
-					redoAction.setManager(u);
+					globalUndoAction.setManager(u);
+					globalRedoAction.setManager(u);
 					last = u;
 				}
 			}
 		});
+	}
+	
+	
+//	protected static void updateGlobal(CUndoManager u)
+//	{
+//
+//	}
+	
+	
+	public static JComponent findJComponent(Container c)
+	{
+		if(c instanceof JFrame)
+		{
+			// this is a bad idea: invoking a menu is going to lose undo manager attached to some other component
+			// if the root pane has another undo manager set.
+			return ((JFrame)c).getRootPane();
+		}
+		else if(c instanceof JComponent)
+		{
+			return (JComponent)c;
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 	
@@ -119,6 +177,31 @@ public class CUndoManager
 				}
 			}
 		}
+		else if(x instanceof JComponent)
+		{
+			Object v = ((JComponent)x).getClientProperty(KEY_UNDO_MANAGER);
+			if(v instanceof CUndoManager)
+			{
+				return (CUndoManager)v;
+			}
+		}
+		
+		return null;
+	}
+	
+	
+	protected static CUndoManager findUndoManager(Component c)
+	{
+		while(c != null)
+		{
+			CUndoManager u = getUndoManager(c);
+			if(u != null)
+			{
+				return u;
+			}
+			
+			c = c.getParent();
+		}
 		return null;
 	}
 
@@ -142,6 +225,10 @@ public class CUndoManager
 	{
 		localUndoAction.updateUndoState();
 		localRedoAction.updateRedoState();
+		
+		// FIX name sometimes is wrong...
+		globalUndoAction.setManager(this);
+		globalRedoAction.setManager(this);
 	}
 	
 
@@ -259,11 +346,14 @@ public class CUndoManager
 		//
 		
 		private Action action;
+		private String defaultText;
 		
 		
-		public AbstractGlobalAction()
+		public AbstractGlobalAction(String defaultText)
 		{
+			this.defaultText = defaultText;
 			setEnabled(false);
+			update();
 		}
 		
 		
@@ -322,12 +412,27 @@ public class CUndoManager
 		
 		protected void update()
 		{
-			if(action != null)
+			boolean en;
+			String text;
+			
+			if(action == null)
 			{
-				// TODO set tooltip instead
-				//setText((String)action.getValue(Action.NAME));
-				setEnabled(action.isEnabled());
+				en = false;
+				text = null;
 			}
+			else
+			{
+				en = action.isEnabled();
+				text = (String)action.getValue(Action.NAME);
+			}
+			
+			setEnabled(en);
+			
+			if(CKit.isBlank(text))
+			{
+				text = defaultText;
+			}
+			setText(text);
 		}
 	}
 	
@@ -335,9 +440,15 @@ public class CUndoManager
 	//
 	
 	
-	public static class UndoAction
+	public static class GlobalUndoAction
 		extends AbstractGlobalAction
 	{
+		public GlobalUndoAction()
+		{
+			super(Menus.Undo);
+		}
+		
+		
 		protected Action getAction(CUndoManager m)
 		{
 			return m == null ? null : m.localUndoAction;
@@ -348,9 +459,15 @@ public class CUndoManager
 	//
 	
 	
-	public static class RedoAction
+	public static class GlobalRedoAction
 		extends AbstractGlobalAction
 	{
+		public GlobalRedoAction()
+		{
+			super(Menus.Redo);
+		}
+		
+		
 		protected Action getAction(CUndoManager m)
 		{
 			return m == null ? null : m.localRedoAction;

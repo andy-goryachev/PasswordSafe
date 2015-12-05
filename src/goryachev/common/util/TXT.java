@@ -1,15 +1,7 @@
 // Copyright (c) 2005-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
-import goryachev.common.ui.UI;
 import goryachev.common.util.lz.PseudoLocalizationPromptProvider;
 import goryachev.common.util.lz.TXTFormat;
-import java.awt.AWTEvent;
-import java.awt.Component;
-import java.awt.ComponentOrientation;
-import java.awt.Toolkit;
-import java.awt.event.AWTEventListener;
-import java.awt.event.ContainerEvent;
-import java.awt.event.HierarchyEvent;
 import java.util.Locale;
 
 
@@ -75,8 +67,6 @@ public class TXT
 	private static Mode mode = Mode.OFF;
 	private static CLanguage language;
 	private static WeakList<HasPrompts> hasPrompts;
-	private static AWTEventListener awtListener;
-	protected static ComponentOrientation orientation;
 
 	
 	/** returns localized prompt in the current language */
@@ -163,7 +153,7 @@ public class TXT
 		case PSEUDO_DOT:
 			{
 				PseudoLocalizationPromptProvider p = new PseudoLocalizationPromptProvider();
-				p.setLanguage(getLanguage());
+				p.setLanguage(getLanguage2());
 				setTestChar(TEST_DOT_CHAR);
 				setPromptProvider(p);
 			}
@@ -172,7 +162,7 @@ public class TXT
 		case PSEUDO:
 			{
 				PseudoLocalizationPromptProvider p = new PseudoLocalizationPromptProvider();
-				p.setLanguage(getLanguage());
+				p.setLanguage(getLanguage2());
 				setTestChar(null);
 				setPromptProvider(p);
 			}
@@ -254,7 +244,8 @@ public class TXT
 	}
 	
 	
-	public static void setLanguage(CLanguage la)
+	/** see Application.setLanguage() */
+	public static void setLanguage2(CLanguage la)
 	{
 		if(CKit.notEquals(language, la))
 		{
@@ -273,57 +264,13 @@ public class TXT
 					c.updatePrompts();
 				}
 			}
-			
-			boolean ltr = CLanguage.isLeftToRight(language); 
-			if(ltr != oldltr)
-			{
-				orientation = ltr ? ComponentOrientation.LEFT_TO_RIGHT : ComponentOrientation.RIGHT_TO_LEFT;
-				UI.setLeftToRightOrientation(orientation);
-				
-				if(awtListener == null)
-				{
-					// install awt listener to track events in order to set the proper orientation
-					awtListener = new AWTEventListener()
-					{
-						public void eventDispatched(AWTEvent ev)
-						{
-							int id = ev.getID();
-							switch(id)
-							{
-							case HierarchyEvent.HIERARCHY_CHANGED:
-								{
-									Component c = ((HierarchyEvent)ev).getComponent();
-									c.applyComponentOrientation(orientation);
-								}
-								break;
-								
-							case ContainerEvent.COMPONENT_ADDED:
-								{
-									Component c = ((ContainerEvent)ev).getChild();
-									c.applyComponentOrientation(orientation);
-								}
-								break;
-							}
-						}
-					};
-					
-					long mask = 
-//						AWTEvent.CONTAINER_EVENT_MASK |
-						AWTEvent.HIERARCHY_EVENT_MASK;
-					
-					Toolkit.getDefaultToolkit().addAWTEventListener(awtListener, mask);
-				}
-			}
 		}
 	}
 	
-	
-	public static CLanguage getLanguage()
+
+	/** see also Application.getLanguage() */
+	public static CLanguage getLanguage2()
 	{
-		if(language == null)
-		{
-			setLanguage(CLanguage.getDefault());
-		}
 		return language;
 	}
 	

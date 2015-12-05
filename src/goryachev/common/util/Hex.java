@@ -90,6 +90,7 @@ public class Hex
 	}
 	
 	
+	/** returns hex value of a char in the range 0..15, throws an exception if not a hex char */
 	public static int parseHexChar(char c) throws Exception
 	{
 		int x = HEX.indexOf(Character.toUpperCase(c));
@@ -100,21 +101,32 @@ public class Hex
 		return x;
 	}
 	
-
+	
 	/** 
 	 * Parses input string as a hexadecimal byte array, ignoring all non-hex symbols.
 	 * Throws an exception if the number of hex symbols is not even.
 	 */
 	public static byte[] parseByteArray(String s) throws Exception
 	{
-		int sz = s.length();
+		return parseByteArray(s, 0, s.length());
+	}
+	
+
+	/** 
+	 * Parses input string as a hexadecimal byte array, ignoring all non-hex symbols,
+	 * starting at the specified offset and using len characters. 
+	 * Throws an exception if the number of hex symbols is not even.
+	 */
+	public static byte[] parseByteArray(String s, int off, int len) throws Exception
+	{
+		int sz = len / 2;
 		ByteArrayOutputStream ba = new ByteArrayOutputStream(sz);
 		boolean first = true;
 		int d = 0;
 		
-		for(int i=0; i<sz; i++)
+		for(int i=0; i<len; i++)
 		{
-			char c = s.charAt(i);
+			char c = s.charAt(off + i);
 			if(isHexChar(c))
 			{
 				if(first)
@@ -243,5 +255,36 @@ public class Hex
 	{
 		c = Character.toUpperCase(c);
 		return (HEX.indexOf(c) >= 0);
+	}
+	
+	
+	/** parses hex-encoded long value */
+	public static long parseLong(String s) throws Exception
+	{
+		return parseLong(s, 0, s.length());
+	}
+
+
+	public static long parseLong(String s, int off, int len) throws Exception
+	{
+		if((len & 1) != 0)
+		{
+			throw new Exception("len must be even: " + len);
+		}
+		else if(len > 16)
+		{
+			throw new Exception("len is too large: " + len);
+		}
+		
+		long d = 0;
+		for(int i=0; i<len; i++)
+		{
+			d <<= 4;
+			
+			char c = s.charAt(i);
+			int nibble = parseHexChar(c);
+			d |= nibble;
+		}
+		return d;
 	}
 }

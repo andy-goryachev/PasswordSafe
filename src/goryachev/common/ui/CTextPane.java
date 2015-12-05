@@ -1,8 +1,8 @@
 // Copyright (c) 2009-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.ui.text.CEditorKit;
+import goryachev.common.ui.text.DocumentTools;
 import goryachev.common.util.CKit;
-import goryachev.common.util.DocumentTools;
 import goryachev.common.util.Log;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;

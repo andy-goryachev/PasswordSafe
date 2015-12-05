@@ -1,8 +1,10 @@
 // Copyright (c) 2004-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
+import java.awt.Component;
 import java.awt.geom.Rectangle2D;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
@@ -202,28 +204,31 @@ public class Dump
 
 		for(int i=0; i<bytes.length; i++)
 		{
-			// indent
-			for(int j=0; j<indent; j++)
-			{
-				sb.a(' ');
-			}
-			
-			// offset
 			if(col == 0)
 			{
-				lineStart = i;
-				if(bigfile)
+				// indent
+				for(int j=0; j<indent; j++)
 				{
-					hex(sb,(int)(addr >> 24));
-					hex(sb,(int)(addr >> 16));
+					sb.a(' ');
 				}
-				hex(sb,(int)(addr >> 8));
-				hex(sb,(int)(addr));
-				sb.append("  ");
+				
+				// offset
+				if(col == 0)
+				{
+					lineStart = i;
+					if(bigfile)
+					{
+						hex(sb,(int)(addr >> 24));
+						hex(sb,(int)(addr >> 16));
+					}
+					hex(sb,(int)(addr >> 8));
+					hex(sb,(int)(addr));
+					sb.append("  ");
+				}
 			}
 			
 			// byte
-			hex(sb,bytes[i]);
+			hex(sb, bytes[i]);
 			sb.append(' ');
 
 			// space or newline
@@ -620,15 +625,20 @@ public class Dump
 	}
 	
 	
-//	private static void describeObjectSimple(SB sb, Object x)
-//	{
-//		sb.a(CKit.simpleName(x)).a(".").a(Hex.toHexString(x.hashCode()));
-//	}
+	private static boolean isStatic(Field f)
+	{
+		return Modifier.isStatic(f.getModifiers());
+	}
 	
 	
-	// FIX stack overflows with circular dependencies
 	private static void describeObject(Object x, SB sb, int indent)
 	{
+		if(indent > 2)
+		{
+			// prevent stack overflow with circular dependencies 
+			return;
+		}
+		
 		Class c = x.getClass();
 		sb.nl();
 		
@@ -645,6 +655,12 @@ public class Dump
 				Field[] fs = c.getDeclaredFields();
 				for(Field f: fs)
 				{
+					if(isStatic(f))
+					{
+						// skip static fields
+						continue;
+					}
+					
 					Object v;
 					try
 					{
@@ -816,6 +832,7 @@ public class Dump
 	}
 	
 	
+	/** returns simple name of an object's class */
 	public static String simpleName(Object x)
 	{
 		if(x == null)
@@ -848,5 +865,26 @@ public class Dump
 			return s.substring(0, max);
 		}
 		return s;
+	}
+	
+	
+	public static String componentHierarchy(Component c)
+	{
+		if(c == null)
+		{
+			return "<null>";
+		}
+		
+		SB sb = new SB();
+		while(c != null)
+		{
+			if(sb.isNotEmpty())
+			{
+				sb.a("\n  ");
+			}
+			sb.a(simpleName(c));
+			c = c.getParent();
+		}
+		return sb.toString();
 	}
 }

@@ -3,12 +3,20 @@ package goryachev.common.ui;
 import goryachev.common.ui.dialogs.license.StandardLicense;
 import goryachev.common.util.CJob;
 import goryachev.common.util.CKit;
+import goryachev.common.util.CLanguage;
 import goryachev.common.util.DocumentTools;
 import goryachev.common.util.Log;
 import goryachev.common.util.TXT;
 import goryachev.common.util.platform.ApplicationSupport;
+import java.awt.AWTEvent;
+import java.awt.Component;
+import java.awt.ComponentOrientation;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.Window;
+import java.awt.event.AWTEventListener;
+import java.awt.event.ContainerEvent;
+import java.awt.event.HierarchyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -58,7 +66,9 @@ public abstract class Application
 	protected Window splash;
 	private static Application instance;
 	private static boolean exiting;
-	
+	private static AWTEventListener awtListener;
+	protected static ComponentOrientation orientation;
+
 
 	public Application(String profileName, String version, String copyright)
 	{
@@ -505,5 +515,69 @@ public abstract class Application
 				d.open();
 			}
 		};
+	}
+	
+	
+	public static CLanguage getLanguage()
+	{
+		CLanguage la = TXT.getLanguage2();
+		if(la == null)
+		{
+			setLanguage(CLanguage.getDefault());
+		}
+		return la;
+	}
+	
+	
+	public static void setLanguage(CLanguage la)
+	{
+		CLanguage language = TXT.getLanguage2();
+		if(CKit.notEquals(language, la))
+		{
+			boolean oldltr = CLanguage.isLeftToRight(language);
+				
+			TXT.setLanguage2(la);
+			
+			boolean ltr = CLanguage.isLeftToRight(language); 
+			if(ltr != oldltr)
+			{
+				orientation = ltr ? ComponentOrientation.LEFT_TO_RIGHT : ComponentOrientation.RIGHT_TO_LEFT;
+				UI.setLeftToRightOrientation(orientation);
+				
+				if(awtListener == null)
+				{
+					// install awt listener to track events in order to set the proper orientation
+					awtListener = new AWTEventListener()
+					{
+						public void eventDispatched(AWTEvent ev)
+						{
+							int id = ev.getID();
+							switch(id)
+							{
+							case HierarchyEvent.HIERARCHY_CHANGED:
+								{
+									Component c = ((HierarchyEvent)ev).getComponent();
+									c.applyComponentOrientation(orientation);
+								}
+								break;
+								
+							case ContainerEvent.COMPONENT_ADDED:
+								{
+									Component c = ((ContainerEvent)ev).getChild();
+									c.applyComponentOrientation(orientation);
+								}
+								break;
+							}
+						}
+					};
+					
+					long mask = 
+//						AWTEvent.CONTAINER_EVENT_MASK |
+						AWTEvent.HIERARCHY_EVENT_MASK;
+					
+					Toolkit.getDefaultToolkit().addAWTEventListener(awtListener, mask);
+				}
+			}
+		}
 	}
 }

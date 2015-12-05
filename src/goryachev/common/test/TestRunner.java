@@ -5,8 +5,6 @@ import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
 import goryachev.common.util.CSorter;
 import goryachev.common.util.Log;
-import goryachev.common.util.Rex;
-import goryachev.common.util.SW;
 import goryachev.common.util.log.ConsoleLogWriter;
 import goryachev.common.util.log.LogWriter;
 import java.lang.annotation.Annotation;
@@ -88,7 +86,7 @@ public class TestRunner
 		}
 		catch(Exception e)
 		{
-			throw new Rex("Test class must define a single no-arg constructor: " + CKit.simpleName(c), e);
+			throw new TestException("Test class must define a single no-arg constructor: " + CKit.simpleName(c), e);
 		}
 	}
 	
@@ -107,11 +105,11 @@ public class TestRunner
 					{
 						if(needsStatic)
 						{
-							throw new Rex("method " + CKit.simpleName(c) + "." + m.getName() + "() must be static");
+							throw new TestException("method " + CKit.simpleName(c) + "." + m.getName() + "() must be static");
 						}
 						else
 						{
-							throw new Rex("method " + CKit.simpleName(c) + "." + m.getName() + "() must not be static");
+							throw new TestException("method " + CKit.simpleName(c) + "." + m.getName() + "() must not be static");
 						}
 					}
 
@@ -297,7 +295,7 @@ public class TestRunner
 		
 		print("\n\n");
 		
-		String elapsed = SW.formatMillis(ended - started);
+		String elapsed = CKit.formatTimePeriod(ended - started);
 		
 		if(failed == 0)
 		{

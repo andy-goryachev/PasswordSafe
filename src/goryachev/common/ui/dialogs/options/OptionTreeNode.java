@@ -14,9 +14,9 @@ public class OptionTreeNode
 	private CList<OptionEntry> entries = new CList();
 	
 	
-	public OptionTreeNode(OptionTreeNode parent, ImageIcon icon, String name)
+	public OptionTreeNode(ImageIcon icon, String name)
 	{
-		super(parent, name);
+		super(name);
 		this.icon = icon;
 		this.name = name;
 	}

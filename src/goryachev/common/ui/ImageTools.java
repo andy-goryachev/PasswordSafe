@@ -1,8 +1,10 @@
 // Copyright (c) 2007-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
+import goryachev.common.util.Base64;
 import goryachev.common.util.FileTools;
 import goryachev.common.util.Log;
 import goryachev.common.util.Reflector;
+import goryachev.common.util.SB;
 import goryachev.common.util.TextTools;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -375,5 +377,13 @@ public class ImageTools
 			g.dispose();
 		}
 		return im;
+	}
+	
+	
+	public static void appendBase64PNG(BufferedImage im, SB sb) throws Exception
+	{
+		byte[] b = ImageTools.toPNG(im);
+		sb.a("data:image/png;base64,");
+		sb.a(Base64.encode(b));
 	}
 }

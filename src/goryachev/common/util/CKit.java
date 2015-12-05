@@ -20,6 +20,8 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Reader;
 import java.io.Writer;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -47,10 +49,9 @@ public class CKit
 	public static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");
 	public static final int MS_IN_A_SECOND = 1000;
 	public static final int MS_IN_A_MINUTE = 60000;
-	public static final long MS_IN_10_MINUTES = 600000L;
-	public static final long MS_IN_AN_HOUR = 3600000L;
-	public static final long MS_IN_A_DAY = 86400000L;
-	public static final long MS_IN_A_WEEK = 604800000L;
+	public static final int MS_IN_AN_HOUR = 3600000;
+	public static final int MS_IN_A_DAY = 86400000;
+	public static final int MS_IN_A_WEEK = 604800000;
 	private static AtomicInteger id = new AtomicInteger(); 
 	
 	
@@ -1449,13 +1450,13 @@ public class CKit
 
 	public static long milliseconds(int hours, int minutes, int seconds)
 	{
-		return (hours * MS_IN_AN_HOUR) + (minutes * MS_IN_A_MINUTE) + seconds * MS_IN_A_SECOND;
+		return (hours * (long)MS_IN_AN_HOUR) + (minutes * MS_IN_A_MINUTE) + (seconds * MS_IN_A_SECOND);
 	}
 	
 	
 	public static int ms(int hours, int minutes, int seconds)
 	{
-		return (hours * (int)MS_IN_AN_HOUR) + (minutes * MS_IN_A_MINUTE) + seconds * MS_IN_A_SECOND;
+		return (hours * MS_IN_AN_HOUR) + (minutes * MS_IN_A_MINUTE) + (seconds * MS_IN_A_SECOND);
 	}
 
 
@@ -1837,6 +1838,68 @@ public class CKit
 	}
 
 
+	public static String formatTimePeriod(long t)
+	{
+		boolean force = false;
+		SB sb = new SB();
+
+		int d = (int)(t / CKit.MS_IN_A_DAY);
+		if(d != 0)
+		{
+			sb.append(d);
+			sb.append(':');
+			t %= CKit.MS_IN_A_DAY;
+			force = true;
+		}
+
+		int h = (int)(t / CKit.MS_IN_AN_HOUR);
+		if(force || (h != 0))
+		{
+			append(sb, h, 2);
+			sb.append(':');
+			t %= CKit.MS_IN_AN_HOUR;
+			force = true;
+		}
+
+		int m = (int)(t / CKit.MS_IN_A_MINUTE);
+		if(force || (m != 0))
+		{
+			append(sb, m, 2);
+			sb.append(':');
+			t %= CKit.MS_IN_A_MINUTE;
+			force = true;
+		}
+
+		int s = (int)(t / CKit.MS_IN_A_SECOND);
+		if(force)
+		{
+			append(sb, s, 2);
+		}
+		else
+		{
+			sb.append(s);
+		}
+		sb.append('.');
+
+		int ms = (int)(t % CKit.MS_IN_A_SECOND);
+		append(sb, ms, 3);
+
+		return sb.toString();
+	}
+
+
+	private static void append(SB sb, int n, int precision)
+	{
+		String s = String.valueOf(n);
+		n = precision - s.length();
+		if(n > 0)
+		{
+			sb.append("0000000000", 0, n);
+		}
+		sb.append(s);
+	}
+
+	
 	/** concatenates two byte arrays */
 	public static byte[] cat(byte[] a, byte[] b)
 	{
@@ -1937,5 +2000,35 @@ public class CKit
 	public static int round(double x)
 	{
 		return (int)Math.round(x);
+	}
+	
+	
+	/** collect public static fields from a class, of specified type */
+	public static <T> CSet<T> collectPublicStaticFields(Class<?> c, Class<T> type)
+	{
+		CSet<T> rv = new CSet();
+		for(Field f: c.getFields())
+		{
+			int m = f.getModifiers();
+			if(Modifier.isPublic(m) && Modifier.isStatic(m))
+			{
+				try
+				{
+					Object v = f.get(null);
+					if(v != null)
+					{
+						if(type.isAssignableFrom(v.getClass()))
+						{
+							rv.add((T)v);
+						}
+					}
+				}
+				catch(Exception e)
+				{
+					Log.err(e);
+				}
+			}
+		}
+		return rv;
 	}
 }

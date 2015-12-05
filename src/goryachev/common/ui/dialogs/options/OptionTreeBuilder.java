@@ -13,7 +13,7 @@ public class OptionTreeBuilder
 
 	public OptionTreeBuilder()
 	{
-		root = new OptionTreeNode(null, null, null);
+		root = new OptionTreeNode(null, null);
 		last = root;
 	}
 
@@ -26,7 +26,7 @@ public class OptionTreeBuilder
 
 	public void addChild(ImageIcon icon, String name)
 	{
-		OptionTreeNode nd = new OptionTreeNode(last, icon, name);
+		OptionTreeNode nd = new OptionTreeNode(icon, name);
 		last.addChild(nd);
 		last = nd;
 	}

@@ -2,10 +2,9 @@
 package goryachev.common.util.html;
 
 
-
 // TODO void elements, html versions, browser types
 // http://www.w3.org/TR/REC-html40/index/elements.html
-public class Html4
+public class HTML4
 {
 	public static final String A = "a";
 	public static final String ABBR = "abbr";
@@ -98,103 +97,4 @@ public class Html4
 	public static final String U = "u";
 	public static final String UL = "ul";
 	public static final String VAR = "var";
-	
-	
-	public static String[] allTags()
-	{
-		return new String[]
-		{
-			A,
-			ABBR,
-			ACRONYM,
-			ADDRESS,
-			APPLET,
-			AREA,
-			B,
-			BASE,
-			BASEFONT,
-			BDO,
-			BIG,
-			BLOCKQUOTE,
-			BODY,
-			BR,
-			BUTTON,
-			CAPTION,
-			CENTER,
-			CITE,
-			CODE,
-			COL,
-			COLGROUP,
-			DD,
-			DEL,
-			DFN,
-			DIR,
-			DIV,
-			DL,
-			DT,
-			EM,
-			FIELDSET,
-			FONT,
-			FORM,
-			FRAME,
-			FRAMESET,
-			H1,
-			H2,
-			H3,
-			H4,
-			H5,
-			H6,
-			HEAD,
-			HR,
-			HTML,
-			I,
-			IFRAME,
-			IMG,
-			INPUT,
-			INS,
-			ISINDEX,
-			KBD,
-			LABEL,
-			LEGEND,
-			LI,
-			LINK,
-			MAP,
-			MENU,
-			META,
-			NOFRAMES,
-			NOSCRIPT,
-			OBJECT,
-			OL,
-			OPTGROUP,
-			OPTION,
-			P,
-			PARAM,
-			PRE,
-			Q,
-			S,
-			SAMP,
-			SCRIPT,
-			SELECT,
-			SMALL,
-			SPAN,
-			STRIKE,
-			STRONG,
-			STYLE,
-			SUB,
-			SUP,
-			TABLE,
-			TBODY,
-			TD,
-			TEXTAREA,
-			TFOOT,
-			TH,
-			THEAD,
-			TITLE,
-			TR,
-			TT,
-			U,
-			UL,
-			VAR
-		};
-	}
 }

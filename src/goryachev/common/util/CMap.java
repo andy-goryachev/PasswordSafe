@@ -24,6 +24,12 @@ public class CMap<K,V>
 	}
 	
 	
+	public CList<K> keys()
+	{
+		return new CList(keySet());
+	}
+	
+	
 	public V set(K k, V v)
 	{
 		if(v == null)

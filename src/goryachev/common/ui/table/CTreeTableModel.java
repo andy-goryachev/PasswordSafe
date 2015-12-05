@@ -613,7 +613,10 @@ public class CTreeTableModel<T extends CTreeNode>
 				{
 					// collapse and delete
 					int row = find(ch.getKey(), index);
-					removeModelRow(ch, row);
+					if(row >= 0)
+					{
+						removeModelRow(ch, row);
+					}
 				}
 			}
 		}

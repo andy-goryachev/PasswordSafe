@@ -139,7 +139,7 @@ public class UISettings
 
 	protected String getPathString(CTreeTable t, int ix)
 	{
-		CTreeNode nd = t.getData(ix);
+		CTreeNode nd = t.getNode(ix);
 		if(nd != null)
 		{
 			String[] ss = nd.getPathKeys();
@@ -252,7 +252,8 @@ public class UISettings
 			}
 			sb.append("-1");
 			
-			set(prefix + TABLE, sb);
+			String s = sb.toString();
+			set(prefix + TABLE, s);
 		}
 		
 		if(storeSelection)

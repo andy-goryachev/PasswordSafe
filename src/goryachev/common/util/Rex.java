@@ -11,15 +11,15 @@ public class Rex
 	}
 	
 	
-	public Rex(String message)
+	public Rex(Object message)
 	{
-		super(message);
+		super(String.valueOf(message));
 	}
 	
 	
-	public Rex(String message, Throwable cause)
+	public Rex(Object message, Throwable cause)
 	{
-		super(message, cause);
+		super(String.valueOf(message), cause);
 	}
 	
 	

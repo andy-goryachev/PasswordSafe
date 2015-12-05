@@ -286,7 +286,7 @@ public class CMemoryBar
 	
 	protected void actionSysInfo()
 	{
-		String text = SysInfo.getSystemInfo(false);
+		String text = SysInfo.getSystemInfo();
 		
 		CDialog d = new CDialog(this, "SystemInformationDialog", true);
 		d.borderless();

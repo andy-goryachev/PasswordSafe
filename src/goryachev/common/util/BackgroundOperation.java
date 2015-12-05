@@ -1,6 +1,5 @@
 // Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
-import goryachev.common.ui.Progress;
 
 
 public interface BackgroundOperation

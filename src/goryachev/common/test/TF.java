@@ -3,7 +3,6 @@ package goryachev.common.test;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
 import goryachev.common.util.Dump;
-import goryachev.common.util.Rex;
 import goryachev.common.util.SB;
 
 
@@ -15,7 +14,7 @@ public class TF
 	{
 		if(CKit.notEquals(value, expected))
 		{
-			throw new Rex
+			throw new TestException
 			(
 				"Unexpected value=" + 
 				Dump.describe(value) + 
@@ -31,7 +30,7 @@ public class TF
 	{
 		if(x == null)
 		{
-			throw new Rex("expecting a non-null value");
+			throw new TestException("expecting a non-null value");
 		}
 	}
 	
@@ -41,7 +40,7 @@ public class TF
 	{
 		if(x != null)
 		{
-			throw new Rex("expecting a null value");
+			throw new TestException("expecting a null value");
 		}
 	}
 	
@@ -50,14 +49,14 @@ public class TF
 	{
 		if(!x)
 		{
-			throw new Rex("expression is not true");
+			throw new TestException("expression is not true");
 		}
 	}
 	
 	
 	public static void fail()
 	{
-		throw new Rex("test failed");
+		throw new TestException("test failed");
 	}
 
 	

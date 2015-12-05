@@ -30,7 +30,7 @@ public abstract class CAction
 	public CAction()
 	{
 	}
-	
+
 
 	public CAction(String title)
 	{
@@ -48,18 +48,18 @@ public abstract class CAction
 	{
 		super(title, img);
 	}
-	
-	
+
+
 	public CAction(Icon img, String title, String tooltip)
 	{
-		this(img,title);
+		this(img, title);
 		this.tooltip = tooltip;
 	}
-	
-	
+
+
 	public CAction(Icon img, String title, boolean enabled)
 	{
-		super(title,img);
+		super(title, img);
 		setEnabled(enabled);
 	}
 
@@ -69,15 +69,15 @@ public abstract class CAction
 		this(name);
 		setAccelerator(ks);
 	}
-	
-	
+
+
 	public CAction(Icon img, String name, Accelerator a)
 	{
-		this(img,name);
+		this(img, name);
 		a.set(this);
 	}
-	
-	
+
+
 	public CAction(String name, Accelerator a)
 	{
 		this(name);
@@ -101,8 +101,8 @@ public abstract class CAction
 			event = null;
 		}
 	}
-	
-	
+
+
 	public void fire()
 	{
 		if(isEnabled())
@@ -110,17 +110,17 @@ public abstract class CAction
 			actionPerformed(null);
 		}
 	}
-	
-	
+
+
 	public void setText(String s)
 	{
 		setName(s);
 	}
-	
-	
+
+
 	public void setName(String s)
 	{
-		putValue(Action.NAME,s);
+		putValue(Action.NAME, s);
 	}
 
 
@@ -132,10 +132,10 @@ public abstract class CAction
 
 	public void setIcon(Icon icon)
 	{
-		putValue(Action.SMALL_ICON,icon);
+		putValue(Action.SMALL_ICON, icon);
 	}
-	
-	
+
+
 	public Icon getIcon()
 	{
 		Object x = getValue(Action.SMALL_ICON);
@@ -145,8 +145,8 @@ public abstract class CAction
 		}
 		return null;
 	}
-	
-	
+
+
 	public String getToolTipText()
 	{
 		return tooltip == null ? getName() : tooltip;
@@ -170,7 +170,7 @@ public abstract class CAction
 		return Boolean.TRUE.equals(getValue(Action.SELECTED_KEY));
 	}
 
-	
+
 	public boolean toggleSelected()
 	{
 		boolean on = !isSelected();
@@ -186,7 +186,7 @@ public abstract class CAction
 		{
 			return CFocusMonitor.getLastWindow();
 		}
-		
+
 		if(event.getSource() instanceof Component)
 		{
 			return (Component)event.getSource();

@@ -187,8 +187,8 @@ public class MainWindow
 		
 		// edit
 		mb.add(m = new CMenu(Menus.Edit));
-		m.add(new CMenuItem(Menus.Undo, Accelerators.UNDO, CUndoManager.undoAction));
-		m.add(new CMenuItem(Menus.Redo, Accelerators.REDO, CUndoManager.redoAction));
+		m.add(new CMenuItem(Menus.Undo, Accelerators.UNDO, CUndoManager.globalUndoAction));
+		m.add(new CMenuItem(Menus.Redo, Accelerators.REDO, CUndoManager.globalRedoAction));
 		m.addSeparator();
 		m.add(new CMenuItem(TXT.get("MainWindow.menu.copy username","Copy User Name to Clipboard"), listTab.passEditor.copyUsernameAction));
 		m.add(new CMenuItem(TXT.get("MainWindow.menu.copy password","Copy Password to Clipboard"), listTab.passEditor.copyPasswordAction));

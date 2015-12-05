@@ -145,7 +145,7 @@ public class CTableRenderer<T>
 				}
 				
 				CTreeTable ta = (CTreeTable)t;
-				T item = (T)ta.getNode(row).getItem();
+				T item = (T)ta.getTreeEntry(row).getItem();
 								
 				renderCellComplete(item, selected, focus);
 								

@@ -1,5 +1,6 @@
 // Copyright (c) 2012-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
+
 import goryachev.common.util.TXT;
 
 
@@ -75,6 +76,7 @@ public class Menus
 	public static final String MoveUp = TXT.get("Menus.move up (verb)", "Move Up");
 	// n
 	public static final String New = TXT.get("Menus.new item", "New");
+	public static final String NewWindow = TXT.get("Menus.new window", "New Window");
 	public static final String NewFromTemplate = TXT.get("Menus.new item from template", "New from Template");
 	public static final String Next = TXT.get("Menus.next page", "Next");
 	public static final String No = TXT.get("Menus.no", "No");

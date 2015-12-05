@@ -1,5 +1,7 @@
 // Copyright (c) 2012-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
+import goryachev.common.util.D;
+import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.awt.Window;
 import java.beans.PropertyChangeEvent;
@@ -16,6 +18,7 @@ public class CFocusMonitor
 {
 	private Window lastWindow;
 	private JTextComponent lastEditor;
+	private Component lastComponent;
 	private static CFocusMonitor monitor = register();
 	
 
@@ -24,10 +27,44 @@ public class CFocusMonitor
 	}
 
 
+	/** PropertyChangeListener */
+	public void propertyChange(PropertyChangeEvent ev)
+	{
+		Object x = ev.getNewValue();
+		if(x instanceof JTextComponent)
+		{
+			JTextComponent t = (JTextComponent)x;
+			//if(t.isEditable())
+			{
+				lastEditor = t; 
+			}
+		}
+		
+		//D.simpleName(x);
+		
+		if(x instanceof Component)
+		{
+			lastComponent = (Component)x;
+		}
+		
+		Window w = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusedWindow();
+		if(w != lastWindow)
+		{
+			lastWindow = w;
+		}
+	}
+	
+
 	/** returns last editable editor text component */
 	public static JTextComponent getLastTextComponent()
 	{
 		return monitor.lastEditor;
+	}
+	
+	
+	public static Component getLastComponent()
+	{
+		return monitor.lastComponent;
 	}
 	
 	
@@ -45,26 +82,6 @@ public class CFocusMonitor
 		return m;
 	}
 
-
-	public void propertyChange(PropertyChangeEvent ev)
-	{
-		Object x = ev.getNewValue();
-		if(x instanceof JTextComponent)
-		{
-			JTextComponent t = (JTextComponent)x;
-			//if(t.isEditable())
-			{
-				lastEditor = t; 
-			}
-		}
-		
-		Window w = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusedWindow();
-		if(w != lastWindow)
-		{
-			lastWindow = w;
-		}
-	}
-	
 	
 	// called from Application.startUI
 	// causes an instance to be loaded and registered

@@ -18,6 +18,9 @@ public abstract class CTreeNode
 	
 	public boolean isEditable() { return false; }
 	
+	/** returns true if node has been modified */
+	public boolean removeChild(CTreeNode p) { throw new UnsupportedOperationException(); }
+	
 	// TODO this is weird, remove later
 	public void editingStarted() { }
 	public void editingStopped() { }
@@ -28,9 +31,8 @@ public abstract class CTreeNode
 	private CTreeNode parent;
 	
 	
-	public CTreeNode(CTreeNode parent, String key)
+	public CTreeNode(String key)
 	{
-		this.parent = parent;
 		this.key = key;
 	}
 	
@@ -41,9 +43,21 @@ public abstract class CTreeNode
 	}
 	
 	
-	protected void setParent(CTreeNode parent)
+	public void setParent(CTreeNode p)
 	{
-		this.parent = parent;
+		if(p == null)
+		{
+			// special case
+			parent = p;
+		}
+		else if(parent != p)
+		{
+			if(parent != null)
+			{
+				parent.removeChild(this);
+			}
+			this.parent = p;
+		}
 	}
 	
 
@@ -78,5 +92,30 @@ public abstract class CTreeNode
 	public final String getTreeNodeKey()
 	{
 		return key;
+	}
+	
+	
+	public int indexOf(CTreeNode nd)
+	{
+		if(nd != null)
+		{
+			String key = nd.getTreeNodeKey();
+			
+			Object[] cs = getChildren();
+			if(cs != null)
+			{
+				int sz = cs.length;
+				for(int i=0; i<sz; i++)
+				{
+					Object ch = cs[i];
+					String nodeKey = ((CTreeNode)ch).getTreeNodeKey();
+					if(key.equals(nodeKey))
+					{
+						return i;
+					}
+				}
+			}
+		}
+		return -1;
 	}
 }

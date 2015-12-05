@@ -1,40 +1,15 @@
 // Copyright (c) 2009-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util.platform;
-import goryachev.common.ui.Application;
-import goryachev.common.ui.CBorder;
-import goryachev.common.ui.Theme;
-import goryachev.common.ui.UI;
-import goryachev.common.ui.text.CDocument;
-import goryachev.common.ui.text.CDocumentBuilder;
-import goryachev.common.util.CComparator;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
 import goryachev.common.util.CSorter;
 import goryachev.common.util.Hex;
 import goryachev.common.util.SB;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Insets;
-import java.awt.Rectangle;
-import java.awt.SystemColor;
 import java.security.Security;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.Properties;
-import javax.swing.ActionMap;
-import javax.swing.Icon;
-import javax.swing.InputMap;
-import javax.swing.JLabel;
-import javax.swing.UIDefaults;
-import javax.swing.UIManager;
-import javax.swing.border.Border;
 
 
 public class SysInfo
@@ -52,25 +27,12 @@ public class SysInfo
 	/** generates system information report as text string */
 	public static String getSystemInfo()
 	{
-		return getSystemInfo(false);
-	}
-	
-	
-	/** generates system information report as text string, with or without ui defaults part */
-	public static String getSystemInfo(boolean ui)
-	{
 		StringOut out = new StringOut();
 		SysInfo s = new SysInfo(out);
 		
 		s.extractApp();
-		s.extractGraphics();
 		s.extractEnvironment();
 		s.extractSystemProperties();
-		
-		if(ui)
-		{
-			s.extractUIDefaults("UIManager.getLookAndFeelDefaults", null);
-		}
 		
 		return out.getReport();
 	}
@@ -152,13 +114,6 @@ public class SysInfo
 	
 	public void extractApp()
 	{
-		header("Application");
-		if(CKit.isNotBlank(Application.getTitle()))
-		{
-			print("Title: " + Application.getTitle());
-			print("Version: " + Application.getVersion());
-		}
-		
 		print("Time: " + new SimpleDateFormat("yyyy-MMdd HH:mm:ss").format(System.currentTimeMillis()));
 		
 		long max = Runtime.getRuntime().maxMemory();
@@ -196,108 +151,6 @@ public class SysInfo
 		{
 			print(key + " = " + safe(p.getProperty(key)));
 		}
-		nl();
-	}
-	
-
-	public void extractUIDefaults(String name, UIDefaults defs)
-	{
-		header(name);
-
-		try
-		{
-			if(defs == null)
-			{
-				defs = UIManager.getLookAndFeelDefaults();
-			}
-
-			CList<Object> keys = new CList(defs.keySet());
-			new CComparator<Object>()
-			{
-				public int compare(Object a, Object b)
-				{
-					return compareText(a, b);
-				}
-			}.sort(keys);
-
-			for(Object key: keys)
-			{
-				Object v = defs.get(key);
-				out.describe(key, v);
-			}
-		}
-		catch(Throwable e)
-		{
-			print(CKit.stackTrace(e));
-		}
-		
-		nl();
-	}
-	
-	
-	protected void sc(String name, Color c)
-	{
-		out.describe(name, c);
-	}
-	
-	
-	public void extractSystemColors()
-	{
-		header("System Colors");
-		
-	    sc("activeCaption", SystemColor.activeCaption);
-	    sc("activeCaptionText", SystemColor.activeCaptionText);
-	    sc("activeCaptionBorder", SystemColor.activeCaptionBorder);
-	    sc("control", SystemColor.control);
-	    sc("controlDkShadow", SystemColor.controlDkShadow);
-	    sc("controlHighlight", SystemColor.controlHighlight);
-	    sc("controlLtHighlight", SystemColor.controlLtHighlight);
-	    sc("controlShadow", SystemColor.controlShadow);
-	    sc("controlText", SystemColor.controlText);
-		sc("desktop", SystemColor.desktop);
-	    sc("inactiveCaption", SystemColor.inactiveCaption);
-	    sc("inactiveCaptionText", SystemColor.inactiveCaptionText);
-	    sc("inactiveCaptionBorder", SystemColor.inactiveCaptionBorder);
-	    sc("info", SystemColor.info);
-	    sc("infoText", SystemColor.infoText);
-	    sc("menu", SystemColor.menu);
-	    sc("menuText", SystemColor.menuText);
-	    sc("scrollbar", SystemColor.scrollbar);
-	    sc("text", SystemColor.text);
-	    sc("textHighlight", SystemColor.textHighlight);
-	    sc("textHighlightText", SystemColor.textHighlightText);
-	    sc("textInactiveText", SystemColor.textInactiveText);
-	    sc("textText", SystemColor.textText);
-	    sc("window", SystemColor.window);
-	    sc("windowBorder", SystemColor.windowBorder);
-	    sc("windowText", SystemColor.windowText);
-		
-		nl();
-	}
-	
-
-	public void extractGraphics()
-	{
-		try
-		{
-			header("Graphics");
-
-			GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			for(GraphicsDevice dev: env.getScreenDevices())
-			{
-				print(dev.getIDstring() + ":");
-
-				for(GraphicsConfiguration gc: dev.getConfigurations())
-				{
-					Rectangle r = gc.getBounds();
-					print(2, r.width + "x" + r.height + " @(" + r.x + "," + r.y + ")");
-				}
-			}
-		}
-		catch(Throwable ignore)
-		{
-		}
-		
 		nl();
 	}
 	
@@ -354,88 +207,6 @@ public class SysInfo
 		
 		//
 		
-		
-		protected void describeInsets(Insets m)
-		{
-			a("(t=").a(m.top);
-			a(",l=").a(m.left);
-			a(",b=").a(m.bottom);
-			a(",r=").a(m.right);
-			a(")");
-		}
-
-		
-		protected void describeColor(Color c)
-		{
-			a("(");
-			a(Hex.toHexByte(c.getRed()));
-			a(Hex.toHexByte(c.getGreen()));
-			a(Hex.toHexByte(c.getBlue()));
-			
-			if(c.getAlpha() != 255)
-			{
-				a(".").a(Hex.toHexByte(c.getAlpha()));
-			}
-			
-			a(")");
-		}
-		
-		
-		protected void describeFont(Font f)
-		{
-			a("(");
-			a(f.getFamily());
-			
-			if(CKit.notEquals(f.getFamily(), f.getName()))
-			{
-				a("/");
-				a(f.getName());
-			}
-			
-			a(",");
-			a(f.getSize());
-			a(",");
-
-			if(f.isBold())
-			{
-				if(f.isItalic())
-				{
-					a("bolditalic");
-				}
-				else
-				{
-					a("bold");
-				}
-			}
-			else
-			{
-				if(f.isItalic())
-				{
-					a("italic");
-				}
-				else
-				{
-					a("plain");
-				}
-			}
-			
-			a(")");
-		}
-
-		
-		protected void describeIcon(Icon ic)
-		{
-			a("(w=").a(ic.getIconWidth());
-			a(",h=").a(ic.getIconHeight());
-			a(")");
-		}
-
-		
-		protected void describeBorder(Border border)
-		{
-			describeInsets(border.getBorderInsets(new JLabel()));
-		}
-		
 
 		protected void describe(Object x)
 		{
@@ -447,52 +218,6 @@ public class SysInfo
 				a('"');
 				a(x);
 				a('"');
-			}
-			else if(x instanceof Color)
-			{
-				a(x.getClass().getSimpleName());
-				describeColor((Color)x);
-			}
-			else if(x instanceof Font)
-			{
-				a(x.getClass().getSimpleName());				
-				describeFont((Font)x);
-			}
-			else if(x instanceof Dimension)
-			{
-				a(x.getClass().getSimpleName());
-				
-				Dimension d = (Dimension)x;
-				a("(w=").a(d.getWidth());
-				a(",h=").a(d.getHeight());
-				a(")");
-			}
-			else if(x instanceof Insets)
-			{
-				a(x.getClass().getSimpleName());
-				describeInsets((Insets)x);
-			}
-			else if(x instanceof Icon)
-			{
-				a(x.getClass().getSimpleName());
-				describeIcon((Icon)x);
-			}
-			else if(x instanceof Border)
-			{
-				a(x.getClass().getName());
-				describeBorder((Border)x);
-			}
-			else if(x instanceof InputMap)
-			{
-				a(x.getClass().getSimpleName());
-			}
-			else if(x instanceof ActionMap)
-			{
-				a(x.getClass().getSimpleName());
-			}
-			else if(x instanceof Component)
-			{
-				a(x.getClass().getName());
 			}
 			else if(x instanceof Object[])
 			{
@@ -575,172 +300,6 @@ public class SysInfo
 		public String getReport()
 		{
 			return sb.getAndClear();
-		}
-	}
-	
-	
-	//
-	
-	
-	public static class DocumentOut
-		extends Out
-	{
-		private final CDocumentBuilder b;
-		private final Font font;
-		private String indent = "    ";
-
-		
-		public DocumentOut()
-		{
-			b = new CDocumentBuilder();
-			font = Theme.monospacedFont();
-			b.setFont(font);
-		}
-		
-		
-		public void header(String title)
-		{
-			b.setUnderline(true);
-			b.bold(title);
-			b.setUnderline(false);
-			b.nl();
-		}
-		
-		
-		public void nl()
-		{
-			b.nl();
-		}
-		
-		
-		public void print(int count, String x)
-		{
-			for(int i=0; i<count; i++)
-			{
-				b.a(indent);
-			}
-			b.append(x);		
-			b.nl();
-		}
-		
-		
-		public void describe(Object key, Object v)
-		{
-			b.a(indent);
-			b.a(key);
-			b.a(" = ");
-			describe(v);
-			b.nl();
-		}
-		
-		
-		protected Out a(Object x)
-		{
-			b.a(x);
-			return this;
-		}
-		
-		protected void describeColor(Color c)
-		{
-			super.describeColor(c);
-			
-			nl();
-			a(indent);
-			a(indent);
-
-			JLabel t = new JLabel("   ");
-			t.setOpaque(true);
-			t.setBorder(new CBorder(Theme.TEXT_FG));
-			t.setBackground(c);
-			t.setAlignmentY(1.0f);
-			b.addComponent(t);
-		}
-		
-		
-		protected void describeFont(Font f)
-		{
-			super.describeFont(f);
-			b.nl();
-			
-			a(indent);
-			a(indent);
-			
-			JLabel t = new JLabel("The quick brown fox jumped over the lazy dog 0123456789.");
-			t.setFont(f);
-			t.setOpaque(true);
-			t.setForeground(Color.black);
-			t.setBackground(UI.mix(Color.yellow, 0.2, Color.white));
-			t.setBorder(new CBorder(1));
-			b.addComponent(t);
-		}
-		
-		
-		protected void describeIcon(Icon ic)
-		{
-			super.describeIcon(ic);
-			
-			nl();
-			a(indent);
-			a(indent);
-			
-			JLabel t = new JLabel(ic)
-			{
-				public void paint(Graphics g)
-				{
-					try
-					{
-						super.paint(g);
-					}
-					catch(ClassCastException e)
-					{
-						setIcon(null);
-						setOpaque(true);
-						setBackground(UI.mix(Color.white, 0.5, Color.magenta));
-						setForeground(Color.black);
-						setText(e.getMessage());
-					}
-				}
-			};
-			b.addComponent(t);
-		}
-		
-		
-		protected void describeBorder(Border border)
-		{			
-			super.describeBorder(border);
-			
-			nl();
-			a(indent);
-			a(indent);
-			
-			JLabel t = new JLabel("   ")
-			{
-				public void paint(Graphics g)
-				{
-					try
-					{
-						super.paint(g);
-					}
-					catch(ClassCastException e)
-					{
-						setIcon(null);
-						setOpaque(true);
-						setBackground(UI.mix(Color.white, 0.5, Color.magenta));
-						setForeground(Color.black);
-						setText(e.getMessage());
-					}
-				}
-			};
-			t.setOpaque(true);
-			t.setBorder(border);
-			t.setBackground(Theme.TEXT_BG);
-			b.addComponent(t);
-		}
-		
-		
-		public CDocument getReport()
-		{
-			return b.getDocument();
 		}
 	}
 }

@@ -2,7 +2,7 @@
 package goryachev.common.ui.theme;
 import goryachev.common.ui.CButtonPanel;
 import goryachev.common.util.CKit;
-import goryachev.common.util.CUnique;
+import goryachev.common.util.CSet;
 import goryachev.common.util.SB;
 import java.awt.Component;
 import java.awt.Container;
@@ -48,7 +48,7 @@ public class AssignMnemonic
 	
 	private static void assignMenuBar(JMenuBar mb)
 	{
-		CUnique<Character> u = new CUnique();
+		CSet<Character> u = new CSet();
 		
 		int ct = mb.getMenuCount();
 		for(int i=0; i<ct; i++)
@@ -64,7 +64,7 @@ public class AssignMnemonic
 	
 	private static void assignMenu(JMenu mb)
 	{
-		CUnique<Character> u = new CUnique();
+		CSet<Character> u = new CSet();
 		
 		int ct = mb.getMenuComponentCount();
 		for(int i=0; i<ct; i++)
@@ -80,7 +80,7 @@ public class AssignMnemonic
 	
 	private static void assignPopupMenu(JPopupMenu mb)
 	{
-		CUnique<Character> u = new CUnique();
+		CSet<Character> u = new CSet();
 		
 		int ct = mb.getComponentCount();
 		for(int i=0; i<ct; i++)
@@ -96,7 +96,7 @@ public class AssignMnemonic
 	
 	private static void assignButtonPanel(Container p)
 	{
-		CUnique<Character> u = new CUnique();
+		CSet<Character> u = new CSet();
 		
 		int ct = p.getComponentCount();
 		for(int i=0; i<ct; i++)
@@ -110,7 +110,7 @@ public class AssignMnemonic
 	}
 	
 
-	private static void assign(JMenuItem m, CUnique<Character> u)
+	private static void assign(JMenuItem m, CSet<Character> u)
 	{
 		String text = m.getText();
 		int mnem = identifyMnemonic(text, u);
@@ -121,7 +121,7 @@ public class AssignMnemonic
 	}
 	
 	
-	private static void assignButton(AbstractButton b, CUnique<Character> u)
+	private static void assignButton(AbstractButton b, CSet<Character> u)
 	{
 		String text = b.getText();
 		int mnem = identifyMnemonic(text, u);
@@ -132,7 +132,7 @@ public class AssignMnemonic
 	}
 
 
-	private static int identifyMnemonic(String text, CUnique<Character> u)
+	private static int identifyMnemonic(String text, CSet<Character> u)
 	{
 		if(text != null)
 		{
@@ -150,7 +150,7 @@ public class AssignMnemonic
 					char up = Character.toUpperCase(c);
 					if(!u.contains(up))
 					{
-						u.put(up);
+						u.add(up);
 						return c;
 					}
 				}

@@ -21,9 +21,9 @@ public abstract class CTreeNode2
 	private CList<CTreeNode> children;
 
 	
-	public CTreeNode2(CTreeNode parent, String key)
+	public CTreeNode2(String key)
 	{
-		super(parent, key);
+		super(key);
 	}
 	
 
@@ -69,33 +69,44 @@ public abstract class CTreeNode2
 	}
 
 	
-	public void addChild(int index, CTreeNode ch)
+	/** returns index of the added child */
+	public int addChild(int index, CTreeNode ch)
 	{
+		CList<CTreeNode> cs = children();
+		int ix;
+		
 		if(index < 0)
 		{
-			children().add(ch);
+			ix = cs.size();
+			cs.add(ch);
 		}
 		else 
 		{
-			children().add(index, ch);
+			cs.add(index, ch);
+			ix = index;
 		}
+		
 		ch.setParent(this);
+		
+		return ix;
 	}
 	
 	
-	public void addChild(CTreeNode ch)
+	public int addChild(CTreeNode ch)
 	{
-		addChild(-1, ch);
+		return addChild(-1, ch);
 	}
 	
 	
-	public void removeChild(CTreeNode p)
+	public boolean removeChild(CTreeNode p)
 	{
 		int ix = indexOfChild(p);
 		if(ix >= 0)
 		{
 			children().remove(ix);
+			return true;
 		}
+		return false;
 	}
 	
 	

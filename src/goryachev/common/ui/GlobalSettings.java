@@ -145,6 +145,12 @@ public class GlobalSettings
 			settings.restoreWindow(UI + lookupWindowName(w), w);
 		}
 		
+		// has settings
+		if(c instanceof HasSettings)
+		{
+			((HasSettings)c).restoreSettings(UI + getName(c), settings);
+		}
+		
 		// local settings
 		LocalSettings ls = LocalSettings.get(c);
 		if(ls != null)
@@ -223,17 +229,23 @@ public class GlobalSettings
 			return;
 		}
 		
-		// component settings
+		// settings attached to a component
 		ComponentSettings s = ComponentSettings.get(c);
 		if(s != null)
 		{
 			s.storeSettings(UI + getName(c), settings);
 		}
 		
+		// local settings. was this a bad idea?
 		LocalSettings ls = LocalSettings.get(c);
 		if(ls != null)
 		{
 			ls.store(settings);
+		}
+		
+		if(c instanceof HasSettings)
+		{
+			((HasSettings)c).storeSettings(UI + getName(c), settings);
 		}
 		
 		if(isIgnored(c))

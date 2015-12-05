@@ -274,7 +274,7 @@ public class OptionPanel
 	protected void onSelectionChange()
 	{
 		int row = tree.getSelectedRow();
-		OptionTreeNode nd = tree.getItem(row);
+		OptionTreeNode nd = tree.getNode(row);
 		if(nd != null)
 		{
 			titleField.setText(nd.getName());
@@ -430,7 +430,7 @@ public class OptionPanel
 
 			if(sel.size() == 1)
 			{
-				tree.selectItem(sel.get(0));
+				tree.selectNode(sel.get(0));
 			}
 		}
 		else
@@ -450,18 +450,15 @@ public class OptionPanel
 		expr = expr.toLowerCase();
 			
 		OptionTreeNode rt = findRecursive(root, null, expr);
-		if(rt == null)
-		{
-			rt = new OptionTreeNode(null, null, null);
-		}
 		return rt;
 	}
 	
 	
 	// FIX also search node names
+	// TODO or extract text from the container hierarchy 
 	protected OptionTreeNode findRecursive(OptionTreeNode src, OptionTreeNode parent, String expr)
 	{
-		OptionTreeNode rv = new OptionTreeNode(parent, src.getIcon(), src.getName());
+		OptionTreeNode rv = new OptionTreeNode(src.getIcon(), src.getName());
 		
 		int sz = src.getChildrenCount();
 		for(int i=0; i<sz; i++)
@@ -503,6 +500,10 @@ public class OptionPanel
 		
 		if(found || ((rv.getChildrenCount() > 0) || (rv.getOptionEntryCount() > 0)))
 		{
+			if(parent != null)
+			{
+				parent.addChild(rv);
+			}
 			return rv;
 		}
 		else
@@ -555,8 +556,8 @@ public class OptionPanel
 		OptionTreeNode nd = findNode(ed);
 		if(nd != null)
 		{
-			tree.expandItem(nd);
-			tree.selectItem(nd);
+			tree.expandNode(nd);
+			tree.selectNode(nd);
 		}
 	}
 

@@ -4,7 +4,8 @@ import javax.swing.JTextField;
 import javax.swing.text.Document;
 
 
-public class CTextField extends JTextField
+public class CTextField
+	extends JTextField
 {
 	public CTextField()
 	{

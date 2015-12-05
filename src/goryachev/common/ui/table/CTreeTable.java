@@ -150,7 +150,7 @@ public class CTreeTable<T extends CTreeNode>
 	
 	public void toggle(int row)
 	{
-		TreeEntry nd = getNode(row);
+		TreeEntry nd = getTreeEntry(row);
 		if(nd != null)
 		{
 			if(!nd.isLeaf())
@@ -209,7 +209,7 @@ public class CTreeTable<T extends CTreeNode>
 	
 	public boolean isExpanded(T item)
 	{
-		int ix = rowForItem(item);
+		int ix = rowForNode(item);
 		return ix < 0 ? true : isRowExpanded(ix);
 	}
 	
@@ -257,19 +257,8 @@ public class CTreeTable<T extends CTreeNode>
 		super.setModel(m);
 	}
 	
-	
-	public T getData(int row)
-	{
-		TreeEntry<T> n = getNode(row);
-		if(n != null)
-		{
-			return n.getItem();
-		}
-		return null;
-	}
 
-
-	public T getFirstSelectedItem()
+	public T getFirstSelectedNode()
 	{
 		try
 		{
@@ -311,7 +300,7 @@ public class CTreeTable<T extends CTreeNode>
 	}
 	
 	
-	public TreeEntry getNode(int viewRow)
+	public TreeEntry getTreeEntry(int viewRow)
 	{
 		return getTreeModel().getNode(viewRow);
 	}
@@ -327,34 +316,26 @@ public class CTreeTable<T extends CTreeNode>
 	}
 	
 	
-	public T getItem(int viewRow)
+	public T getNode(int viewRow)
 	{
-		if(viewRow >= 0)
+		TreeEntry<T> n = getTreeEntry(viewRow);
+		if(n != null)
 		{
-			try
-			{
-				int row = convertRowIndexToModel(viewRow);
-				return getTreeModel().get(row);
-			}
-			catch(Exception e)
-			{ }
+			return n.getItem();
 		}
 		return null;
 	}
+
 	
-	
-	public Object[] getSelectedItems()
-	{
-		int[] rows = getSelectedRows();
-		int sz = rows.length;
-		
-		Object[] r = new Object[sz];
-		for(int i=0; i<sz; i++)
+	public T getSelectedNode()
+    {
+		int ix = getSelectionModel().getLeadSelectionIndex();
+		if(ix >= 0)
 		{
-			r[i] = getItem(rows[i]);
+			return getNode(ix);
 		}
-		return r;
-	}
+		return null;
+    }
 	
 	
 	public void addSelectionListener(CSelectionListener li)
@@ -407,23 +388,24 @@ public class CTreeTable<T extends CTreeNode>
 	public CList<T> getSelectedNodes()
 	{
 		int[] rows = getSelectedRows();
-		CList<T> list = new CList(rows.length);
-		for(int i=0; i<rows.length; i++)
+		int sz = rows.length;
+		CList<T> rv = new CList(sz);
+		for(int i=0; i<sz; i++)
 		{
-			list.add(getItem(rows[i]));
+			rv.add(getNode(rows[i]));
 		}
-		return list;
+		return rv;
 	}
 	
 	
-	public int findItemRow(T item)
+	public int findNodeRow(CTreeNode item)
 	{
 		String[] path = item.getPathKeys();
 		
 		int sz = getRowCount();
 		for(int i=0; i<sz; i++)
 		{
-			T en = getItem(i);
+			T en = getNode(i);
 			if(CKit.equals(path, en.getPathKeys()))
 			{
 				return i;
@@ -433,9 +415,9 @@ public class CTreeTable<T extends CTreeNode>
 	}
 	
 	
-	public void refresh(T item)
+	public void refresh(CTreeNode item)
 	{
-		int ix = findItemRow(item);
+		int ix = findNodeRow(item);
 		if(ix < 0)
 		{
 			if(item != null)
@@ -493,7 +475,7 @@ public class CTreeTable<T extends CTreeNode>
 	{
 		for(int ix=0; ix<getRowCount(); ix++)
 		{
-			T item = getData(ix);
+			T item = getNode(ix);
 			String[] path = item.getPathKeys();
 			if(Arrays.equals(path, fullPath))
 			{
@@ -504,9 +486,10 @@ public class CTreeTable<T extends CTreeNode>
 	}
 	
 	
-	/** returns row index of the item identified by path or -1 */
+	/** expands the path and returns row index of the item identified by path or -1 if not found */
     public int expandPath(String[] fullPath)
 	{
+    	// FIX this is wrong, needs to go from the root!
 		if(fullPath != null)
 		{
 			int start = 0;
@@ -516,7 +499,7 @@ public class CTreeTable<T extends CTreeNode>
 				
 				for(int ix=start; ix<getRowCount(); ix++)
 				{
-					T item = getData(ix);
+					T item = getNode(ix);
 					String[] path = item.getPathKeys();
 					
 					if(isPrefix(path, fullPath))
@@ -553,7 +536,7 @@ public class CTreeTable<T extends CTreeNode>
 		{
 			for(int i=0; i<prefix.length; i++)
 			{
-				if(!prefix[i].equals(path[i]))
+				if(CKit.notEquals(prefix[i], path[i]))
 				{
 					return false;
 				}
@@ -592,7 +575,7 @@ public class CTreeTable<T extends CTreeNode>
 	}
 
 
-	public int rowForItem(T item)
+	public int rowForNode(T item)
 	{
 		if(item != null)
 		{
@@ -600,7 +583,7 @@ public class CTreeTable<T extends CTreeNode>
 			int sz = getRowCount();
 			for(int i=0; i<sz; i++)
 			{
-				if(CKit.equals(itemPath, getItem(i).getPathKeys()))
+				if(CKit.equals(itemPath, getNode(i).getPathKeys()))
 				{
 					return i;
 				}
@@ -610,9 +593,9 @@ public class CTreeTable<T extends CTreeNode>
 	}
 	
 	
-	public void selectItem(T item)
+	public void selectNode(T item)
 	{
-		int ix = rowForItem(item);
+		int ix = rowForNode(item);
 		if(ix >= 0)
 		{
 			selectRow(ix);
@@ -620,13 +603,10 @@ public class CTreeTable<T extends CTreeNode>
 	}
 	
 	
-	public void expandItem(T item)
+	public void expandNode(CTreeNode item)
 	{
-		int ix = rowForItem(item);
-		if(ix >= 0)
-		{
-			expandRow(ix);
-		}
+		String[] keys = item.getPathKeys();
+		expandPath(keys);
 	}
 	
 	
@@ -711,7 +691,7 @@ public class CTreeTable<T extends CTreeNode>
 			if(col == TREE_COLUMN)
 			{
 				int row = rowAtPoint(p);
-				TreeEntry nd = getNode(row);
+				TreeEntry nd = getTreeEntry(row);
 				if(nd != null)
 				{
 					// check if within the expand/collapse border 
@@ -731,7 +711,7 @@ public class CTreeTable<T extends CTreeNode>
 			{
 				Point p = ev.getPoint();					
 				int row = rowAtPoint(p);
-				TreeEntry nd = getNode(row);
+				TreeEntry nd = getTreeEntry(row);
 				if(nd != null)
 				{
 					// check if within the expand/collapse border 

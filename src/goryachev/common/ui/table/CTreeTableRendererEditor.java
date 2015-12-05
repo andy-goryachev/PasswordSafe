@@ -133,7 +133,7 @@ public class CTreeTableRendererEditor
 
 	public Component getTableCellRendererComponent(JTable t, Object val, boolean sel, boolean focus, int row, int column)
 	{
-		node = ((CTreeTable)t).getNode(row);
+		node = ((CTreeTable)t).getTreeEntry(row);
 		if(node.isLeaf())
 		{
 			expanIconField.setIcon(CIcons.TreeBlank);
@@ -158,7 +158,7 @@ public class CTreeTableRendererEditor
 
 	public Component getTableCellEditorComponent(JTable t, Object val, boolean sel, int row, int col)
 	{
-		node = ((CTreeTable)t).getNode(row);
+		node = ((CTreeTable)t).getTreeEntry(row);
 		if(node.isLeaf())
 		{
 			expanIconField.setIcon(CIcons.TreeBlank);
