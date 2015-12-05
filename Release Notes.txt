@@ -9,6 +9,9 @@
 		RELEASE NOTES
 		=============
 
+3.02.43
+- sync up with common code
+
 3.02.42
 - paint button text
 
