@@ -481,4 +481,13 @@ public class D
 		}
 		return eclipseDetected;
 	}
+
+
+	public static void injectException()
+	{
+		if(true)
+		{
+			throw new RuntimeException();
+		}
+	}
 }

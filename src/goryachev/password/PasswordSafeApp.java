@@ -25,7 +25,7 @@ import javax.swing.ImageIcon;
 public class PasswordSafeApp
 	extends Application
 {
-	public static final String VERSION   = "3.02.43";
+	public static final String VERSION   = "3.02.44";
 	public static final String COPYRIGHT = "copyright © 2015 andy goryachev";	
 	public static final String TITLE = "PasswørdSafe";
 	public static final String EXTENSION = ".safe";
@@ -108,7 +108,7 @@ public class PasswordSafeApp
 	
 	public static File getDefaultDataFile()
 	{
-		File f = new File(getDefaultSettingsDirectory(), CSystem.getUserName() + EXTENSION);
+		File f = new File(getUserHome(), CSystem.getUserName() + EXTENSION);
 		try
 		{
 			return f.getCanonicalFile();

@@ -1,10 +1,11 @@
 // Copyright (c) 2007-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.ui.dialogs.license.StandardLicense;
+import goryachev.common.ui.text.DocumentTools;
 import goryachev.common.util.CJob;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CLanguage;
-import goryachev.common.util.DocumentTools;
+import goryachev.common.util.CObjectProperty;
 import goryachev.common.util.Log;
 import goryachev.common.util.TXT;
 import goryachev.common.util.platform.ApplicationSupport;
@@ -293,6 +294,20 @@ public abstract class Application
 			
 			CFocusMonitor.init();
 			
+			TXT.getLanguageProperty().addListener(true, new CObjectProperty.Listener<CLanguage>()
+			{
+				public void onPropertyChange(final CLanguage old, final CLanguage la)
+				{
+					UI.inEDT(new Runnable()
+					{
+						public void run()
+						{
+							updateLanguage(old, la);
+						}
+					});
+				}
+			});
+			
 			openMainWindow();
 			closeSplashScreen();
 		}
@@ -518,65 +533,45 @@ public abstract class Application
 	}
 	
 	
-	public static CLanguage getLanguage()
+	protected void updateLanguage(CLanguage old, CLanguage la)
 	{
-		CLanguage la = TXT.getLanguage2();
-		if(la == null)
+		boolean oldltr = CLanguage.isLeftToRight(old);
+		boolean ltr = CLanguage.isLeftToRight(la); 
+		if(ltr != oldltr)
 		{
-			setLanguage(CLanguage.getDefault());
-		}
-		return la;
-	}
-	
-	
-	public static void setLanguage(CLanguage la)
-	{
-		CLanguage language = TXT.getLanguage2();
-		if(CKit.notEquals(language, la))
-		{
-			boolean oldltr = CLanguage.isLeftToRight(language);
-				
-			TXT.setLanguage2(la);
+			orientation = ltr ? ComponentOrientation.LEFT_TO_RIGHT : ComponentOrientation.RIGHT_TO_LEFT;
+			UI.setLeftToRightOrientation(orientation);
 			
-			boolean ltr = CLanguage.isLeftToRight(language); 
-			if(ltr != oldltr)
+			if(awtListener == null)
 			{
-				orientation = ltr ? ComponentOrientation.LEFT_TO_RIGHT : ComponentOrientation.RIGHT_TO_LEFT;
-				UI.setLeftToRightOrientation(orientation);
-				
-				if(awtListener == null)
+				// install awt listener to track events in order to set the proper orientation
+				awtListener = new AWTEventListener()
 				{
-					// install awt listener to track events in order to set the proper orientation
-					awtListener = new AWTEventListener()
+					public void eventDispatched(AWTEvent ev)
 					{
-						public void eventDispatched(AWTEvent ev)
+						int id = ev.getID();
+						switch(id)
 						{
-							int id = ev.getID();
-							switch(id)
+						case HierarchyEvent.HIERARCHY_CHANGED:
 							{
-							case HierarchyEvent.HIERARCHY_CHANGED:
-								{
-									Component c = ((HierarchyEvent)ev).getComponent();
-									c.applyComponentOrientation(orientation);
-								}
-								break;
-								
-							case ContainerEvent.COMPONENT_ADDED:
-								{
-									Component c = ((ContainerEvent)ev).getChild();
-									c.applyComponentOrientation(orientation);
-								}
-								break;
+								Component c = ((HierarchyEvent)ev).getComponent();
+								c.applyComponentOrientation(orientation);
 							}
+							break;
+							
+						case ContainerEvent.COMPONENT_ADDED:
+							{
+								Component c = ((ContainerEvent)ev).getChild();
+								c.applyComponentOrientation(orientation);
+							}
+							break;
 						}
-					};
-					
-					long mask = 
-//						AWTEvent.CONTAINER_EVENT_MASK |
-						AWTEvent.HIERARCHY_EVENT_MASK;
-					
-					Toolkit.getDefaultToolkit().addAWTEventListener(awtListener, mask);
-				}
+					}
+				};
+				
+				long mask = AWTEvent.HIERARCHY_EVENT_MASK;
+				
+				Toolkit.getDefaultToolkit().addAWTEventListener(awtListener, mask);
 			}
 		}
 	}

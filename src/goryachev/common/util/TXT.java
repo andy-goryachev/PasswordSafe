@@ -65,8 +65,8 @@ public class TXT
 	private static PromptProvider provider = createDefaultProvider();
 	private static Character testChar;
 	private static Mode mode = Mode.OFF;
-	private static CLanguage language;
 	private static WeakList<HasPrompts> hasPrompts;
+	private static CObjectProperty<CLanguage> languageProperty;
 
 	
 	/** returns localized prompt in the current language */
@@ -140,7 +140,7 @@ public class TXT
 	 */
 	public static String get(String key, String format, Object... args)
 	{
-		return get(language, key, format, args);
+		return get(getLanguage(), key, format, args);
 	}
 	
 	
@@ -153,7 +153,7 @@ public class TXT
 		case PSEUDO_DOT:
 			{
 				PseudoLocalizationPromptProvider p = new PseudoLocalizationPromptProvider();
-				p.setLanguage(getLanguage2());
+				p.setLanguage(getLanguage());
 				setTestChar(TEST_DOT_CHAR);
 				setPromptProvider(p);
 			}
@@ -162,7 +162,7 @@ public class TXT
 		case PSEUDO:
 			{
 				PseudoLocalizationPromptProvider p = new PseudoLocalizationPromptProvider();
-				p.setLanguage(getLanguage2());
+				p.setLanguage(getLanguage());
 				setTestChar(null);
 				setPromptProvider(p);
 			}
@@ -204,7 +204,7 @@ public class TXT
 
 	public static String format(String fmt, Object ... args)
 	{
-		return new TXTFormat(language, fmt, args).format();
+		return new TXTFormat(getLanguage(), fmt, args).format();
 	}
 	
 	
@@ -244,14 +244,21 @@ public class TXT
 	}
 	
 	
-	/** see Application.setLanguage() */
-	public static void setLanguage2(CLanguage la)
+	public static CObjectProperty<CLanguage> getLanguageProperty()
 	{
-		if(CKit.notEquals(language, la))
+		if(languageProperty == null)
 		{
-			boolean oldltr = CLanguage.isLeftToRight(language);
-				
-			language = la;
+			languageProperty = new CObjectProperty<CLanguage>(CLanguage.getDefault());
+		}
+		return languageProperty;
+	}
+	
+	
+	public static void setLanguage(CLanguage la)
+	{
+		if(CKit.notEquals(getLanguage(), la))
+		{
+			getLanguageProperty().set(la);
 			Locale.setDefault(la.getLocale());
 			
 			provider.setLanguage(la);
@@ -267,11 +274,10 @@ public class TXT
 		}
 	}
 	
-
-	/** see also Application.getLanguage() */
-	public static CLanguage getLanguage2()
+	
+	public static CLanguage getLanguage()
 	{
-		return language;
+		return getLanguageProperty().get();
 	}
 	
 	

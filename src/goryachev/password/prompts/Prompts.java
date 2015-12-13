@@ -1,7 +1,6 @@
 // Copyright (c) 2011-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.prompts;
 import goryachev.common.ui.Appearance;
-import goryachev.common.ui.Application;
 import goryachev.common.util.CLanguageCode;
 import goryachev.common.util.Log;
 import goryachev.common.util.TXT;
@@ -36,7 +35,7 @@ public class Prompts
 			Log.err(e);
 		}		
 		
-		Application.setLanguage(Appearance.getLanguage());
+		TXT.setLanguage(Appearance.getLanguage());
 		TXT.checkTestMode();
 	}
 }

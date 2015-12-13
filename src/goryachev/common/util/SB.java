@@ -640,4 +640,24 @@ public class SB
 			sb.append(c);
 		}
 	}
+	
+	
+	/** append all items separated by the separator (all nulls are treated as empty strings) */
+	public void addAll(Object[] ss, Object sep)
+	{
+		boolean first = true;
+		for(Object s: ss)
+		{
+			if(first)
+			{
+				first = false;
+			}
+			else
+			{
+				a(sep);
+			}
+			
+			a(s);
+		}
+	}
 }

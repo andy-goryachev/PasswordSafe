@@ -2,6 +2,7 @@
 package goryachev.common.ui;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CancellableThread;
+import goryachev.common.util.Progress;
 import java.awt.EventQueue;
 
 

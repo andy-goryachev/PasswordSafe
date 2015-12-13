@@ -1,7 +1,6 @@
 // Copyright (c) 2012-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.wizard;
 import goryachev.common.ui.Appearance;
-import goryachev.common.ui.Application;
 import goryachev.common.ui.CComboBox;
 import goryachev.common.ui.CPanel;
 import goryachev.common.ui.InfoField;
@@ -106,7 +105,7 @@ public class LanguagePage
 			CLanguage la = (CLanguage)languages.lookup(s);
 			if(la != null)
 			{
-				if(CKit.notEquals(la, Application.getLanguage()))
+				if(CKit.notEquals(la, TXT.getLanguage()))
 				{
 					handleEvents = false;
 					
@@ -115,7 +114,7 @@ public class LanguagePage
 					languageField.setSelectedItem(x);
 					
 					Appearance.setLanguage(la);
-					Application.setLanguage(la);
+					TXT.setLanguage(la);
 					Broadcast.fire(LANGUAGE_CHANGED);
 					
 					handleEvents = true;
