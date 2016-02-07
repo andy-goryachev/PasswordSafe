@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2009-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.dialogs.options;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;

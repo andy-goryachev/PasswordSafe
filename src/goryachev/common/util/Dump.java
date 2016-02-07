@@ -1,4 +1,4 @@
-// Copyright (c) 2004-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2004-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.awt.Component;
 import java.awt.geom.Rectangle2D;

@@ -1,4 +1,4 @@
-// Copyright (c) 2007-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2007-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import goryachev.common.io.CWriter;
 import java.io.BufferedInputStream;
@@ -40,18 +40,18 @@ import java.util.zip.ZipFile;
 
 public class CKit
 {
-	public static final String COPYRIGHT = "Copyright (c) 1996-2015 Andy Goryachev <andy@goryachev.com>  All Rights Reserved.";
+	public static final String COPYRIGHT = "Copyright (c) 1996-2016 Andy Goryachev <andy@goryachev.com>  All Rights Reserved.";
 	public static final char APPLE = '\u2318';
 	public static final char BOM = '\ufeff';
 	public static final String[] emptyStringArray = new String[0];
 	public static final Charset CHARSET_8859_1 = Charset.forName("8859_1");
 	public static final Charset CHARSET_ASCII = Charset.forName("US-ASCII");
 	public static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");
-	public static final int MS_IN_A_SECOND = 1000;
-	public static final int MS_IN_A_MINUTE = 60000;
-	public static final int MS_IN_AN_HOUR = 3600000;
-	public static final int MS_IN_A_DAY = 86400000;
-	public static final int MS_IN_A_WEEK = 604800000;
+	public static final long MS_IN_A_SECOND = 1000;
+	public static final long MS_IN_A_MINUTE = 60000;
+	public static final long MS_IN_AN_HOUR = 3600000;
+	public static final long MS_IN_A_DAY = 86400000;
+	public static final long MS_IN_A_WEEK = 604800000;
 	private static AtomicInteger id = new AtomicInteger(); 
 	
 	
@@ -1450,13 +1450,13 @@ public class CKit
 
 	public static long milliseconds(int hours, int minutes, int seconds)
 	{
-		return (hours * (long)MS_IN_AN_HOUR) + (minutes * MS_IN_A_MINUTE) + (seconds * MS_IN_A_SECOND);
+		return (hours * MS_IN_AN_HOUR) + (minutes * MS_IN_A_MINUTE) + (seconds * MS_IN_A_SECOND);
 	}
 	
 	
 	public static int ms(int hours, int minutes, int seconds)
 	{
-		return (hours * MS_IN_AN_HOUR) + (minutes * MS_IN_A_MINUTE) + (seconds * MS_IN_A_SECOND);
+		return (int)milliseconds(hours, minutes, seconds);
 	}
 
 

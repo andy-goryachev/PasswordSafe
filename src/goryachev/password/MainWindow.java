@@ -1,5 +1,12 @@
 // Copyright (c) 2009-2015 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import javax.swing.JLabel;
+import javax.swing.JMenuBar;
 import goryachev.common.ui.AppFrame;
 import goryachev.common.ui.Application;
 import goryachev.common.ui.CAction;
@@ -30,13 +37,6 @@ import goryachev.password.data.PassEntry;
 import goryachev.password.img.PasswordSafeIcons;
 import goryachev.password.ui.ActivityMonitor;
 import goryachev.password.ui.ClipboardHandler;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import javax.swing.JLabel;
-import javax.swing.JMenuBar;
 
 
 // TODO recentFiles
@@ -75,7 +75,8 @@ public class MainWindow
 	{
 		super("MainWindow");
 		
-		activityMonitor = new ActivityMonitor(Preferences.lockTimeoutOption.get() * CKit.MS_IN_A_MINUTE)
+		int ms = (int)(Preferences.lockTimeoutOption.get() * CKit.MS_IN_A_MINUTE);
+		activityMonitor = new ActivityMonitor(ms)
 		{
 			protected void onNoActivity()
 			{

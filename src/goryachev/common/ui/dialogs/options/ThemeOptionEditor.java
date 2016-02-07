@@ -1,4 +1,4 @@
-// Copyright (c) 2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2015-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.dialogs.options;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CButton;
@@ -21,6 +21,7 @@ public class ThemeOptionEditor
 	public final CComboBox selectorField;
 	protected ThemePreviewPanel preview;
 	private String old;
+	private boolean changed;
 	
 	
 	public ThemeOptionEditor()
@@ -105,7 +106,10 @@ public class ThemeOptionEditor
 	
 	public void revert()
 	{
-		Theme.setTheme(old);
+		if(changed)
+		{
+			Theme.setTheme(old);
+		}
 	}
 
 
@@ -119,6 +123,7 @@ public class ThemeOptionEditor
 	{
 		String name = getThemeName();
 		ATheme.setTheme(name, false);
+		changed = true;
 	}
 	
 	

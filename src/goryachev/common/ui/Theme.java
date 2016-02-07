@@ -1,4 +1,4 @@
-// Copyright (c) 2008-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2008-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.ui.theme.ATheme;
 import goryachev.common.ui.theme.AgButtonUI;
@@ -259,26 +259,6 @@ public class Theme
 	{
 		return UI.deriveFont(plainFont(), bold, (float)scale);
 	}
-	
-	
-//	public static Border raisedBevelBorder()
-//	{
-//		if(raisedBevelBorder == null)
-//		{
-//			raisedBevelBorder = new CBevelBorder(BORDER_FACTOR, false);
-//		}
-//		return raisedBevelBorder;
-//	}
-//	
-//	
-//	public static Border loweredBevelBorder()
-//	{
-//		if(loweredBevelBorder == null)
-//		{
-//			loweredBevelBorder = new CBevelBorder(BORDER_FACTOR, true);
-//		}
-//		return loweredBevelBorder;
-//	}
 	
 
 	public static CToolBar toolbar()

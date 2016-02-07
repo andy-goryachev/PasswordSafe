@@ -1,4 +1,4 @@
-// Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
 import goryachev.common.util.CKit;
 import goryachev.common.util.TXT;
@@ -216,10 +216,10 @@ public class TimePeriodFormatter
 		long h = (int)(time / CKit.MS_IN_AN_HOUR);
 		int t = (int)(time % CKit.MS_IN_AN_HOUR);
 		
-		int m = t / CKit.MS_IN_A_MINUTE;
+		int m = t / (int)CKit.MS_IN_A_MINUTE;
 		t %= CKit.MS_IN_A_MINUTE;
 		
-		int s = t / CKit.MS_IN_A_SECOND;
+		int s = t / (int)CKit.MS_IN_A_SECOND;
 		t %= CKit.MS_IN_A_SECOND;
 		
 		if(h > 0)

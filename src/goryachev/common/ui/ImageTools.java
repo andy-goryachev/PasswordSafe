@@ -1,4 +1,4 @@
-// Copyright (c) 2007-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2007-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.util.Base64;
 import goryachev.common.util.FileTools;
@@ -198,8 +198,7 @@ public class ImageTools
 				w = Math.round(im.getWidth() * ry);
 			}
 			
-			boolean hasAlpha = im.getColorModel().hasAlpha();
-			return ImageScaler.resize(im, hasAlpha, w, h, true);
+			return ImageScaler.resize(im, w, h, true);
 		}
 		else
 		{

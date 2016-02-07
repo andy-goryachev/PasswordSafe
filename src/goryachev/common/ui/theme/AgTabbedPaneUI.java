@@ -1,4 +1,4 @@
-// Copyright (c) 2008-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2008-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
 import goryachev.common.ui.Theme;
 import java.awt.Color;

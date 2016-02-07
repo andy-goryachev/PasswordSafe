@@ -1,4 +1,4 @@
-// Copyright (c) 2005-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2005-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import java.awt.Component;
 import java.awt.Window;

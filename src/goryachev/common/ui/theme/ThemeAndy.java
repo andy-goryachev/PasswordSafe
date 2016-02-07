@@ -1,4 +1,4 @@
-// Copyright (c) 2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2015-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
 import goryachev.common.ui.ThemeKey;
 import goryachev.common.ui.UI;
@@ -23,7 +23,7 @@ public class ThemeAndy
 		set(ThemeKey.AFFIRM_BUTTON_COLOR, Color.green);
 		set(ThemeKey.DESTRUCTIVE_BUTTON_COLOR, Color.magenta);
 		set(ThemeKey.FIELD_BG, UI.mix(Color.white, 0.85, panelBG));
-		set(ThemeKey.FIELD_FG, UI.mix(Color.black, 0.65, Color.white));
+		set(ThemeKey.FIELD_FG, UI.mix(Color.white, 0.15, Color.black));
 		set(ThemeKey.FOCUS_COLOR, new Color(90, 90, 90));
 		set(ThemeKey.GRID_COLOR, new Color(242, 242, 242));
 		set(ThemeKey.LINE_COLOR, new Color(0xaca8a2));

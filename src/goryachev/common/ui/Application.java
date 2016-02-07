@@ -1,4 +1,4 @@
-// Copyright (c) 2007-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2007-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.ui.dialogs.license.StandardLicense;
 import goryachev.common.ui.text.DocumentTools;
@@ -219,21 +219,13 @@ public abstract class Application
 			}
 		}
 		
-		try
+		UI.inEDT(new Runnable()
 		{
-			UI.inEDTW(new Runnable()
+			public void run()
 			{
-				public void run()
-				{
-					startUI();
-				}
-			});
-		}
-		catch(Exception e)
-		{
-			Log.err(e);
-			System.exit(-4);
-		}
+				startUI();
+			}
+		});
 	}
 	
 	
@@ -314,6 +306,7 @@ public abstract class Application
 		catch(Throwable e)
 		{
 			showError(e);
+			System.exit(-5);
 		}
 	}
 	

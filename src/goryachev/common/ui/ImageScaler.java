@@ -1,4 +1,4 @@
-// Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.util.Log;
 import goryachev.common.util.Rex;
@@ -236,7 +236,6 @@ public class ImageScaler
 			// scale the image
 			double sx = tw / (double)source.getWidth();
 			double sy = th / (double)source.getHeight();
-			boolean hasAlpha = source.getColorModel().hasAlpha();
 			BufferedImage scaled;
 			boolean fitWidth;
 			if(trim)
@@ -250,7 +249,7 @@ public class ImageScaler
 					fitWidth = false;
 				}
 				
-				BufferedImage im = resize(source, hasAlpha, tw, th, fitWidth);
+				BufferedImage im = resize(source, tw, th, fitWidth);
 				// crop
 				if(im.getWidth() > tw)
 				{
@@ -286,7 +285,7 @@ public class ImageScaler
 					th2 = (int)Math.round(image.getHeight() * scale); 
 				}
 				
-				scaled = resize(source, hasAlpha, tw2, th2, fitWidth);
+				scaled = resize(source, tw2, th2, fitWidth);
 			}
 			
 			// scaled image offsets and size
@@ -441,7 +440,7 @@ public class ImageScaler
 	
 	
 	// multi-core resize
-	public static BufferedImage resize(Image image, boolean hasAlpha, int width, int height, boolean fitWidth)
+	public static BufferedImage resize(Image image, int width, int height, boolean fitWidth)
 	{
 		int w = image.getWidth(null);
 		int h = image.getHeight(null);

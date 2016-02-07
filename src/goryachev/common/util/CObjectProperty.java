@@ -1,4 +1,4 @@
-// Copyright (c) 2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2015-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.lang.ref.WeakReference;
 
@@ -108,13 +108,13 @@ public class CObjectProperty<T>
 	}
 	
 	
-	public synchronized void addListener(Listener li)
+	public synchronized void addListener(Listener<T> li)
 	{
 		listeners().add(li);
 	}
 	
 	
-	public void addListener(boolean fireImmediately, Listener li)
+	public void addListener(boolean fireImmediately, Listener<T> li)
 	{
 		addListener(li);
 		
@@ -125,13 +125,13 @@ public class CObjectProperty<T>
 	}
 	
 	
-	public synchronized void addWeakListener(Listener li)
+	public synchronized void addWeakListener(Listener<T> li)
 	{
 		listeners().add(new WeakReference(li));
 	}
 	
 	
-	public void addWeakListener(boolean fireImmediately, Listener li)
+	public void addWeakListener(boolean fireImmediately, Listener<T> li)
 	{
 		addWeakListener(li);
 		

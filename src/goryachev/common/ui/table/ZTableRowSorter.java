@@ -1,4 +1,4 @@
-// Copyright (c) 2010-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2010-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.table;
 import goryachev.common.util.CList;
 import goryachev.common.util.CSorter;

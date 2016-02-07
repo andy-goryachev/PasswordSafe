@@ -1,4 +1,4 @@
-// Copyright (c) 2007-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2007-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -107,6 +107,28 @@ public class CList<T>
 	public int hashCode()
 	{
 		return CList.class.hashCode() ^ super.hashCode();
+	}
+	
+	
+	public void setAll(T[] items)
+	{
+		clear();
+		
+		if(items != null)
+		{
+			addAll(items);
+		}
+	}
+	
+	
+	public void setAll(Collection<T> items)
+	{
+		clear();
+		
+		if(items != null)
+		{
+			addAll(items);
+		}
 	}
 	
 	

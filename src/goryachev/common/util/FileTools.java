@@ -1,4 +1,4 @@
-// Copyright (c) 2004-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2004-2016 Andy Goryachev <andy@goryachev.com>
 // Contains fragments of Apache FileNameUtils code
 // http://www.apache.org/licenses/LICENSE-2.0
 package goryachev.common.util;

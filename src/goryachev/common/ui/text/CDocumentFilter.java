@@ -1,4 +1,4 @@
-// Copyright (c) 2013-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.text;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;

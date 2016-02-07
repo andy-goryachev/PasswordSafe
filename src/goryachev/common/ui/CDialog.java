@@ -1,4 +1,4 @@
-// Copyright (c) 2005-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2005-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.ui.theme.AssignMnemonic;
 import goryachev.common.util.CList;

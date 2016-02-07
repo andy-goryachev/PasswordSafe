@@ -1,4 +1,4 @@
-// Copyright (c) 2008-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2008-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util.lz;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CLanguage;

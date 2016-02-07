@@ -1,4 +1,4 @@
-// Copyright (c) 2006-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2006-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import goryachev.common.util.log.ConsoleLogWriter;
 import goryachev.common.util.log.ErrorLogWriter;

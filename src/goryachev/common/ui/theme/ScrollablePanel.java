@@ -1,4 +1,4 @@
-// Copyright (c) 2005-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2005-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
 import java.awt.BorderLayout;
 import java.awt.Component;

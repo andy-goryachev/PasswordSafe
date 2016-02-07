@@ -1,4 +1,4 @@
-// Copyright (c) 2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2015-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.ThemeKey;

@@ -1,41 +1,20 @@
-// Copyright (c) 2012-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2012-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.table;
 import goryachev.common.util.CList;
 import java.util.Collection;
-import java.util.Iterator;
 
 
 /**
  * Simple item-based table model similar to old CTableModel
  */
 public class ZModel<V>
-	extends ZTableModelCommon
-	implements Iterable<V>
+	extends ZBaseModel<V>
 {
 	private CList<V> rows = new CList();
 	
 	
 	public ZModel()
 	{
-	}
-	
-	
-	public ZColumnInfo addColumn(String name, ZColumnHandler<? extends V> h)
-	{
-		ZColumnInfo zi = addColumnPrivate();
-		zi.name = name;
-		zi.handler = h;
-		return zi;
-	}
-	
-	
-	public ZColumnInfo addColumn(String name, int preferredWidth, ZColumnHandler<? extends V> h)
-	{
-		ZColumnInfo zi = addColumnPrivate();
-		zi.name = name;
-		zi.handler = h;
-		zi.pref = preferredWidth;
-		return zi;
 	}
 	
 	
@@ -99,30 +78,6 @@ public class ZModel<V>
 	}
 	
 
-	public Iterator<V> iterator()
-	{
-		return new Iterator<V>()
-		{
-			int ix;
-			
-			public boolean hasNext()
-			{
-				return (ix < size());
-			}
-
-			public V next()
-			{
-				return getItem(ix++);
-			}
-
-			public void remove()
-			{
-				throw new UnsupportedOperationException();
-			}
-		};
-	}
-
-
 	protected void clearNoEvents()
 	{
 		rows.clear();
@@ -182,35 +137,6 @@ public class ZModel<V>
 		rows.set(row, item);
 	}
 	
-	
-	protected ZColumnHandler<V> columnHandler(int col)
-	{
-		return (ZColumnHandler<V>)getColumnInfo(col).handler;
-	}
-	
-
-	public Object getValueAt(int row, int col)
-	{
-		if(row < 0)
-		{
-			return null;
-		}
-		else if(col < 0)
-		{
-			return null;
-		}
-		
-		V item = getItem(row);
-		return columnHandler(col).getCellValue(item);
-	}
-
-
-	public void setValueAt(Object val, int row, int col)
-	{
-		V item = getItem(row);
-		columnHandler(col).setCellValue(item, val);
-	}
-
 
 	public void replaceAll(Collection<? extends V> list)
 	{
@@ -234,7 +160,7 @@ public class ZModel<V>
 	}
 	
 	
-	public void addAll(V[] items)
+	public void addAll(V ... items)
 	{
 		insertItems(size(), items);
 	}
@@ -279,96 +205,6 @@ public class ZModel<V>
 	}
 	
 	
-	public void setSelectedEntries(CTableSelector sel, CList<V> items)
-	{
-		if(items != null)
-		{
-			int sz = items.size();
-			int[] rows = new int[sz];
-			for(int i=0; i<sz; i++)
-			{
-				V item = items.get(i);
-				int ix = indexOfKey(item);
-				rows[i] = ix;
-			}
-			
-			sel.setSelectedModelRows(rows);
-		}
-	}
-	
-	
-	public void setSelectedEntry(CTableSelector sel, V item)
-	{
-		int ix = indexOfKey(item);
-		sel.setSelectedModelRow(ix);
-	}
-	
-	
-	public V getSelectedEntry(CTableSelector sel)
-	{
-		int ix = sel.getSelectedModelRow();
-		if(ix < 0)
-		{
-			return null;
-		}
-		else
-		{
-			return getItem(ix);
-		}
-	}
-	
-	
-	public void refreshAll()
-	{
-		int last = size() - 1;
-		if(last >= 0)
-		{
-			fireTableRowsUpdated(0, last);
-		}
-	}
-	
-	
-	public void refreshRow(int modelRow)
-	{
-		fireTableRowsUpdated(modelRow, modelRow);
-	}
-	
-	
-	public int indexOfKey(V item)
-	{
-		if(item == null)
-		{
-			return -1;
-		}
-		
-		int sz = getRowCount();
-		for(int i=0; i<sz; i++)
-		{
-			if(item.equals(getItem(i)))
-			{
-				return i;
-			}
-		}
-		return -1;
-	}
-	
-	
-	public V removeItem(V item)
-	{
-		int ix = indexOfKey(item);
-		if(ix >= 0)
-		{
-			item = getItem(ix);
-			remove(ix);
-			return item;
-		}
-		else
-		{
-			return null;
-		}
-	}
-	
-	
 	public void removeItems(Iterable<V> items)
 	{
 		if(items != null)
@@ -384,31 +220,5 @@ public class ZModel<V>
 	public CList<V> asList()
 	{
 		return new CList(rows);
-	}
-
-
-	public void fireTableRowUpdated(int row)
-	{
-		fireTableRowsUpdated(row, row);
-	}
-
-
-	public void fireAllRowsUpdated()
-	{
-		int sz = size();
-		if(sz > 0)
-		{
-			fireTableRowsUpdated(0, sz - 1);
-		}
-	}
-	
-	
-	public void fireItemUpdated(V item)
-	{
-		int ix = indexOfKey(item);
-		if(ix >= 0)
-		{
-			fireTableRowUpdated(ix);
-		}
 	}
 }

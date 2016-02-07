@@ -1,5 +1,6 @@
-// Copyright (c) 2008-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2008-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
+import java.io.File;
 import goryachev.common.util.platform.CPlatformLinux;
 import goryachev.common.util.platform.CPlatformMac;
 import goryachev.common.util.platform.CPlatformUnix;
@@ -54,6 +55,13 @@ public abstract class CPlatform
 	public static String getVersion()
 	{
 		return System.getProperty("os.version");
+	}
+	
+	
+	/** returns application settings folder. */
+	public File getDefaultSettingsFolder()
+	{
+		return new File(System.getProperty("user.home"), ".goryachev.com");
 	}
 	
 	

@@ -1,4 +1,4 @@
-// Copyright (c) 2007-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2007-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util.platform;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CPlatform;
@@ -39,5 +39,11 @@ public class CPlatformWindows
 		}
 		
 		return null;
+	}
+	
+	
+	public File getDefaultSettingsFolder()
+	{
+		return new File(System.getProperty("user.home"), "goryachev.com");
 	}
 }

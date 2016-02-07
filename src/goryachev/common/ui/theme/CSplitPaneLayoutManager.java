@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2009-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
 import java.awt.Component;
 import java.awt.Container;

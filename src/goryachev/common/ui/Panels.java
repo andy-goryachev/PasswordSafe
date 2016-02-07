@@ -1,7 +1,11 @@
-// Copyright (c) 2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2015-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
+import goryachev.common.ui.icons.CIcons;
 import goryachev.common.ui.theme.ThemeColor;
 import goryachev.common.util.CKit;
+import goryachev.common.util.CancelledException;
+import goryachev.common.util.Log;
+import goryachev.common.util.UserException;
 import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.Icon;
@@ -237,16 +241,78 @@ public class Panels
 	// perhaps this needs own component to be able to set borders, colors
 	public static CPanel info(Icon icon, String text)
 	{
-		JLabel ic = new JLabel(icon);
-		ic.setVerticalAlignment(JLabel.TOP);
-
 		JTextComponent t = textComponent(text);
 		t.setOpaque(false);
 		
 		CPanel p = new CPanel(10, 10);
 		p.border();
-		p.setLeading(ic);
+		
+		if(icon != null)
+		{
+			JLabel ic = new JLabel(icon);
+			ic.setVerticalAlignment(JLabel.TOP);
+			p.setLeading(ic);
+		}
 		p.setCenter(scrollTransparent(t));
+		return p;
+	}
+	
+	
+	public static CPanel errorPane(Object exceptionOrMessage)
+	{
+		String msg;
+		JTextComponent t;
+		CScrollPane s;
+		Img icon = CIcons.Error96;
+		
+		if(exceptionOrMessage instanceof Throwable)
+		{
+			if(exceptionOrMessage instanceof UserException)
+			{
+				msg = ((UserException)exceptionOrMessage).getMessage();
+				t = Panels.textComponent(msg);
+				s = Panels.scroll(t);
+			}
+			else
+			{
+				Throwable e = (Throwable)exceptionOrMessage;
+				
+				if(e instanceof CancelledException)
+				{
+					// ignore
+					icon = CIcons.Cancelled96;
+				}
+				else if(e instanceof InterruptedException)
+				{
+					// ignore
+					icon = CIcons.Cancelled96;
+				}
+				else
+				{
+					Log.err(e);
+				}
+				
+				msg = CKit.stackTrace(e);
+				t = Panels.textArea(msg, false);
+				s = Panels.scroll(t, true);
+			}
+		}
+		else
+		{
+			msg = String.valueOf(exceptionOrMessage);
+			if(CKit.isBlank(msg))
+			{
+				msg = "Error";
+			}
+			t = Panels.textComponent(msg);
+			s = Panels.scroll(t);
+		}
+		
+		t.setBorder(new CBorder(20));
+		
+		CPanel p = new CPanel();
+		p.setLeading(Panels.iconField(icon));
+		p.setCenter(s);
 		return p;
 	}
 }
