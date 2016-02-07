@@ -1,4 +1,4 @@
-// Copyright (c) 2015 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2015-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;
