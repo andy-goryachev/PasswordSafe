@@ -9,6 +9,9 @@
 		RELEASE NOTES
 		=============
 
+3.03.45
+- 2016
+
 3.02.44
 - default data file location changed to user.home
 
