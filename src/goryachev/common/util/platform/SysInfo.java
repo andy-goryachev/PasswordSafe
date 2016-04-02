@@ -14,8 +14,8 @@ import java.util.Properties;
 
 public class SysInfo
 {
-	private DecimalFormat numberFormat = new DecimalFormat("#,##0.##");
-	private final Out out;
+	protected DecimalFormat numberFormat = new DecimalFormat("#,##0.##");
+	protected final Out out;
 	
 	
 	public SysInfo(Out out)
@@ -203,7 +203,7 @@ public class SysInfo
 		
 		public abstract void describe(Object key, Object v);
 		
-		protected abstract Out a(Object x);
+		public abstract Out a(Object x);
 		
 		//
 		
@@ -257,7 +257,7 @@ public class SysInfo
 		}
 
 		
-		protected Out a(Object x)
+		public Out a(Object x)
 		{
 			sb.a(x);
 			return this;
