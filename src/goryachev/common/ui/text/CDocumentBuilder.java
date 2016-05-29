@@ -295,7 +295,7 @@ public class CDocumentBuilder
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 	}
 

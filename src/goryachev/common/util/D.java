@@ -1,20 +1,15 @@
 // Copyright (c) 2007-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
-import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Enumeration;
 import java.util.Map;
-import javax.swing.text.AttributeSet;
 
 
 /** debug printing */
 // TODO move conversion to Dump
 public class D
 {
-	private static Boolean eclipseDetected;
-	
-	
 	// convert milliseconds to MM:SS or HHH:MM:SS String
 	public static String msToString(long ms)
 	{
@@ -118,9 +113,9 @@ public class D
 		{
 			listLongArray((long[])x);
 		}
-		else if(x instanceof AttributeSet)
+		else if(x instanceof double[])
 		{
-			listAttributeSet((AttributeSet)x);
+			listDoubleArray((double[])x);
 		}
 		else 
 		{
@@ -134,7 +129,7 @@ public class D
 		SB sb = new SB();
 		sb.append(a.size());
 		
-		CList<Object> keys = new CList(a.keySet());
+		CList<Object> keys = new CList<>(a.keySet());
 		CSorter.sort(keys);
 		
 		for(Object key: keys)
@@ -215,36 +210,54 @@ public class D
 	private static void listLongArray(long[] a)
 	{
 		SB sb = new SB();
-		sb.append(a.length);
+		sb.a("[");
+		sb.a(a.length);
+		sb.a("]{");
 		
+		boolean comma = false;
 		for(long d: a)
 		{
-			sb.append("\n");
-			sb.append("    ");
+			if(comma)
+			{
+				sb.a(", ");
+			}
+			else
+			{
+				comma = true;
+			}
 			sb.append(d);
 		}
+		sb.a("}");
 
 		log(sb.toString(), 2);
 	}
 	
 	
-	private static void listAttributeSet(AttributeSet as)
+	private static void listDoubleArray(double[] a)
 	{
 		SB sb = new SB();
-		sb.append(as.getAttributeCount());
+		sb.a("[");
+		sb.a(a.length);
+		sb.a("]{");
 		
-		Enumeration en = as.getAttributeNames();
-		while(en.hasMoreElements())
+		boolean comma = false;
+		for(double d: a)
 		{
-			Object att = en.nextElement();
-			sb.append("\n");
-			sb.append("    ");
-			sb.append(att);
+			if(comma)
+			{
+				sb.a(", ");
+			}
+			else
+			{
+				comma = true;
+			}
+			sb.append(d);
 		}
+		sb.a("}");
 
 		log(sb.toString(), 2);
 	}
-
+	
 	
 	public static void trace()
 	{
@@ -313,34 +326,10 @@ public class D
 		System.out.println(className + "." + t.getMethodName() + " " + msg);
 	}
 
-
-//	public static int hashCode(Object ... xs)
-//	{
-//		return hashCodeArray(xs);
-//	}
-//
-//
-//	public static int hashCodeArray(Object[] xs)
-//	{
-//		int c = 0;
-//		for(Object x: xs)
-//		{
-//			if(c == 0)
-//			{
-//				c = x.hashCode();
-//			}
-//			else
-//			{
-//				c ^= x.hashCode();
-//			}
-//		}
-//		return c;
-//	}
-	
 	
 	public static void dump(byte[] b)
 	{
-		if(isEclipse())
+		if(CKit.isEclipse())
 		{
 			if(b == null)
 			{
@@ -356,7 +345,7 @@ public class D
 	
 	public static void dump(String s, byte[] b)
 	{
-		if(isEclipse())
+		if(CKit.isEclipse())
 		{
 			if(b == null)
 			{
@@ -372,7 +361,7 @@ public class D
 	
 	public static void describe(Object x)
 	{
-		if(isEclipse())
+		if(CKit.isEclipse())
 		{
 			print(Dump.describe(x));
 		}
@@ -382,7 +371,7 @@ public class D
 	// TODO what is it?
 	public static void where(Object ... ss)
 	{
-		if(isEclipse())
+		if(CKit.isEclipse())
 		{
 			StackTraceElement[] tr = new Throwable().getStackTrace();
 			int start = 1;
@@ -430,7 +419,7 @@ public class D
 	
 	public static void pp(Object a)
 	{
-		if(isEclipse())
+		if(CKit.isEclipse())
 		{
 			System.out.print(a == null ? "<null>" : a.toString());
 		}
@@ -439,7 +428,7 @@ public class D
 	
 	public static void p(Object a)
 	{
-		if(isEclipse())
+		if(CKit.isEclipse())
 		{
 			System.out.println(a == null ? "<null>" : a.toString());
 		}
@@ -448,7 +437,7 @@ public class D
 	
 	public static void p(Object ... a)
 	{
-		if(isEclipse())
+		if(CKit.isEclipse())
 		{
 			SB sb = new SB();
 			for(Object x: a)
@@ -466,22 +455,12 @@ public class D
 	
 	public static void simpleName(Object x)
 	{
-		if(isEclipse())
+		if(CKit.isEclipse())
 		{
 			System.out.println(Dump.simpleName(x));
 		}
 	}
 	
-	
-	public static boolean isEclipse()
-	{
-		if(eclipseDetected == null)
-		{
-			eclipseDetected = new File(".project").exists() && new File(".classpath").exists();
-		}
-		return eclipseDetected;
-	}
-
 
 	public static void injectException()
 	{

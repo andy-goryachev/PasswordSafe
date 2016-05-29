@@ -104,7 +104,7 @@ public class Dialogs
 				}
 				else
 				{
-					Log.err(e);
+					Log.fail(e);
 				}
 				
 				msg = CKit.stackTrace(e);

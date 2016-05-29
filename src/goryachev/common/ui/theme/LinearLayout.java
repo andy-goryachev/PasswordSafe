@@ -191,7 +191,7 @@ public class LinearLayout
 			}
 			catch(Exception e)
 			{
-				Log.err(e);
+				Log.fail(e);
 			}
 		}
 	}

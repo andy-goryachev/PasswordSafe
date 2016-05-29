@@ -36,9 +36,7 @@ public class ATheme
 	public static final String NAME_WINDOWS = "Windows";
 	
 	public static final float TITLE_FONT_FACTOR = 1.6f;
-	
-	public static final StringOption themeOption = new StringOption("ui.theme", NAME_ANDY);
-	
+		
 	protected static Font basePlainFont;
 	protected static Font baseMonospacedFont;
 	protected static Color basePanelBG;
@@ -51,6 +49,9 @@ public class ATheme
 	private String name;
 	private boolean dark;
 	private Hashtable map = new Hashtable();
+	
+	public static final StringOption themeOption = new StringOption("ui.theme", NAME_ANDY);
+	protected static final Log log = Log.get("ATheme");
 	
 	static
 	{
@@ -340,7 +341,7 @@ public class ATheme
 			return (Color)v;
 		}
 		
-		Log.err("color not found " + k + " in " + name);
+		log.fail("color not found " + k + " in " + name);
 		return Color.magenta;
 	}
 	
@@ -353,7 +354,7 @@ public class ATheme
 			return (Font)v;
 		}
 		
-		Log.err("font not found " + k + " in " + name);
+		log.fail("font not found " + k + " in " + name);
 		return basePlainFont;
 	}
 	

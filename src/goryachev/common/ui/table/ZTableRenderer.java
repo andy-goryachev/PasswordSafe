@@ -92,7 +92,7 @@ public class ZTableRenderer
 				
 				// icon
 
-				Icon ic = Parsers.parseIcon(val);
+				Icon ic = UI.parseIcon(val);
 				setIcon(ic);
 				
 				// alignment
@@ -157,7 +157,7 @@ public class ZTableRenderer
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 		return this;
 	}

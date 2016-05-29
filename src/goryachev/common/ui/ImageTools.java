@@ -121,7 +121,7 @@ public class ImageTools
 			}
 			catch(Exception e)
 			{
-				Log.err(e);
+				Log.fail(e);
 			}
 		}
 		return null;
@@ -169,7 +169,7 @@ public class ImageTools
 			}
 			catch(Exception e)
 			{
-				Log.err(e);
+				Log.fail(e);
 			}
 		}
 		return null;
@@ -239,7 +239,7 @@ public class ImageTools
 			}
 		}
 		
-		Log.err(new Exception("don't know how to get alpha from " + im.getClass()));
+		Log.fail(new Exception("don't know how to get alpha from " + im.getClass()));
 		return false;
 	}
 	
@@ -347,7 +347,7 @@ public class ImageTools
 		}
 		catch(Exception e)
 		{
-			Log.print("Image not found: " + name);
+			Log.fail("Image not found: " + name);
 			return colorImage(16, 16, Color.red);
 		}
 	}

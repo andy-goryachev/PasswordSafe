@@ -132,7 +132,7 @@ public class UISettings
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 	}
 
@@ -432,7 +432,7 @@ public class UISettings
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 	}
 	

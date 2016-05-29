@@ -90,7 +90,7 @@ public class Theme
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 		
 		// init default colors and borders

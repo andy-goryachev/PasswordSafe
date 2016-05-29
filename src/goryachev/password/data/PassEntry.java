@@ -59,7 +59,7 @@ public final class PassEntry
 			}
 			else
 			{
-				Log.print("name is not a string");
+				Log.fail("name is not a string");
 				name = null;
 			}
 		}
@@ -83,7 +83,7 @@ public final class PassEntry
 		}
 		else
 		{
-			Log.print("username is not a string");
+			Log.fail("username is not a string");
 		}
 		return null;
 	}
@@ -104,7 +104,7 @@ public final class PassEntry
 		}
 		else
 		{
-			Log.print("username is not an opaque value");
+			Log.fail("username is not an opaque value");
 		}
 		return null;
 	}
@@ -125,7 +125,7 @@ public final class PassEntry
 		}
 		else
 		{
-			Log.print("username is not a string");
+			Log.fail("username is not a string");
 		}
 		return null;
 	}

@@ -191,7 +191,7 @@ public class CTableRenderer<T>
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 		return this;
 	}

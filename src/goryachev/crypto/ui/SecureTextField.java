@@ -50,7 +50,7 @@ public class SecureTextField
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 		finally
 		{

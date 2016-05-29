@@ -27,7 +27,7 @@ public abstract class DelayedAction
 			}
 			catch(Exception e)
 			{
-				Log.err(e);
+				Log.fail(e);
 			}
 		}
 	};

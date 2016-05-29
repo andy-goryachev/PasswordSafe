@@ -3,6 +3,9 @@ package goryachev.common.util;
 import java.lang.ref.WeakReference;
 
 
+/**
+ * Unsynchronized List of WeakListeners.
+ */
 public class WeakList<T>
 {
 	private CList<WeakReference<T>> list;
@@ -16,14 +19,14 @@ public class WeakList<T>
 	
 	public WeakList(int size)
 	{
-		list = new CList(size);
+		list = new CList<>(size);
 	}
 
 
-	public synchronized CList<T> asList()
+	public CList<T> asList()
 	{
 		int sz = list.size();
-		CList<T> rv = new CList(sz);
+		CList<T> rv = new CList<>(sz);
 		for(int i=sz-1; i>=0; i--)
 		{
 			WeakReference<T> ref = list.get(i);
@@ -39,21 +42,33 @@ public class WeakList<T>
 		}
 		return rv;
 	}
-
-
-	public synchronized void add(T item)
+	
+	
+	public T get(int ix)
 	{
-		list.add(new WeakReference(item));
+		return list.get(ix).get();
+	}
+
+
+	public void add(T item)
+	{
+		list.add(new WeakReference<>(item));
 	}
 	
 	
-	public synchronized int size()
+	public void add(int index, T item)
+	{
+		list.add(index, new WeakReference<>(item));
+	}
+	
+	
+	public int size()
 	{
 		return list.size();
 	}
 	
 	
-	public synchronized void remove(T item)
+	public void remove(T item)
 	{
 		int sz = list.size();
 		for(int i=sz-1; i>=0; i--)
@@ -69,5 +84,11 @@ public class WeakList<T>
 				list.remove(i);
 			}
 		}
+	}
+	
+	
+	public void remove(int ix)
+	{
+		list.remove(ix);
 	}
 }

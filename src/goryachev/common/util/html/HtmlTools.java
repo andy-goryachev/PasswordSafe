@@ -367,7 +367,7 @@ public class HtmlTools
 			}
 			catch(Exception e)
 			{
-				Log.err(e);
+				Log.fail(e);
 			}
 		}
 		return u;

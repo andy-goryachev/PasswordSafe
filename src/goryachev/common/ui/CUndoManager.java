@@ -259,7 +259,7 @@ public class CUndoManager
 			}
 			catch(Exception e)
 			{
-				Log.err(e);
+				Log.fail(e);
 				UI.beep();
 			}
 			
@@ -310,7 +310,7 @@ public class CUndoManager
 			}
 			catch(Exception e)
 			{
-				Log.err(e);
+				Log.fail(e);
 				UI.beep();
 			}
 			

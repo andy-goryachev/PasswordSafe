@@ -125,7 +125,7 @@ public class AppFrame
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 		
 		int count = 0;

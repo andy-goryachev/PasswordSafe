@@ -148,7 +148,7 @@ public class CTextPane
 			}
 			catch(Exception e)
 			{
-				Log.err(e);
+				Log.fail(e);
 			}
 			break;
 		}

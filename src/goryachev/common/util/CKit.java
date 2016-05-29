@@ -38,7 +38,7 @@ import java.util.zip.InflaterInputStream;
 import java.util.zip.ZipFile;
 
 
-public class CKit
+public final class CKit
 {
 	public static final String COPYRIGHT = "Copyright (c) 1996-2016 Andy Goryachev <andy@goryachev.com>  All Rights Reserved.";
 	public static final char APPLE = '\u2318';
@@ -53,12 +53,9 @@ public class CKit
 	public static final long MS_IN_A_DAY = 86400000;
 	public static final long MS_IN_A_WEEK = 604800000;
 	private static AtomicInteger id = new AtomicInteger(); 
+	private static Boolean eclipseDetected;
 	
 	
-	private CKit()
-	{ }
-	
-
 	public static void close(Closeable x)
 	{
 		try
@@ -411,7 +408,7 @@ public class CKit
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 			return null;
 		}
 	}
@@ -598,6 +595,7 @@ public class CKit
 	
 	
 	/** universal comparison to be used when other logic fails */
+	@SuppressWarnings("unchecked")
 	public static int compareLastResort(Object a, Object b)
 	{
 		if(a == null)
@@ -810,7 +808,7 @@ public class CKit
 	/** Splits a string using any whitespace as delimiter.  Returns a non-null value. */
 	public static String[] split(String s)
 	{
-		CList<String> list = new CList();
+		CList<String> list = new CList<>();
 		
 		if(s != null)
 		{
@@ -859,7 +857,7 @@ public class CKit
 	 */
 	public static String[] split(String s, String delim)
 	{
-		CList<String> list = new CList();
+		CList<String> list = new CList<>();
 		
 		if(s != null)
 		{
@@ -896,7 +894,7 @@ public class CKit
 
 	public static String[] split(String s, char delim, boolean includeDelimiter)
 	{
-		CList<String> a = new CList();
+		CList<String> a = new CList<>();
 
 		if(s != null)
 		{
@@ -928,7 +926,7 @@ public class CKit
 	/** Splits a string using any of the characters in the delimiters string */
 	public static String[] splitAny(String s, String delimiters)
 	{
-		CList<String> list = new CList();
+		CList<String> list = new CList<>();
 		
 		int start = 0;
 		boolean white = true;
@@ -1434,7 +1432,7 @@ public class CKit
 	
 	public static void todo()
 	{
-		throw new Rex("(to be implemented)");
+		throw new Error("(to be implemented)");
 	}
 	
 	
@@ -2004,6 +2002,7 @@ public class CKit
 	
 	
 	/** collect public static fields from a class, of specified type */
+	@SuppressWarnings("unchecked")
 	public static <T> CSet<T> collectPublicStaticFields(Class<?> c, Class<T> type)
 	{
 		CSet<T> rv = new CSet();
@@ -2025,10 +2024,21 @@ public class CKit
 				}
 				catch(Exception e)
 				{
-					Log.err(e);
+					Log.fail(e);
 				}
 			}
 		}
 		return rv;
+	}
+	
+	
+	/** returns true if running from Eclipse */
+	public static boolean isEclipse()
+	{
+		if(eclipseDetected == null)
+		{
+			eclipseDetected = new File(".project").exists() && new File(".classpath").exists();
+		}
+		return eclipseDetected;
 	}
 }

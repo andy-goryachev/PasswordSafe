@@ -227,7 +227,7 @@ public class PassEditor
 			}
 			catch(Exception e)
 			{
-				Log.err(e);
+				Log.fail(e);
 			}
 			finally
 			{

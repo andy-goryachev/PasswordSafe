@@ -111,7 +111,7 @@ public class CFocusTraversalPolicy
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 		
 		return components.get(0);

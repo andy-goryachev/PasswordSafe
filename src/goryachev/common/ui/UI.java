@@ -44,6 +44,7 @@ import java.awt.event.MouseWheelListener;
 import javax.swing.AbstractButton;
 import javax.swing.Action;
 import javax.swing.DefaultCellEditor;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
@@ -495,7 +496,7 @@ public class UI
 		{ }
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 	}
 	
@@ -535,7 +536,7 @@ public class UI
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 	}
 	
@@ -562,7 +563,7 @@ public class UI
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 	}
 	
@@ -725,7 +726,7 @@ public class UI
 		}
 		else
 		{
-			Log.print("no horizontal alignment for " + x);
+			Log.fail("no horizontal alignment for " + x);
 		}
 	}
 	
@@ -1276,7 +1277,7 @@ public class UI
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 		return null;
 	}
@@ -1290,7 +1291,7 @@ public class UI
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 		return null;
 	}
@@ -1904,5 +1905,11 @@ public class UI
 			d.width = width;
 			c.setPreferredSize(d);
 		}
+	}
+	
+	
+	public static Icon parseIcon(Object x)
+	{
+		return (x instanceof Icon) ? (Icon)x : null;
 	}
 }

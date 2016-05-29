@@ -231,7 +231,7 @@ public class DocumentTools
 			}
 			catch(Exception e)
 			{
-				Log.err(e);
+				Log.fail(e);
 			}
 		}
 		return null;
@@ -248,7 +248,7 @@ public class DocumentTools
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 			return null;
 		}
 	}
@@ -274,7 +274,7 @@ public class DocumentTools
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 			return null;
 		}
 	}
@@ -327,7 +327,7 @@ public class DocumentTools
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 	}
 

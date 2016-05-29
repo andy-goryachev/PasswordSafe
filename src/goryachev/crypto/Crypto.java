@@ -52,7 +52,7 @@ public class Crypto
 		}
 		catch(Throwable e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 	}
 	
@@ -68,7 +68,7 @@ public class Crypto
 		}
 		catch(Throwable e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 	}
 
@@ -84,7 +84,7 @@ public class Crypto
 		}
 		catch(Throwable e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 	}
 	
@@ -100,7 +100,7 @@ public class Crypto
 		}
 		catch(Throwable e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 	}
 	

@@ -63,11 +63,11 @@ public class ZTableRowSorter
 		catch(IndexOutOfBoundsException e)
 		{ 
 			// weird error
-			Log.err(e);
+			Log.fail(e);
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 	}
 
@@ -84,7 +84,7 @@ public class ZTableRowSorter
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 	}
 

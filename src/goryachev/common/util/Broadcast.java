@@ -66,7 +66,7 @@ public class Broadcast
 				}
 				catch(Exception e)
 				{
-					Log.err(e);
+					Log.fail(e);
 				}
 			}
 		}

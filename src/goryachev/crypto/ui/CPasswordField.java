@@ -50,7 +50,7 @@ public final class CPasswordField
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 			UIManager.getLookAndFeel().provideErrorFeedback(this);
 		}
 	}

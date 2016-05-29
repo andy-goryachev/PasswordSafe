@@ -25,7 +25,7 @@ import javax.swing.ImageIcon;
 public class PasswordSafeApp
 	extends Application
 {
-	public static final String VERSION   = "3.03.45";
+	public static final String VERSION   = "3.03.45+";
 	public static final String COPYRIGHT = "copyright © 2016 andy goryachev";	
 	public static final String TITLE = "PasswørdSafe";
 	public static final String EXTENSION = ".safe";
@@ -115,7 +115,7 @@ public class PasswordSafeApp
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 		}
 		return f;
 	}
@@ -149,7 +149,7 @@ public class PasswordSafeApp
 		}
 		catch(Exception e)
 		{
-			Log.err(e);
+			Log.fail(e);
 			failed(CKit.stackTrace(e));
 		}
 	}
