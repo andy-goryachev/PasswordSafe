@@ -1,6 +1,7 @@
 // Copyright (c) 2012-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.ui.theme.AssignMnemonic;
+import javax.swing.Action;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
@@ -24,6 +25,13 @@ public class CPopupMenu
 	{
 		CMenuItem m = new CMenuItem(s);
 		m.setEnabled(false);
+		return add(m);
+	}
+
+	
+	public JMenuItem add(String s, Action a)
+	{
+		CMenuItem m = new CMenuItem(s, a);
 		return add(m);
 	}
 }

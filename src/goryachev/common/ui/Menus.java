@@ -98,6 +98,8 @@ public class Menus
 	public static final String Properties = TXT.get("Menus.properties", "Properties");
 	public static final String Preview = TXT.get("Menus.preview pane", "Preview");
 	public static final String Print = TXT.get("Menus.to print something", "Print");
+	// q
+	public static final String Quit = TXT.get("Menus.quit application", "Quit");
 	// r
 	public static final String Redo = TXT.get("Menus.redo", "Redo");
 	public static final String Refresh = TXT.get("Menus.refresh", "Refresh");
