@@ -1,4 +1,4 @@
-// Copyright (c) 2010-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2010-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.text;
 import java.awt.Color;
 import javax.swing.text.DefaultHighlighter;

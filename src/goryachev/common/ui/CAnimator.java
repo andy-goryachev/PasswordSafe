@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

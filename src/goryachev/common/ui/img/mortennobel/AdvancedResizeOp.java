@@ -4,9 +4,9 @@
  * License: The BSD 3-Clause License
  * http://opensource.org/licenses/BSD-3-Clause
  */
-package goryachev.common.util.img.mortennobel;
+package goryachev.common.ui.img.mortennobel;
+import goryachev.common.ui.img.jhlabs.UnsharpFilter;
 import goryachev.common.util.CList;
-import goryachev.common.util.img.jhlabs.UnsharpFilter;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;

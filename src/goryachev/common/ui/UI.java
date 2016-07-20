@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.ui.dialogs.ZeroFrame;
 import goryachev.common.ui.theme.InsetsResource;
@@ -7,6 +7,7 @@ import goryachev.common.util.CList;
 import goryachev.common.util.CPlatform;
 import goryachev.common.util.Clearable;
 import goryachev.common.util.Log;
+import goryachev.common.util.Menus;
 import goryachev.common.util.Obj;
 import goryachev.common.util.Rex;
 import goryachev.common.util.SB;
@@ -73,7 +74,7 @@ import javax.swing.text.JTextComponent;
 /** common UI tools */
 public class UI
 {
-	public static final String COPYRIGHT = "Copyright (c) 1996-2016 Andy Goryachev <andy@goryachev.com>  All Rights Reserved.";
+	public static final String COPYRIGHT = "Copyright © 1996-2016 Andy Goryachev <andy@goryachev.com>  All Rights Reserved.";
 	public static final int ALT = InputEvent.ALT_DOWN_MASK;
 	public static final int CTRL = InputEvent.CTRL_DOWN_MASK;
 	public static final int SHIFT = InputEvent.SHIFT_DOWN_MASK;

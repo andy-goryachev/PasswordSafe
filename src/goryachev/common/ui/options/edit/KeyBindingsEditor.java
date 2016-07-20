@@ -1,4 +1,4 @@
-// Copyright (c) 2008-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.options.edit;
 import goryachev.common.ui.Accelerator;
 import goryachev.common.ui.CAction;
@@ -10,7 +10,6 @@ import goryachev.common.ui.CPopupMenu;
 import goryachev.common.ui.CPopupMenuController;
 import goryachev.common.ui.CScrollPane;
 import goryachev.common.ui.CToolBar;
-import goryachev.common.ui.Menus;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.UI;
 import goryachev.common.ui.options.OptionEditorInterface;
@@ -18,6 +17,7 @@ import goryachev.common.ui.table.CTableSelector;
 import goryachev.common.ui.table.ZFilterLogic;
 import goryachev.common.ui.table.ZTable;
 import goryachev.common.util.CList;
+import goryachev.common.util.Menus;
 import goryachev.common.util.SB;
 import goryachev.common.util.TXT;
 import java.awt.event.KeyEvent;

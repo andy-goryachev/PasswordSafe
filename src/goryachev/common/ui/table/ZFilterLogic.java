@@ -1,9 +1,8 @@
-// Copyright (c) 2008-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.table;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CPanel;
 import goryachev.common.ui.CTextFieldWithPrompt;
-import goryachev.common.ui.Menus;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.ThemeKey;
 import goryachev.common.ui.UI;
@@ -11,6 +10,7 @@ import goryachev.common.ui.icons.CIcons;
 import goryachev.common.ui.theme.CFieldBorder;
 import goryachev.common.ui.theme.ThemeColor;
 import goryachev.common.util.CKit;
+import goryachev.common.util.Menus;
 import goryachev.common.util.TXT;
 import java.awt.Color;
 import java.awt.Dimension;

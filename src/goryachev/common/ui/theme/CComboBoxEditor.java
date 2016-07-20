@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
 import javax.swing.JTextField;
 import javax.swing.plaf.basic.BasicComboBoxEditor;

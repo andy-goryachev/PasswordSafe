@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.dialogs.options;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
@@ -9,7 +9,6 @@ import goryachev.common.ui.CTextFieldWithPrompt;
 import goryachev.common.ui.DelayedAction;
 import goryachev.common.ui.Dialogs;
 import goryachev.common.ui.GlobalSettings;
-import goryachev.common.ui.Menus;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.UI;
 import goryachev.common.ui.icons.CIcons;
@@ -18,6 +17,7 @@ import goryachev.common.ui.table.CTableColumn;
 import goryachev.common.ui.table.CTreeTable;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
+import goryachev.common.util.Menus;
 import goryachev.common.util.TXT;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;

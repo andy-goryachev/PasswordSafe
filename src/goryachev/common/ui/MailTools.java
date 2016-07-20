@@ -1,5 +1,7 @@
-// Copyright (c) 2013-2016 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.util;
+// Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
+package goryachev.common.ui;
+import goryachev.common.util.Hex;
+import goryachev.common.util.SB;
 import java.awt.Desktop;
 import java.net.URI;
 import java.text.Normalizer;

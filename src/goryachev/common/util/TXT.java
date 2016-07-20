@@ -1,4 +1,4 @@
-// Copyright (c) 2005-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2005-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import goryachev.common.util.lz.PseudoLocalizationPromptProvider;
 import goryachev.common.util.lz.TXTFormat;

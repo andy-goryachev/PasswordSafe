@@ -1,4 +1,4 @@
-// Copyright (c) 2006-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2006-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.table;
 import goryachev.common.ui.UI;
 import goryachev.common.util.Log;

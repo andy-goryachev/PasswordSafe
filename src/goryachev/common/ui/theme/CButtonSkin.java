@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
 import goryachev.common.ui.CButton;
 import goryachev.common.ui.CSkin;

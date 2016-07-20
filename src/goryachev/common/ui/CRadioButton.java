@@ -1,4 +1,4 @@
-// Copyright (c) 2013-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import javax.swing.Action;
 import javax.swing.Icon;

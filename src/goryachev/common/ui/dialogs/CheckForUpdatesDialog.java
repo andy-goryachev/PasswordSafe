@@ -1,14 +1,14 @@
-// Copyright (c) 2013-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.dialogs;
 import goryachev.common.ui.Application;
 import goryachev.common.ui.CButton;
 import goryachev.common.ui.CheckForUpdate;
-import goryachev.common.ui.Menus;
 import goryachev.common.ui.icons.CIcons;
 import goryachev.common.ui.text.CDocumentBuilder;
 import goryachev.common.ui.wizard.ProcessPanel;
 import goryachev.common.ui.wizard.WizardDialog2;
 import goryachev.common.util.CKit;
+import goryachev.common.util.Menus;
 import goryachev.common.util.ProductInfo;
 import goryachev.common.util.TXT;
 import java.awt.Component;

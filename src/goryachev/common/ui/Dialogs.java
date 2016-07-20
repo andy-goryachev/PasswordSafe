@@ -1,4 +1,4 @@
-// Copyright (c) 2008-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.ui.dialogs.options.COptionDialog;
 import goryachev.common.ui.dialogs.options.OptionTreeNode;
@@ -6,6 +6,7 @@ import goryachev.common.ui.icons.CIcons;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CancelledException;
 import goryachev.common.util.Log;
+import goryachev.common.util.Menus;
 import goryachev.common.util.TXT;
 import goryachev.common.util.UserException;
 import java.awt.Component;

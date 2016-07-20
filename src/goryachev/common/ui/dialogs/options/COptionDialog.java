@@ -1,4 +1,4 @@
-// Copyright (c) 2008-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.dialogs.options;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
@@ -6,8 +6,8 @@ import goryachev.common.ui.CButtonPanel;
 import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CPanel;
 import goryachev.common.ui.Dialogs;
-import goryachev.common.ui.Menus;
 import goryachev.common.ui.options.OptionEditorInterface;
+import goryachev.common.util.Menus;
 import java.awt.Component;
 
 

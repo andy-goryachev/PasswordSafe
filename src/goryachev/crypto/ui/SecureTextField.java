@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.ui;
 import goryachev.common.util.Log;
 import goryachev.crypto.Crypto;

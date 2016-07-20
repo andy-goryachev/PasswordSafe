@@ -1,4 +1,4 @@
-// Copyright (c) 2008-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.options.edit;
 import goryachev.common.ui.options.IntOption;
 import goryachev.common.ui.options.IntegerOption;

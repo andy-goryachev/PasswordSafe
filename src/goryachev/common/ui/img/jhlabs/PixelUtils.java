@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package goryachev.common.util.img.jhlabs;
+package goryachev.common.ui.img.jhlabs;
 import java.awt.Color;
 import java.util.Random;
 

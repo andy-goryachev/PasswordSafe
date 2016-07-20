@@ -1,4 +1,4 @@
-// Copyright (c) 2007-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2007-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.ui.dialogs.license.StandardLicense;
 import goryachev.common.ui.text.DocumentTools;
@@ -7,6 +7,7 @@ import goryachev.common.util.CKit;
 import goryachev.common.util.CLanguage;
 import goryachev.common.util.CObjectProperty;
 import goryachev.common.util.Log;
+import goryachev.common.util.Menus;
 import goryachev.common.util.TXT;
 import goryachev.common.util.platform.ApplicationSupport;
 import java.awt.AWTEvent;

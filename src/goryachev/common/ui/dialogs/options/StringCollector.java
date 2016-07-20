@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2015-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.dialogs.options;
 import goryachev.common.util.CKit;
 import goryachev.common.util.SB;

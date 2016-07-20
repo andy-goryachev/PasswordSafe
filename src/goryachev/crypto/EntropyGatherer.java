@@ -1,4 +1,4 @@
-// Copyright (c) 2012-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto;
 import goryachev.common.util.WeakList;
 import java.awt.AWTEvent;

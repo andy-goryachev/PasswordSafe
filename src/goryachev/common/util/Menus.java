@@ -1,9 +1,8 @@
-// Copyright (c) 2012-2016 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.ui;
-
-import goryachev.common.util.TXT;
+// Copyright © 2012-2016 Andy Goryachev <andy@goryachev.com>
+package goryachev.common.util;
 
 
+/** common text strings */
 public class Menus
 {
 	// a

@@ -1,6 +1,7 @@
-// Copyright (c) 2013-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.util.Log;
+import goryachev.common.util.Menus;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;

@@ -1,11 +1,11 @@
-// Copyright (c) 2009-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.text;
 import goryachev.common.ui.CBorder;
+import goryachev.common.ui.CBrowser;
 import goryachev.common.ui.CButton;
 import goryachev.common.ui.Cursors;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.UI;
-import goryachev.common.util.CBrowser;
 import goryachev.common.util.Log;
 import goryachev.common.util.SB;
 import java.awt.Color;

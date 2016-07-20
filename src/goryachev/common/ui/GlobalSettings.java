@@ -1,4 +1,4 @@
-// Copyright (c) 2005-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2005-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.ui.options.COption;
 import goryachev.common.ui.options.PreferenceListener;
@@ -7,7 +7,6 @@ import goryachev.common.util.CFileSettings;
 import goryachev.common.util.CList;
 import goryachev.common.util.CMap;
 import goryachev.common.util.CSettings;
-import goryachev.common.util.CSettingsProvider;
 import goryachev.common.util.Log;
 import goryachev.common.util.Obj;
 import goryachev.common.util.Rex;
@@ -63,7 +62,7 @@ public class GlobalSettings
 	}
 	
 	
-	public static void setSettingsProvider(CSettingsProvider p)
+	public static void setSettingsProvider(CSettings.Provider p)
 	{
 		settings.setProvider(p);
 	}
@@ -75,7 +74,7 @@ public class GlobalSettings
 	}
 	
 	
-	public static CSettingsProvider getSettingsProfider()
+	public static CSettings.Provider getSettingsProfider()
 	{
 		return settings.getProvider();
 	}

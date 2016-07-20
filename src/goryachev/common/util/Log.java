@@ -1,4 +1,4 @@
-// Copyright (c) 2006-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2006-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import goryachev.common.util.log.ConsoleLogWriter;
 import goryachev.common.util.log.ErrorLogWriter;
@@ -38,6 +38,11 @@ public class Log
 	private static final CMap<String,Log> channels = new CMap<>();
 	private static final CMap<String,LogWriter> writerByName = new CMap<>();
 	private static volatile Log errorChannel = initErrorChannel();
+	
+	static
+	{
+		initConsole();
+	}
 	
 	
 	public Log(String name)

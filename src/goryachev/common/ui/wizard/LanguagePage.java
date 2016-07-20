@@ -1,11 +1,11 @@
-// Copyright (c) 2012-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.wizard;
 import goryachev.common.ui.Appearance;
+import goryachev.common.ui.Broadcast;
 import goryachev.common.ui.CComboBox;
 import goryachev.common.ui.CPanel;
 import goryachev.common.ui.InfoField;
 import goryachev.common.ui.theme.AssignMnemonic;
-import goryachev.common.util.Broadcast;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CLanguage;
 import goryachev.common.util.CList;

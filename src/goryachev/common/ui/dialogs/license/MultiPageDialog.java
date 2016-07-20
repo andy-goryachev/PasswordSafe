@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.dialogs.license;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.CDialog;
@@ -6,13 +6,13 @@ import goryachev.common.ui.CScrollPane;
 import goryachev.common.ui.CSplitPane;
 import goryachev.common.ui.CTextFieldWithPrompt;
 import goryachev.common.ui.ClipboardTools;
-import goryachev.common.ui.Menus;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.table.CTableSelector;
 import goryachev.common.ui.table.ZColumnHandler;
 import goryachev.common.ui.table.ZModel;
 import goryachev.common.ui.table.ZTable;
 import goryachev.common.ui.text.CDocument;
+import goryachev.common.util.Menus;
 import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.JComponent;

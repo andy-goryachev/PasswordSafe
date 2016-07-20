@@ -1,6 +1,5 @@
-// Copyright (c) 2009-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
-import goryachev.common.util.CBrowser;
 import goryachev.common.util.CKit;
 import goryachev.common.util.FileTools;
 import java.awt.Font;

@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2015-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.dialogs.options;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CButton;
@@ -7,9 +7,9 @@ import goryachev.common.ui.CPanel;
 import goryachev.common.ui.CTabbedPane;
 import goryachev.common.ui.CTextField;
 import goryachev.common.ui.HorizontalPanel;
-import goryachev.common.ui.Menus;
 import goryachev.common.ui.UI;
 import goryachev.common.ui.icons.CIcons;
+import goryachev.common.util.Menus;
 import goryachev.common.util.TXT;
 import goryachev.common.util.html.HtmlTools;
 import java.awt.AWTEvent;

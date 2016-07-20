@@ -1,16 +1,10 @@
 // Copyright (c) 2009-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import javax.swing.JLabel;
-import javax.swing.JMenuBar;
 import goryachev.common.ui.AppFrame;
 import goryachev.common.ui.Application;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CBorder;
+import goryachev.common.ui.CBrowser;
 import goryachev.common.ui.CButton;
 import goryachev.common.ui.CFocusTraversalPolicy;
 import goryachev.common.ui.CMenu;
@@ -21,13 +15,12 @@ import goryachev.common.ui.CUndoManager;
 import goryachev.common.ui.ContactSupport;
 import goryachev.common.ui.Dialogs;
 import goryachev.common.ui.GlobalSettings;
-import goryachev.common.ui.Menus;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.UI;
 import goryachev.common.ui.dialogs.CFileChooser;
 import goryachev.common.ui.dialogs.CheckForUpdatesDialog;
-import goryachev.common.util.CBrowser;
 import goryachev.common.util.CKit;
+import goryachev.common.util.Menus;
 import goryachev.common.util.SB;
 import goryachev.common.util.TXT;
 import goryachev.crypto.EntropyGatherer;
@@ -37,6 +30,13 @@ import goryachev.password.data.PassEntry;
 import goryachev.password.img.PasswordSafeIcons;
 import goryachev.password.ui.ActivityMonitor;
 import goryachev.password.ui.ClipboardHandler;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import javax.swing.JLabel;
+import javax.swing.JMenuBar;
 
 
 // TODO recentFiles

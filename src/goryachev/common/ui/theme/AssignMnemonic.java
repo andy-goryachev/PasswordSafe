@@ -1,4 +1,4 @@
-// Copyright (c) 2013-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.theme;
 import goryachev.common.ui.CButtonPanel;
 import goryachev.common.util.CKit;

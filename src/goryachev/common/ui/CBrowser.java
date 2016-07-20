@@ -1,5 +1,7 @@
-// Copyright (c) 2012-2016 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.util;
+// Copyright © 2012-2016 Andy Goryachev <andy@goryachev.com>
+package goryachev.common.ui;
+import goryachev.common.util.Log;
+import goryachev.common.util.NetTools;
 import java.awt.Desktop;
 import java.net.URI;
 import java.net.URL;

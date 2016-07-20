@@ -1,4 +1,4 @@
-// Copyright (c) 2008-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.options.edit;
 import goryachev.common.ui.Accelerator;
 import goryachev.common.ui.CAction;
@@ -6,9 +6,9 @@ import goryachev.common.ui.CButton;
 import goryachev.common.ui.CDialog;
 import goryachev.common.ui.CPanel;
 import goryachev.common.ui.KeyNames;
-import goryachev.common.ui.Menus;
 import goryachev.common.ui.Theme;
 import goryachev.common.ui.text.CDocumentFilter;
+import goryachev.common.util.Menus;
 import goryachev.common.util.TXT;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

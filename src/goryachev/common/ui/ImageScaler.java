@@ -1,9 +1,9 @@
-// Copyright (c) 2013-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
+import goryachev.common.ui.img.jhlabs.GaussianFilter;
+import goryachev.common.ui.img.mortennobel.ResampleOp;
 import goryachev.common.util.Log;
 import goryachev.common.util.Rex;
-import goryachev.common.util.img.jhlabs.GaussianFilter;
-import goryachev.common.util.img.mortennobel.ResampleOp;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;

@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
@@ -10,7 +10,7 @@ import java.util.Properties;
 
 
 public class CFileSettings
-	implements CSettingsProvider
+	implements CSettings.Provider
 {
 	private File file;
 	private Properties properties;

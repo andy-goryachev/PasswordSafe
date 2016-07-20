@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2015-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.ui.icons.CIcons;
 import goryachev.common.ui.theme.ThemeColor;

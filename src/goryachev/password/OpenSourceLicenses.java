@@ -2,11 +2,11 @@
 package goryachev.password;
 import goryachev.common.ui.Application;
 import goryachev.common.ui.CAction;
-import goryachev.common.ui.Menus;
 import goryachev.common.ui.dialogs.license.MultiPageDialog;
+import goryachev.common.ui.img.jhlabs.PixelUtils;
+import goryachev.common.ui.img.mortennobel.Lanczos3Filter;
 import goryachev.common.util.CKit;
-import goryachev.common.util.img.jhlabs.PixelUtils;
-import goryachev.common.util.img.mortennobel.Lanczos3Filter;
+import goryachev.common.util.Menus;
 import java.awt.Component;
 import org.bouncycastle.LICENSE;
 

@@ -4,7 +4,7 @@
  * License: The BSD 3-Clause License
  * http://opensource.org/licenses/BSD-3-Clause
  */
-package goryachev.common.util.img.mortennobel;
+package goryachev.common.ui.img.mortennobel;
 import goryachev.common.util.CJob;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;

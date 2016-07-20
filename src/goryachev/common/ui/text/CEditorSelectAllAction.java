@@ -1,4 +1,4 @@
-// Copyright (c) 2012-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.text;
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.Document;

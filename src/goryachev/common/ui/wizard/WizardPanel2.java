@@ -1,14 +1,14 @@
-// Copyright (c) 2013-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.wizard;
 import goryachev.common.ui.CAction;
 import goryachev.common.ui.CButton;
 import goryachev.common.ui.CPanel;
-import goryachev.common.ui.Menus;
 import goryachev.common.ui.Panels;
 import goryachev.common.ui.UI;
 import goryachev.common.ui.icons.CIcons;
 import goryachev.common.util.CKit;
 import goryachev.common.util.HasPrompts;
+import goryachev.common.util.Menus;
 import goryachev.common.util.UserException;
 import java.awt.Component;
 import java.util.Stack;

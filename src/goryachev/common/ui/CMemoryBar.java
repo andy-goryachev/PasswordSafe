@@ -1,6 +1,7 @@
-// Copyright (c) 2009-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui;
 import goryachev.common.util.CKit;
+import goryachev.common.util.Menus;
 import goryachev.common.util.TXT;
 import goryachev.common.util.platform.SysInfo;
 import java.awt.Color;

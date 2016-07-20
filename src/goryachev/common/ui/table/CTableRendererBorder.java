@@ -1,4 +1,4 @@
-// Copyright (c) 2010-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2010-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.ui.table;
 import goryachev.common.ui.CBorder;
 import goryachev.common.ui.Theme;
