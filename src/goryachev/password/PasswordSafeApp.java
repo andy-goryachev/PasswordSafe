@@ -1,4 +1,4 @@
-// Copyright (c) 2005-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2005-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
 import goryachev.common.ui.Application;
 import goryachev.common.ui.Dialogs;
