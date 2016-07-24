@@ -1,8 +1,5 @@
 // Copyright © 2005-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.swing.Application;
-import goryachev.common.swing.Dialogs;
-import goryachev.common.swing.dialogs.license.StandardLicense;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CSystem;
 import goryachev.common.util.Log;
@@ -18,6 +15,9 @@ import goryachev.password.data.v2.DataFormatV2;
 import goryachev.password.img.PasswordSafeIcons;
 import goryachev.password.prompts.Prompts;
 import goryachev.password.ui.ClipboardHandler;
+import goryachev.swing.Application;
+import goryachev.swing.Dialogs;
+import goryachev.swing.dialogs.license.StandardLicense;
 import java.io.File;
 import javax.swing.ImageIcon;
 

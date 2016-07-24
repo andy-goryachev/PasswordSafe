@@ -1,6 +1,6 @@
 // Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.swing;
-import goryachev.common.swing.icons.CIcons;
+import goryachev.swing.icons.CIcons;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 

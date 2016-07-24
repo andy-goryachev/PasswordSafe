@@ -1,17 +1,5 @@
 // Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.swing.BackgroundThread;
-import goryachev.common.swing.CAction;
-import goryachev.common.swing.CButton;
-import goryachev.common.swing.CDialog;
-import goryachev.common.swing.CFocusTraversalPolicy;
-import goryachev.common.swing.CPanel;
-import goryachev.common.swing.CProgressField;
-import goryachev.common.swing.CTextField;
-import goryachev.common.swing.Dialogs;
-import goryachev.common.swing.InfoField;
-import goryachev.common.swing.Theme;
-import goryachev.common.swing.dialogs.CFileChooser;
 import goryachev.common.util.CKit;
 import goryachev.common.util.Log;
 import goryachev.common.util.Menus;
@@ -23,6 +11,18 @@ import goryachev.crypto.swing.MatchLabel;
 import goryachev.crypto.swing.OnScreenKeyboard;
 import goryachev.password.data.DataFile;
 import goryachev.password.ui.PasswordVerifier2;
+import goryachev.swing.BackgroundThread;
+import goryachev.swing.CAction;
+import goryachev.swing.CButton;
+import goryachev.swing.CDialog;
+import goryachev.swing.CFocusTraversalPolicy;
+import goryachev.swing.CPanel;
+import goryachev.swing.CProgressField;
+import goryachev.swing.CTextField;
+import goryachev.swing.Dialogs;
+import goryachev.swing.InfoField;
+import goryachev.swing.Theme;
+import goryachev.swing.dialogs.CFileChooser;
 import java.awt.Component;
 import java.io.File;
 

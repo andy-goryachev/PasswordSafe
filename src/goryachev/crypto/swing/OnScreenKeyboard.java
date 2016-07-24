@@ -1,12 +1,12 @@
 // Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.swing;
-import goryachev.common.swing.CBorder;
-import goryachev.common.swing.Theme;
-import goryachev.common.swing.ThemeKey;
-import goryachev.common.swing.UI;
-import goryachev.common.swing.theme.ThemeColor;
 import goryachev.common.util.CLanguage;
 import goryachev.common.util.CLanguageCode;
+import goryachev.swing.CBorder;
+import goryachev.swing.Theme;
+import goryachev.swing.ThemeKey;
+import goryachev.swing.UI;
+import goryachev.swing.theme.ThemeColor;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;

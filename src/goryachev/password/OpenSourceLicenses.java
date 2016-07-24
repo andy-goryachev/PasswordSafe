@@ -1,12 +1,12 @@
 // Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.swing.Application;
-import goryachev.common.swing.CAction;
-import goryachev.common.swing.dialogs.license.MultiPageDialog;
-import goryachev.common.swing.img.jhlabs.PixelUtils;
-import goryachev.common.swing.img.mortennobel.Lanczos3Filter;
 import goryachev.common.util.CKit;
 import goryachev.common.util.Menus;
+import goryachev.swing.Application;
+import goryachev.swing.CAction;
+import goryachev.swing.dialogs.license.MultiPageDialog;
+import goryachev.swing.img.jhlabs.PixelUtils;
+import goryachev.swing.img.mortennobel.Lanczos3Filter;
 import java.awt.Component;
 import org.bouncycastle.LICENSE;
 

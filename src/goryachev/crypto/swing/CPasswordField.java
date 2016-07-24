@@ -1,9 +1,9 @@
 // Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.swing;
-import goryachev.common.swing.Theme;
 import goryachev.common.util.Log;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;
+import goryachev.swing.Theme;
 import javax.swing.JPasswordField;
 import javax.swing.UIManager;
 

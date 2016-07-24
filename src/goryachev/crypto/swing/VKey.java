@@ -1,12 +1,12 @@
 // Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.swing;
-import goryachev.common.swing.CAction;
-import goryachev.common.swing.CMenuItem;
-import goryachev.common.swing.CPopupMenu;
-import goryachev.common.swing.UI;
 import goryachev.common.util.CLanguage;
 import goryachev.common.util.CLanguageCode;
 import goryachev.common.util.Log;
+import goryachev.swing.CAction;
+import goryachev.swing.CMenuItem;
+import goryachev.swing.CPopupMenu;
+import goryachev.swing.UI;
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import javax.swing.JButton;

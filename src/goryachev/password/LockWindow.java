@@ -1,9 +1,9 @@
 // Copyright © 2012-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.swing.AppFrame;
-import goryachev.common.swing.Application;
-import goryachev.common.swing.UI;
 import goryachev.crypto.EntropyGatherer;
+import goryachev.swing.AppFrame;
+import goryachev.swing.Application;
+import goryachev.swing.UI;
 import java.awt.event.KeyEvent;
 import java.io.File;
 
