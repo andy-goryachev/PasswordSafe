@@ -1,8 +1,8 @@
 // Copyright © 2012-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.ui.Application;
-import goryachev.common.ui.dialogs.AboutDialog;
-import goryachev.common.ui.text.CDocumentBuilder;
+import goryachev.common.swing.Application;
+import goryachev.common.swing.dialogs.AboutDialog;
+import goryachev.common.swing.text.CDocumentBuilder;
 import goryachev.common.util.ProductInfo;
 import goryachev.common.util.TXT;
 import goryachev.password.img.PasswordSafeIcons;

@@ -1,10 +1,10 @@
 // Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.ui.Application;
-import goryachev.common.ui.CAction;
-import goryachev.common.ui.dialogs.license.MultiPageDialog;
-import goryachev.common.ui.img.jhlabs.PixelUtils;
-import goryachev.common.ui.img.mortennobel.Lanczos3Filter;
+import goryachev.common.swing.Application;
+import goryachev.common.swing.CAction;
+import goryachev.common.swing.dialogs.license.MultiPageDialog;
+import goryachev.common.swing.img.jhlabs.PixelUtils;
+import goryachev.common.swing.img.mortennobel.Lanczos3Filter;
 import goryachev.common.util.CKit;
 import goryachev.common.util.Menus;
 import java.awt.Component;

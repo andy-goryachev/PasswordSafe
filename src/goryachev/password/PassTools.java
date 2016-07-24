@@ -2,8 +2,8 @@
 package goryachev.password;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;
-import goryachev.crypto.ui.CPasswordField;
-import goryachev.crypto.ui.SecureTextField;
+import goryachev.crypto.swing.CPasswordField;
+import goryachev.crypto.swing.SecureTextField;
 
 
 public class PassTools

@@ -1,8 +1,8 @@
 // Copyright © 2005-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.ui.Application;
-import goryachev.common.ui.Dialogs;
-import goryachev.common.ui.dialogs.license.StandardLicense;
+import goryachev.common.swing.Application;
+import goryachev.common.swing.Dialogs;
+import goryachev.common.swing.dialogs.license.StandardLicense;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CSystem;
 import goryachev.common.util.Log;
