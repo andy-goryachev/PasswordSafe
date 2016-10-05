@@ -1,7 +1,5 @@
 // Copyright © 2010-2016 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.util;
-
-
+package goryachev.common.i18n;
 
 // ISO639 codes http://www.loc.gov/standards/iso639-2/ISO-639-2_utf-8.txt
 public enum CLanguageCode

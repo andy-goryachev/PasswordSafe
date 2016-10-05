@@ -1,6 +1,6 @@
 // Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options.edit;
-import goryachev.common.util.CLanguage;
+import goryachev.common.i18n.CLanguage;
 import goryachev.common.util.CLookup;
 import goryachev.common.util.CSorter;
 import goryachev.common.util.CStringList;

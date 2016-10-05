@@ -1,7 +1,7 @@
 // Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.i18n.Menus;
 import goryachev.common.util.Log;
-import goryachev.common.util.Menus;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;

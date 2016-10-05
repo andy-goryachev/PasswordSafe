@@ -1,7 +1,7 @@
 // Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
+import goryachev.common.i18n.Menus;
 import goryachev.common.util.CKit;
-import goryachev.common.util.Menus;
 import goryachev.swing.Application;
 import goryachev.swing.CAction;
 import goryachev.swing.dialogs.license.MultiPageDialog;

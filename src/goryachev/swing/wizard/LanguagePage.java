@@ -1,12 +1,12 @@
 // Copyright © 2012-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.wizard;
+import goryachev.common.i18n.CLanguage;
+import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
-import goryachev.common.util.CLanguage;
 import goryachev.common.util.CList;
 import goryachev.common.util.CLookup;
 import goryachev.common.util.CSorter;
 import goryachev.common.util.HasPrompts;
-import goryachev.common.util.TXT;
 import goryachev.swing.Appearance;
 import goryachev.swing.Broadcast;
 import goryachev.swing.CComboBox;

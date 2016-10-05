@@ -1,7 +1,10 @@
 // Copyright © 2005-2016 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.util;
-import goryachev.common.util.lz.PseudoLocalizationPromptProvider;
-import goryachev.common.util.lz.TXTFormat;
+package goryachev.common.i18n;
+import goryachev.common.util.CKit;
+import goryachev.common.util.CList;
+import goryachev.common.util.CObjectProperty;
+import goryachev.common.util.HasPrompts;
+import goryachev.common.util.WeakList;
 import java.util.Locale;
 
 

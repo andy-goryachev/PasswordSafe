@@ -1,9 +1,9 @@
 // Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.i18n.TXT;
 import goryachev.common.io.WebReader;
 import goryachev.common.util.DotSeparatedVersion;
 import goryachev.common.util.Log;
-import goryachev.common.util.TXT;
 import goryachev.common.util.UserException;
 import java.io.FileNotFoundException;
 import java.net.URL;

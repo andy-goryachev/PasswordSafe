@@ -1,9 +1,5 @@
 // Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.util.lz;
-import goryachev.common.util.CLanguage;
-import goryachev.common.util.CLanguageCode;
-import goryachev.common.util.PromptProvider;
-
+package goryachev.common.i18n;
 
 public class PseudoLocalizationPromptProvider
 	implements PromptProvider

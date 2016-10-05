@@ -1,8 +1,8 @@
 // Copyright © 2012-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.i18n.Menus;
 import goryachev.common.util.CKit;
 import goryachev.common.util.Log;
-import goryachev.common.util.Menus;
 import goryachev.common.util.Rex;
 import java.awt.Component;
 import java.awt.Container;

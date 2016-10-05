@@ -1,6 +1,6 @@
 // Copyright © 2009-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.text;
-import goryachev.common.util.CLanguage;
+import goryachev.common.i18n.CLanguage;
 import java.util.Locale;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.Document;

@@ -1,10 +1,10 @@
 // Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.wizard;
+import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CancelledException;
 import goryachev.common.util.Log;
 import goryachev.common.util.Rex;
-import goryachev.common.util.TXT;
 import goryachev.common.util.UserException;
 import goryachev.swing.BackgroundThread;
 import goryachev.swing.CAction;

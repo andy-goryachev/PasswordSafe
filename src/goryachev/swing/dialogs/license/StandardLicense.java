@@ -1,6 +1,6 @@
 // Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.dialogs.license;
-import goryachev.common.util.TXT;
+import goryachev.common.i18n.TXT;
 import goryachev.swing.Application;
 import goryachev.swing.text.CDocumentBuilder;
 import javax.swing.text.StyledDocument;

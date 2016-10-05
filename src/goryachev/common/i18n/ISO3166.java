@@ -1,6 +1,8 @@
 // Copyright © 2009-2016 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.util;
+package goryachev.common.i18n;
 
+import goryachev.common.util.CKit;
+import goryachev.common.util.CMap;
 
 // http://en.wikipedia.org/wiki/ISO_3166-1
 // http://en.wikipedia.org/wiki/ISO_3166-2

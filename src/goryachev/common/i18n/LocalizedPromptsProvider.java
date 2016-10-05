@@ -1,8 +1,6 @@
 // Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.util.lz;
-import goryachev.common.util.CLanguage;
+package goryachev.common.i18n;
 import goryachev.common.util.Log;
-import goryachev.common.util.PromptProvider;
 import java.io.File;
 
 

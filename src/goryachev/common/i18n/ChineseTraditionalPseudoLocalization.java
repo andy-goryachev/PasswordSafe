@@ -1,5 +1,5 @@
 // Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.util.lz;
+package goryachev.common.i18n;
 import goryachev.common.util.CMap;
 import goryachev.common.util.SB;
 import java.nio.charset.Charset;

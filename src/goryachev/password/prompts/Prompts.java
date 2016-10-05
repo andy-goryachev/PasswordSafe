@@ -1,9 +1,9 @@
 // Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.prompts;
-import goryachev.common.util.CLanguageCode;
+import goryachev.common.i18n.CLanguageCode;
+import goryachev.common.i18n.LocalizedPromptsProvider;
+import goryachev.common.i18n.TXT;
 import goryachev.common.util.Log;
-import goryachev.common.util.TXT;
-import goryachev.common.util.lz.LocalizedPromptsProvider;
 import goryachev.swing.Appearance;
 
 

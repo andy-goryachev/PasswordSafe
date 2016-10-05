@@ -1,9 +1,9 @@
 // Copyright © 2010-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
+import goryachev.common.i18n.Menus;
+import goryachev.common.i18n.TXT;
 import goryachev.common.util.CComparator;
 import goryachev.common.util.CList;
-import goryachev.common.util.Menus;
-import goryachev.common.util.TXT;
 import goryachev.password.data.DataFile;
 import goryachev.password.data.PassEntry;
 import goryachev.swing.CAction;

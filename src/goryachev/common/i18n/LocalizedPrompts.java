@@ -1,5 +1,5 @@
 // Copyright © 2005-2016 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.util.lz;
+package goryachev.common.i18n;
 import goryachev.common.io.CWriter;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;

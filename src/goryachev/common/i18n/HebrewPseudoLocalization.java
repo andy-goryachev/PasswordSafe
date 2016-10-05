@@ -1,14 +1,29 @@
 // Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.util.lz;
+package goryachev.common.i18n;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CMap;
 
 
-public class ArabicPseudoLocalization
+public class HebrewPseudoLocalization
 	extends AbstractPseudoLocalization
 {
 	protected void initMap(CMap<Character,String> m)
 	{
+//		add
+//		(
+//			"Iו",
+//			"iז",
+//			"Nה",
+//			"nת",
+//			"Oס",
+//			"oם",
+//			"Wש",
+//			"wש",
+//			"Xא",
+//			"xא",
+//			"Yע",
+//			"yע"
+//		);
 	}
 	
 	
@@ -27,6 +42,6 @@ public class ArabicPseudoLocalization
 			master = master.substring(html.length());
 		}
 		
-		return prefix + "ا" + master + "ه";
+		return prefix + "ז" + master + "ו";
 	}
 }

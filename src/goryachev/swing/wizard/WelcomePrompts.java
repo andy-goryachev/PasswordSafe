@@ -1,6 +1,6 @@
 // Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.wizard;
-import goryachev.common.util.TXT;
+import goryachev.common.i18n.TXT;
 import goryachev.swing.Application;
 
 

@@ -1,15 +1,15 @@
 // Copyright © 2009-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.i18n.Menus;
+import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
 import goryachev.common.util.CPlatform;
 import goryachev.common.util.Clearable;
 import goryachev.common.util.Log;
-import goryachev.common.util.Menus;
 import goryachev.common.util.Obj;
 import goryachev.common.util.Rex;
 import goryachev.common.util.SB;
-import goryachev.common.util.TXT;
 import goryachev.swing.dialogs.ZeroFrame;
 import goryachev.swing.theme.InsetsResource;
 import java.awt.Color;

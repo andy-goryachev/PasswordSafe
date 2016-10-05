@@ -1,6 +1,6 @@
 // Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.swing;
-import goryachev.common.util.CLanguageCode;
+import goryachev.common.i18n.CLanguageCode;
 
 
 // http://en.wikipedia.org/wiki/Keyboard_layout

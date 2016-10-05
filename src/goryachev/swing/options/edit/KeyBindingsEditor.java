@@ -1,9 +1,9 @@
 // Copyright © 2008-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options.edit;
+import goryachev.common.i18n.Menus;
+import goryachev.common.i18n.TXT;
 import goryachev.common.util.CList;
-import goryachev.common.util.Menus;
 import goryachev.common.util.SB;
-import goryachev.common.util.TXT;
 import goryachev.swing.Accelerator;
 import goryachev.swing.CAction;
 import goryachev.swing.CBorder;

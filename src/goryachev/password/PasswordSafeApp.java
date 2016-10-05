@@ -1,10 +1,10 @@
 // Copyright © 2005-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
+import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CSystem;
 import goryachev.common.util.Log;
 import goryachev.common.util.ProductInfo;
-import goryachev.common.util.TXT;
 import goryachev.common.util.log.FileLogWriter;
 import goryachev.common.util.log.LogWriter;
 import goryachev.crypto.OpaqueChars;

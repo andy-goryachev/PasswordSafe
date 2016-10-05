@@ -1,9 +1,9 @@
 // Copyright © 2009-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
+import goryachev.common.i18n.Menus;
+import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
-import goryachev.common.util.Menus;
 import goryachev.common.util.SB;
-import goryachev.common.util.TXT;
 import goryachev.crypto.EntropyGatherer;
 import goryachev.crypto.OpaqueChars;
 import goryachev.password.data.DataFile;

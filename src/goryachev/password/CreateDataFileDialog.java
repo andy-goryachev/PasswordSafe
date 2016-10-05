@@ -1,10 +1,10 @@
 // Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
+import goryachev.common.i18n.Menus;
+import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.common.util.Log;
-import goryachev.common.util.Menus;
 import goryachev.common.util.SB;
-import goryachev.common.util.TXT;
 import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.swing.CPasswordField;
 import goryachev.crypto.swing.MatchLabel;

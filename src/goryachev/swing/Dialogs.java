@@ -1,10 +1,10 @@
 // Copyright © 2008-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.i18n.Menus;
+import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CancelledException;
 import goryachev.common.util.Log;
-import goryachev.common.util.Menus;
-import goryachev.common.util.TXT;
 import goryachev.common.util.UserException;
 import goryachev.swing.dialogs.options.COptionDialog;
 import goryachev.swing.dialogs.options.OptionTreeNode;

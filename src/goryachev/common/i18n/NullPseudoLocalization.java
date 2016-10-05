@@ -1,5 +1,5 @@
 // Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.util.lz;
+package goryachev.common.i18n;
 
 
 public class NullPseudoLocalization

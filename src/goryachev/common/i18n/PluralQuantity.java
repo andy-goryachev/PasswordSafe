@@ -1,8 +1,5 @@
 // Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.util.lz;
-import goryachev.common.util.CLanguage;
-import goryachev.common.util.TXT;
-
+package goryachev.common.i18n;
 
 /**
  * Plural quantity identifiers.

@@ -1,7 +1,8 @@
 // Copyright © 2008-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
-import goryachev.common.util.TXT;
+import goryachev.common.util.FH;
 import goryachev.swing.options.COption;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ public class Accelerator
 	
 	public int hashCode()
 	{
-		return CKit.hashCode(getID(), getKeyStroke());
+		return FH.hash(getID(), getKeyStroke());
 	}
 	
 	

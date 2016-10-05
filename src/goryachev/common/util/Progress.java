@@ -55,7 +55,8 @@ public class Progress
 	
 	public int hashCode()
 	{
-		return CKit.hashCode(Progress.class, progress);
+		int h = FH.hash(0, Progress.class);
+		return FH.hash(h, progress);
 	}
 	
 	

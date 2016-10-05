@@ -1,8 +1,8 @@
 // Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.wizard;
+import goryachev.common.i18n.Menus;
 import goryachev.common.util.CKit;
 import goryachev.common.util.HasPrompts;
-import goryachev.common.util.Menus;
 import goryachev.common.util.UserException;
 import goryachev.swing.CAction;
 import goryachev.swing.CButton;

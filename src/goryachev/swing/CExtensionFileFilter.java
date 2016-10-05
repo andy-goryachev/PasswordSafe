@@ -1,8 +1,8 @@
 // Copyright © 2006-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
-import goryachev.common.util.TXT;
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
 

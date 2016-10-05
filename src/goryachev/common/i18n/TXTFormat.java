@@ -1,6 +1,5 @@
 // Copyright © 2005-2016 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.util.lz;
-import goryachev.common.util.CLanguage;
+package goryachev.common.i18n;
 import java.util.ArrayList;
 
 

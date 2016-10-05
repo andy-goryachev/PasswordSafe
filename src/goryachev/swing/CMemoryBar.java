@@ -1,8 +1,8 @@
 // Copyright © 2009-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.i18n.Menus;
+import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
-import goryachev.common.util.Menus;
-import goryachev.common.util.TXT;
 import goryachev.common.util.platform.SysInfo;
 import java.awt.Color;
 import java.awt.Dimension;

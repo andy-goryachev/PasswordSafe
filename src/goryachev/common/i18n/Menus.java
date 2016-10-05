@@ -1,6 +1,5 @@
 // Copyright © 2012-2016 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.util;
-
+package goryachev.common.i18n;
 
 /** common text strings */
 public class Menus

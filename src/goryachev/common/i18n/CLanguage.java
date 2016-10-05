@@ -1,5 +1,11 @@
 // Copyright © 2005-2016 Andy Goryachev <andy@goryachev.com>
-package goryachev.common.util;
+package goryachev.common.i18n;
+import goryachev.common.util.CKit;
+import goryachev.common.util.CList;
+import goryachev.common.util.FH;
+import goryachev.common.util.HasProperty;
+import goryachev.common.util.TextSplitter;
+import goryachev.common.util.TextTools;
 import java.util.Locale;
 
 
@@ -164,7 +170,7 @@ public class CLanguage
 	
 	public int hashCode()
 	{
-		return CKit.hashCode(CLanguage.class, locale, code);
+		return FH.hash(CLanguage.class, locale, code);
 	}
 	
 	

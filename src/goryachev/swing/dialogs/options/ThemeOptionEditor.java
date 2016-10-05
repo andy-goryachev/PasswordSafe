@@ -1,7 +1,7 @@
 // Copyright © 2015-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.dialogs.options;
+import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
-import goryachev.common.util.TXT;
 import goryachev.swing.CAction;
 import goryachev.swing.CButton;
 import goryachev.swing.CComboBox;

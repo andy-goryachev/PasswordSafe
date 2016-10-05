@@ -1,12 +1,12 @@
 // Copyright © 2007-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.i18n.CLanguage;
+import goryachev.common.i18n.Menus;
+import goryachev.common.i18n.TXT;
 import goryachev.common.util.CJob;
 import goryachev.common.util.CKit;
-import goryachev.common.util.CLanguage;
 import goryachev.common.util.CObjectProperty;
 import goryachev.common.util.Log;
-import goryachev.common.util.Menus;
-import goryachev.common.util.TXT;
 import goryachev.common.util.platform.ApplicationSupport;
 import goryachev.swing.dialogs.license.StandardLicense;
 import goryachev.swing.text.DocumentTools;
