@@ -1,4 +1,4 @@
-// Copyright © 2004-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2004-2016 Andy Goryachev <andy@goryachev.com>
 // Contains fragments of Apache FileNameUtils code
 // http://www.apache.org/licenses/LICENSE-2.0
 package goryachev.common.util;
@@ -10,14 +10,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Stack;
+import javax.swing.ImageIcon;
 
 
 public class FileTools
 {
-	public static final String COPYRIGHT = "Copyright © Andy Goryachev <andy@goryachev.com>.  All Rights Reserved.";
+	public static final String COPYRIGHT = "Copyright (c) Andy Goryachev <andy@goryachev.com>.  All Rights Reserved.";
 	
 	
 	public static final String[] IMAGE =
@@ -333,6 +335,20 @@ public class FileTools
 			close(out);
 		}
 	}
+
+	
+	// get image from either JAR path or a file
+	/** @deprecated - use Img.load() or Img.get() */
+	public static ImageIcon loadImageIcon(String name)
+	{
+		// try jar first
+		URL url = ClassLoader.getSystemResource(name);
+		if(url != null)
+		{
+			return new ImageIcon(url);
+		}
+		return new ImageIcon(name);
+	}		
 
 	
 	// get input stream from either a JAR or a file

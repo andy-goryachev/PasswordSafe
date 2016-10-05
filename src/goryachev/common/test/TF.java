@@ -1,4 +1,4 @@
-// Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.test;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
@@ -85,13 +85,6 @@ public class TF
 	}
 	
 	
-	/** adds stack trace to the test case printout */
-	public static void print(Throwable e)
-	{
-		TestCase.print(CKit.stackTrace(e));
-	}
-	
-	
 	/** list elements of an array, map, collection, iterator, iterable. */
 	public static void list(Object x)
 	{
@@ -102,7 +95,7 @@ public class TF
 	/** Runs a set of test classes */
 	public static void run(Class ... tests)
 	{
-		TestRunner.run(new CList<>(tests));
+		TestRunner.run(new CList(tests));
 	}
 	
 	

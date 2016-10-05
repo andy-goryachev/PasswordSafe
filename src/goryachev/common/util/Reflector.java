@@ -1,4 +1,4 @@
-// Copyright © 2015-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2015-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.lang.reflect.Method;
 
@@ -40,12 +40,12 @@ public class Reflector
 			}
 			catch(Exception e)
 			{
-				Log.fail(e);
+				Log.err(e);
 			}
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.err(e);
 		}
 		
 		return null;

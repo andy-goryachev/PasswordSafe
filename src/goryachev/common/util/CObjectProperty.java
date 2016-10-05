@@ -1,4 +1,4 @@
-// Copyright © 2015-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2015-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.lang.ref.WeakReference;
 
@@ -80,7 +80,7 @@ public class CObjectProperty<T>
 					}
 					catch(Exception e)
 					{
-						Log.fail(e);
+						Log.err(e);
 					}
 				}
 			}

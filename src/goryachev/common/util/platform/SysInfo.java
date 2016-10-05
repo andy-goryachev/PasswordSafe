@@ -1,4 +1,4 @@
-// Copyright © 2009-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2009-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util.platform;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
@@ -14,8 +14,8 @@ import java.util.Properties;
 
 public class SysInfo
 {
-	protected DecimalFormat numberFormat = new DecimalFormat("#,##0.##");
-	protected final Out out;
+	private DecimalFormat numberFormat = new DecimalFormat("#,##0.##");
+	private final Out out;
 	
 	
 	public SysInfo(Out out)
@@ -130,7 +130,7 @@ public class SysInfo
 		header("Environment");
 		
 		Map<String,String> env = System.getenv();
-		CList<String> keys = new CList<>(env.keySet());
+		CList<String> keys = new CList(env.keySet());
 		CSorter.sort(keys);
 		for(String key: keys)
 		{
@@ -145,7 +145,7 @@ public class SysInfo
 		header("System Properties");
 		
 		Properties p = System.getProperties();
-		CList<String> keys = new CList<>(p.stringPropertyNames());
+		CList<String> keys = new CList(p.stringPropertyNames());
 		CSorter.sort(keys);
 		for(String key: keys)
 		{
@@ -175,7 +175,7 @@ public class SysInfo
 
 		try
 		{
-			CList<String> names = new CList<>(Security.getAlgorithms(name));
+			CList<String> names = new CList(Security.getAlgorithms(name));
 			CSorter.sort(names);
 			
 			for(String s: names)
@@ -203,7 +203,7 @@ public class SysInfo
 		
 		public abstract void describe(Object key, Object v);
 		
-		public abstract Out a(Object x);
+		protected abstract Out a(Object x);
 		
 		//
 		
@@ -257,7 +257,7 @@ public class SysInfo
 		}
 
 		
-		public Out a(Object x)
+		protected Out a(Object x)
 		{
 			sb.a(x);
 			return this;

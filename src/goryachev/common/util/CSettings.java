@@ -1,4 +1,4 @@
-// Copyright © 2005-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2005-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.io.File;
 import java.util.Hashtable;
@@ -7,34 +7,21 @@ import java.util.Hashtable;
 /** utility class helps storing/restoring various binary values */
 public class CSettings
 {
-	public interface Provider
-	{
-		public String getProperty(String key);
-
-		public void setProperty(String key, String value);
-
-		public CList<String> getPropertyNames();
-
-		public void save() throws Exception;
-	}
-	
-	//
-	
-	public static final Provider NONE = new Provider()
+	public static final CSettingsProvider NONE = new CSettingsProvider()
 	{
 		public String getProperty(String key) { return null; }
 		public void setProperty(String key, String value) { }
 		public CList<String> getPropertyNames() { return new CList(0); }
 		public void save() throws Exception { }
 	};
-	private Provider provider = NONE;
+	private CSettingsProvider provider = NONE;
 	
 	/** in-memory settings based on hashtable*/
 	public static class CMAP extends CSettings
 	{		
 		public CMAP()
 		{
-			super(new Provider()
+			super(new CSettingsProvider()
 			{
 				protected final Hashtable<String,Object> settings = new Hashtable();
 
@@ -55,19 +42,19 @@ public class CSettings
 	}
 	
 	
-	public CSettings(Provider p)
+	public CSettings(CSettingsProvider p)
 	{
 		setProvider(p);
 	}
 	
 	
-	public void setProvider(Provider p)
+	public void setProvider(CSettingsProvider p)
 	{
 		this.provider = p;
 	}
 	
 	
-	public CSettings.Provider getProvider()
+	public CSettingsProvider getProvider()
 	{
 		return provider;
 	}

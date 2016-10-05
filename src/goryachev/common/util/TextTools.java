@@ -1,12 +1,8 @@
-// Copyright © 2005-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2005-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.util.Collection;
 
 
-/** 
- * Various helpful text utility methods.
- * Unfortunately, most of them do not handle supplementary unicode code points.
- */  
 public class TextTools
 {
 	public interface SeparatorFunction
@@ -17,7 +13,9 @@ public class TextTools
 	public static final SeparatorFunction ANY_BLANK = new SeparatorFunction() { public boolean isSeparator(char c) { return CKit.isBlank(c); }};
 	public static final SeparatorFunction BLANK_OR_PUNCT = new SeparatorFunction() { public boolean isSeparator(char c) { return isBlankOrPunctuation(c); }};
 	
+	
 	//
+	
 
 	// attempt to trim on the word boundary up to max characters
 	public static String trimNicely(String s, int max)
@@ -246,8 +244,8 @@ public class TextTools
 		return false;
 	}
 	
+	
 
-	/** returns true if the character is non-word punctuation that does not contribute to the meaning */
 	public static boolean isTrimmablePunctuation(int c)
 	{
 		switch(c)
@@ -283,7 +281,6 @@ public class TextTools
 		case '/':
 		case '\\':
 		case '-':
-		case '*':
 			
 		case '"':
 		case '\'':
@@ -366,28 +363,6 @@ public class TextTools
 		case '‧': // middle dot
 		case '׃': // hebrew colon
 		case '׀': // hebrew paseq
-		case '‥': // japanese ellipsis
-		case '！': // japanese
-		case '：': // japanese
-		case '？': // japanese
-		case '·': // korean
-			return true;
-		}
-
-		return false;
-	}
-	
-	
-	/** returns true if the character signifies end of a sentence */
-	public static boolean isSentenceEnd(int c)
-	{
-		switch(c)
-		{
-		case '.':
-		case '…':
-		case '!':
-		case '?':
-		case '。': // full stop
 		case '‥': // japanese ellipsis
 		case '！': // japanese
 		case '：': // japanese
@@ -752,7 +727,7 @@ public class TextTools
 	/** split to words using whitespace and word-delimiting punctuation */
 	public static CList<String> splitWords(String text)
 	{
-		CList<String> list = new CList<>();
+		CList<String> list = new CList();
 		if(text != null)
 		{
 			int start = 0;
@@ -883,7 +858,7 @@ public class TextTools
 	}
 
 
-	public static int indexOfIgnoreCase(String text, String pattern, int fromIndex)
+	protected static int indexOfIgnoreCase(String text, String pattern, int fromIndex)
 	{
 		int textLen = text.length();
 		int patternLen = pattern.length();
@@ -933,15 +908,6 @@ public class TextTools
 	/** educated guess, may fail with some numbers */
 	public static boolean isNumber(String s)
 	{
-		if(CKit.isBlank(s))
-		{
-			return false;
-		}
-		
-		boolean number = false;
-		boolean exp = false;
-		int sign = 0;
-		
 		for(int i=0; i<s.length(); i++)
 		{
 			char c = s.charAt(i);
@@ -957,47 +923,23 @@ public class TextTools
 			case '7':
 			case '8':
 			case '9':
-				number = true;
-				break;
 			case '-':
 			case '+':
-				sign++;
-				break;
 			case '.':
 			case ',':
-				break;
+			case ' ':
 			case 'e':
 			case 'E':
 			case 'f':
 			case 'F':
 			case 'g':
 			case 'G':
-				if(exp)
-				{
-					return false;
-				}
-				else
-				{
-					exp = true;
-				}
 				break;
 			default:
 				return false;
 			}
 		}
-		
-		if(sign > 2)
-		{
-			return false;
-		}
-		else if(number)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return true;
 	}
 	
 	
@@ -1070,25 +1012,6 @@ public class TextTools
 		if(text != null)
 		{
 			return (text.indexOf(c) >= 0);
-		}
-		return false;
-	}
-
-
-	/** returns true if text contains any whitespace character */
-	public static boolean containsWhitespace(String text)
-	{
-		if(text != null)
-		{
-			int sz = text.length();
-			for(int i=0; i<sz; i++)
-			{
-				char c = text.charAt(i);
-				if(CKit.isBlank(c))
-				{
-					return true;
-				}
-			}
 		}
 		return false;
 	}

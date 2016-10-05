@@ -1,7 +1,7 @@
-// Copyright © 2008-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2008-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.i18n.TXT;
-import goryachev.swing.Accelerator;
+import goryachev.common.ui.Accelerator;
+import goryachev.common.util.TXT;
 import java.awt.event.KeyEvent;
 
 

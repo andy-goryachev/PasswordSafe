@@ -1,16 +1,16 @@
-// Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
-import goryachev.swing.Appearance;
-import goryachev.swing.Dialogs;
-import goryachev.swing.dialogs.options.OptionTreeBuilder;
-import goryachev.swing.dialogs.options.ThemeOptionEditor;
-import goryachev.swing.options.FileOption;
-import goryachev.swing.options.IntegerOption;
-import goryachev.swing.options.LongOption;
-import goryachev.swing.options.edit.IntegerOptionEditor;
-import goryachev.swing.options.edit.KeyBindingsEditor;
+import goryachev.common.ui.Appearance;
+import goryachev.common.ui.Dialogs;
+import goryachev.common.ui.Menus;
+import goryachev.common.ui.dialogs.options.OptionTreeBuilder;
+import goryachev.common.ui.dialogs.options.ThemeOptionEditor;
+import goryachev.common.ui.options.FileOption;
+import goryachev.common.ui.options.IntegerOption;
+import goryachev.common.ui.options.LongOption;
+import goryachev.common.ui.options.edit.IntegerOptionEditor;
+import goryachev.common.ui.options.edit.KeyBindingsEditor;
+import goryachev.common.util.TXT;
 import javax.swing.JFrame;
 
 

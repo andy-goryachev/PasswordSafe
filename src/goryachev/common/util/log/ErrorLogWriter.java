@@ -1,4 +1,4 @@
-// Copyright © 2015-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2015-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util.log;
 import goryachev.common.util.CList;
 import goryachev.common.util.ILogWriter;
@@ -17,7 +17,7 @@ public class ErrorLogWriter
 	
 	public static final ErrorLogWriter instance = new ErrorLogWriter();
 	private int maxSize = 128;
-	private CList<LogEntry> errors = new CList<>();
+	private CList<LogEntry> errors = new CList();
 	private CList<Monitor> listeners;
 	
 	
@@ -62,7 +62,7 @@ public class ErrorLogWriter
 	{
 		if(listeners == null)
 		{
-			listeners = new CList<>();
+			listeners = new CList();
 		}
 		
 		listeners.add(m);

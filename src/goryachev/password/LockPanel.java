@@ -1,25 +1,25 @@
-// Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
+import goryachev.common.ui.AppFrame;
+import goryachev.common.ui.Application;
+import goryachev.common.ui.BackgroundThread;
+import goryachev.common.ui.CAction;
+import goryachev.common.ui.CButton;
+import goryachev.common.ui.CFocusTraversalPolicy;
+import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CProgressField;
+import goryachev.common.ui.CTextField;
+import goryachev.common.ui.Dialogs;
+import goryachev.common.ui.InputTracker;
+import goryachev.common.ui.Menus;
+import goryachev.common.ui.Theme;
+import goryachev.common.ui.UI;
+import goryachev.common.ui.dialogs.CFileChooser;
+import goryachev.common.util.TXT;
 import goryachev.crypto.OpaqueChars;
-import goryachev.crypto.swing.CPasswordField;
-import goryachev.crypto.swing.OnScreenKeyboard;
+import goryachev.crypto.ui.CPasswordField;
+import goryachev.crypto.ui.OnScreenKeyboard;
 import goryachev.password.data.DataFile;
-import goryachev.swing.AppFrame;
-import goryachev.swing.Application;
-import goryachev.swing.BackgroundThread;
-import goryachev.swing.CAction;
-import goryachev.swing.CButton;
-import goryachev.swing.CFocusTraversalPolicy;
-import goryachev.swing.CPanel;
-import goryachev.swing.CProgressField;
-import goryachev.swing.CTextField;
-import goryachev.swing.Dialogs;
-import goryachev.swing.InputTracker;
-import goryachev.swing.Theme;
-import goryachev.swing.UI;
-import goryachev.swing.dialogs.CFileChooser;
 import java.awt.event.KeyEvent;
 import java.io.File;
 

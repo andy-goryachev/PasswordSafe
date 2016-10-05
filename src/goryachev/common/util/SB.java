@@ -1,4 +1,4 @@
-// Copyright © 2010-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2010-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 
 
@@ -66,18 +66,6 @@ public class SB
 			sb.append("\t");
 		}
 		return this;
-	}
-	
-	
-	/** append an object, separating it with the specified delimiter if the buffer is not empty */
-	public SB a(char delimiter, Object x)
-	{
-		if(isNotEmpty())
-		{
-			sb.append(delimiter);
-		}
-		
-		return a(x);
 	}
 	
 	

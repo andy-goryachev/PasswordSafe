@@ -1,4 +1,4 @@
-// Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto;
 import goryachev.common.util.CKit;
 import goryachev.common.util.Log;
@@ -52,7 +52,7 @@ public class Crypto
 		}
 		catch(Throwable e)
 		{
-			Log.fail(e);
+			Log.err(e);
 		}
 	}
 	
@@ -68,7 +68,7 @@ public class Crypto
 		}
 		catch(Throwable e)
 		{
-			Log.fail(e);
+			Log.err(e);
 		}
 	}
 
@@ -84,7 +84,7 @@ public class Crypto
 		}
 		catch(Throwable e)
 		{
-			Log.fail(e);
+			Log.err(e);
 		}
 	}
 	
@@ -100,7 +100,7 @@ public class Crypto
 		}
 		catch(Throwable e)
 		{
-			Log.fail(e);
+			Log.err(e);
 		}
 	}
 	

@@ -1,28 +1,28 @@
-// Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
+import goryachev.common.ui.BackgroundThread;
+import goryachev.common.ui.CAction;
+import goryachev.common.ui.CButton;
+import goryachev.common.ui.CDialog;
+import goryachev.common.ui.CFocusTraversalPolicy;
+import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CProgressField;
+import goryachev.common.ui.CTextField;
+import goryachev.common.ui.Dialogs;
+import goryachev.common.ui.InfoField;
+import goryachev.common.ui.Menus;
+import goryachev.common.ui.Theme;
+import goryachev.common.ui.dialogs.CFileChooser;
 import goryachev.common.util.CKit;
 import goryachev.common.util.Log;
 import goryachev.common.util.SB;
+import goryachev.common.util.TXT;
 import goryachev.crypto.OpaqueChars;
-import goryachev.crypto.swing.CPasswordField;
-import goryachev.crypto.swing.MatchLabel;
-import goryachev.crypto.swing.OnScreenKeyboard;
+import goryachev.crypto.ui.CPasswordField;
+import goryachev.crypto.ui.MatchLabel;
+import goryachev.crypto.ui.OnScreenKeyboard;
 import goryachev.password.data.DataFile;
 import goryachev.password.ui.PasswordVerifier2;
-import goryachev.swing.BackgroundThread;
-import goryachev.swing.CAction;
-import goryachev.swing.CButton;
-import goryachev.swing.CDialog;
-import goryachev.swing.CFocusTraversalPolicy;
-import goryachev.swing.CPanel;
-import goryachev.swing.CProgressField;
-import goryachev.swing.CTextField;
-import goryachev.swing.Dialogs;
-import goryachev.swing.InfoField;
-import goryachev.swing.Theme;
-import goryachev.swing.dialogs.CFileChooser;
 import java.awt.Component;
 import java.io.File;
 
@@ -242,7 +242,7 @@ public class CreateDataFileDialog
 				public void onError(Throwable e)
 				{
 					setProgress(false);
-					Log.fail(e);
+					Log.err(e);
 					backToPassword();
 				}
 			}.start();

@@ -1,4 +1,4 @@
-// Copyright © 2007-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2007-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util.platform;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CPlatform;
@@ -35,23 +35,15 @@ public class CPlatformWindows
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.err(e);
 		}
 		
 		return null;
 	}
 	
 	
-	@Deprecated
 	public File getDefaultSettingsFolder()
 	{
-		return new File(getUserHome(), SETTINGS_FOLDER);
-	}
-
-
-	protected File getSettingsFolderPrivate()
-	{
-		// TODO "Documents"?
-		return new File(getUserHome(), SETTINGS_FOLDER);
+		return new File(System.getProperty("user.home"), "goryachev.com");
 	}
 }

@@ -1,4 +1,4 @@
-// Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.io;
 import goryachev.common.util.CKit;
 import java.io.InputStream;

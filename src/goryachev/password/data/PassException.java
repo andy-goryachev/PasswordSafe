@@ -1,6 +1,6 @@
-// Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.data;
-import goryachev.common.i18n.TXT;
+import goryachev.common.util.TXT;
 
 
 public final class PassException

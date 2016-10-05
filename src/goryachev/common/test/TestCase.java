@@ -1,4 +1,4 @@
-// Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.test;
 import goryachev.common.util.SB;
 
@@ -11,7 +11,7 @@ public class TestCase
 	private SB text = new SB();
 	private long startTime;
 	private long stopTime;
-	protected static final ThreadLocal<TestCase> currentTestCase = new ThreadLocal<>();
+	protected static final ThreadLocal<TestCase> currentTestCase = new ThreadLocal();
 	
 	
 	public TestCase(String name)

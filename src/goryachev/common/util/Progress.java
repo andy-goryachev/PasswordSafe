@@ -1,4 +1,4 @@
-// Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 
 
@@ -55,8 +55,7 @@ public class Progress
 	
 	public int hashCode()
 	{
-		int h = FH.hash(0, Progress.class);
-		return FH.hash(h, progress);
+		return CKit.hashCode(Progress.class, progress);
 	}
 	
 	

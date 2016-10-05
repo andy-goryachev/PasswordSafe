@@ -1,89 +1,109 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright © 2016 Andy Goryachev <andy@goryachev.com> -->
+<!--
+To change the build for another application:
+	1. rename first two properties in this file
+	2. create a new build/apple/apple.zip on mac os x
+		zip -r apple.zip APP.app 
+	3. edit build/apple/Info.plist:
+		- CFBundleName
+		- MainClass
+-->
 
-
-<project default="build-all" basedir=".">
-
-	<!-- project name -->
+<project>
 	<property name="TARGET" value="PasswordSafe"/>
+	<property name="MAIN" value="goryachev.password.PasswordSafeApp"/>
+
 	
-	<!-- libraries -->
-	<path id="libs">
-		<pathelement location="lib/bouncycastle/bcprov-jdk15on-150.jar" />
+	<property name="DEBUG" value="false" />
+	
+	<property name="SRC" value="src"/>
+	<property name="LIB" value="lib/jars"/>
+	<property name="WORK" value="build/out"/>
+	<property name="OUT" value="${WORK}/classes"/>
+	<property name="LIB_EXT" value="${WORK}/lib"/>
+	<property name="PACKAGE" value="${WORK}/package"/>
+	<property name="JAR" value="build/jar/${TARGET}.jar"/>
+	
+	<path id="lib.classpath">
+		<fileset dir="${LIB}">
+			<include name="**/*.jar"/>
+		</fileset>
 	</path>
+
+
+
+	
+	<target name="all" depends="clean,compile,copyresources,target,copyjar" />
+	
+	
 	
 	
 	<target name="clean">
-		<delete includeEmptyDirs="true" dir="build" failonerror="false" />
+		<delete dir="${OUT}" />
+		<delete dir="${PACKAGE}" />
+		<delete dir="${LIB_EXT}" />
 	</target>
 
 	
-	<target name="init" depends="clean">
-		<mkdir dir="build" />
-		<mkdir dir="build/classes" />
-		<mkdir dir="build/jars" />
-	</target>
-
-			
-	<target name="compile" depends="init">
-		<javac
-			srcdir="src"
-			destdir="build/classes"
-			debug="true"
-			encoding="utf-8"
-			fork="true"
-			nowarn="true"
-			optimize="false"
-			source="1.8"
-			target="1.8"
-			includeantruntime="false"
-		>
-			<compilerarg value="-Xlint:none"/>
-		
-			<classpath refid="libs" />
+	<target name="compile">
+		<mkdir dir="${OUT}"/>
+		<javac srcdir="${SRC}" destdir="${OUT}" debug="${DEBUG}" encoding="utf-8" target="1.6" source="1.6">
+			<classpath refid="lib.classpath" />
+			<exclude name="test/**/*" />
 		</javac>
 	</target>
 	
 	
-	<!-- copy non-java resources -->
-	<target name="copy-resources" depends="init">
-		<copy todir="build/classes">
-			<fileset dir="src" excludes="**/*.java" />
-		</copy>
-	</target>
-	
-	
-	<!-- upack library jars -->
-	<target name="unpack-jars" depends="init">
-		<unzip dest="build/classes">
-			<path refid="libs" />
+	<target name="unjar_libs" depends="clean">
+		<unzip dest="${LIB_EXT}">
+			<fileset dir="${LIB}">
+				<include name="**/*.jar" />
+			</fileset>
+			<patternset>
+				<exclude name="META-INF/**/*"/>
+			</patternset>			
 		</unzip>
-		
-		<delete dir="build/classes/META-INF" />
 	</target>
-	
-	
-	<!-- build app jar -->
-	<target name="make-jar" depends="compile, copy-resources, unpack-jars">
-		<delete file="build/jars/${TARGET}.jar" />
 
-		<jar
-			jarfile="build/jars/${TARGET}.jar"
-			basedir="build/classes"
-			filesonly="true"
-			manifest="config/${TARGET}.manifest"
-			>
+	
+	<target name="copyresources" depends="unjar_libs">
+		<copy todir="${OUT}">
+		    <fileset dir="${SRC}">
+			    <exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+		<copy todir="${OUT}">
+		    <fileset dir="${LIB_EXT}" />
+		</copy>
+	</target>	
+
+
+	<target name="target">
+		<mkdir dir="${WORK}"/>
+		<mkdir dir="build/jar" />
+		<delete file="${JAR}" />
+		<jar destfile="${JAR}">
+			<manifest>
+				<attribute name="Main-Class" value="${MAIN}"/>
+			</manifest>
+			<fileset dir="${OUT}">
+			</fileset>
 		</jar>
 	</target>
-	
-	
-	<!-- generate digest -->
-	<target name="sha-jar" depends="make-jar">
-		<checksum file="build/jars/${TARGET}.jar" algorithm="sha-256" forceoverwrite="yes" fileext=".sha256.txt" />
+
+
+	<target name="package">
+		<copy todir="${PACKAGE}">
+			<fileset dir="build/zip/" />
+		</copy>
+		<copy file="build/apple/Info.plist" todir="${PACKAGE}/${TARGET}.app/Contents" />
+		<copy file="build/apple/PkgInfo" todir="${PACKAGE}/${TARGET}.app/Contents" />
+		<copy file="${JAR}" todir="${PACKAGE}/${TARGET}.app/Contents/Resources/Java" />
+		<copy file="build/apple/apple.zip" tofile="build/deploy/${TARGET}.zip" />
+		<zip destfile="build/deploy/${TARGET}.zip" update="true" basedir="${PACKAGE}" />
 	</target>
 	
-
-	<!-- build all -->
-	<target name="build-all" depends="compile, copy-resources, make-jar, sha-jar" />
 	
+	<target name="copyjar" depends="target">
+		<copy file="${JAR}" todir="." />
+	</target>	
 </project>

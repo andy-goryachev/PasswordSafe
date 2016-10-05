@@ -1,4 +1,4 @@
-// Copyright © 2012-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2012-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import goryachev.common.util.platform.ApplicationSupport;
 import java.util.Collection;
@@ -13,7 +13,7 @@ public abstract class CJob
 	/** called in a background thread when the job has been completed or has thrown an exception */
 	protected void onThisJobCompleted() { }
 	
-	protected void handleJobError(Throwable e) { Log.fail(e); }
+	protected void handleJobError(Throwable e) { Log.err(e); }
 	
 	//
 	
@@ -23,7 +23,7 @@ public abstract class CJob
 	private volatile boolean cancelled;
 	private static final Object NULL = new Object();
 	private static final ParallelExecutor exec = init();
-	private static final ThreadLocal<CJob> currentJob = new ThreadLocal<>();
+	private static final ThreadLocal<CJob> currentJob = new ThreadLocal();
 	
 	
 	public CJob(String name)
@@ -99,7 +99,7 @@ public abstract class CJob
 	{
 		if(children == null)
 		{
-			children = new CList<>();
+			children = new CList();
 		}
 		
 		children.add(ch);
@@ -136,7 +136,7 @@ public abstract class CJob
 		}
 		catch(Throwable e)
 		{
-			Log.fail(e);
+			Log.err(e);
 		}
 		
 		currentJob.set(null);
@@ -193,7 +193,7 @@ public abstract class CJob
 				}
 				catch(Exception e)
 				{
-					Log.fail(e);
+					Log.err(e);
 				}
 			}
 		}
@@ -223,7 +223,7 @@ public abstract class CJob
 	public CList<CJob> getChildren()
 	{
 		CList<CJob> cs = getChildrenPrivate();
-		return cs == null ? new CList<>() : cs;
+		return cs == null ? new CList() : cs;
 	}
 	
 	
@@ -235,7 +235,7 @@ public abstract class CJob
 		}
 		else
 		{
-			return new CList<>(children);
+			return new CList(children);
 		}
 	}
 	
@@ -255,7 +255,7 @@ public abstract class CJob
 		}
 		catch(Exception e)
 		{ 
-			Log.fail(e);
+			Log.err(e);
 		}
 	}
 	

@@ -1,4 +1,4 @@
-// Copyright © 2012-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2012-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util.log;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -7,7 +7,7 @@ public class AsyncWriter
 	implements LogWriterPrivate, Runnable
 {
 	private final LogWriter writer;
-	private final LinkedBlockingQueue<LogEntry> queue = new LinkedBlockingQueue<>();
+	private final LinkedBlockingQueue<LogEntry> queue = new LinkedBlockingQueue();
 	private final Thread thread;
 	private volatile boolean running = true;
 

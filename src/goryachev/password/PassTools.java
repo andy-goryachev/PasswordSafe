@@ -1,9 +1,9 @@
-// Copyright © 2015-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2015-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;
-import goryachev.crypto.swing.CPasswordField;
-import goryachev.crypto.swing.SecureTextField;
+import goryachev.crypto.ui.CPasswordField;
+import goryachev.crypto.ui.SecureTextField;
 
 
 public class PassTools

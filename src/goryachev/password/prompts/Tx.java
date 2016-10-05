@@ -1,6 +1,6 @@
-// Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.prompts;
-import goryachev.common.i18n.TXT;
+import goryachev.common.util.TXT;
 
 
 public class Tx

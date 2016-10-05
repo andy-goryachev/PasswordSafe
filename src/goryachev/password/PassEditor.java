@@ -1,28 +1,28 @@
-// Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
+import goryachev.common.ui.CAction;
+import goryachev.common.ui.CBorder;
+import goryachev.common.ui.CButton;
+import goryachev.common.ui.CMenuItem;
+import goryachev.common.ui.CPanel;
+import goryachev.common.ui.CPopupMenu;
+import goryachev.common.ui.CPopupMenuController;
+import goryachev.common.ui.CScrollPane;
+import goryachev.common.ui.CTextArea;
+import goryachev.common.ui.CTextField;
+import goryachev.common.ui.CUndoManager;
+import goryachev.common.ui.InputTracker;
+import goryachev.common.ui.Menus;
+import goryachev.common.ui.Theme;
+import goryachev.common.ui.UI;
+import goryachev.common.ui.text.CEditorKit;
 import goryachev.common.util.Log;
+import goryachev.common.util.TXT;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;
-import goryachev.crypto.swing.CPasswordField;
+import goryachev.crypto.ui.CPasswordField;
 import goryachev.password.data.PassEntry;
 import goryachev.password.ui.ClipboardHandler;
-import goryachev.swing.CAction;
-import goryachev.swing.CBorder;
-import goryachev.swing.CButton;
-import goryachev.swing.CMenuItem;
-import goryachev.swing.CPanel;
-import goryachev.swing.CPopupMenu;
-import goryachev.swing.CPopupMenuController;
-import goryachev.swing.CScrollPane;
-import goryachev.swing.CTextArea;
-import goryachev.swing.CTextField;
-import goryachev.swing.CUndoManager;
-import goryachev.swing.InputTracker;
-import goryachev.swing.Theme;
-import goryachev.swing.UI;
-import goryachev.swing.text.CEditorKit;
 import java.awt.Color;
 import javax.swing.JPopupMenu;
 
@@ -227,7 +227,7 @@ public class PassEditor
 			}
 			catch(Exception e)
 			{
-				Log.fail(e);
+				Log.err(e);
 			}
 			finally
 			{

@@ -1,4 +1,4 @@
-// Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto;
 import java.security.SecureRandom;
 import org.bouncycastle.crypto.Digest;

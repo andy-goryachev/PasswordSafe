@@ -1,15 +1,20 @@
-// Copyright © 2007-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2007-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Enumeration;
 import java.util.Map;
+import javax.swing.text.AttributeSet;
 
 
 /** debug printing */
 // TODO move conversion to Dump
 public class D
 {
+	private static Boolean eclipseDetected;
+	
+	
 	// convert milliseconds to MM:SS or HHH:MM:SS String
 	public static String msToString(long ms)
 	{
@@ -113,9 +118,9 @@ public class D
 		{
 			listLongArray((long[])x);
 		}
-		else if(x instanceof double[])
+		else if(x instanceof AttributeSet)
 		{
-			listDoubleArray((double[])x);
+			listAttributeSet((AttributeSet)x);
 		}
 		else 
 		{
@@ -129,7 +134,7 @@ public class D
 		SB sb = new SB();
 		sb.append(a.size());
 		
-		CList<Object> keys = new CList<>(a.keySet());
+		CList<Object> keys = new CList(a.keySet());
 		CSorter.sort(keys);
 		
 		for(Object key: keys)
@@ -210,54 +215,36 @@ public class D
 	private static void listLongArray(long[] a)
 	{
 		SB sb = new SB();
-		sb.a("[");
-		sb.a(a.length);
-		sb.a("]{");
+		sb.append(a.length);
 		
-		boolean comma = false;
 		for(long d: a)
 		{
-			if(comma)
-			{
-				sb.a(", ");
-			}
-			else
-			{
-				comma = true;
-			}
+			sb.append("\n");
+			sb.append("    ");
 			sb.append(d);
 		}
-		sb.a("}");
 
 		log(sb.toString(), 2);
 	}
 	
 	
-	private static void listDoubleArray(double[] a)
+	private static void listAttributeSet(AttributeSet as)
 	{
 		SB sb = new SB();
-		sb.a("[");
-		sb.a(a.length);
-		sb.a("]{");
+		sb.append(as.getAttributeCount());
 		
-		boolean comma = false;
-		for(double d: a)
+		Enumeration en = as.getAttributeNames();
+		while(en.hasMoreElements())
 		{
-			if(comma)
-			{
-				sb.a(", ");
-			}
-			else
-			{
-				comma = true;
-			}
-			sb.append(d);
+			Object att = en.nextElement();
+			sb.append("\n");
+			sb.append("    ");
+			sb.append(att);
 		}
-		sb.a("}");
 
 		log(sb.toString(), 2);
 	}
-	
+
 	
 	public static void trace()
 	{
@@ -326,10 +313,34 @@ public class D
 		System.out.println(className + "." + t.getMethodName() + " " + msg);
 	}
 
+
+//	public static int hashCode(Object ... xs)
+//	{
+//		return hashCodeArray(xs);
+//	}
+//
+//
+//	public static int hashCodeArray(Object[] xs)
+//	{
+//		int c = 0;
+//		for(Object x: xs)
+//		{
+//			if(c == 0)
+//			{
+//				c = x.hashCode();
+//			}
+//			else
+//			{
+//				c ^= x.hashCode();
+//			}
+//		}
+//		return c;
+//	}
+	
 	
 	public static void dump(byte[] b)
 	{
-		if(CKit.isEclipse())
+		if(isEclipse())
 		{
 			if(b == null)
 			{
@@ -345,7 +356,7 @@ public class D
 	
 	public static void dump(String s, byte[] b)
 	{
-		if(CKit.isEclipse())
+		if(isEclipse())
 		{
 			if(b == null)
 			{
@@ -361,7 +372,7 @@ public class D
 	
 	public static void describe(Object x)
 	{
-		if(CKit.isEclipse())
+		if(isEclipse())
 		{
 			print(Dump.describe(x));
 		}
@@ -371,7 +382,7 @@ public class D
 	// TODO what is it?
 	public static void where(Object ... ss)
 	{
-		if(CKit.isEclipse())
+		if(isEclipse())
 		{
 			StackTraceElement[] tr = new Throwable().getStackTrace();
 			int start = 1;
@@ -419,7 +430,7 @@ public class D
 	
 	public static void pp(Object a)
 	{
-		if(CKit.isEclipse())
+		if(isEclipse())
 		{
 			System.out.print(a == null ? "<null>" : a.toString());
 		}
@@ -428,7 +439,7 @@ public class D
 	
 	public static void p(Object a)
 	{
-		if(CKit.isEclipse())
+		if(isEclipse())
 		{
 			System.out.println(a == null ? "<null>" : a.toString());
 		}
@@ -437,7 +448,7 @@ public class D
 	
 	public static void p(Object ... a)
 	{
-		if(CKit.isEclipse())
+		if(isEclipse())
 		{
 			SB sb = new SB();
 			for(Object x: a)
@@ -455,12 +466,22 @@ public class D
 	
 	public static void simpleName(Object x)
 	{
-		if(CKit.isEclipse())
+		if(isEclipse())
 		{
 			System.out.println(Dump.simpleName(x));
 		}
 	}
 	
+	
+	public static boolean isEclipse()
+	{
+		if(eclipseDetected == null)
+		{
+			eclipseDetected = new File(".project").exists() && new File(".classpath").exists();
+		}
+		return eclipseDetected;
+	}
+
 
 	public static void injectException()
 	{

@@ -1,4 +1,4 @@
-// Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.ui;
 import java.awt.AWTEvent;
 import java.awt.Toolkit;

@@ -1,4 +1,4 @@
-// Copyright © 2006-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2006-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -132,7 +132,7 @@ public class NetTools
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.err(e);
 		}
 		
 		return CKit.CHARSET_UTF8;

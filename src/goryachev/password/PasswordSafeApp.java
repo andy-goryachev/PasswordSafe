@@ -1,10 +1,13 @@
-// Copyright © 2005-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2005-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.i18n.TXT;
+import goryachev.common.ui.Application;
+import goryachev.common.ui.Dialogs;
+import goryachev.common.ui.dialogs.license.StandardLicense;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CSystem;
 import goryachev.common.util.Log;
 import goryachev.common.util.ProductInfo;
+import goryachev.common.util.TXT;
 import goryachev.common.util.log.FileLogWriter;
 import goryachev.common.util.log.LogWriter;
 import goryachev.crypto.OpaqueChars;
@@ -15,9 +18,6 @@ import goryachev.password.data.v2.DataFormatV2;
 import goryachev.password.img.PasswordSafeIcons;
 import goryachev.password.prompts.Prompts;
 import goryachev.password.ui.ClipboardHandler;
-import goryachev.swing.Application;
-import goryachev.swing.Dialogs;
-import goryachev.swing.dialogs.license.StandardLicense;
 import java.io.File;
 import javax.swing.ImageIcon;
 
@@ -25,7 +25,7 @@ import javax.swing.ImageIcon;
 public class PasswordSafeApp
 	extends Application
 {
-	public static final String VERSION   = "3.03.46";
+	public static final String VERSION   = "3.03.45";
 	public static final String COPYRIGHT = "copyright © 2016 andy goryachev";	
 	public static final String TITLE = "PasswørdSafe";
 	public static final String EXTENSION = ".safe";
@@ -115,7 +115,7 @@ public class PasswordSafeApp
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.err(e);
 		}
 		return f;
 	}
@@ -149,7 +149,7 @@ public class PasswordSafeApp
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.err(e);
 			failed(CKit.stackTrace(e));
 		}
 	}

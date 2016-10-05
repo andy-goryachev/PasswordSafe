@@ -1,4 +1,4 @@
-// Copyright © 2013-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2013-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.util.Set;
 
@@ -20,7 +20,7 @@ public class CMultiMap<K,V>
 	
 	public CMultiMap(int size)
 	{
-		map = new CMap<>(size);
+		map = new CMap(size);
 	}
 	
 	
@@ -69,7 +69,7 @@ public class CMultiMap<K,V>
 		CList<V> c = map.get(key);
 		if(c == null)
 		{
-			c = new CList<>();
+			c = new CList();
 			map.put(key, c);
 		}
 		return c.add(val);
@@ -100,7 +100,7 @@ public class CMultiMap<K,V>
 	/** Collects all the values in the map.  The order of values is not defined and may vary */
 	public CList<V> collectValues()
 	{
-		CList<V> list = new CList<>(size() * 2);
+		CList<V> list = new CList(size() * 2);
 		for(K k: map.keySet())
 		{
 			CList<V> c = map.get(k);
@@ -110,25 +110,8 @@ public class CMultiMap<K,V>
 	}
 	
 	
-	/** removes all values for a given key */
-	public CList<V> remove(K key)
+	public CList<V> remove(K k)
 	{
-		return map.remove(key);
-	}
-	
-	
-	/** removes key-value pair from the map */
-	public void remove(K key, V val)
-	{
-		CList<V> list = map.get(key);
-		if(list != null)
-		{
-			list.remove(val);
-			
-			if(list.size() == 0)
-			{
-				map.remove(key);
-			}
-		}
+		return map.remove(k);
 	}
 }

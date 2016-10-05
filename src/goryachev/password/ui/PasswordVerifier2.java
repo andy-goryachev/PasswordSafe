@@ -1,13 +1,13 @@
-// Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.ui;
-import goryachev.common.i18n.TXT;
+import goryachev.common.ui.InputTracker;
+import goryachev.common.util.TXT;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;
-import goryachev.crypto.swing.CPasswordField;
-import goryachev.crypto.swing.MatchLabel;
-import goryachev.crypto.swing.SecretDocument;
-import goryachev.crypto.swing.SecureTextField;
-import goryachev.swing.InputTracker;
+import goryachev.crypto.ui.CPasswordField;
+import goryachev.crypto.ui.MatchLabel;
+import goryachev.crypto.ui.SecretDocument;
+import goryachev.crypto.ui.SecureTextField;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Arrays;

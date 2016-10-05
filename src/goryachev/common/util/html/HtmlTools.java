@@ -1,4 +1,4 @@
-// Copyright © 2008-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2008-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util.html;
 import goryachev.common.util.Base64;
 import goryachev.common.util.CComparator;
@@ -367,7 +367,7 @@ public class HtmlTools
 			}
 			catch(Exception e)
 			{
-				Log.fail(e);
+				Log.err(e);
 			}
 		}
 		return u;

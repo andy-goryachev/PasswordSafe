@@ -1,10 +1,10 @@
-// Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright (c) 2011-2016 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.prompts;
-import goryachev.common.i18n.CLanguageCode;
-import goryachev.common.i18n.LocalizedPromptsProvider;
-import goryachev.common.i18n.TXT;
+import goryachev.common.ui.Appearance;
+import goryachev.common.util.CLanguageCode;
 import goryachev.common.util.Log;
-import goryachev.swing.Appearance;
+import goryachev.common.util.TXT;
+import goryachev.common.util.lz.LocalizedPromptsProvider;
 
 
 public class Prompts
@@ -32,7 +32,7 @@ public class Prompts
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.err(e);
 		}		
 		
 		TXT.setLanguage(Appearance.getLanguage());
