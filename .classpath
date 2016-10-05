@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/jars/bcprov.jar" sourcepath="lib/src/lcrypto.zip"/>
+	<classpathentry kind="lib" path="lib/bouncycastle/bcprov-jdk15on-150.jar" sourcepath="lib/bouncycastle/lcrypto-jdk15on-150.zip"/>
 	<classpathentry kind="output" path="out"/>
 </classpath>
