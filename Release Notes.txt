@@ -9,6 +9,10 @@
 		RELEASE NOTES
 		=============
 
+3.03.46
+- common code update
+- build.xml
+
 3.03.45
 - 2016
 
