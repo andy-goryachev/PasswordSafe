@@ -89,7 +89,7 @@ public class XParagraphView
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 	}
 
@@ -103,7 +103,7 @@ public class XParagraphView
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 	}
 }

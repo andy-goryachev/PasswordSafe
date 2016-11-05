@@ -119,7 +119,7 @@ public class CNumberFormat
 			}
 			catch(Exception e)
 			{
-				Log.fail(e);
+				Log.ex(e);
 			}
 		}
 		

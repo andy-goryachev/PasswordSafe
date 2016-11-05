@@ -289,7 +289,7 @@ public class Panels
 				}
 				else
 				{
-					Log.fail(e);
+					Log.ex(e);
 				}
 				
 				msg = CKit.stackTrace(e);

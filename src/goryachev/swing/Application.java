@@ -163,7 +163,7 @@ public abstract class Application
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 		
 		try
@@ -172,7 +172,7 @@ public abstract class Application
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 			System.exit(-1);
 		}
 		
@@ -182,7 +182,7 @@ public abstract class Application
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 			System.exit(-2);
 		}
 		
@@ -193,7 +193,7 @@ public abstract class Application
 		catch(final Exception e)
 		{
 			// failed app init
-			Log.fail(e);
+			Log.ex(e);
 
 			try
 			{
@@ -251,7 +251,7 @@ public abstract class Application
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 			System.exit(-1);
 		}
 		
@@ -261,7 +261,7 @@ public abstract class Application
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 			System.exit(-2);
 		}
 		
@@ -272,7 +272,7 @@ public abstract class Application
 		catch(final Exception e)
 		{
 			// failed app init
-			Log.fail(e);
+			Log.ex(e);
 			System.exit(-3);
 		}
 	}
@@ -315,7 +315,7 @@ public abstract class Application
 	// in EDT
 	public void showError(Throwable e)
 	{
-		Log.fail(e);
+		Log.ex(e);
 		
 		String msg = e.getMessage();
 		if(CKit.isBlank(msg))

@@ -55,7 +55,7 @@ public class CEditorToUpperCaseAction
 			}
 			catch(Exception e)
 			{
-				Log.fail(e);
+				Log.ex(e);
 				UI.beep();
 			}
 		}

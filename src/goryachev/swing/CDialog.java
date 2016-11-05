@@ -184,7 +184,7 @@ public class CDialog
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 		
 		setVisible(false);

@@ -32,7 +32,7 @@ public class Prompts
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}		
 		
 		TXT.setLanguage(Appearance.getLanguage());

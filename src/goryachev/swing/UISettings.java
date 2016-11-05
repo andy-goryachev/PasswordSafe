@@ -131,7 +131,7 @@ public class UISettings
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 	}
 
@@ -431,7 +431,7 @@ public class UISettings
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 	}
 	

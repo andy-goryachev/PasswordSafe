@@ -23,7 +23,7 @@ public class XBoxView
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 	}
 
@@ -37,7 +37,7 @@ public class XBoxView
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 			return 0;
 		}
 	}

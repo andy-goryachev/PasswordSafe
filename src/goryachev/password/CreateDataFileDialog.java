@@ -242,7 +242,7 @@ public class CreateDataFileDialog
 				public void onError(Throwable e)
 				{
 					setProgress(false);
-					Log.fail(e);
+					Log.ex(e);
 					backToPassword();
 				}
 			}.start();

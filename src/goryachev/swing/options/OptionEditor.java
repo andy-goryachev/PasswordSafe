@@ -67,7 +67,7 @@ public abstract class OptionEditor<T>
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 			return false;
 		}
 	}

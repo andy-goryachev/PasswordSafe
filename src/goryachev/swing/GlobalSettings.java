@@ -488,7 +488,7 @@ public class GlobalSettings
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 		
 		for(COption op: options)
@@ -499,7 +499,7 @@ public class GlobalSettings
 			}
 			catch(Exception e)
 			{
-				Log.fail(e);
+				Log.ex(e);
 			}
 		}
 
@@ -509,7 +509,7 @@ public class GlobalSettings
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 	}
 	
@@ -524,7 +524,7 @@ public class GlobalSettings
 			}
 			catch(Exception e)
 			{
-				Log.fail(e);
+				Log.ex(e);
 			}
 		}
 	}

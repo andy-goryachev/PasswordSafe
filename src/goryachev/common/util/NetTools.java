@@ -132,7 +132,7 @@ public class NetTools
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 		
 		return CKit.CHARSET_UTF8;

@@ -113,7 +113,7 @@ public class CHtmlEditorKit
 		}
 		catch(Exception e)
 		{
-			Log.fail(new Error("Unable to load icon: " + src, e));
+			Log.ex(new Error("Unable to load icon: " + src, e));
 		}
 		
 		return CIcons.TBD;

@@ -40,7 +40,7 @@ public class SecretDocument
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 	}
 	
@@ -53,7 +53,7 @@ public class SecretDocument
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 			return new OpaqueChars();
 		}
 	}

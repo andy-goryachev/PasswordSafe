@@ -390,7 +390,7 @@ public class ImageScaler
 			}
 			
 			// make it obvious
-			Log.fail(e);
+			Log.ex(e);
 			g.setColor(Color.red);
 			g.fillRect(0, 0, width, height);
 		}

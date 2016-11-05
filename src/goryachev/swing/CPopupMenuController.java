@@ -158,7 +158,7 @@ public abstract class CPopupMenuController
 					}
 					catch(Exception e)
 					{
-						Log.fail(e);
+						Log.ex(e);
 					}
 				}
 			}
@@ -237,7 +237,7 @@ public abstract class CPopupMenuController
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 		ev.consume();
 	}

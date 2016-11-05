@@ -1,9 +1,13 @@
 /out/
 /user.home*/
 /test/
+/test.data/
 /test.out/
 /build/
 ~*
 *.log
 /*.jar
-/test.data/
+hs_err_pid*
+.settings/
+/*.log
+/*.conf

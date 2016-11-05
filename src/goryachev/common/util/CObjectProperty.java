@@ -80,7 +80,7 @@ public class CObjectProperty<T>
 					}
 					catch(Exception e)
 					{
-						Log.fail(e);
+						Log.ex(e);
 					}
 				}
 			}

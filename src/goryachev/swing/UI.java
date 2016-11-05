@@ -497,7 +497,7 @@ public class UI
 		{ }
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 	}
 	
@@ -537,7 +537,7 @@ public class UI
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 	}
 	
@@ -564,7 +564,7 @@ public class UI
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 	}
 	
@@ -727,7 +727,7 @@ public class UI
 		}
 		else
 		{
-			Log.fail("no horizontal alignment for " + x);
+			Log.ex("no horizontal alignment for " + x);
 		}
 	}
 	
@@ -1278,7 +1278,7 @@ public class UI
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 		return null;
 	}
@@ -1292,7 +1292,7 @@ public class UI
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 		return null;
 	}

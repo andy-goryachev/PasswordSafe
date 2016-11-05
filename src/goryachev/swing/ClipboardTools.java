@@ -28,7 +28,7 @@ public class ClipboardTools
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 		return null;
 	}

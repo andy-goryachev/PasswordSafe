@@ -148,7 +148,7 @@ public class Img
 		}
 		catch(Exception e)
 		{
-			Log.fail("Icon not found: " + name);
+			Log.ex("Icon not found: " + name);
 			return new Img(ImageTools.create(16, 16, Color.red));
 		}
 	}
@@ -163,7 +163,7 @@ public class Img
 		}
 		catch(Exception e)
 		{
-			Log.fail("Icon not found: " + name);
+			Log.ex("Icon not found: " + name);
 			return new Img(ImageTools.create(16, 16, Color.red));
 		}
 	}

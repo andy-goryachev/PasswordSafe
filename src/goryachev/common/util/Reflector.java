@@ -3,8 +3,26 @@ package goryachev.common.util;
 import java.lang.reflect.Method;
 
 
+/** Reflection helper */
 public class Reflector
 {
+	/** returns an accessible method, wrapped in an exception-eating wrapper */
+	public static CMethod method(Class c, String name, Class<?> ... args)
+	{
+		try
+		{
+			Method m = c.getDeclaredMethod(name, args);
+			m.setAccessible(true);
+			return new CMethod(m);
+		}
+		catch(Exception e)
+		{
+			throw new Error(e);
+		}
+	}
+	
+	
+	/** invokes a specified method via reflection */
 	public static <T> T invoke(Class<T> returnType, String methodName, Object object, Object ... args)
 	{
 		if(object == null)
@@ -40,12 +58,12 @@ public class Reflector
 			}
 			catch(Exception e)
 			{
-				Log.fail(e);
+				Log.ex(e);
 			}
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 		
 		return null;

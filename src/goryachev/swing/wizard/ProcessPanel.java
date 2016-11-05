@@ -174,7 +174,7 @@ public abstract class ProcessPanel
 				}
 				else
 				{
-					Log.fail(err);
+					Log.ex(err);
 					setText(CKit.stackTrace(err));
 					
 					// this looks better

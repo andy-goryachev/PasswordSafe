@@ -34,7 +34,7 @@ public class CheckForUpdate
 		}
 		catch(FileNotFoundException e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 			URL u = new URL(url);
 			throw new UserException(TXT.get("CheckForUpdate.err.server problem", "Sorry, there seems to be a problem contacting server [{0}]", u.getHost()));
 		}

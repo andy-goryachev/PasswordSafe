@@ -115,7 +115,7 @@ public class VKey
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 	}
 	
@@ -190,7 +190,7 @@ public class VKey
 			}
 			catch(Exception e)
 			{
-				Log.fail(e);
+				Log.ex(e);
 			}
 		}
 	}

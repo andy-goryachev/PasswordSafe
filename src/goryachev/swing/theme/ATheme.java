@@ -341,7 +341,7 @@ public class ATheme
 			return (Color)v;
 		}
 		
-		log.fail("color not found " + k + " in " + name);
+		Log.ex("color not found " + k + " in " + name);
 		return Color.magenta;
 	}
 	
@@ -354,7 +354,7 @@ public class ATheme
 			return (Font)v;
 		}
 		
-		log.fail("font not found " + k + " in " + name);
+		Log.ex("font not found " + k + " in " + name);
 		return basePlainFont;
 	}
 	

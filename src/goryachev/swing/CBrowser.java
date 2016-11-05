@@ -24,7 +24,7 @@ public class CBrowser
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 	}
 	
@@ -43,7 +43,7 @@ public class CBrowser
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 	}
 

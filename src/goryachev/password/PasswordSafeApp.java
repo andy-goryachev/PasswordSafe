@@ -115,7 +115,7 @@ public class PasswordSafeApp
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 		return f;
 	}
@@ -149,7 +149,7 @@ public class PasswordSafeApp
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 			failed(CKit.stackTrace(e));
 		}
 	}

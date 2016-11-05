@@ -55,7 +55,7 @@ public class CEditorToLowerCaseAction
 			}
 			catch(Exception e)
 			{
-				Log.fail(e);
+				Log.ex(e);
 				UI.beep();
 			}
 		}

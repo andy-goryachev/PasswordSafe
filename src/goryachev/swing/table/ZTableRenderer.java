@@ -157,7 +157,7 @@ public class ZTableRenderer
 		}
 		catch(Exception e)
 		{
-			Log.fail(e);
+			Log.ex(e);
 		}
 		return this;
 	}
