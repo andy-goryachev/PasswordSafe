@@ -1,0 +1,2 @@
+- option to clear password on lock
+- code to zero strings via reflection 
