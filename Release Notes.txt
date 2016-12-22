@@ -11,6 +11,7 @@
 
 3.03.47 RC
 - bouncycastle 1.55
+- common code update
 
 3.03.46
 - common code update
