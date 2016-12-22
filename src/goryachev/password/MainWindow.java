@@ -76,7 +76,7 @@ public class MainWindow
 		super("MainWindow");
 		
 		int ms = (int)(Preferences.lockTimeoutOption.get() * CKit.MS_IN_A_MINUTE);
-		activityMonitor = new ActivityMonitor(ms)
+		activityMonitor = new ActivityMonitor(this, ms)
 		{
 			protected void onNoActivity()
 			{

@@ -2,6 +2,7 @@
 package goryachev.password.ui;
 import java.awt.AWTEvent;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.AWTEventListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,11 +16,13 @@ public abstract class ActivityMonitor
 	
 	//
 	
+	private final Window parent;
 	private Timer timer;
 	
 	
-	public ActivityMonitor(int delay)
+	public ActivityMonitor(Window parent, int delay)
 	{
+		this.parent = parent;
 		setDelay(delay);
 	}
 	
@@ -42,7 +45,10 @@ public abstract class ActivityMonitor
 	
 	protected void trigger()
 	{
-		timer.restart();
+		if(timer != null)
+		{
+			timer.restart();
+		}
 	}
 
 
@@ -54,18 +60,34 @@ public abstract class ActivityMonitor
 
 	public void actionPerformed(ActionEvent ev)
 	{
-		onNoActivity();
+		if(parent.isVisible())
+		{
+			onNoActivity();
+		}
+		else
+		{
+			stop();
+			stopTimer();
+		}
 	}
 	
 	
 	public void setDelay(int delay)
 	{
-		if(timer != null)
-		{
-			timer.stop();
-		}
+		stopTimer();
 		
 		timer = new Timer(delay, this);
 		timer.setRepeats(false);
+		timer.start();
+	}
+	
+	
+	protected void stopTimer()
+	{
+		if(timer != null)
+		{
+			timer.stop();
+			timer = null;
+		}		
 	}
 }
