@@ -9,7 +9,7 @@
 		RELEASE NOTES
 		=============
 
-3.03.47 RC
+3.04.47
 - bouncycastle 1.55
 - common code update
 

@@ -39,7 +39,6 @@
 			includeantruntime="false"
 		>
 			<compilerarg value="-Xlint:none"/>
-		
 			<classpath refid="libs" />
 		</javac>
 	</target>
@@ -82,8 +81,14 @@
 		<checksum file="build/jars/${TARGET}.jar" algorithm="sha-256" forceoverwrite="yes" fileext=".sha256.txt" />
 	</target>
 	
+	
+	<!-- copy jar to base dir -->
+	<target name="copy-jar" depends="make-jar">
+		<copy file="build/jars/${TARGET}.jar" todir="." />
+	</target>
+	
 
 	<!-- build all -->
-	<target name="build-all" depends="compile, copy-resources, make-jar, sha-jar" />
+	<target name="build-all" depends="compile, copy-resources, make-jar, sha-jar, copy-jar" />
 	
 </project>
