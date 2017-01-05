@@ -1,4 +1,4 @@
-// Copyright © 2015-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2015-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import javax.swing.JTextArea;
 import javax.swing.text.Document;

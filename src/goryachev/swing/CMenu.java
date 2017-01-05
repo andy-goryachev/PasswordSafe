@@ -1,4 +1,4 @@
-// Copyright © 2008-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.swing.theme.AssignMnemonic;
 import java.awt.Component;

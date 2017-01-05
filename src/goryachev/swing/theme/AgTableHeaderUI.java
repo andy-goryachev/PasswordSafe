@@ -1,4 +1,4 @@
-// Copyright © 2009-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.theme;
 import goryachev.swing.table.CTableHeaderRenderer;
 import java.awt.Graphics;

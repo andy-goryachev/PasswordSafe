@@ -1,4 +1,4 @@
-// Copyright © 2005-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2005-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.CFileSettings;
 import goryachev.common.util.CList;

@@ -1,4 +1,4 @@
-// Copyright © 2010-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2010-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
 import goryachev.common.i18n.Menus;
 import goryachev.common.i18n.TXT;

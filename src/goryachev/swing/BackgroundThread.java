@@ -1,4 +1,4 @@
-// Copyright © 2006-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2006-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CancellableThread;

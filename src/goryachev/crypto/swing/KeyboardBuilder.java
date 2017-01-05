@@ -1,4 +1,4 @@
-// Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.swing;
 import java.awt.Dimension;
 import java.awt.Insets;

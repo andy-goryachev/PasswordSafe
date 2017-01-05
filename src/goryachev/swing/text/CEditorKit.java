@@ -1,4 +1,4 @@
-// Copyright © 2009-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.text;
 import goryachev.common.i18n.CLanguage;
 import java.util.Locale;
