@@ -4,9 +4,9 @@ import goryachev.common.util.CKit;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.EAXDecryptStream;
 import goryachev.crypto.EAXEncryptStream;
-import goryachev.crypto.EntropyGatherer;
 import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.SecretByteArrayOutputStream;
+import goryachev.crypto.swing.EntropyGathererSwing;
 import goryachev.password.data.DataFile;
 import goryachev.password.data.DataFormat;
 import goryachev.password.data.DataTools;
@@ -231,7 +231,7 @@ public final class DataFormatV2
 			{
 				// using entropy collected from the user mouse/keyboard
 				// as well as provided by the jvm
-				SecureRandom r = EntropyGatherer.getSecureRandom();
+				SecureRandom r = EntropyGathererSwing.getSecureRandom();
 				
 				return encrypt(payload, passphrase, r);
 			}

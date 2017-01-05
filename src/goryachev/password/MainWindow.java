@@ -4,8 +4,8 @@ import goryachev.common.i18n.Menus;
 import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.common.util.SB;
-import goryachev.crypto.EntropyGatherer;
 import goryachev.crypto.OpaqueChars;
+import goryachev.crypto.swing.EntropyGathererSwing;
 import goryachev.password.data.DataFile;
 import goryachev.password.data.PassEntry;
 import goryachev.password.img.PasswordSafeIcons;
@@ -124,7 +124,7 @@ public class MainWindow
 		tp.apply(this);
 		
 		UI.whenFocused(listTab.table, KeyEvent.VK_TAB, focusAddAction);
-		EntropyGatherer.start();
+		EntropyGathererSwing.start();
 	}
 	
 

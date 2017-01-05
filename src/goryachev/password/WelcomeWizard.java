@@ -5,7 +5,7 @@ import goryachev.common.i18n.TXT;
 import goryachev.common.util.HasPrompts;
 import goryachev.common.util.ProductInfo;
 import goryachev.common.util.SB;
-import goryachev.crypto.EntropyGatherer;
+import goryachev.crypto.swing.EntropyGathererSwing;
 import goryachev.password.img.PasswordSafeIcons;
 import goryachev.swing.Application;
 import goryachev.swing.CAction;
@@ -55,7 +55,7 @@ public class WelcomeWizard
 		
 		updatePrompts();
 		TXT.registerListener(this);
-		EntropyGatherer.start();
+		EntropyGathererSwing.start();
 	}
 	
 	

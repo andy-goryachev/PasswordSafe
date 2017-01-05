@@ -1,4 +1,4 @@
-// Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto;
 import goryachev.common.util.CKit;
 
@@ -131,6 +131,68 @@ public final class OpaqueChars
 		finally
 		{
 			Crypto.zero(me);
+		}
+	}
+
+
+	public void append(String s)
+	{
+		if(s != null)
+		{
+			append(s.toCharArray());
+		}
+	}
+	
+	
+	public void append(char[] add)
+	{
+		char[] cs = getChars();
+		try
+		{
+			char[] rv = new char[cs.length + add.length];
+			try
+			{
+				System.arraycopy(cs, 0, rv, 0, cs.length);
+				System.arraycopy(add, 0, rv, cs.length, add.length);
+				set(rv);
+			}
+			finally
+			{
+				Crypto.zero(rv);
+			}
+		}
+		finally
+		{
+			Crypto.zero(cs);
+		}
+	}
+
+
+	public void deleteLastChar()
+	{
+		char[] cs = getChars();
+		try
+		{
+			int len = cs.length - 1;
+			if(len >= 0)
+			{
+				// TODO this does not handle surrogate characters
+				char[] rv = new char[len];
+				try
+				{
+					System.arraycopy(cs, 0, rv, 0, len);
+					set(rv);
+				}
+				finally
+				{
+					Crypto.zero(rv);
+				}
+			}
+			
+		}
+		finally
+		{
+			Crypto.zero(cs);
 		}
 	}
 }

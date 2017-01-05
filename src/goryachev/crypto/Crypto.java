@@ -1,5 +1,6 @@
-// Copyright © 2011-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto;
+import goryachev.common.util.CField;
 import goryachev.common.util.CKit;
 import goryachev.common.util.Log;
 import goryachev.common.util.Rex;
@@ -29,6 +30,10 @@ import org.bouncycastle.crypto.signers.RSADigestSigner;
 /** Collection of simple operations related to cryptography */
 public class Crypto
 {
+	private static final CField<int[]> BIGINTEGER_MAG = new CField(BigInteger.class, "mag");
+	private static final CField<char[]> STRING_VALUE = new CField(String.class, "value");
+	
+	
 	public static void zero(CipherParameters p)
 	{
 		try
@@ -96,6 +101,63 @@ public class Crypto
 			if(b != null)
 			{
 				Arrays.fill(b, '\u0000');
+			}
+		}
+		catch(Throwable e)
+		{
+			Log.ex(e);
+		}
+	}
+	
+	
+	/** 
+	 * destroys char[] array inside of a String.  
+	 * this method uses reflection and may or may not work.
+	 * this method must be used against strings created via String(char[]) constuctor
+	 * to avoid messing up the jvm.
+	 */
+	public static final void zero(String s)
+	{
+		try
+		{
+			if(s != null)
+			{
+				char[] v = STRING_VALUE.get(s);
+				if(v != null)
+				{
+					Arrays.fill(v, '\u0000');
+				}
+				
+				// this will ensure NPE if the code tries to reuse the destroyed string
+				STRING_VALUE.set(s, null);
+			}
+		}
+		catch(Throwable e)
+		{
+			Log.ex(e);
+		}
+	}
+	
+	
+	/** 
+	 * destroys int[] array inside of a BigInteger.  
+	 * this method uses reflection and may or may not work.
+	 * this method must be used against objects created via explicit constructor
+	 * to avoid messing up the jvm.
+	 */
+	public static final void zero(BigInteger x)
+	{
+		try
+		{
+			if(x != null)
+			{
+				int[] v = BIGINTEGER_MAG.get(x);
+				if(v != null)
+				{
+					Arrays.fill(v, '\u0000');
+				}
+				
+				BIGINTEGER_MAG.set(x, null);
 			}
 		}
 		catch(Throwable e)

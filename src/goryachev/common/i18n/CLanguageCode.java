@@ -1,4 +1,4 @@
-// Copyright © 2010-2016 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2010-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.i18n;
 
 // ISO639 codes http://www.loc.gov/standards/iso639-2/ISO-639-2_utf-8.txt
