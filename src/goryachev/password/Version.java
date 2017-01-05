@@ -7,5 +7,5 @@ package goryachev.password;
  */
 public class Version
 {
-	public static final String VERSION   = "3.04.47";
+	public static final String VERSION   = "3.04.48";
 }

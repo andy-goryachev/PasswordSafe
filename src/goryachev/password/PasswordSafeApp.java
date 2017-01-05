@@ -3,6 +3,7 @@ package goryachev.password;
 import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CSystem;
+import goryachev.common.util.Copyright;
 import goryachev.common.util.Log;
 import goryachev.common.util.ProductInfo;
 import goryachev.common.util.log.FileLogWriter;
@@ -25,7 +26,6 @@ import javax.swing.ImageIcon;
 public class PasswordSafeApp
 	extends Application
 {
-	public static final String COPYRIGHT = "copyright © 2016 andy goryachev";	
 	public static final String TITLE = "PasswørdSafe";
 	public static final String EXTENSION = ".safe";
 	public static final String PRODUCT_URL = "http://goryachev.com/products/password-safe";
@@ -41,7 +41,7 @@ public class PasswordSafeApp
 
 	public PasswordSafeApp()
 	{
-		super("PasswordSafe", Version.VERSION, COPYRIGHT);
+		super("PasswordSafe", Version.VERSION, Copyright.COPYRIGHT);
 	}
 	
 	

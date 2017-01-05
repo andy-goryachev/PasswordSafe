@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="lib" path="lib/bouncycastle/bcprov-jdk15on-155.jar" sourcepath="lib/bouncycastle/lcrypto-jdk15on-155.zip"/>
+	<classpathentry kind="lib" path="lib/bouncycastle/bcprov-jdk15on-156.jar" sourcepath="lib/bouncycastle/lcrypto-jdk15on-156.zip"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="out"/>
 </classpath>

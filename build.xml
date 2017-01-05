@@ -9,7 +9,7 @@
 	
 	<!-- libraries -->
 	<path id="libs">
-		<pathelement location="lib/bouncycastle/bcprov-jdk15on-155.jar" />
+		<pathelement location="lib/bouncycastle/bcprov-jdk15on-156.jar" />
 	</path>
 	
 	

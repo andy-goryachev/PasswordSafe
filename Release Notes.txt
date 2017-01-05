@@ -9,6 +9,9 @@
 		RELEASE NOTES
 		=============
 
+3.04.48
+- bouncycastle 1.56
+
 3.04.47
 - bouncycastle 1.55
 - common code update
