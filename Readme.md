@@ -21,5 +21,5 @@ This project is licensed under the terms of the MIT license.
 
 ### Official Site
 
-<a href='http://goryachev.com/products/password-safe/index.html'>goryachev.com</a>
+<a href='https://goryachev.com/products/password-safe/index.html'>goryachev.com</a>
 
