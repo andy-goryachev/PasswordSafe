@@ -1,5 +1,5 @@
 // Copyright © 2013-2017 Andy Goryachev <andy@goryachev.com>
-package goryachev.password;
+package goryachev.password.licenses;
 import goryachev.common.i18n.Menus;
 import goryachev.common.util.CKit;
 import goryachev.swing.Application;
@@ -13,14 +13,14 @@ import org.bouncycastle.LICENSE;
 
 public class OpenSourceLicenses
 {
-	public static final CAction action = new CAction() { public void action() { actionLicense(getSourceWindow()); } };
+	public static final CAction openDialogAction = new CAction() { public void action() { actionLicense(getSourceWindow()); } };
 
 	
 	private static void licenses(MultiPageDialog d)
 	{
 		d.addPage("BouncyCastle", LICENSE.licenseText);
 		
-		d.addPage("java-image-scaling", CKit.readStringQuiet(Lanczos3Filter.class, "license.txt"));
+		d.addPage("Java Image Scaling", CKit.readStringQuiet(Lanczos3Filter.class, "license.txt"));
 		
 		d.addPage("JH Labs Image Filters", CKit.readStringQuiet(PixelUtils.class, "License.txt"));
 	}

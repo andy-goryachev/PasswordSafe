@@ -3,11 +3,11 @@ package goryachev.password;
 import goryachev.common.i18n.Menus;
 import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
-import goryachev.common.util.SB;
 import goryachev.crypto.OpaqueChars;
 import goryachev.password.data.DataFile;
 import goryachev.password.data.PassEntry;
 import goryachev.password.img.PasswordSafeIcons;
+import goryachev.password.licenses.OpenSourceLicenses;
 import goryachev.password.ui.ClipboardHandler;
 import goryachev.swing.Application;
 import goryachev.swing.CAction;
@@ -34,8 +34,6 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 
 
-// TODO recentFiles
-// TODO incognito mode
 public class MainPanel
 	extends CPanel
 {
@@ -58,11 +56,8 @@ public class MainPanel
 	public final CButton lockButton;
 	public final CButton exitButton;
 	
-	public static final String KEY_LAST_FOLDER = "last.folder";
 	public final MainWindow mainWindow;
 	public final ListTab listTab;
-	private File file;
-	private boolean modified;
 	
 
 	public MainPanel(MainWindow w)
@@ -172,7 +167,7 @@ public class MainPanel
 		m.item(TXT.get("MainWindow.menu.about passwords", "Mandatory XKCD Reference"), xkcdAction);
 		m.separator();
 		m.item(Menus.License, Application.licenseAction());
-		m.item(Menus.OpenSourceLicenses, OpenSourceLicenses.action);
+		m.item(Menus.OpenSourceLicenses, OpenSourceLicenses.openDialogAction);
 		m.item(Menus.About, aboutAction);
 		return m;
 	}
@@ -180,15 +175,15 @@ public class MainPanel
 	
 	public File getFile()
 	{
-		return file;
+		return mainWindow.getFile();
 	}
 	
 	
-	public void setFile(File f)
-	{
-		file = f;
-		Preferences.dataFileOption.set(f);
-	}
+//	public void setFile(File f)
+//	{
+//		file = f;
+//		Preferences.dataFileOption.set(f);
+//	}
 	
 	
 	public void actionPreferences()
@@ -196,42 +191,10 @@ public class MainPanel
 		Preferences.openPreferences(this);
 	}
 	
-	
-	protected void updateTitle()
-	{
-		SB sb = new SB();
-		sb.a(Application.getTitle());
-		if(getFile() != null)
-		{
-			sb.a(" - ");
-			sb.a(getFile().getAbsolutePath());
-			
-			if(isModified())
-			{
-				sb.a(" *");
-			}
-		}
-		
-		MainWindow.get(this).setTitle(sb.toString());
-	}
-	
 
 	public static MainPanel get(Component c)
 	{
 		return UI.getAncestorOfClass(MainPanel.class, c);
-	}
-	
-	
-	public void setModified(boolean on)
-	{
-		modified = on;
-		updateTitle();
-	}
-	
-	
-	public boolean isModified()
-	{
-		return modified;
 	}
 	
 	
@@ -243,7 +206,7 @@ public class MainPanel
 	
 	public void saveIfModified()
 	{
-		if(isModified())
+		if(mainWindow.isModified())
 		{
 			saveFile();
 		}
@@ -258,7 +221,7 @@ public class MainPanel
 			if(df != null)
 			{
 				PasswordSafeApp.save(df, getFile());
-				setModified(false);
+				mainWindow.setModified(false);
 			}
 		}
 		catch(Exception e)
@@ -275,7 +238,7 @@ public class MainPanel
 			DataFile df = listTab.getDataFile();
 			if(df != null)
 			{
-				CFileChooser fc = new CFileChooser(this, KEY_LAST_FOLDER);
+				CFileChooser fc = new CFileChooser(this, MainWindow.KEY_LAST_FOLDER);
 				fc.setDialogType(CFileChooser.SAVE_DIALOG);
 				fc.setFileFilter(Styles.createFileFilter());
 				fc.setCurrentDirectory(getFile());
@@ -291,12 +254,12 @@ public class MainPanel
 						return;
 					}
 					
-					setFile(f);
+					mainWindow.setFile(f);
 					PasswordSafeApp.save(df, f);
 					
 					Preferences.dataFileOption.set(f);
 
-					setModified(false);
+					mainWindow.setModified(false);
 				}
 			}
 		}
@@ -312,9 +275,9 @@ public class MainPanel
 		ClipboardHandler.clearConditionally();
 		GlobalSettings.storeAll();
 		
-		if(isModified())
+		if(mainWindow.isModified())
 		{
-			displaySaving();
+			mainWindow.displaySaving();
 			
 			UI.later(new Runnable()
 			{
@@ -345,7 +308,7 @@ public class MainPanel
 	{
 		saveIfModified();
 			
-		CFileChooser fc = new CFileChooser(this, KEY_LAST_FOLDER);
+		CFileChooser fc = new CFileChooser(this, MainWindow.KEY_LAST_FOLDER);
 		fc.setDialogType(CFileChooser.OPEN_DIALOG);
 		fc.setFileFilter(Styles.createFileFilter());
 		
@@ -366,9 +329,9 @@ public class MainPanel
 
 	public void setDataFile(File f, DataFile df)
 	{
-		setFile(f);
+		mainWindow.setFile(f);
 		listTab.setDataFile(df);
-		updateTitle();
+		mainWindow.updateTitle();
 	}
 	
 	
@@ -385,12 +348,6 @@ public class MainPanel
 	}
 
 	
-	protected void displaySaving()
-	{
-		MainWindow.get(this).displaySaving();
-	}
-	
-	
 	protected void onChangeDatabasePassword()
 	{
 		DataFile df = listTab.getDataFile();
@@ -400,7 +357,7 @@ public class MainPanel
 		if(pass != null)
 		{
 			df.setPassword(pass);
-			setModified(true);
+			mainWindow.setModified(true);
 		}
 	}
 	

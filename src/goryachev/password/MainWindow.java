@@ -24,6 +24,7 @@ public class MainWindow
 	extends AppFrame
 {
 	public static final String KEY_LAST_FOLDER = "last.folder";
+
 	private File file;
 	private boolean modified;
 	private ActivityMonitor activityMonitor;
@@ -72,7 +73,7 @@ public class MainWindow
 	
 	public void setFile(File f)
 	{
-		file = f;
+		this.file = f;
 		Preferences.dataFileOption.set(f);
 	}
 	
@@ -107,7 +108,7 @@ public class MainWindow
 	}
 	
 	
-	protected void updateTitle()
+	public void updateTitle()
 	{
 		SB sb = new SB();
 		sb.a(Application.getTitle());

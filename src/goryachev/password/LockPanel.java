@@ -195,7 +195,7 @@ public class LockPanel
 	
 	protected void open(File file, DataFile df)
 	{
-		MainPanel p = MainWindow.get(this).setMainPanel();
+		MainPanel p = mainWindow.setMainPanel();
 		p.setDataFile(file, df);
 	}
 	
