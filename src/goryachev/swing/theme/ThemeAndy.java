@@ -33,7 +33,7 @@ public class ThemeAndy
 		set(ThemeKey.TARGET_COLOR, new Color(253, 178, 84));
 		set(ThemeKey.TEXT_BG, Color.white);
 		set(ThemeKey.TEXT_FG, Color.black);
-		set(ThemeKey.TEXT_SELECTION_BG, UI.mix(Color.yellow, 0.9, Color.white));
+		set(ThemeKey.TEXT_SELECTION_BG, UI.mix(Color.yellow, 0.5, Color.white));
 		set(ThemeKey.TEXT_SELECTION_FG, Color.black);
 		set(ThemeKey.TOOL_TIP_BG, new Color(255, 255, 225));
 		set(ThemeKey.TOOLBAR_COLOR, new Color(0xb2aea7));

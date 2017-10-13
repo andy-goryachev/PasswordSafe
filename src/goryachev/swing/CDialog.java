@@ -41,7 +41,7 @@ public class CDialog
 	public static final int DEFAULT_HEIGHT = 550;
 	public static final int MARGIN = 10;
 
-	public final CAction closeDialogAction = new CAction() { public void action() { actionWindowClose(); } };
+	public final XAction closeDialogAction = new XAction(this::actionWindowClose);
 	
 	private Component defaultFocusComponent;
 

@@ -7,7 +7,6 @@ import goryachev.common.util.Log;
 import goryachev.common.util.Rex;
 import goryachev.common.util.UserException;
 import goryachev.swing.BackgroundThread;
-import goryachev.swing.CAction;
 import goryachev.swing.CBorder;
 import goryachev.swing.CIcon;
 import goryachev.swing.CPanel;
@@ -15,6 +14,7 @@ import goryachev.swing.CScrollPane;
 import goryachev.swing.ChoiceDialog;
 import goryachev.swing.InfoField;
 import goryachev.swing.Theme;
+import goryachev.swing.XAction;
 import goryachev.swing.icons.CIcons;
 import javax.swing.Action;
 import javax.swing.Icon;
@@ -33,7 +33,7 @@ public abstract class ProcessPanel
 	
 	//
 	
-	public final CAction cancelAction = new CAction() { public void action() { actionCancel(); }};
+	public final XAction cancelAction = new XAction(this::actionCancel);
 	protected final Action continueAction;
 	protected final Action[] otherActions;
 	public final JLabel statusField;

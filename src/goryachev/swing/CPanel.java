@@ -21,6 +21,7 @@ public class CPanel
 	public static final float FILL = CTableLayout.FILL;
 	//public static final float MINIMUM = CTableLayout3.MINIMUM;
 	public static final float PREFERRED = CTableLayout.PREFERRED;
+	public static final float PREF = CTableLayout.PREFERRED;
 	
 	private boolean trackWidth = true;
 	private boolean trackHeight;
@@ -251,6 +252,15 @@ public class CPanel
 	{
 		JLabel t = new JLabel(s);
 		t.setHorizontalAlignment(JLabel.TRAILING);
+		return t;
+	}
+	
+	
+	public JLabel labelBold(String s)
+	{
+		JLabel t = new JLabel(s);
+		t.setHorizontalAlignment(JLabel.TRAILING);
+		t.setFont(Theme.boldFont());
 		return t;
 	}
 

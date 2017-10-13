@@ -78,6 +78,7 @@ public class UI
 	public static final int ALT = InputEvent.ALT_DOWN_MASK;
 	public static final int CTRL = InputEvent.CTRL_DOWN_MASK;
 	public static final int SHIFT = InputEvent.SHIFT_DOWN_MASK;
+	public static final int SHORTCUT = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
 	private static final String HTML_DISABLE_CLIENT_PROPERTY = "html.disable";
 	private static final Obj KEY_TABLE_HEADER_HIGHLIGHT = new Obj("KEY_TABLE_HEADER_HIGHLIGHT");
 	private static CPopupMenuController defaultPopupMenuController;
@@ -1458,30 +1459,30 @@ public class UI
 	
 	
 	/** intelligently place the popup menu below or above the component, aligning it with the component boundary */
-	public static void showPopup(Component c, JPopupMenu popup)
+	public static void showPopup(Component target, JComponent popup)
 	{
-		showPopup(c, new Rectangle(0, 0, c.getWidth(), c.getHeight()), popup);
+		showPopup(target, new Rectangle(0, 0, target.getWidth(), target.getHeight()), popup);
 	}
 	
 	
-	public static void showPopup(Component c, int x, int y, JPopupMenu popup)
+	public static void showPopup(Component target, int x, int y, JComponent popup)
 	{
-		UI.showPopup(c, new Rectangle(x, y, 0, 0), popup);
+		UI.showPopup(target, new Rectangle(x, y, 0, 0), popup);
 	}
 
 	
-	public static void showPopup(Component c, Rectangle r, JPopupMenu popup)
+	public static void showPopup(Component target, Rectangle r, JComponent popup)
 	{
 		int x = 0;
 		int y = 0;
 
 		try
 		{
-			GraphicsConfiguration gc = c.getGraphicsConfiguration();
+			GraphicsConfiguration gc = target.getGraphicsConfiguration();
 			if(gc != null)
 			{
 				Rectangle screen = gc.getBounds();
-				Point pc = c.getLocationOnScreen();
+				Point pc = target.getLocationOnScreen();
 				Dimension dp = popup.getPreferredSize();
 				int w = dp.width;
 				int h = dp.height;
@@ -1530,7 +1531,17 @@ public class UI
 		catch(Exception e)
 		{ }
 
-		popup.show(c, x, y);
+		JPopupMenu m;
+		if(popup instanceof JPopupMenu)
+		{
+			m = (JPopupMenu)popup;
+		}
+		else
+		{
+			m = new JPopupMenu();
+			m.add(popup);
+		}
+		m.show(target, x, y);
 	}
 
 
@@ -1848,30 +1859,12 @@ public class UI
 				{
 					final JTextComponent t = (JTextComponent)c;
 
-					CAction cutAction = new CAction()
-					{
-						public void action() throws Exception
-						{
-							t.cut();
-						}
-					};
+					XAction cutAction = new XAction(t::cut);
 					cutAction.setEnabled(t.isEditable() && t.isEnabled());
 					
-					CAction copyAction = new CAction()
-					{
-						public void action() throws Exception
-						{
-							t.copy();
-						}
-					};
+					XAction copyAction = new XAction(t::copy);
 					
-					CAction pasteAction = new CAction()
-					{
-						public void action() throws Exception
-						{
-							t.paste();
-						}
-					};
+					XAction pasteAction = new XAction(t::paste);
 					pasteAction.setEnabled(t.isEditable() && t.isEnabled());
 					
 					CPopupMenu m = new CPopupMenu();

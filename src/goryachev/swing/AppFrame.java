@@ -35,9 +35,8 @@ public class AppFrame
 	//
 	
 	
-	public final CAction closeAction = new CAction() { public void action() { actionWindowClose(); } }; 
-	public final CAction appExitAction = new CAction() { public void action() { Application.exit(); } }; 
-	
+	public final XAction closeAction = new XAction(this::actionWindowClose); 
+	public final XAction appExitAction = new XAction(Application::exit); 
 	protected Rectangle normalBounds;
 	
 

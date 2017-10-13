@@ -1,19 +1,19 @@
 // Copyright © 2013-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.wizard;
-import goryachev.swing.CAction;
 import goryachev.swing.CDialog;
 import goryachev.swing.CPanel;
 import goryachev.swing.UI;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.KeyEvent;
+import javax.swing.Action;
 import javax.swing.JComponent;
 
 
 public class WizardDialog2
 	extends CDialog
 {
-	public final CAction backAction;
+	public final Action backAction;
 	public final WizardPanel2 panel;
 	
 	

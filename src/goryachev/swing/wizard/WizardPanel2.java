@@ -4,11 +4,11 @@ import goryachev.common.i18n.Menus;
 import goryachev.common.util.CKit;
 import goryachev.common.util.HasPrompts;
 import goryachev.common.util.UserException;
-import goryachev.swing.CAction;
 import goryachev.swing.CButton;
 import goryachev.swing.CPanel;
 import goryachev.swing.Panels;
 import goryachev.swing.UI;
+import goryachev.swing.XAction;
 import goryachev.swing.icons.CIcons;
 import java.awt.Component;
 import java.util.Stack;
@@ -19,7 +19,7 @@ import javax.swing.JComponent;
 public class WizardPanel2
 	extends CPanel
 {
-	public final CAction backAction = new CAction() { public void action() { actionBack(); }};
+	public final XAction backAction = new XAction(this::actionBack);
 	private Stack<Entry> stack = new Stack();
 	protected final WizardTitleBar titleField;
 

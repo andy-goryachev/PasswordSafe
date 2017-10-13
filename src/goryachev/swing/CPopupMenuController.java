@@ -6,7 +6,6 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JComponent;
-import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.text.Caret;
 import javax.swing.text.JTextComponent;
@@ -20,7 +19,7 @@ public abstract class CPopupMenuController
 	public void onMouseClick(boolean left) { }
 	
 	/** create the popup menu.  returning null results in no popup being shown */
-	public abstract JPopupMenu constructPopupMenu();
+	public abstract JComponent constructPopupMenu();
 	
 	//
 	
@@ -228,7 +227,7 @@ public abstract class CPopupMenuController
 		{
 			if(source != null)
 			{
-				JPopupMenu m = constructPopupMenu();
+				JComponent m = constructPopupMenu();
 				if(m != null)
 				{
 					UI.showPopup(source, ev.getX(), ev.getY(), m);

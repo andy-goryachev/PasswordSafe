@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.awt.event.AWTEventListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.security.SecureRandom;
 
 
 /**
@@ -28,7 +29,7 @@ public final class EntropyGathererSwing
 	implements AWTEventListener
 {
 	private static EntropyGathererSwing instance;
-	
+
 	
 	private EntropyGathererSwing()
 	{
@@ -40,17 +41,14 @@ public final class EntropyGathererSwing
 	 * Attaches the global entropy gatherer instance to the AWT event queue.  
 	 * Subsequent calls have no effect.
 	 * It is recommenended to call this method when AWT queue becomes available, 
-	 * such as on the main application window creation.
-	 * Must be called from the EDT.
+	 * such as on the main application window creation.  
 	 */
-	public static final void start()
+	public synchronized static final SecureRandom init()
 	{
 		UI.checkEDT();
 		
-		// FIX I need to rethink this
 		if(instance == null)
 		{
-			// TODO avoid error here if already registered
 			instance = new EntropyGathererSwing();
 			
 			long mask =
@@ -63,6 +61,8 @@ public final class EntropyGathererSwing
 			
 			Toolkit.getDefaultToolkit().addAWTEventListener(instance, mask);
 		}
+		
+		return instance.getSecureRandomGenerator();
 	}
 
 

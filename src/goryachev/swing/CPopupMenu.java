@@ -21,7 +21,9 @@ public class CPopupMenu
 	}
 	
 	
-	public JMenuItem add(String s)
+	/** disabled menu item */
+	@Deprecated
+	public JMenuItem item(String s)
 	{
 		CMenuItem m = new CMenuItem(s);
 		m.setEnabled(false);
@@ -29,9 +31,16 @@ public class CPopupMenu
 	}
 
 	
-	public JMenuItem add(String s, Action a)
+	public CMenuItem item(String s, Action a)
 	{
 		CMenuItem m = new CMenuItem(s, a);
-		return add(m);
+		add(m);
+		return m;
+	}
+	
+	
+	public void separator()
+	{
+		addSeparator();
 	}
 }

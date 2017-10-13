@@ -2,12 +2,12 @@
 package goryachev.swing.dialogs.options;
 import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
-import goryachev.swing.CAction;
 import goryachev.swing.CButton;
 import goryachev.swing.CComboBox;
 import goryachev.swing.CPanel;
 import goryachev.swing.InputTracker;
 import goryachev.swing.Theme;
+import goryachev.swing.XAction;
 import goryachev.swing.options.OptionEditorInterface;
 import goryachev.swing.theme.ATheme;
 import javax.swing.JComponent;
@@ -17,7 +17,7 @@ public class ThemeOptionEditor
 	extends CPanel
 	implements OptionEditorInterface
 {
-	public final CAction editThemeAction = new CAction() { public void action() { actionEditTheme(); }};
+	public final XAction editThemeAction = new XAction(this::actionEditTheme);
 	public final CComboBox selectorField;
 	protected ThemePreviewPanel preview;
 	private String old;

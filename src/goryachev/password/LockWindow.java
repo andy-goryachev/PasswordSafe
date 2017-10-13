@@ -1,6 +1,5 @@
 // Copyright © 2012-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.crypto.swing.EntropyGathererSwing;
 import goryachev.swing.AppFrame;
 import goryachev.swing.Application;
 import goryachev.swing.UI;
@@ -25,7 +24,6 @@ public class LockWindow
 		setSize(700, 420);
 		
 		setTitle(Application.getTitle() + " " + Application.getVersion());
-		EntropyGathererSwing.start();
 		
 		UI.whenAncestorOfFocusedComponent(this, KeyEvent.VK_ESCAPE, closeAction);
 	}

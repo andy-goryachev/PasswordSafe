@@ -1,12 +1,12 @@
 // Copyright © 2008-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.dialogs.options;
 import goryachev.common.i18n.Menus;
-import goryachev.swing.CAction;
 import goryachev.swing.CBorder;
 import goryachev.swing.CButtonPanel;
 import goryachev.swing.CDialog;
 import goryachev.swing.CPanel;
 import goryachev.swing.Dialogs;
+import goryachev.swing.XAction;
 import goryachev.swing.options.OptionEditorInterface;
 import java.awt.Component;
 
@@ -14,7 +14,7 @@ import java.awt.Component;
 public class COptionDialog
 	extends CDialog
 {
-	public final CAction okAction = new CAction() { public void action() { onOk(); } };
+	public final XAction okAction = new XAction(this::onOk);
 	public final OptionPanel optionPanel;
 	public final CButtonPanel buttonPanel;
 	private boolean changed;

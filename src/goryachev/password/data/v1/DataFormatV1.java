@@ -78,7 +78,7 @@ public final class DataFormatV1
 	}
 	
 	
-	public byte[] save(DataFile df) throws Exception
+	public byte[] save(DataFile df, SecureRandom r) throws Exception
 	{
 		byte[] salt = null;
 		byte[] iv = null;
@@ -88,7 +88,7 @@ public final class DataFormatV1
 		
 		try
 		{
-			SecureRandom r = SecureRandom.getInstance(ALGORITHM_PRNG);
+//			SecureRandom r = SecureRandom.getInstance(ALGORITHM_PRNG);
 			salt = new byte[SALT_LENGTH];
 			r.nextBytes(salt);
 			

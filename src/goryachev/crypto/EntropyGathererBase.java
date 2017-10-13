@@ -32,19 +32,11 @@ public abstract class EntropyGathererBase
 	private final SecureRandomSpi spi;
 	private final Provider provider;
 	protected final SecureRandom jvmRandom;
-	private static EntropyGathererBase instance;
 	private static WeakList<Listener> listeners;
 	
 	
 	protected EntropyGathererBase(String name)
 	{
-		if(instance != null)
-		{
-			throw new Error("already registered");
-		}
-		
-		instance = this;
-		
 		jvmRandom = new SecureRandom();
 
 		random = new DigestRandomGenerator(new SHA512Digest());
@@ -90,7 +82,7 @@ public abstract class EntropyGathererBase
 	}
 	
 	
-	public static void addListener(Listener li)
+	public static final void addListener(Listener li)
 	{
 		if(listeners == null)
 		{
@@ -101,7 +93,7 @@ public abstract class EntropyGathererBase
 	}
 	
 	
-	protected static void tick()
+	protected static final void tick()
 	{
 		if(listeners != null)
 		{
@@ -119,42 +111,35 @@ public abstract class EntropyGathererBase
 	
 	
 	/** Adds entropy to the generator. */
-	public static final void addSeedMaterial(long x)
+	public final void addSeedMaterial(long x)
 	{
-		instance.random.addSeedMaterial(x);
+		random.addSeedMaterial(x);
 	}
 	
 	
 	/** Adds entropy to the generator. */
-	public static final void addSeedMaterial(byte[] x)
+	public final void addSeedMaterial(byte[] x)
 	{
-		instance.random.addSeedMaterial(x);
+		random.addSeedMaterial(x);
 	}
 	
 	
 	/** Adds entropy to the generator. */
-	public static void addSeedMaterial(double x)
+	public final void addSeedMaterial(double x)
 	{
-		instance.random.addSeedMaterial(Double.doubleToLongBits(x));
+		random.addSeedMaterial(Double.doubleToLongBits(x));
 	}
 	
 	
 	/** Adds entropy to the generator. */
-	public static void addSeedMaterial(String s)
+	public final void addSeedMaterial(String s)
 	{
 		byte[] b = s.getBytes(CKit.CHARSET_UTF8);
-		instance.random.addSeedMaterial(b);
+		random.addSeedMaterial(b);
 	}
 	
 	
-	/** Returns an instance of SecureRanom based on this entropy gatherer component. */
-	public static final SecureRandom getSecureRandom()
-	{
-		return instance.getSecureRandomPrivate();
-	}
-	
-	
-	private final SecureRandom getSecureRandomPrivate()
+	public final SecureRandom getSecureRandomGenerator()
 	{
 		return new SecureRandom(spi, provider) { };
 	}

@@ -198,7 +198,7 @@ public final class DataFormatV2
 	/**
 	 * Serializes the data object to a byte array and then encrypts it. 
 	 */
-	public final byte[] save(DataFile df) throws Exception
+	public final byte[] save(DataFile df, SecureRandom r) throws Exception
 	{
 		OpaqueChars passphrase = df.getPassword();
 		
@@ -231,7 +231,7 @@ public final class DataFormatV2
 			{
 				// using entropy collected from the user mouse/keyboard
 				// as well as provided by the jvm
-				SecureRandom r = EntropyGathererSwing.getSecureRandom();
+//				SecureRandom r = EntropyGathererSwing.getSecureRandom();
 				
 				return encrypt(payload, passphrase, r);
 			}

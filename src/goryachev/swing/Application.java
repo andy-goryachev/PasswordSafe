@@ -25,6 +25,7 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Properties;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.text.Document;
 
@@ -59,7 +60,7 @@ public abstract class Application
 
 	//
 	
-	public static final CAction exitAction = new CAction() { public void action() { exit(); }};
+	public static final XAction exitAction = new XAction(Application::exit);
 
 	public final String profileName;
 	public final String version;
@@ -498,7 +499,7 @@ public abstract class Application
 	}
 	
 	
-	public static CAction licenseAction()
+	public static Action licenseAction()
 	{
 		return new CAction()
 		{

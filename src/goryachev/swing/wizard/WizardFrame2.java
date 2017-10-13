@@ -1,9 +1,9 @@
 // Copyright © 2013-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.wizard;
 import goryachev.swing.AppFrame;
-import goryachev.swing.CAction;
 import goryachev.swing.CPanel;
 import goryachev.swing.UI;
+import goryachev.swing.XAction;
 import goryachev.swing.theme.AssignMnemonic;
 import java.awt.event.KeyEvent;
 import javax.swing.JComponent;
@@ -13,7 +13,7 @@ public class WizardFrame2
 	extends AppFrame
 {
 	public final WizardPanel2 panel;
-	public final CAction backAction;
+	public final XAction backAction;
 	
 	
 	public WizardFrame2(String name)

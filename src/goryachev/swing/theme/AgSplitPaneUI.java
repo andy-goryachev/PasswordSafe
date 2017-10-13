@@ -1,5 +1,6 @@
 // Copyright © 2009-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.theme;
+import goryachev.swing.Theme;
 import goryachev.swing.UI;
 import java.awt.Dimension;
 import java.awt.Graphics;

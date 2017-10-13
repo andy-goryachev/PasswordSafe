@@ -124,7 +124,6 @@ public class MainWindow
 		tp.apply(this);
 		
 		UI.whenFocused(listTab.table, KeyEvent.VK_TAB, focusAddAction);
-		EntropyGathererSwing.start();
 	}
 	
 

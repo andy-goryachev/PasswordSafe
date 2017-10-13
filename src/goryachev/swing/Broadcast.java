@@ -1,11 +1,12 @@
 // Copyright © 2015-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-
 import goryachev.common.util.CList;
 import goryachev.common.util.CMultiMap;
 import goryachev.common.util.Log;
 
+
 // TODO add weak references
+@Deprecated // kill, replace with Subscription
 public class Broadcast
 {
 	public static interface Handler<K>

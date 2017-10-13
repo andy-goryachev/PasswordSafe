@@ -16,6 +16,7 @@ import goryachev.swing.CTextPane;
 import goryachev.swing.CToolBar;
 import goryachev.swing.Theme;
 import goryachev.swing.ThemeKey;
+import goryachev.swing.XAction;
 import goryachev.swing.table.ZColumnHandler;
 import goryachev.swing.table.ZModel;
 import goryachev.swing.table.ZTable;
@@ -36,7 +37,7 @@ import javax.swing.text.DocumentFilter;
 public class ThemePreviewPanel 
 	extends CPanel
 {
-	public final CAction dummyAction = new CAction() { public void action() { }};
+	public final XAction dummyAction = new XAction(() -> {});
 	private boolean editor;
 	private static final int GAP = 5;
 	private static final Object KEY = new Object();

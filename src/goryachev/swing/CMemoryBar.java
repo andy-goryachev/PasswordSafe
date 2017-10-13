@@ -17,8 +17,8 @@ public class CMemoryBar
 	extends JLabel
 	implements CAnimator.Client
 {
-	public final CAction gcAction = new CAction() { public void action() { actionGC(); } };
-	public final CAction sysInfoAction = new CAction() { public void action() { actionSysInfo(); } };
+	public final XAction gcAction = new XAction(this::actionGC);
+	public final XAction sysInfoAction = new XAction(this::actionSysInfo);
 	
 	private boolean startAnimator = true;
 	private int period = 750;

@@ -1,5 +1,6 @@
 // Copyright © 2005-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
+import java.lang.reflect.Array;
 import java.util.Collection;
 
 
@@ -1091,5 +1092,92 @@ public class TextTools
 			}
 		}
 		return false;
+	}
+	
+	
+	private static String printable(int c)
+	{
+		switch(c)
+		{
+		case '\b': return "\\b";
+		case '\f': return "\\f";
+		case '\n': return "\\n";
+		case '\r': return "\\r";
+		case '\t': return "\\t";
+		case '\\': return "\\\\";
+		}
+		return null;
+	}
+	
+	
+	/** escape control characters (<0x20) and backslash for debugging. */
+	public static String escapeControlsForPrintout(String text)
+	{
+		if(text == null)
+		{
+			return null;
+		}
+		
+		SB sb = new SB(text.length() + 64);
+		text.codePoints().forEach((c) ->
+		{
+			if(c < ' ')
+			{
+				String s = printable(c);
+				if(s == null)
+				{
+					sb.append(Hex.toHexString((short)c));
+				}
+				else
+				{
+					sb.append(s);
+				}
+			}
+			else
+			{
+				sb.appendCodePoint(c);
+			}
+		});
+		return sb.toString();
+	}
+	
+	
+	/** creates a single String[], using Object.toString(), skipping nulls, and recursively unpacking Collection's and arrays */ 
+	public static String[] array(Object ... items)
+	{
+		CList<String> rv = new CList(128);
+		array(rv, items);
+		return CKit.toArray(rv);
+	}
+	
+	
+	private static void array(CList<String> list, Object x)
+	{
+		CKit.checkCancelled();
+		
+		if(x == null)
+		{
+			return;
+		}
+		
+		if(x.getClass().isArray())
+		{
+			int sz = Array.getLength(x);
+			for(int i=0; i<sz; i++)
+			{
+				array(list, Array.get(x, i));
+			}
+		}
+		else if(x instanceof Collection)
+		{
+			for(Object item: (Collection)x)
+			{
+				array(list, item);
+			}
+		}
+		else
+		{
+			list.add(x.toString());
+		}
 	}
 }

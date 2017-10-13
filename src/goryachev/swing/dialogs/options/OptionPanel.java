@@ -4,7 +4,6 @@ import goryachev.common.i18n.Menus;
 import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
-import goryachev.swing.CAction;
 import goryachev.swing.CBorder;
 import goryachev.swing.CPanel;
 import goryachev.swing.CScrollPane;
@@ -15,6 +14,7 @@ import goryachev.swing.Dialogs;
 import goryachev.swing.GlobalSettings;
 import goryachev.swing.Theme;
 import goryachev.swing.UI;
+import goryachev.swing.XAction;
 import goryachev.swing.icons.CIcons;
 import goryachev.swing.options.OptionEditorInterface;
 import goryachev.swing.table.CTableColumn;
@@ -68,13 +68,7 @@ public class OptionPanel
 				delayed.fire();
 			}
 		});
-		UI.whenFocused(filter, KeyEvent.VK_ESCAPE, new CAction()
-		{
-			public void action() throws Exception
-			{
-				actionClearFilter();
-			}
-		});
+		UI.whenFocused(filter, KeyEvent.VK_ESCAPE, new XAction(this::actionClearFilter));
 		
 		buttonLabel = new JLabel();
 		buttonLabel.addMouseListener(new MouseAdapter()

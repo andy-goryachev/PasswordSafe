@@ -1,5 +1,7 @@
 // Copyright © 2009-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.theme;
+import goryachev.swing.CSplitPane;
+import goryachev.swing.Theme;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -9,7 +11,6 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JSplitPane;
-import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
@@ -33,18 +34,44 @@ public class CSplitPaneDivider
 		super(ui);
 	}
 
+	
+	protected Color getDividerColor()
+	{
+		if(splitPane instanceof CSplitPane)
+		{
+			Color c = ((CSplitPane)splitPane).getDividerColor();
+			if(c != null)
+			{
+				return c;
+			}
+		}
+		return Theme.LINE_COLOR;
+	}
 
 	public void paint(Graphics g)
 	{
-		Color bgColor = (splitPane.hasFocus()) ? UIManager.getColor("SplitPane.shadow") : getBackground();
-		Dimension size = getSize();
+		Color c = 
+			(splitPane.hasFocus()) ? 
+				//UIManager.getColor("SplitPane.shadow") : getBackground();
+				Theme.FOCUS_COLOR : getDividerColor(); 
 
-		if(bgColor != null)
+		if(c != null)
 		{
-			g.setColor(bgColor);
-			g.fillRect(0, 0, size.width, size.height);
+			Dimension r = getSize();
+			g.setColor(c);
+			if(getOrientation() == JSplitPane.HORIZONTAL_SPLIT)
+			{
+				int x = r.width / 2;
+				g.drawLine(x, 0, x, r.height);
+			}
+			else
+			{
+				int y = r.height / 2;
+				g.drawLine(0, y, r.width, y); 
+			}
+//			g.fillRect(0, 0, r.width, r.height);
 		}
-		super.paint(g);
+//		super.paint(g);
 	}
 
 

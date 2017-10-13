@@ -91,4 +91,16 @@ public class WeakList<T>
 	{
 		list.remove(ix);
 	}
+	
+	
+	public void clear()
+	{
+		list.clear();
+	}
+	
+	
+	public WeakReference<T> getRef(int ix)
+	{
+		return list.get(ix);
+	}
 }

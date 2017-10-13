@@ -3,7 +3,6 @@ package goryachev.swing.dialogs.options;
 import goryachev.common.i18n.Menus;
 import goryachev.common.i18n.TXT;
 import goryachev.common.util.html.HtmlTools;
-import goryachev.swing.CAction;
 import goryachev.swing.CButton;
 import goryachev.swing.CDialog;
 import goryachev.swing.CPanel;
@@ -11,6 +10,7 @@ import goryachev.swing.CTabbedPane;
 import goryachev.swing.CTextField;
 import goryachev.swing.HorizontalPanel;
 import goryachev.swing.UI;
+import goryachev.swing.XAction;
 import goryachev.swing.icons.CIcons;
 import java.awt.AWTEvent;
 import java.awt.Component;
@@ -27,7 +27,7 @@ import javax.swing.SwingUtilities;
 public class ThemeEditorDialog
 	extends CDialog
 {
-	public final CAction saveAction = new CAction() { public void action() { actionSave(); } };
+	public final XAction saveAction = new XAction(this::actionSave);
 	public final CTextField nameField;
 	public final ThemePreviewPanel preview;
 	public final CPanel selectedElementPanel;

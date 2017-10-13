@@ -3,12 +3,12 @@ package goryachev.swing.options.edit;
 import goryachev.common.i18n.Menus;
 import goryachev.common.i18n.TXT;
 import goryachev.swing.Accelerator;
-import goryachev.swing.CAction;
 import goryachev.swing.CButton;
 import goryachev.swing.CDialog;
 import goryachev.swing.CPanel;
 import goryachev.swing.KeyNames;
 import goryachev.swing.Theme;
+import goryachev.swing.XAction;
 import goryachev.swing.text.CDocumentFilter;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -21,9 +21,9 @@ import javax.swing.KeyStroke;
 public class KeyEditorDialog
 	extends CDialog
 {
-	public final CAction clearAction = new CAction() { public void action() { actionClear(); } };
-	public final CAction cancelAction = new CAction() { public void action() { actionCancel(); } };
-	public final CAction okAction = new CAction() { public void action() { actionCommit(); } };
+	public final XAction clearAction = new XAction(this::actionClear);
+	public final XAction cancelAction = new XAction(this::actionCancel);
+	public final XAction okAction = new XAction(this::actionCommit);
 	public final JTextField keyField;
 	public final JLabel warningLabel;
 	protected final Accelerator ac;

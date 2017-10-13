@@ -179,6 +179,11 @@ public class Dump
 	// address starts with startAddress
 	public static String hex(byte[] bytes, long startAddress)
 	{
+		if(bytes == null)
+		{
+			return "";
+		}
+		
 		SB sb = new SB(((bytes.length/16)+1) * 77 + 1);
 		hex(sb, bytes, startAddress, 0);
 		return sb.toString();
@@ -756,5 +761,51 @@ public class Dump
 			return s.substring(0, max);
 		}
 		return s;
+	}
+	
+	
+	public static String toPrintable(Object x)
+	{
+		if(x == null)
+		{
+			return "";
+		}
+		
+		String s = x.toString();
+		int len = s.length();
+		SB sb = new SB(len);
+		for(int i=0; i<len; i++)
+		{
+			char c = s.charAt(i);
+			switch(c)
+			{
+			case '\b':
+				sb.append("\\b");
+				break;
+			case '\t':
+				sb.append("\\t");
+				break;
+			case '\r':
+				sb.append("\\r");
+				break;
+			case '\n':
+				sb.append("\\n");
+				break;
+			case '\f':
+				sb.append("\\f");
+				break;
+			default:
+				if(c < 0x20)
+				{
+					sb.append("\\x");
+					sb.append(Hex.toHexByte(c));
+				}
+				else
+				{
+					sb.append(c);
+				}
+			}
+		}
+		return sb.toString();
 	}
 }

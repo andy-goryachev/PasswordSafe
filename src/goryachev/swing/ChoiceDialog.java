@@ -3,6 +3,7 @@ package goryachev.swing;
 import goryachev.swing.icons.CIcons;
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.Action;
 import javax.swing.text.JTextComponent;
 
 
@@ -28,15 +29,9 @@ public class ChoiceDialog<T>
 	}
 	
 	
-	protected CAction createAction(final T choice)
+	protected Action createAction(final T choice)
 	{
-		return new CAction()
-		{
-			public void action()
-			{
-				setChoice(choice);
-			}
-		};
+		return new XAction(() -> setChoice(choice));
 	}
 	
 	

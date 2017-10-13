@@ -60,6 +60,7 @@ public class MultiPageDialog
 		
 		table = new ZTable(model);
 		table.setTableHeader(null);
+		table.setBackground(Theme.FIELD_BG);
 		
 		selector = new CTableSelector(table)
 		{
@@ -76,7 +77,7 @@ public class MultiPageDialog
 		CScrollPane tableScroll = new CScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		tableScroll.setBorder(CBorder.NONE);
 		tableScroll.setViewportBorder(CBorder.NONE);
-		tableScroll.getViewport().setBackground(Theme.TEXT_BG);
+		tableScroll.getViewport().setBackground(Theme.FIELD_BG);
 		
 		CScrollPane detailScroll = new CScrollPane(textField, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		detailScroll.setBorder(CBorder.NONE);
@@ -86,6 +87,7 @@ public class MultiPageDialog
 		split = new CSplitPane(true, tableScroll, detailScroll);
 		split.setDividerLocation(200);
 		split.setBorder(null);
+		split.setBackground(Theme.TEXT_BG);
 		
 		panel().setCenter(split);
 	}
