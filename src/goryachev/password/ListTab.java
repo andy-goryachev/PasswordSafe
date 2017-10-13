@@ -81,7 +81,7 @@ public class ListTab
 
 		// detail
 		
-		passEditor = new PassEditor();
+		passEditor = new PassEditor(this);
 		
 		detailPanel = new CPanel();
 		detailPanel.setName("detail");

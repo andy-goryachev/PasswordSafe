@@ -6,10 +6,8 @@ import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.swing.CPasswordField;
 import goryachev.crypto.swing.OnScreenKeyboard;
 import goryachev.password.data.DataFile;
-import goryachev.swing.AppFrame;
 import goryachev.swing.Application;
 import goryachev.swing.BackgroundThread;
-import goryachev.swing.CAction;
 import goryachev.swing.CButton;
 import goryachev.swing.CFocusTraversalPolicy;
 import goryachev.swing.CPanel;
@@ -19,6 +17,7 @@ import goryachev.swing.Dialogs;
 import goryachev.swing.InputTracker;
 import goryachev.swing.Theme;
 import goryachev.swing.UI;
+import goryachev.swing.XAction;
 import goryachev.swing.dialogs.CFileChooser;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -27,10 +26,11 @@ import java.io.File;
 public class LockPanel
 	extends CPanel
 {
-	public final CAction browseAction = new CAction() { public void action() { onBrowse(); } };
-	public final CAction createAction = new CAction() { public void action() { onCreate(); } };
-	public final CAction exitAction = new CAction() { public void action() { onExit(); } };
-	public final CAction okAction = new CAction() { public void action() { onOk(); } };
+	public final XAction browseAction = new XAction(this::onBrowse);
+	public final XAction createAction = new XAction(this::onCreate);
+	public final XAction exitAction = new XAction(this::onExit);
+	public final XAction okAction = new XAction(this::onOk);
+	protected final MainWindow mainWindow;
 	protected CTextField fileField;
 	protected CProgressField progressField;
 	private CPasswordField passField;
@@ -38,8 +38,10 @@ public class LockPanel
 	private boolean progress;
 	
 	
-	public LockPanel(File f)
+	public LockPanel(MainWindow w, File f)
 	{
+		this.mainWindow = w;
+			
 		fileField = new CTextField(f.getAbsolutePath());
 		
 		passField = new CPasswordField();
@@ -107,6 +109,7 @@ public class LockPanel
 		updateActions();
 		
 		UI.focusLater(passField);
+		UI.whenAncestorOfFocusedComponent(this, KeyEvent.VK_ESCAPE, mainWindow.closeAction);
 	}
 	
 	
@@ -192,12 +195,8 @@ public class LockPanel
 	
 	protected void open(File file, DataFile df)
 	{
-		MainWindow w = new MainWindow();
-		//w.unlock();
-		w.setDataFile(file, df);
-		w.open();
-		
-		AppFrame.getAppFrame(this).close();
+		MainPanel p = MainWindow.get(this).setMainPanel();
+		p.setDataFile(file, df);
 	}
 	
 	

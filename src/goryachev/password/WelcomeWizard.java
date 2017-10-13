@@ -227,7 +227,10 @@ public class WelcomeWizard
 	
 	protected void openMainWindow(File f)
 	{
-		new LockWindow(f).open();
+		MainWindow w = new MainWindow();
+		w.lock();
+		w.open();
+		
 		close();
 	}
 }

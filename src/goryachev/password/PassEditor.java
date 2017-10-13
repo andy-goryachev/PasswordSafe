@@ -43,12 +43,15 @@ public class PassEditor
 	public final CScrollPane scroll;
 	public final Color userColor = new Color(0x8500c8);
 	public final Color passColor = new Color(0x00cc00);
+	protected final ListTab parent;
 	private PassEntry entry;
 	protected InputTracker tracker;
 
 	
-	public PassEditor()
+	public PassEditor(ListTab p)
 	{
+		this.parent = p;
+		
 		tracker = new InputTracker()
 		{
 			public void onInputEvent()
@@ -197,7 +200,7 @@ public class PassEditor
 	{
 		MainWindow w = MainWindow.get(this);
 		w.setModified(true);
-		w.refresh(entry);
+		parent.refresh(entry);
 	}
 	
 	

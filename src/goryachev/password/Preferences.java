@@ -11,7 +11,7 @@ import goryachev.swing.options.IntegerOption;
 import goryachev.swing.options.LongOption;
 import goryachev.swing.options.edit.IntegerOptionEditor;
 import goryachev.swing.options.edit.KeyBindingsEditor;
-import javax.swing.JFrame;
+import java.awt.Component;
 
 
 public class Preferences
@@ -21,7 +21,7 @@ public class Preferences
 	public static final IntegerOption lockTimeoutOption = new IntegerOption("lock.timeout2", 5);
 
 	
-	public static void openPreferences(JFrame parent)
+	public static void openPreferences(Component parent)
 	{
 		OptionTreeBuilder b = new OptionTreeBuilder();
 		

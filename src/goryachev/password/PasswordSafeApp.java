@@ -147,7 +147,9 @@ public class PasswordSafeApp
 			}
 			else
 			{
-				new LockWindow(f).open();
+				MainWindow w = new MainWindow();
+				w.lock(f);
+				w.open();
 			}
 		}
 		catch(Exception e)
