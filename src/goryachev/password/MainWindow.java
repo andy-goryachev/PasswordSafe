@@ -5,7 +5,6 @@ import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.common.util.SB;
 import goryachev.crypto.OpaqueChars;
-import goryachev.crypto.swing.EntropyGathererSwing;
 import goryachev.password.data.DataFile;
 import goryachev.password.data.PassEntry;
 import goryachev.password.img.PasswordSafeIcons;
@@ -18,8 +17,7 @@ import goryachev.swing.CBorder;
 import goryachev.swing.CBrowser;
 import goryachev.swing.CButton;
 import goryachev.swing.CFocusTraversalPolicy;
-import goryachev.swing.CMenu;
-import goryachev.swing.CMenuItem;
+import goryachev.swing.CMenuBar;
 import goryachev.swing.CPanel;
 import goryachev.swing.CToolBar;
 import goryachev.swing.CUndoManager;
@@ -166,48 +164,42 @@ public class MainWindow
 	
 	private JMenuBar createMenu()
 	{
-		JMenuBar mb = Theme.menubar();
-		mb.setBorder(null);
-		CMenu m;
-
+		CMenuBar m = Theme.menubar();
 		// file
-		mb.add(m = new CMenu(Menus.File));
-		m.add(new CMenuItem(TXT.get("MainWindow.menu.new data file", "New Database"), createDatabaseAction));
-		m.addSeparator();
-		m.add(new CMenuItem(Menus.Open, Accelerators.OPEN, openAction));
-		m.add(new CMenuItem(Menus.Save, Accelerators.SAVE, saveAction));
-		m.add(new CMenuItem(Menus.SaveAs, Accelerators.SAVE_AS, saveAsAction));
-		m.addSeparator();
-		m.add(new CMenuItem(TXT.get("MainWindow.menu.lock database", "Lock"), lockAction));
-		m.add(new CMenuItem(TXT.get("MainWindow.menu.change database passphrase", "Change Database Passphrase"), changeDataPassAction));
-		m.addSeparator();
-		m.add(new CMenuItem(Menus.Preferences, Accelerators.PREFERENCES, preferencesAction));
-		m.addSeparator();
-		m.add(new CMenuItem(Menus.Exit, exitAction));
-		
+		m.menu(Menus.File);
+		m.item(TXT.get("MainWindow.menu.new data file", "New Database"), createDatabaseAction);
+		m.separator();
+		m.item(Menus.Open, Accelerators.OPEN, openAction);
+		m.item(Menus.Save, Accelerators.SAVE, saveAction);
+		m.item(Menus.SaveAs, Accelerators.SAVE_AS, saveAsAction);
+		m.separator();
+		m.item(TXT.get("MainWindow.menu.lock database", "Lock"), lockAction);
+		m.item(TXT.get("MainWindow.menu.change database passphrase", "Change Database Passphrase"), changeDataPassAction);
+		m.separator();
+		m.item(Menus.Preferences, Accelerators.PREFERENCES, preferencesAction);
+		m.separator();
+		m.item(Menus.Exit, exitAction);
 		// edit
-		mb.add(m = new CMenu(Menus.Edit));
-		m.add(new CMenuItem(Menus.Undo, Accelerators.UNDO, CUndoManager.globalUndoAction));
-		m.add(new CMenuItem(Menus.Redo, Accelerators.REDO, CUndoManager.globalRedoAction));
-		m.addSeparator();
-		m.add(new CMenuItem(TXT.get("MainWindow.menu.copy username","Copy User Name to Clipboard"), listTab.passEditor.copyUsernameAction));
-		m.add(new CMenuItem(TXT.get("MainWindow.menu.copy password","Copy Password to Clipboard"), listTab.passEditor.copyPasswordAction));
-		m.add(new CMenuItem(TXT.get("MainWindow.menu.clear clipboard","Clear Clipboard"), clearClipboardAction));
-		m.addSeparator();
-		m.add(new CMenuItem(TXT.get("MainWindow.menu.delete an entry","Delete Entry"), listTab.deleteEntryAction));
-		
+		m.menu(Menus.Edit);
+		m.item(Menus.Undo, Accelerators.UNDO, CUndoManager.globalUndoAction);
+		m.item(Menus.Redo, Accelerators.REDO, CUndoManager.globalRedoAction);
+		m.separator();
+		m.item(TXT.get("MainWindow.menu.copy username","Copy User Name to Clipboard"), listTab.passEditor.copyUsernameAction);
+		m.item(TXT.get("MainWindow.menu.copy password","Copy Password to Clipboard"), listTab.passEditor.copyPasswordAction);
+		m.item(TXT.get("MainWindow.menu.clear clipboard","Clear Clipboard"), clearClipboardAction);
+		m.separator();
+		m.item(TXT.get("MainWindow.menu.delete an entry","Delete Entry"), listTab.deleteEntryAction);
 		// help
-		mb.add(m = new CMenu(Menus.Help));
-		m.add(new CMenuItem(Menus.ContactSupport, ContactSupport.action));
-		m.add(new CMenuItem(Menus.CheckForUpdates, checkForUpdatesAction));
-		m.addSeparator();
-		m.add(new CMenuItem(TXT.get("MainWindow.menu.about passwords", "Mandatory XKCD Reference"), xkcdAction));
-		m.addSeparator();
-		m.add(new CMenuItem(Menus.License, Application.licenseAction()));
-		m.add(new CMenuItem(Menus.OpenSourceLicenses, OpenSourceLicenses.action));
-		m.add(new CMenuItem(Menus.About, aboutAction));
-		
-		return mb;
+		m.menu(Menus.Help);
+		m.item(Menus.ContactSupport, ContactSupport.action);
+		m.item(Menus.CheckForUpdates, checkForUpdatesAction);
+		m.separator();
+		m.item(TXT.get("MainWindow.menu.about passwords", "Mandatory XKCD Reference"), xkcdAction);
+		m.separator();
+		m.item(Menus.License, Application.licenseAction());
+		m.item(Menus.OpenSourceLicenses, OpenSourceLicenses.action);
+		m.item(Menus.About, aboutAction);
+		return m;
 	}
 	
 	

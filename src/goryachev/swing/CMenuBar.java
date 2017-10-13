@@ -59,6 +59,14 @@ public class CMenuBar
 	}
 	
 	
+	public CMenuItem item(String text, Accelerator acc, Action a)
+	{
+		CMenuItem m = new CMenuItem(text, acc, a);
+		lastMenu().add(m);
+		return m;
+	}
+	
+	
 	/** creates a disabled menu item for development purposes */
 	@Deprecated
 	public CMenuItem item(String text)
