@@ -10,6 +10,7 @@
 		=============
 
 3.05.49
+- license changed to Apache 2.0
 - removed separate lock window
 - bouncycastle 1.57
 - common code update
