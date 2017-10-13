@@ -39,6 +39,7 @@
 			includeantruntime="false"
 		>
 			<compilerarg value="-Xlint:none"/>
+		
 			<classpath refid="libs" />
 		</javac>
 	</target>
@@ -52,7 +53,7 @@
 	</target>
 	
 	
-	<!-- upack library jars -->
+	<!-- unpack library jars -->
 	<target name="unpack-jars" depends="init">
 		<unzip dest="build/classes">
 			<path refid="libs" />
