@@ -1,0 +1,479 @@
+﻿// Project: ?
+// Database saved 2013-0126-150020 by Andy
+
+	LANGUAGES	23	1
+ID
+ro
+es
+ru
+ko
+el
+zh_CN
+da
+fi
+it
+fr
+sv
+cs
+nb
+zh_TW
+pl
+pt
+uk
+hi
+en_US
+de
+nl
+en_UK
+pt_BR
+
+
+	PROMPTS	441	27
+ID	PATH	FILE	LINE	MASTER	ro	es	ru	ko	el	zh_CN	da	fi	it	fr	sv	cs	nb	zh_TW	pl	pt	uk	hi	en_US	de	nl	en_UK	pt_BR
+Accelerator.key alt	goryachev/ui/Accelerator.java	Accelerator.java	126	Alt		Alt	Alt	Alt	Alt	Alt	Alt	Alt	Alt	Alt	Alt	Alt	Alt	Alt	Alt	Alt		आल्ट		Alt	Alt		Tecla Alt
+Accelerator.key alt graph	goryachev/ui/Accelerator.java	Accelerator.java	127	AltGraph																							
+Accelerator.key backspace	goryachev/ui/Accelerator.java	Accelerator.java	161	Backspace		Retroceso	Возврат	백스페이스	Οπισθοδιάστημα	退格键	Tilbage	Askelpalautin	Backspace	Retour Arrière	Tillbakaknapp	Backspace	Tilbakeknapp	倒退鍵	Backspace	Retrocesso		बेकस्पेस		Rücktaste	Backspace		Retrocesso
+Accelerator.key cancel	goryachev/ui/Accelerator.java	Accelerator.java	163	Cancel		Cancelar	Отменить	취소하기	Ακύρωση	取消	Annuller	Peruuta		Annuler	Avbryt	Storno	Avbryt	取消	Anuluj	Cancelar		रद्द		Abbrechen	Annuleren		Cancelar
+Accelerator.key clear	goryachev/ui/Accelerator.java	Accelerator.java	164	Clear		Borrar	Очистить	선택 취소	Απαλοιφή	清除		Tyhjennä	Deseleziona	Effacer	Töm	Vymazat	Fjern	清除		Limpar		मिटाएँ		Löschen	Wissen		Limpar
+Accelerator.key Convert henkan	goryachev/ui/Accelerator.java	Accelerator.java	317	Convert																							
+Accelerator.key ctrl	goryachev/ui/Accelerator.java	Accelerator.java	124	Ctrl		Ctrl	Ctrl	Ctrl	Ctrl	Ctrl	Ctrl	Ctrl	Ctrl	Ctrl	Ctrl	Ctrl	Ctrl	Ctrl	Ctrl	Ctrl		कंट्रोल		Strg	Ctrl		Ctrl
+Accelerator.key down arrow	goryachev/ui/Accelerator.java	Accelerator.java	179	Down Arrow																							
+Accelerator.key end	goryachev/ui/Accelerator.java	Accelerator.java	174	End		Fin	Закончить	끝	Τέλος	结束	Slut		Fine	Fin	Slut	Konec	Slutt	結束		Fim		समाप्त		Ende	Einde		Fim
+Accelerator.key enter	goryachev/ui/Accelerator.java	Accelerator.java	160	Enter		Tecla Enter	Ввод	입력	Enter	Enter	Enter	Enter	Invio	Entrée	Enter	Enter	Enter	Enter	Enter	Tecla Enter		ऐंटर		Eingabe	Enter		Tecla Enter
+Accelerator.key escape	goryachev/ui/Accelerator.java	Accelerator.java	170	Escape		Esc	Esc	Esc	Escape	Esc	Esc	Esc	Esc	Échap	Esc	Esc	Escape	Esc	Esc	Sair		एस्केप		Escape	Escape		Tecla Esc
+Accelerator.key Help	goryachev/ui/Accelerator.java	Accelerator.java	270	Help		Ayuda	Справка	도움말	Βοήθεια	帮助	Hjælp	Ohje		Aide	Hjälp	Nápověda	Hjelp	說明	Help	Ajuda		मदद		Hilfe	Help		Ajuda
+Accelerator.key home	goryachev/ui/Accelerator.java	Accelerator.java	175	Home		Inicio	Главная	홈			Startside						Startsside					होम			Home		
+Accelerator.key Insert	goryachev/ui/Accelerator.java	Accelerator.java	269	Insert		Insertar	Вставить	삽입		插入	Indsætte		Inserisci		Infoga		Sett inn	插入		Inserir		इन्सर्ट		Einfügen			Inserir
+Accelerator.key left arrow	goryachev/ui/Accelerator.java	Accelerator.java	176	Left Arrow																							
+Accelerator.key meta	goryachev/ui/Accelerator.java	Accelerator.java	151	Meta		Meta	Мета	Meta	Μέτα	元	Meta	Meta	Meta	Meta	Meta	Meta	Meta	中繼	Meta	Meta		मेटा		Meta	Meta		Meta
+Accelerator.key numeric pad character	goryachev/ui/Accelerator.java	Accelerator.java	371	Numeric Pad																							
+Accelerator.key numpad delete	goryachev/ui/Accelerator.java	Accelerator.java	241	Numeric Pad Delete																							
+Accelerator.key numpad down	goryachev/ui/Accelerator.java	Accelerator.java	275	Numeric Pad Down Arrow																							
+Accelerator.key numpad left	goryachev/ui/Accelerator.java	Accelerator.java	276	Numeric Pad Left Arrow																							
+Accelerator.key numpad right	goryachev/ui/Accelerator.java	Accelerator.java	277	Numeric Pad Right Arrow																							
+Accelerator.key numpad separator	goryachev/ui/Accelerator.java	Accelerator.java	237	Numeric Pad Separator																							
+Accelerator.key numpad up	goryachev/ui/Accelerator.java	Accelerator.java	274	Numeric Pad Up Arrow																							
+Accelerator.key page down	goryachev/ui/Accelerator.java	Accelerator.java	173	Page Down			Следующая страница	Page Down		Page Down	Page Down		Pagina giù	Page Avant		O stránku dolů	Gå til Neste Side	Page Down		Página Seguinte		पृष्ठ नचे		Bild ab			
+Accelerator.key page up	goryachev/ui/Accelerator.java	Accelerator.java	172	Page Up			Предыдущая страница	Page Up		Page Up	Page Up		Pagina su	Page Arrière		O stránku nahoru	Gå til Forrige Side	Page Up		Página Anterior		पृष्ठ ऊपर		Bild auf			
+Accelerator.key pause	goryachev/ui/Accelerator.java	Accelerator.java	168	Pause		Pausar	Пауза	일시 중지	Παύση	暂停	Pause	Tauko	Pausa	Pause	Paus		Pause	暫停		Pausa		विश्राम					
+Accelerator.key print screen	goryachev/ui/Accelerator.java	Accelerator.java	268	Print Screen																							
+Accelerator.key right arrow	goryachev/ui/Accelerator.java	Accelerator.java	178	Right Arrow																							
+Accelerator.key shift	goryachev/ui/Accelerator.java	Accelerator.java	123	Shift		Mayús.	Shift	Shift	Shift	Shift	Shift	Vaihto	Shift	Maj	Skift	Shift	Shift	Shift	Shift	Mudar		शिफ्ट		Umschalt	Shift		Tecla Shift
+Accelerator.key space	goryachev/ui/Accelerator.java	Accelerator.java	171	Space		Espacio	Пространство	스페이스	Διάστημα		Plads	Väli	Spazio	Espace	Mellanslag		Rom			Espaço		स्पेस			Ruimte		Tecla de Espaço
+Accelerator.key tab	goryachev/ui/Accelerator.java	Accelerator.java	162	Tab		Tabulación	Вкладка	탭	Στηλοθέτης	Tab	Fane	Sarkain		Tabulation	Tabb	Tabelátor	Tabulator	Tab		Tabulação		टैब		Tab	Tab		Tecla Tab
+Accelerator.key up arrow	goryachev/ui/Accelerator.java	Accelerator.java	177	Up Arrow																							
+Accelerator.key VK_ACCEPT kakutei	goryachev/ui/Accelerator.java	Accelerator.java	321	Accept																							
+Accelerator.key VK_ALL_CANDIDATES zenkouho	goryachev/ui/Accelerator.java	Accelerator.java	340	All Candidates																							
+Accelerator.key VK_ALPHANUMERIC eisuu	goryachev/ui/Accelerator.java	Accelerator.java	328	Alphanumeric																							
+Accelerator.key VK_BEGIN	goryachev/ui/Accelerator.java	Accelerator.java	363	Begin		Inicio	Начать	시작	Αρχή	开始	Start	Aloita	Inizio	Début	Start	Zahájit	Start	開始	Początek	Início		शुरू		Anfang	Begin		Início
+Accelerator.key VK_CODE_INPUT kanji bangou	goryachev/ui/Accelerator.java	Accelerator.java	344	Code Input																							
+Accelerator.key VK_FULL_WIDTH zenkaku	goryachev/ui/Accelerator.java	Accelerator.java	334	Full Width																							
+Accelerator.key VK_HALF_WIDTH hankaku	goryachev/ui/Accelerator.java	Accelerator.java	336	Half Width																							
+Accelerator.key VK_HIRAGANA	goryachev/ui/Accelerator.java	Accelerator.java	332	Hiragana																							
+Accelerator.key VK_JAPANESE_HIRAGANA	goryachev/ui/Accelerator.java	Accelerator.java	348	Hiragana																							
+Accelerator.key VK_JAPANESE_KATAKANA	goryachev/ui/Accelerator.java	Accelerator.java	346	Katakana																							
+Accelerator.key VK_JAPANESE_ROMAN	goryachev/ui/Accelerator.java	Accelerator.java	350	Roman																							
+Accelerator.key VK_KANA	goryachev/ui/Accelerator.java	Accelerator.java	324	Kana																							
+Accelerator.key VK_KANJI	goryachev/ui/Accelerator.java	Accelerator.java	326	Kanji																							
+Accelerator.key VK_KATAKANA	goryachev/ui/Accelerator.java	Accelerator.java	330	Katakana																							
+Accelerator.key VK_NONCONVERT muhenkan	goryachev/ui/Accelerator.java	Accelerator.java	319	Non-convert																							
+Accelerator.key VK_PREVIOUS_CANDIDATE maekouho	goryachev/ui/Accelerator.java	Accelerator.java	342	Previous Candidate																							
+Accelerator.key VK_ROMAN_CHARACTERS romaji	goryachev/ui/Accelerator.java	Accelerator.java	338	Romaji																							
+Accelerators.category.menu.Edit	goryachev/password/Accelerators.java	Accelerators.java	11	Main Menu: Edit																							
+Accelerators.category.menu.File	goryachev/password/Accelerators.java	Accelerators.java	10	Main Menu: File																							
+Accelerators.open	goryachev/password/Accelerators.java	Accelerators.java	18	Open		Abrir	Открыть	열기	Άνοιγμα	打开	Åben	Avaa	Apri	Ouvrir	Öppna	Otevřít	Åpen	開啟	Otwórz	Abrir		खोलें		Öffnen	Openen		Abrir
+Accelerators.preferences	goryachev/password/Accelerators.java	Accelerators.java	43	Preferences		Preferencias	Установки	선택	Προτιμήσεις	首选项	Indstillinger	Määritykset	Preferenze	Préférences	Inställningar	Předvolby	Innstillinger	喜好設定	Ustawienia	Preferências		पसंदगियाँ		Einstellungen	Voorkeuren		Preferências
+Accelerators.redo	goryachev/password/Accelerators.java	Accelerators.java	60	Redo		Rehacer	Повторить	재실행하기	Επανάληψη	重做	Gør om igen	Tee uudelleen	Rifai	Refaire	Gör om	Provést znovu	Gjør om igjen	重做	Powtórz	Refazer		फिर करें		Wiederholen	Opnieuw uitvoeren		Refazer
+Accelerators.save	goryachev/password/Accelerators.java	Accelerators.java	26	Save		Guardar	Сохранить	저장하기	Αποθήκευση	保存	Gem	Tallenna	Salva	Enregistrer	Spara	Uložit	Lagre	儲存	Zapisz	Guardar		सहेजें		Speichern	Opslaan		Salvar
+Accelerators.save.as	goryachev/password/Accelerators.java	Accelerators.java	35	Save As		Guardar como	Сохранить как	다른 이름으로 저장하기	Αποθήκευση ως	另存为	Gem som	Tallenna nimellä	Salva come	Enregistrer Sous	Spara som	Uložit jako	Lagre Som	另存為	Zapisz jako	Guardar Como		ऐसे सहेजें		Speichern als	Opslaan als		Salvar Como
+Accelerators.undo	goryachev/password/Accelerators.java	Accelerators.java	51	Undo		Deshacer	Отменить	실행 취소	Αναίρεση	撤销	Fortryde	Kumoa	Annulla	Défaire	Ångra	Vrátit zpět	Gjenopprett	復原	Cofnij	Desfazer		पहले जैसा		Rückgängig machen	Ongedaan maken		Desfazer
+AddEntryDialog.check.hide password	goryachev/password/AddEntryDialog.java	AddEntryDialog.java	75	hide password																							
+AddEntryDialog.dialog.title	goryachev/password/AddEntryDialog.java	AddEntryDialog.java	60	Add Entry																							
+AddEntryDialog.label.name	goryachev/password/AddEntryDialog.java	AddEntryDialog.java	144	Name:		Nombre:	Имя:	이름:	Όνομα:	名称：	Navn:	Nimi:	Nome:	Nom:	Namn:		Navn:	名稱：	Nazwa:	Nome:		नाम:		Name:	Naam:		Nome:
+AddEntryDialog.label.notes	goryachev/password/AddEntryDialog.java	AddEntryDialog.java	104	Notes:																							
+AddEntryDialog.label.password	goryachev/password/AddEntryDialog.java	AddEntryDialog.java	150	Password:		Contraseña:	Пароль:	암호:	Κωδικός πρόσβασης:	密码：	Adgangskode:	Salasana:		Mot de Passe:	Lösenord:	Heslo:	Passord:	密碼：	Hasło:	Palavra-passe:		पासवर्ड:		Passwort:	Wachtwoord:		Senha:
+AddEntryDialog.label.user	goryachev/password/AddEntryDialog.java	AddEntryDialog.java	147	User name:		Nombre de usuario:	Имя пользователя:	사용자 이름:	Όνομα χρήστη:	用户名：	Brugernavn:	Käyttäjänimi:	Nome Utente:	Nom d'utilisateur:	Användarnamn:	Uživatelské jméno:	Brukernavn:	使用者名稱：	Nazwa użytkownika:	Nome de utilizador:		प्रयोक्ता नाम:		Benutzername:	Gebruikersnaam:		Nome do usuário:
+AddEntryDialog.label.verify password	goryachev/password/AddEntryDialog.java	AddEntryDialog.java	164	Verify:																							
+Appearance.option.interface language	goryachev/ui/Appearance.java	Appearance.java	34	Interface Language		Idioma de la interfaz	Язык интерфейса	인터페이스 언어	Γλώσσα περιβάλλοντος εργασίας	界面语言	Grænsefladesprog	Käyttöliittymän kieli	Lingua d'interfaccia		Språk för användargränssnitt	Jazyk rozhraní	Grensesnittspråk	介面語言	Język interfejsu	Idioma de Interface		अंतराफलक भाषा		Oberflächensprache	Interfacetaal		Idioma de Interface
+Application.startup error title	goryachev/ui/Application.java	Application.java	216	Startup Error																							
+Application.status bar.button.view log	goryachev/ui/Application.java	Application.java	356	View Log		Ver registro	Просмотреть журнал	로그 보기	Προβολή αρχείου καταγραφής	查看日志	Vis log	Tarkastele lokia	Visualizza Registro	Afficher Journal	Visa logg	Zobrazit protokol	Vis Logg	檢視日誌	Wyświetl dziennik	Ver Registo		लोग देखें		Log anzeigen	Logboek weergeven		Visualizar Registro
+CButton.browse files	goryachev/ui/CButton.java	CButton.java	18	Browse		Examinar	Просматривать	브라우즈	Αναζήτηση	浏览	Gennemse	Selaa	Sfoglia	Parcourir	Bläddra igenom	Procházet	Bla gjennom	瀏覽	Przeglądaj	Percorrer		विचरें		Durchsuchen	Bladeren		Procurar
+CButton.cancel	goryachev/ui/CButton.java	CButton.java	19	Cancel		Cancelar	Отменить	취소하기	Ακύρωση	取消	Annuller	Peruuta		Annuler	Avbryt	Storno	Avbryt	取消	Anuluj	Cancelar		रद्द		Abbrechen	Annuleren		Cancelar
+CButton.close	goryachev/ui/CButton.java	CButton.java	20	Close		Cerrar	Закрыть	닫기	Κλείσιμο	关闭	Luk	Sulje	Chiudi	Fermer	Stäng	Zavřít	Lukk	關閉	Zamknij	Fechar		बंद		Schließen	Sluiten		Fechar
+CButton.copy	goryachev/ui/CButton.java	CButton.java	21	Copy		Copiar	Копировать	복사	Αντιγραφή	复制	Kopier	Kopioi	Copia	Copier	Kopiera	Kopírovat	Kopier	複製		Copiar		प्रतिलिपि		Kopieren	Kopiëren		Copiar
+CButton.create	goryachev/ui/CButton.java	CButton.java	22	Create		Crear	Создать	생성	Δημιουργία	创建	Oprette	Luo	Crea	Créer	Skapa	Vytvořit	Opprett	建立	Utwórz	Criar		निर्मित करें		Erstellen	Creëren		Criar
+CButton.exit	goryachev/ui/CButton.java	CButton.java	23	Exit		Salir	Выход	종료	Έξοδος	退出	Afslutte	Poistu	Esci	Quitter	Avsluta	Zavřít	Avslutt	結束	Zakończ	Sair		बाहर		Beenden	Afsluiten		Sair
+CButton.no	goryachev/ui/CButton.java	CButton.java	28	No		No	Нет	아니오	Όχι	否	Nej	Ei	No	Non	Nej	Ne	Nei	否	Nie	Não		नहीं		Nein	Nee		Não
+CButton.ok	goryachev/ui/CButton.java	CButton.java	24	OK		OK	OK	OK	OK	确定	OK	OK	OK	Ok	OK	OK	OK	確定	OK	OK		ठक		OK	OK		OK
+CButton.open	goryachev/ui/CButton.java	CButton.java	25	Open		Abrir	Открыть	열기	Άνοιγμα	打开	Åben	Avaa	Apri	Ouvrir	Öppna	Otevřít	Åpen	開啟	Otwórz	Abrir		खोलें		Öffnen	Openen		Abrir
+CButton.save	goryachev/ui/CButton.java	CButton.java	26	Save		Guardar	Сохранить	저장하기	Αποθήκευση	保存	Gem	Tallenna	Salva	Enregistrer	Spara	Uložit	Lagre	儲存	Zapisz	Guardar		सहेजें		Speichern	Opslaan		Salvar
+CButton.yes	goryachev/ui/CButton.java	CButton.java	27	Yes		Sí	Да	예	Ναι	是	Ja	Kyllä	Sì	Oui	Ja	Ano	Ja	是	Tak	Sim		हाँ		Ja	Ja		Sim
+CFilterLogic.showing x/y rows	goryachev/ui/table/CFilterLogic.java	CFilterLogic.java	235	Showing {0} out of {1} rows																							
+ChangePasswordDialog.button.change password	goryachev/password/ChangePasswordDialog.java	ChangePasswordDialog.java	77	Change																							
+ChangePasswordDialog.check.hide password	goryachev/password/ChangePasswordDialog.java	ChangePasswordDialog.java	55	hide password																							
+ChangePasswordDialog.label.password	goryachev/password/ChangePasswordDialog.java	ChangePasswordDialog.java	120	Password:		Contraseña:	Пароль:	암호:	Κωδικός πρόσβασης:	密码：	Adgangskode:	Salasana:		Mot de Passe:	Lösenord:	Heslo:	Passord:	密碼：	Hasło:	Palavra-passe:		पासवर्ड:		Passwort:	Wachtwoord:		Senha:
+ChangePasswordDialog.label.verify password	goryachev/password/ChangePasswordDialog.java	ChangePasswordDialog.java	134	Verify:																							
+CLanguage.Abkhazian	goryachev/util/CLanguage.java	CLanguage.java	679	Abkhazian																							
+CLanguage.Afar	goryachev/util/CLanguage.java	CLanguage.java	678	Afar																							
+CLanguage.Afrikaans	goryachev/util/CLanguage.java	CLanguage.java	680	Afrikaans																							
+CLanguage.Akan	goryachev/util/CLanguage.java	CLanguage.java	681	Akan																							
+CLanguage.Albanian	goryachev/util/CLanguage.java	CLanguage.java	682	Albanian																							
+CLanguage.Amharic	goryachev/util/CLanguage.java	CLanguage.java	683	Amharic																							
+CLanguage.Arabic	goryachev/util/CLanguage.java	CLanguage.java	684	Arabic		Árabe	арабский	아라비아어	Αραβικά	阿拉伯语	Arabisk	arabia	Arabo	Arabe	Arabiska	Arabština	Arabisk	阿拉伯語	arabski	Árabe		अरब		Arabisch	Arabisch		Árabe
+CLanguage.Aragonese	goryachev/util/CLanguage.java	CLanguage.java	685	Aragonese																							
+CLanguage.Armenian	goryachev/util/CLanguage.java	CLanguage.java	686	Armenian																							
+CLanguage.Assamese	goryachev/util/CLanguage.java	CLanguage.java	687	Assamese																							
+CLanguage.Avaric	goryachev/util/CLanguage.java	CLanguage.java	688	Avaric																							
+CLanguage.Avestan	goryachev/util/CLanguage.java	CLanguage.java	689	Avestan																							
+CLanguage.Aymara	goryachev/util/CLanguage.java	CLanguage.java	690	Aymara																							
+CLanguage.Azerbaijani	goryachev/util/CLanguage.java	CLanguage.java	691	Azerbaijani																							
+CLanguage.Bambara	goryachev/util/CLanguage.java	CLanguage.java	693	Bambara																							
+CLanguage.Bashkir	goryachev/util/CLanguage.java	CLanguage.java	694	Bashkir																							
+CLanguage.Basque	goryachev/util/CLanguage.java	CLanguage.java	695	Basque																							
+CLanguage.Belarusian	goryachev/util/CLanguage.java	CLanguage.java	696	Belarusian																							
+CLanguage.Bengali	goryachev/util/CLanguage.java	CLanguage.java	697	Bengali																							
+CLanguage.Bihari	goryachev/util/CLanguage.java	CLanguage.java	698	Bihari																							
+CLanguage.Bislama	goryachev/util/CLanguage.java	CLanguage.java	699	Bislama																							
+CLanguage.Bosnian	goryachev/util/CLanguage.java	CLanguage.java	700	Bosnian																							
+CLanguage.Breton	goryachev/util/CLanguage.java	CLanguage.java	701	Breton																							
+CLanguage.Bulgarian	goryachev/util/CLanguage.java	CLanguage.java	702	Bulgarian																							
+CLanguage.Burmese	goryachev/util/CLanguage.java	CLanguage.java	703	Burmese																							
+CLanguage.Catalan	goryachev/util/CLanguage.java	CLanguage.java	705	Catalan		Catalán	Каталанский	카탈로니아어	Καταλανικά	加泰罗尼亚语	Catalansk	katalaani	Catalano	Catalan	Katalanska	katalánština	Katalansk	加泰羅尼亞語	kataloński	Catalão		कटालान		Katalanisch	Catalaans		Catalão
+CLanguage.Central Khmer	goryachev/util/CLanguage.java	CLanguage.java	706	Central Khmer																							
+CLanguage.Chamorro	goryachev/util/CLanguage.java	CLanguage.java	707	Chamorro																							
+CLanguage.Chechen	goryachev/util/CLanguage.java	CLanguage.java	708	Chechen																							
+CLanguage.Chinese	goryachev/util/CLanguage.java	CLanguage.java	709	Chinese		Chino	Китайский	중국어	Κινεζικά	中文	Kinesisk	kiina	Cinese	Chinois	Kinesiska	čínština	Kinesisk	中文	chiński	Chinês		चन		Chinesisch	Chinees		Chinês
+CLanguage.Chinese HK	goryachev/util/CLanguage.java	CLanguage.java	710	Chinese (HK)																							
+CLanguage.Chinese Simplified	goryachev/util/CLanguage.java	CLanguage.java	711	Chinese (Simplified)																							
+CLanguage.Chinese Traditional	goryachev/util/CLanguage.java	CLanguage.java	712	Chinese (Traditional)																							
+CLanguage.Chuvash	goryachev/util/CLanguage.java	CLanguage.java	713	Chuvash																							
+CLanguage.Cornish	goryachev/util/CLanguage.java	CLanguage.java	714	Cornish																							
+CLanguage.Corsican	goryachev/util/CLanguage.java	CLanguage.java	715	Corsican																							
+CLanguage.Cree	goryachev/util/CLanguage.java	CLanguage.java	716	Cree																							
+CLanguage.Croatian	goryachev/util/CLanguage.java	CLanguage.java	717	Croatian																							
+CLanguage.Czech	goryachev/util/CLanguage.java	CLanguage.java	718	Czech		Checa	Чешский	체코어	Τσεχικά	捷克	Tjekkisk	tšekki	Ceco	Tchèque	Tjeckiska	čeština	Tjekkisk	捷克	czeski	Checo		चेक		Tschechisch	Tsjechisch		Checo
+CLanguage.Danish	goryachev/util/CLanguage.java	CLanguage.java	720	Danish		Danés	Датский	덴마크어	Δανικά	丹麦语	Dansk	tanska	Danese	Danois	Danska	dánština	Dansk	丹麥語	duński	Dinamarquês		डेन		Dänisch	Deens		Dinamarquês
+CLanguage.Divehi	goryachev/util/CLanguage.java	CLanguage.java	721	Divehi																							
+CLanguage.Dutch	goryachev/util/CLanguage.java	CLanguage.java	722	Dutch		Holandés	Голландский	네덜란드어	Ολλανδικά	荷兰语	Hollandsk	hollanti	Olandese	Néerlandais	Nederländska	holandština	Nederlandsk	荷蘭語	holenderski	Holandês		डच		Niederländisch	Nederlands		Holandês
+CLanguage.Dzongkha	goryachev/util/CLanguage.java	CLanguage.java	723	Dzongkha																							
+CLanguage.English	goryachev/util/CLanguage.java	CLanguage.java	725	English		Inglés	Английский	영어	Αγγλικά	英语	Engelsk	englanti	Inglese	Anglais	Engelska	angličtina	Engelsk	英語	angielski	Inglês		अंग्रेज		Englisch	Engels		Inglês
+CLanguage.English UK	goryachev/util/CLanguage.java	CLanguage.java	726	English (UK)																							
+CLanguage.English US	goryachev/util/CLanguage.java	CLanguage.java	727	English (US)																							
+CLanguage.Esperanto	goryachev/util/CLanguage.java	CLanguage.java	728	Esperanto																							
+CLanguage.Estonian	goryachev/util/CLanguage.java	CLanguage.java	729	Estonian																							
+CLanguage.Ewe	goryachev/util/CLanguage.java	CLanguage.java	730	Ewe																							
+CLanguage.Faroese	goryachev/util/CLanguage.java	CLanguage.java	732	Faroese																							
+CLanguage.Fijian	goryachev/util/CLanguage.java	CLanguage.java	733	Fijian																							
+CLanguage.Finnish	goryachev/util/CLanguage.java	CLanguage.java	734	Finnish		Finlandés	Финский	핀란드어	Φινλανδικά	芬兰语	Finsk	suomi	Finlandese	Finnois	Finska	finština	Finsk	芬蘭語	fiński	Finlandês		फिन		Finnisch	Fins		Finlandês
+CLanguage.French	goryachev/util/CLanguage.java	CLanguage.java	735	French		Francés	Французский	프랑스어	Γαλλικά	法语	Fransk	ranska	Francese	Français	Franska	francouzština	Fransk	法語	francuski	Francês		फ्रांसस		Französisch	Frans		Francês
+CLanguage.Fulah	goryachev/util/CLanguage.java	CLanguage.java	736	Fulah																							
+CLanguage.Gaelic	goryachev/util/CLanguage.java	CLanguage.java	738	Gaelic																							
+CLanguage.Galician	goryachev/util/CLanguage.java	CLanguage.java	739	Galician																							
+CLanguage.Ganda	goryachev/util/CLanguage.java	CLanguage.java	740	Ganda																							
+CLanguage.Georgian	goryachev/util/CLanguage.java	CLanguage.java	741	Georgian																							
+CLanguage.German	goryachev/util/CLanguage.java	CLanguage.java	742	German		Alemán	Немецкий	독일어	Γερμανικά	德语	Tysk	saksa	Tedesco	Allemand	Tyska	němčina	Tysk	德語	niemiecki	Alemão		जर्मन		Deutsch	Duits		Alemão
+CLanguage.Greek	goryachev/util/CLanguage.java	CLanguage.java	743	Greek		Griego	Греческий	그리스어	Ελληνικά	希腊语	Græsk	kreikka	Greco	Grec	Grekiska	řečtina	Gresk	希臘語	grecki	Grego		यूनान		Griechisch	Grieks		Grego
+CLanguage.Greenlandic	goryachev/util/CLanguage.java	CLanguage.java	744	Greenlandic																							
+CLanguage.Guarani	goryachev/util/CLanguage.java	CLanguage.java	745	Guarani																							
+CLanguage.Gujarati	goryachev/util/CLanguage.java	CLanguage.java	746	Gujarati																							
+CLanguage.Haitian	goryachev/util/CLanguage.java	CLanguage.java	748	Haitian																							
+CLanguage.Hausa	goryachev/util/CLanguage.java	CLanguage.java	749	Hausa																							
+CLanguage.Hebrew	goryachev/util/CLanguage.java	CLanguage.java	752	Hebrew		Hebreo	Иврит	히브리어	Εβραϊκά	希伯莱语	Hebraisk	heprea	Ebraico	Hébreu	Hebreiska	hebrejština	Hebraisk	希伯萊語	hebrajski	Hebraico		हब्रू		Hebräisch	Hebreeuws		Hebraico
+CLanguage.Herero	goryachev/util/CLanguage.java	CLanguage.java	753	Herero																							
+CLanguage.Hindi	goryachev/util/CLanguage.java	CLanguage.java	754	Hindi																							
+CLanguage.Hiri Motu	goryachev/util/CLanguage.java	CLanguage.java	755	Hiri Motu																							
+CLanguage.Hungarian	goryachev/util/CLanguage.java	CLanguage.java	756	Hungarian		Húngaro	Венгерский	헝가리어	Ουγγρικά	匈牙利语	Ungarsk	unkari	Ungherese	Hongrois	Ungerska	maďarština	Ungarsk	匈牙利語	węgierski	Húngaro		हंगेरियाई		Ungarisch	Hongaars		Húngaro
+CLanguage.Icelandic	goryachev/util/CLanguage.java	CLanguage.java	758	Icelandic		Islandés	Исландский	아이슬란드어	Ισλανδικά	冰岛语	Islandsk	islanti	Islandese	Islandais	Isländska	islandština	Islandsk	冰島語	islandzki	Islandês		आइसलैंड		Isländisch	IJslands		Islandês
+CLanguage.Ido	goryachev/util/CLanguage.java	CLanguage.java	759	Ido																							
+CLanguage.Igbo	goryachev/util/CLanguage.java	CLanguage.java	760	Igbo																							
+CLanguage.Indonesian	goryachev/util/CLanguage.java	CLanguage.java	761	Indonesian																							
+CLanguage.Interlingua	goryachev/util/CLanguage.java	CLanguage.java	762	Interlingua																							
+CLanguage.Interlingue	goryachev/util/CLanguage.java	CLanguage.java	763	Interlingue																							
+CLanguage.Inuktitut	goryachev/util/CLanguage.java	CLanguage.java	764	Inuktitut																							
+CLanguage.Inupiaq	goryachev/util/CLanguage.java	CLanguage.java	765	Inupiaq																							
+CLanguage.Irish	goryachev/util/CLanguage.java	CLanguage.java	766	Irish																							
+CLanguage.Italian	goryachev/util/CLanguage.java	CLanguage.java	767	Italian		Italiano	Итальянский	이탈리아어	Ιταλικά	意大利语	Italiensk	italia	Italiano	Italien	Italienska	italština	Italiensk	義大利語	włoski	Italiano		इतालव		Italienisch	Italiaans		Italiano
+CLanguage.Japanese	goryachev/util/CLanguage.java	CLanguage.java	769	Japanese		Japonés	Японский	일본어	Ιαπωνικά	日语	Japansk	japani	Giapponese	Japonais	Japanska	japonština	Japansk	日語	japoński	Japonês		जापान		Japanisch	Japans		Japonês
+CLanguage.Javanese	goryachev/util/CLanguage.java	CLanguage.java	770	Javanese																							
+CLanguage.Kannada	goryachev/util/CLanguage.java	CLanguage.java	772	Kannada																							
+CLanguage.Kanuri	goryachev/util/CLanguage.java	CLanguage.java	773	Kanuri																							
+CLanguage.Kashmiri	goryachev/util/CLanguage.java	CLanguage.java	774	Kashmiri																							
+CLanguage.Kazakh	goryachev/util/CLanguage.java	CLanguage.java	775	Kazakh																							
+CLanguage.Kikuyu	goryachev/util/CLanguage.java	CLanguage.java	776	Kikuyu																							
+CLanguage.Kinyarwanda	goryachev/util/CLanguage.java	CLanguage.java	777	Kinyarwanda																							
+CLanguage.Komi	goryachev/util/CLanguage.java	CLanguage.java	778	Komi																							
+CLanguage.Kongo	goryachev/util/CLanguage.java	CLanguage.java	779	Kongo																							
+CLanguage.Korean	goryachev/util/CLanguage.java	CLanguage.java	780	Korean		Coreano	Корейский	한국어	Κορεατικά	韩语	Koreansk	korea	Coreano	Coréen	Koreanska	korejština	Koreansk	韓語	koreański	Coreano		कोरियाई		Koreanisch	Koreaans		Coreano
+CLanguage.Kurdish	goryachev/util/CLanguage.java	CLanguage.java	781	Kurdish																							
+CLanguage.Kwanyama	goryachev/util/CLanguage.java	CLanguage.java	782	Kwanyama																							
+CLanguage.Kyrgyz	goryachev/util/CLanguage.java	CLanguage.java	783	Kyrgyz																							
+CLanguage.Lao	goryachev/util/CLanguage.java	CLanguage.java	785	Lao																							
+CLanguage.Latin	goryachev/util/CLanguage.java	CLanguage.java	786	Latin		Latín	Латинский	라틴	Λατινικά	拉丁文	Latín	Latinalainen	Latino	Latin	Latin	Latinka	Latinsk	拉丁文	Łaciński	Latino		लैटिन		Latein	Latijns		Latino
+CLanguage.Latvian	goryachev/util/CLanguage.java	CLanguage.java	787	Latvian																							
+CLanguage.Limburgan	goryachev/util/CLanguage.java	CLanguage.java	788	Limburgan																							
+CLanguage.Lingala	goryachev/util/CLanguage.java	CLanguage.java	789	Lingala																							
+CLanguage.Lithuanian	goryachev/util/CLanguage.java	CLanguage.java	790	Lithuanian																							
+CLanguage.Luba-Katanga	goryachev/util/CLanguage.java	CLanguage.java	791	Luba-Katanga																							
+CLanguage.Luxembourgish	goryachev/util/CLanguage.java	CLanguage.java	792	Luxembourgish																							
+CLanguage.Macedonian	goryachev/util/CLanguage.java	CLanguage.java	794	Macedonian																							
+CLanguage.Malagasy	goryachev/util/CLanguage.java	CLanguage.java	795	Malagasy																							
+CLanguage.Malay	goryachev/util/CLanguage.java	CLanguage.java	796	Malay		Malayo	Малайский	말레이시아어	Μαλαϊκά	马来语	Malajisk	malaiji	Malese	Malais	Malajiska	malajština	Malaisisk	馬來語	malajski	Malaio		मलय		Malaiisch	Maleis		Malaio
+CLanguage.Malayalam	goryachev/util/CLanguage.java	CLanguage.java	797	Malayalam																							
+CLanguage.Maltese	goryachev/util/CLanguage.java	CLanguage.java	798	Maltese																							
+CLanguage.Manx	goryachev/util/CLanguage.java	CLanguage.java	799	Manx																							
+CLanguage.Maori	goryachev/util/CLanguage.java	CLanguage.java	800	Maori																							
+CLanguage.Marathi	goryachev/util/CLanguage.java	CLanguage.java	801	Marathi																							
+CLanguage.Marshallese	goryachev/util/CLanguage.java	CLanguage.java	802	Marshallese																							
+CLanguage.Mongolian	goryachev/util/CLanguage.java	CLanguage.java	803	Mongolian																							
+CLanguage.Nauru	goryachev/util/CLanguage.java	CLanguage.java	805	Nauru		Nauru	Науру	나우루	Ναούρου	瑙鲁	Nauru	Nauru	Nauru	Nauru	Nauru	Nauru	Nauru	諾魯	Nauru	Nauru		नाउरु		Nauru	Nauru		Nauru
+CLanguage.Navajo	goryachev/util/CLanguage.java	CLanguage.java	806	Navajo																							
+CLanguage.Ndonga	goryachev/util/CLanguage.java	CLanguage.java	807	Ndonga																							
+CLanguage.Nepali	goryachev/util/CLanguage.java	CLanguage.java	808	Nepali																							
+CLanguage.Northern Sami	goryachev/util/CLanguage.java	CLanguage.java	809	Northern Sami																							
+CLanguage.North Ndebele	goryachev/util/CLanguage.java	CLanguage.java	810	North Ndebele																							
+CLanguage.Norwegian	goryachev/util/CLanguage.java	CLanguage.java	813	Norwegian		Noruego	Норвежский	노르웨이어	Νορβηγικά	挪威语	Norsk	norja	Norvegese	Norvégien	Norska	norština	Norsk	挪威語	norweski	Norueguês		नोरवेज		Norwegisch	Noors		Norueguês
+CLanguage.Norwegian Bokmal	goryachev/util/CLanguage.java	CLanguage.java	811	Norwegian Bokmål																							
+CLanguage.Norwegian Nynorsk	goryachev/util/CLanguage.java	CLanguage.java	812	Norwegian Nynorsk																							
+CLanguage.Nyanja	goryachev/util/CLanguage.java	CLanguage.java	814	Nyanja																							
+CLanguage.Ojibwa	goryachev/util/CLanguage.java	CLanguage.java	816	Ojibwa																							
+CLanguage.Old Slavonic	goryachev/util/CLanguage.java	CLanguage.java	817	Old Slavonic																							
+CLanguage.Oriya	goryachev/util/CLanguage.java	CLanguage.java	818	Oriya																							
+CLanguage.Oromo	goryachev/util/CLanguage.java	CLanguage.java	819	Oromo																							
+CLanguage.Ossetian	goryachev/util/CLanguage.java	CLanguage.java	820	Ossetian																							
+CLanguage.Pali	goryachev/util/CLanguage.java	CLanguage.java	822	Pali																							
+CLanguage.Panjabi	goryachev/util/CLanguage.java	CLanguage.java	823	Panjabi																							
+CLanguage.Pashto	goryachev/util/CLanguage.java	CLanguage.java	824	Pashto																							
+CLanguage.Pashtu	goryachev/util/CLanguage.java	CLanguage.java	825	Pashtu																							
+CLanguage.Persian	goryachev/util/CLanguage.java	CLanguage.java	826	Persian		Persa	Персидский	페르시아어	Περσικά	波斯语	Persisk	persia	Persiano	Persan	Persiska	perština	Persisk	波斯語	perski	Persa		फारस		Persisch	Perzisch		Persa
+CLanguage.Polish	goryachev/util/CLanguage.java	CLanguage.java	827	Polish		Polaco	Польский	폴란드어	Πολωνικά	波兰语	Polak	puola	Polacco	Polonais	Polska	polština	Polsk	波蘭語	polski	Polaco		पोल		Polnisch	Pools		Polaco
+CLanguage.Portuguese	goryachev/util/CLanguage.java	CLanguage.java	828	Portuguese		Portugués	Португальский	포루투갈어	Πορτογαλικά	葡萄牙语	Portugisisk	portugali	Portoghese	Portugais	Portugisiska	portugalština	Portugesisk	葡萄牙語	portugalski	Português		पुर्तगाल		Portugiesisch	Portugees		Português
+CLanguage.Portuguese BR	goryachev/util/CLanguage.java	CLanguage.java	829	Portuguese (BR)																							
+CLanguage.Provencal	goryachev/util/CLanguage.java	CLanguage.java	830	Provençal																							
+CLanguage.Quechua	goryachev/util/CLanguage.java	CLanguage.java	832	Quechua																							
+CLanguage.Romanian	goryachev/util/CLanguage.java	CLanguage.java	834	Romanian		Rumano	Румынский	루마니아어	Ρουμανικά	罗马尼亚语	Rumænsk	romania	Rumeno	Roumain	Rumänska	rumunština	Rumensk	羅馬尼亞語	rumuński	Romeno		रोमेनियाई		Rumänisch	Roemeens		Romeno
+CLanguage.Romansh	goryachev/util/CLanguage.java	CLanguage.java	835	Romansh																							
+CLanguage.Rundi	goryachev/util/CLanguage.java	CLanguage.java	836	Rundi																							
+CLanguage.Russian	goryachev/util/CLanguage.java	CLanguage.java	837	Russian		Ruso	Русский	러시아어	Ρωσικά	俄语	Russisk	venäjä	Russo	Russe	Ryska	ruština	Russisk	俄語	rosyjski	Russo		रूस		Russisch	Russisch		Russo
+CLanguage.Samoan	goryachev/util/CLanguage.java	CLanguage.java	839	Samoan																							
+CLanguage.Sango	goryachev/util/CLanguage.java	CLanguage.java	840	Sango																							
+CLanguage.Sanskrit	goryachev/util/CLanguage.java	CLanguage.java	841	Sanskrit																							
+CLanguage.Sardinian	goryachev/util/CLanguage.java	CLanguage.java	842	Sardinian																							
+CLanguage.Serbian	goryachev/util/CLanguage.java	CLanguage.java	843	Serbian																							
+CLanguage.Serbo-Croatian	goryachev/util/CLanguage.java	CLanguage.java	844	Serbo-Croatian		Serbio-Croata	Сербскохорватский	세르보크로아티아어	Σερβοκροατικά	塞尔维亚-克罗地亚语	Serbokroatisk	serbokroatia	Serbo-Croato	Serbo-croate	Serbokroatiska	srbochorvatština	Serbo-kroatisk	塞爾維亞-克羅地亞語	serbsko-chorwacki	Servo-Croata		सर्बो-क्रोएशियाई		Serbokroatisch	Servo-Kroatisch		Servo-Croata
+CLanguage.Serbo-Croatian sh_HR	goryachev/util/CLanguage.java	CLanguage.java	845	Serbo-Croatian (sh_HR)																							
+CLanguage.Serbo-Croatian sh_SR	goryachev/util/CLanguage.java	CLanguage.java	846	Serbo-Croatian (Latin)																							
+CLanguage.Serbo-Croatian sh_YU	goryachev/util/CLanguage.java	CLanguage.java	847	Serbo-Croatian (Cyrillic)																							
+CLanguage.Shona	goryachev/util/CLanguage.java	CLanguage.java	848	Shona																							
+CLanguage.Sichuan Yi	goryachev/util/CLanguage.java	CLanguage.java	849	Sichuan Yi																							
+CLanguage.Sindhi	goryachev/util/CLanguage.java	CLanguage.java	850	Sindhi																							
+CLanguage.Sinhala	goryachev/util/CLanguage.java	CLanguage.java	851	Sinhala																							
+CLanguage.Slovak	goryachev/util/CLanguage.java	CLanguage.java	852	Slovak		Eslovaco	Словакский	슬로바키아어	Σλοβακικά	斯洛伐克语	Slovakisk	slovakki	Slovacco	Slovaque	Slovakiska	slovenština	Slovakisk	斯洛伐克語	słowacki	Eslovaco		स्लोवाक		Slowakisch	Slowaaks		Eslovaco
+CLanguage.Slovenian	goryachev/util/CLanguage.java	CLanguage.java	853	Slovenian		Esloveno	Словенский	슬로베니아어	Σλοβενικά	斯洛文尼亚语	Slovensk	sloveeni	Sloveno	Slovène	Slovenska	slovinština	Slovensk	斯洛文尼亞語	słoweński	Esloveno		स्लोवेन		Slowenisch	Sloveens		Esloveno
+CLanguage.Somali	goryachev/util/CLanguage.java	CLanguage.java	854	Somali																							
+CLanguage.Southern Sotho	goryachev/util/CLanguage.java	CLanguage.java	856	Southern Sotho																							
+CLanguage.South Ndebele	goryachev/util/CLanguage.java	CLanguage.java	855	South Ndebele																							
+CLanguage.Spanish	goryachev/util/CLanguage.java	CLanguage.java	857	Spanish		Español	Испанский	스페인어	Ισπανικά	西班牙语	Spansk	espanja	Spagnolo	Espagnol	Spanska	španělština	Spansk	西班牙語	hiszpański	Espanhol		स्पेन		Spanisch	Spaans		Espanhol
+CLanguage.Spanish MX	goryachev/util/CLanguage.java	CLanguage.java	858	Spanish (MX)																							
+CLanguage.Spanish US	goryachev/util/CLanguage.java	CLanguage.java	859	Spanish (US)																							
+CLanguage.Sundanese	goryachev/util/CLanguage.java	CLanguage.java	860	Sundanese																							
+CLanguage.Swahili	goryachev/util/CLanguage.java	CLanguage.java	861	Swahili																							
+CLanguage.Swati	goryachev/util/CLanguage.java	CLanguage.java	862	Swati																							
+CLanguage.Swedish	goryachev/util/CLanguage.java	CLanguage.java	863	Swedish		Sueco	Шведский	스웨덴어	Σουηδικά	瑞典语	Svensk	ruotsi	Svedese	Suédois	Svenska	švédština	Svensk	瑞典語	szwedzki	Sueco		स्वड		Swedisch	Zweeds		Sueco
+CLanguage.Tagalog	goryachev/util/CLanguage.java	CLanguage.java	865	Tagalog																							
+CLanguage.Tahitian	goryachev/util/CLanguage.java	CLanguage.java	866	Tahitian																							
+CLanguage.Tajik	goryachev/util/CLanguage.java	CLanguage.java	867	Tajik																							
+CLanguage.Tamil	goryachev/util/CLanguage.java	CLanguage.java	868	Tamil																							
+CLanguage.Tatar	goryachev/util/CLanguage.java	CLanguage.java	869	Tatar																							
+CLanguage.Telugu	goryachev/util/CLanguage.java	CLanguage.java	870	Telugu																							
+CLanguage.Thai	goryachev/util/CLanguage.java	CLanguage.java	871	Thai		Tailandés	Тайский	타이어	Ταϊλανδικά	泰语	Thailandsk	thai	Tailandese	Thaï	Thai	thajština	Thailandsk	泰語	tajski	Tailandês		थाई		Thailändisch	Thai		Tailandês
+CLanguage.Tibetan	goryachev/util/CLanguage.java	CLanguage.java	872	Tibetan																							
+CLanguage.Tigrinya	goryachev/util/CLanguage.java	CLanguage.java	873	Tigrinya																							
+CLanguage.Tonga	goryachev/util/CLanguage.java	CLanguage.java	874	Tonga		Tonga	Тонга	통가	Τόνγκα	汤加	Tonga	Tonga	Tonga	Tonga	Tonga	Tonga	Tonga	湯加	Tonga	Tonga		टोंगा		Tonga	Tonga		Tonga
+CLanguage.Tsonga	goryachev/util/CLanguage.java	CLanguage.java	875	Tsonga																							
+CLanguage.Tswana	goryachev/util/CLanguage.java	CLanguage.java	876	Tswana																							
+CLanguage.Turkish	goryachev/util/CLanguage.java	CLanguage.java	877	Turkish		Turco	Турецкий	터키어	Τουρκικά	土耳其	Tyrkisk	turkki	Turco	Turk	Turkiska	turečtina	Tyrkisk	土耳其	turecki	Turco		तुर्क		Türkisch	Turks		Turco
+CLanguage.Turkmen	goryachev/util/CLanguage.java	CLanguage.java	878	Turkmen																							
+CLanguage.Twi	goryachev/util/CLanguage.java	CLanguage.java	879	Twi																							
+CLanguage.Ukrainian	goryachev/util/CLanguage.java	CLanguage.java	881	Ukrainian		Ucraniano	Украинский	우크라이나어	Ουκρανικά	乌克兰语	Ukrainsk	ukraina	Ucraino	Ukrainien	Ukrainska	ukrajinština	Ukrainisk	烏克蘭語	ukraiński	Ucraniano		युक्रेन		Ukrainisch	Oekraïens		Ucraniano
+CLanguage.Urdu	goryachev/util/CLanguage.java	CLanguage.java	882	Urdu																							
+CLanguage.Uyghur	goryachev/util/CLanguage.java	CLanguage.java	883	Uyghur																							
+CLanguage.Uzbek	goryachev/util/CLanguage.java	CLanguage.java	884	Uzbek																							
+CLanguage.Venda	goryachev/util/CLanguage.java	CLanguage.java	886	Venda																							
+CLanguage.Vietnamese	goryachev/util/CLanguage.java	CLanguage.java	887	Vietnamese		Vietnamita	Вьетнамский	베트남어	Βιετναμικά	越南语	Vietnamesisk	vietnam	Vietnamita	Vietnamien	Vietnamesiska	vietnamština	Vietnamesisk	越南語	wietnamski	Vietnamita		वियतनाम		Vietnamesisch	Vietnamees		Vietnamita
+CLanguage.Volapuk	goryachev/util/CLanguage.java	CLanguage.java	888	Volapük																							
+CLanguage.Walloon	goryachev/util/CLanguage.java	CLanguage.java	890	Walloon																							
+CLanguage.Welsh	goryachev/util/CLanguage.java	CLanguage.java	891	Welsh																							
+CLanguage.Western Frisian	goryachev/util/CLanguage.java	CLanguage.java	892	Western Frisian																							
+CLanguage.Xhosa	goryachev/util/CLanguage.java	CLanguage.java	894	Xhosa																							
+CLanguage.Yiddish	goryachev/util/CLanguage.java	CLanguage.java	896	Yiddish																							
+CLanguage.Yoruba	goryachev/util/CLanguage.java	CLanguage.java	897	Yoruba																							
+CLanguage.Zhuang	goryachev/util/CLanguage.java	CLanguage.java	899	Zhuang																							
+CLanguage.Zulu	goryachev/util/CLanguage.java	CLanguage.java	900	Zulu																							
+CMemoryBar.description	goryachev/ui/CMemoryBar.java	CMemoryBar.java	123	Click to try to free up memory.																							
+CMemoryBar.gigabytes	goryachev/ui/CMemoryBar.java	CMemoryBar.java	137	GB		GB	ГБ	GB	GB	GB	GB	Gt	GB	Go?	GB	GB	GB	GB	GB	GB		GB		GB	GB		GB
+CMemoryBar.max ram	goryachev/ui/CMemoryBar.java	CMemoryBar.java	121	Maximum: {0}																							
+CMemoryBar.megabytes	goryachev/ui/CMemoryBar.java	CMemoryBar.java	150	MB		MB	МБ	MB	MB	MB	MB	Mt	MB	Mo	MB	MB	MB	MB	MB	MB		MB		MB	MB		MB
+CMemoryBar.total ram	goryachev/ui/CMemoryBar.java	CMemoryBar.java	120	Allocated: {0}																							
+CMemoryBar.used ram	goryachev/ui/CMemoryBar.java	CMemoryBar.java	119	Used memory: {0}																							
+ContactSupport.button.send bug mail	goryachev/ui/dialogs/ContactSupport.java	ContactSupport.java	28	Send Email		Enviar correo electrónico	Отправить Email	이메일 보내기	Αποστολή μηνύματος ηλ. ταχυδρομείου	发送电子邮件	Send e-mail	Lähetä sähköpostiviesti	Invia e-mail	Envoyer Courriel	Skicka e-post	Poslat e-mail	Send Epost	發送電子郵件	Wyślij e-mail	Enviar e-mail		ईमेल भेजें		E-Mail senden	E-mail verzenden		Enviar Email
+ContactSupport.button.send feature mail	goryachev/ui/dialogs/ContactSupport.java	ContactSupport.java	70	Send Email		Enviar correo electrónico	Отправить Email	이메일 보내기	Αποστολή μηνύματος ηλ. ταχυδρομείου	发送电子邮件	Send e-mail	Lähetä sähköpostiviesti	Invia e-mail	Envoyer Courriel	Skicka e-post	Poslat e-mail	Send Epost	發送電子郵件	Wyślij e-mail	Enviar e-mail		ईमेल भेजें		E-Mail senden	E-mail verzenden		Enviar Email
+ContactSupport.dialog.bug.text	goryachev/ui/dialogs/ContactSupport.java	ContactSupport.java	47	If you find a bug, or feel that something that does not work right, please tell us.<br><br>Email us at <b>{0}</b>																							
+ContactSupport.dialog.bug.title	goryachev/ui/dialogs/ContactSupport.java	ContactSupport.java	46	Report a Bug																							
+ContactSupport.dialog.feature.text	goryachev/ui/dialogs/ContactSupport.java	ContactSupport.java	89	If there is a feature that will save you a lot of time, or make things easier, or simpler, please tell us.<br><br>Email us at <b>{0}</b></p>																							
+ContactSupport.dialog.feature.title	goryachev/ui/dialogs/ContactSupport.java	ContactSupport.java	88	Request a Feature																							
+COptionDialog.changes.title	goryachev/ui/dialogs/options/COptionDialog.java	COptionDialog.java	71	Discard changes?																							
+COptionPanel.warning.restart.message	goryachev/ui/dialogs/options/OptionPanel.java	OptionPanel.java	165	Please restart the application for the changes to take effect.																							
+COptionPanel.warning.restart.title	goryachev/ui/dialogs/options/OptionPanel.java	OptionPanel.java	164	Restart Required																							
+CPrompts.find something	goryachev/ui/CPrompts.java	CPrompts.java	8	find...																							
+CreateDataFileDialog.button.create file	goryachev/password/CreateDataFileDialog.java	CreateDataFileDialog.java	75	Create		Crear	Создать	생성	Δημιουργία	创建	Oprette	Luo	Crea	Créer	Skapa	Vytvořit	Opprett	建立	Utwórz	Criar		निर्मित करें		Erstellen	Creëren		Criar
+CreateDataFileDialog.err.dir	goryachev/password/CreateDataFileDialog.java	CreateDataFileDialog.java	181	{0} is a directory.																							
+CreateDataFileDialog.err.overwrite	goryachev/password/CreateDataFileDialog.java	CreateDataFileDialog.java	185	Do you want t overwrite existing file {0}?																							
+CreateDataFileDialog.file	goryachev/password/CreateDataFileDialog.java	CreateDataFileDialog.java	106	File:		Archivo:	Файл:	파일:	Αρχείο:	文件：	Fil:	Tiedosto:	File:	Fichier:	Fil:	Soubor:	Fil:	檔案：	Plik:	Ficheiro:		फाइल:		Datei:	Bestand:		Arquivo:
+CreateDataFileDialog.label.password	goryachev/password/CreateDataFileDialog.java	CreateDataFileDialog.java	110	Password:		Contraseña:	Пароль:	암호:	Κωδικός πρόσβασης:	密码：	Adgangskode:	Salasana:		Mot de Passe:	Lösenord:	Heslo:	Passord:	密碼：	Hasło:	Palavra-passe:		पासवर्ड:		Passwort:	Wachtwoord:		Senha:
+CreateDataFileDialog.label.verify password	goryachev/password/CreateDataFileDialog.java	CreateDataFileDialog.java	113	Verify:																							
+CreateDataFileDialog.title.create file	goryachev/password/CreateDataFileDialog.java	CreateDataFileDialog.java	48	Create Password Database																							
+CStatusBar.button.log console	goryachev/ui/CStatusBar.java	CStatusBar.java	47	Open Log Console																							
+ErrorDialog.title	goryachev/ui/Dialogs.java	Dialogs.java	61	Unexpected Error		Error inesperado	Неожиданная ошибка	예상하지 못한 에러	Μη αναμενόμενο σφάλμα	意外错误	Uventet fejl	Odottamaton virhe	Errore inaspettato	Erreur Inattendue	Oväntat fel	Neočekávaná chyba	Uventet Feil	意外錯誤	Nieoczekiwany błąd	Erro Inesperado		अप्रत्याशित त्रुटि		Unerwarteter Fehler	Onverwachte fout		Erro Inesperado
+FontChooserDialog.font	goryachev/ui/options/edit/FontChooserDialog.java	FontChooserDialog.java	144	Font:		Tipo:	Шрифт:	폰트:	Γραμματοσειρά:	字体：	Skrifttype:	Fontti:	Font:	Police de caractères:	Teckensnitt:	Písmo:	Skrifttype:	字型：	Czcionka:	Fonte:		फोंट:		Schriftart:	Lettertype:		Fonte:
+FontChooserDialog.font style.bold	goryachev/ui/options/edit/FontChooserDialog.java	FontChooserDialog.java	80	Bold																							
+FontChooserDialog.font style.italic	goryachev/ui/options/edit/FontChooserDialog.java	FontChooserDialog.java	83	Italic																							
+FontChooserDialog.pangram - phrase that uses all the letters	goryachev/ui/options/edit/FontChooserDialog.java	FontChooserDialog.java	123	The five boxing wizards jump quickly 1,234,567,890 times.																							
+FontChooserDialog.size	goryachev/ui/options/edit/FontChooserDialog.java	FontChooserDialog.java	146	Size:		Tamaño:	Размер:	크기:	Μέγεθος:	大小：	Størrelse:	Koko:	Dimensione:	Taille:	Storlek:	Velikost:	Størrelse:	大小：	Rozmiar:	Tamanho:		आमाप:		Größe:	Grootte:		Tamanho:
+FontChooserDialog.style	goryachev/ui/options/edit/FontChooserDialog.java	FontChooserDialog.java	145	Style:																							
+FontChooserDialog.title	goryachev/ui/options/edit/FontChooserDialog.java	FontChooserDialog.java	44	Font		Fuente	Шрифт	폰트	Γραμματοσειρά	字体	Skrifttype	Fontti	Font	Police de Caractères	Teckensnitt	Písmo	Skrifttype	字體	Czcionka	Tipo de Letra		फोन्ट		Schriftart	Lettertype		Fonte
+FontOption.bold	goryachev/ui/options/edit/FontOptionEditor.java	FontOptionEditor.java	67	Bold																							
+FontOption.bold+italic	goryachev/ui/options/edit/FontOptionEditor.java	FontOptionEditor.java	69	Bold Italic																							
+FontOption.italic	goryachev/ui/options/edit/FontOptionEditor.java	FontOptionEditor.java	68	Italic																							
+FontOption.regular	goryachev/ui/options/edit/FontOptionEditor.java	FontOptionEditor.java	70	Regular		Regular	Обычный	보통	Κανονικός	正则	Standard	Tavallinen	Regolare	Régulier	Reguljär	Regulární	Normal	正則	Regularne	Normal		नियमित		Regulär	Standaard		Normal
+KeyBindingEditorDialog.button.Clear	goryachev/ui/options/edit/KeyBindingEditor.java	KeyBindingEditor.java	77	Clear		Borrar	Очистить	선택 취소	Απαλοιφή	清除		Tyhjennä	Deseleziona	Effacer	Töm	Vymazat	Fjern	清除		Limpar		मिटाएँ		Löschen	Wissen		Limpar
+KeyBindingEditorDialog.label.new key	goryachev/ui/options/edit/KeyBindingEditor.java	KeyBindingEditor.java	72	New key:																							
+KeyBindingEditorDialog.title	goryachev/ui/options/edit/KeyBindingEditor.java	KeyBindingEditor.java	84	Modify Key																							
+KeyBindingsEditor.button.modify	goryachev/ui/options/edit/KeyBindingsEditor.java	KeyBindingsEditor.java	31	Modify		Modificar	Изменить	수정	Τροποποίηση	修改	Redigér	Muokkaa	Modifica	Modifier	Ändra	Upravit	Endre	修改	Modyfikuj	Modificar		बदलें		Modifizieren	Wijzigen		Modificar
+KeyBindingsEditor.column.command	goryachev/ui/options/edit/KeyBindingsEditor.java	KeyBindingsEditor.java	42	Command		Comando	Команда	명령	Εντολή	命令	Kommando	Komento	Comando	Commande	Kommando	Příkaz	Kommando	命令	Polecenie	Comando		आदेश		Befehl	Opdracht		Comando
+KeyBindingsEditor.column.key	goryachev/ui/options/edit/KeyBindingsEditor.java	KeyBindingsEditor.java	50	Key		Clave	Ключ	키	Κλειδί	键	Nøgle	Avain	Chiave	Clé	Nyckel	Klíč	Nøkkel	鍵	Klucz	Chave		कुंज		Schlüssel	Sleutel		Chave
+KeyBindingsEditor.column.subsystem	goryachev/ui/options/edit/KeyBindingsEditor.java	KeyBindingsEditor.java	46	Where																							
+LicenseDialog.button.accept	goryachev/ui/dialogs/license/LicenseDialog.java	LicenseDialog.java	17	I Accept																							
+LicenseDialog.title	goryachev/ui/dialogs/license/LicenseDialog.java	LicenseDialog.java	26	License Agreement		Contrato de licencia	Лицензионный договор	라이센스 계약내용	Άδεια χρήσης	许可证协议	Licensaftale	Lisenssisopimus	Contratto di licenza	Accord de Licence	Licensavtal	Licenční smlouva	Lisensavtale	授權合約	Umowa licencyjna	Acordo da Licença		लाइसेन्स अनुबंध		Lizenzvereinbarung	Licentiebeheer		Contrato da Licença
+ListTab.column.name	goryachev/password/ListTab.java	ListTab.java	46	Name		Nombre	Имя	이름	Όνομα	名称	Navn	Nimi	Nome	Nom	Namn		Navn	名稱	Nazwa	Nome		नाम		Name	Naam		Nome
+ListTab.column.notes	goryachev/password/ListTab.java	ListTab.java	54	Notes		Notas	Заметки	노트	Σημειώσεις	注释	Noter	Huomautukset	Note	Notes	Anteckningar	Poznámky	Notater	註釋	Notatki	Notas		नोट		Notizen	Notities		Anotações
+ListTab.column.user	goryachev/password/ListTab.java	ListTab.java	50	User Name		Nombre de usuario	Имя пользователя	사용자 이름	Όνομα χρήστη	用户名	Brugernavn	Käyttäjänimi			Användarnamn	Uživatelské jméno	Brukernavn	使用者名稱	Nazwa użytkownika	Nome de Utilizador		प्रयोक्ता नाम		Benutzername	Gebruikersnaam		Nome do Usuário
+LockPanel.create new data file	goryachev/password/LockPanel.java	LockPanel.java	57	Create New																							
+LockPanel.file	goryachev/password/LockPanel.java	LockPanel.java	90	Open Password Database:																							
+LockPanel.password	goryachev/password/LockPanel.java	LockPanel.java	94	Password:		Contraseña:	Пароль:	암호:	Κωδικός πρόσβασης:	密码：	Adgangskode:	Salasana:		Mot de Passe:	Lösenord:	Heslo:	Passord:	密碼：	Hasło:	Palavra-passe:		पासवर्ड:		Passwort:	Wachtwoord:		Senha:
+LogWindow.button.clear	goryachev/ui/log/LogWindow.java	LogWindow.java	147	Clear		Borrar	Очистить	선택 취소	Απαλοιφή	清除		Tyhjennä	Deseleziona	Effacer	Töm	Vymazat	Fjern	清除		Limpar		मिटाएँ		Löschen	Wissen		Limpar
+LogWindow.button.copy	goryachev/ui/log/LogWindow.java	LogWindow.java	145	Copy		Copiar	Копировать	복사	Αντιγραφή	复制	Kopier	Kopioi	Copia	Copier	Kopiera	Kopírovat	Kopier	複製		Copiar		प्रतिलिपि		Kopieren	Kopiëren		Copiar
+LogWindow.button.display all	goryachev/ui/log/LogWindow.java	LogWindow.java	148	Display All																							
+LogWindow.button.preferences	goryachev/ui/log/LogWindow.java	LogWindow.java	152	Preferences		Preferencias	Установки	선택	Προτιμήσεις	首选项	Indstillinger	Määritykset	Preferenze	Préférences	Inställningar	Předvolby	Innstillinger	喜好設定	Ustawienia	Preferências		पसंदगियाँ		Einstellungen	Voorkeuren		Preferências
+LogWindow.button.save	goryachev/ui/log/LogWindow.java	LogWindow.java	146	Save		Guardar	Сохранить	저장하기	Αποθήκευση	保存	Gem	Tallenna	Salva	Enregistrer	Spara	Uložit	Lagre	儲存	Zapisz	Guardar		सहेजें		Speichern	Opslaan		Salvar
+LogWindow.column.event	goryachev/ui/log/LogWindow.java	LogWindow.java	86	Event		Evento	Событие	이벤트	Συμβάν	事件	Hændelse	Tapahtuma	Evento	Événement	Händelse	Událost	Hendelse	事件	Zdarzenie	Evento		घटना		Ereignis	Gebeurtenis		Evento
+LogWindow.column.time	goryachev/ui/log/LogWindow.java	LogWindow.java	80	Time		Tiempo	Время	시간	Ώρα	时间	Tid	Aika		Heure	Tid	Čas	Tid	時間	Godzina	Hora		समय		Zeit	Tijd		Hora
+LogWindow.find	goryachev/ui/log/LogWindow.java	LogWindow.java	141	Find:		Hallar:	Найти:	찾기:	Εύρεση:	查找：	Find:	Etsi:	Trova:	Rechercher:	Sök:	Najít:	Finn:	尋找：	Znajdź:	Encontrar:		ढूंढ़ें:		Suchen:	Zoeken:		Encontrar:
+LogWindow.title	goryachev/ui/log/LogWindow.java	LogWindow.java	56	Log Console																							
+MainWindow.err.file exists	goryachev/password/CreateDataFileDialog.java	CreateDataFileDialog.java	248	File {0} exists, do you want to overwrite it?																							
+MainWindow.menu.about this app	goryachev/password/MainWindow.java	MainWindow.java	151	About		Acerca de	О программе	정보	Πληροφορίες	关于	Om	Tietoja:	Riguardo a	À propos	Om	O aplikaci	Om	關於	O programie	Sobre		परिचय		Info	Over		Sobre
+MainWindow.menu.bill or rights	goryachev/password/MainWindow.java	MainWindow.java	149	U.S. Bill of Rights																							
+MainWindow.menu.change database password	goryachev/password/MainWindow.java	MainWindow.java	128	Change Database Password																							
+MainWindow.menu.clear clipboard	goryachev/password/MainWindow.java	MainWindow.java	138	Clear Clipboard																							
+MainWindow.menu.copy password	goryachev/password/MainWindow.java	MainWindow.java	137	Copy &Password to Clipboard																							
+MainWindow.menu.copy username	goryachev/password/MainWindow.java	MainWindow.java	136	Copy &User Name to Clipboard																							
+MainWindow.menu.delete entry	goryachev/password/MainWindow.java	MainWindow.java	140	Delete		Eliminar	Удалить		Διαγραφή	删除	Slette	Poista		Supprimer	Radera	Odstranit	Slette	刪除		Apagar		हटाएँ		Löschen	Wissen		
+MainWindow.menu.edit	goryachev/password/MainWindow.java	MainWindow.java	135	&Edit		&Editar	&Правка	편집(&E)	&Επεξεργασία	编辑(&E)	&Rediger	Muo&kkaa	&Modifica	&Éditer	&Redigera	&Úpravy	&Rediger	編輯(&E)	&Edytuj	&Editar		&संपादन		&Bearbeiten	&Bewerken		&Editar
+MainWindow.menu.exit	goryachev/password/MainWindow.java	MainWindow.java	132	&Exit		&Salir	&Выйти	&나가기	&Έξοδος	退出(&E)	&Afslut	&Poistu	&Esci	&Quitter	&Avsluta	&Ukončit	&Avslutt	退出(&E)	&Zakończ	&Sair		&निर्गम करें		&Verlassen	&Afsluiten		&Sair
+MainWindow.menu.file	goryachev/password/MainWindow.java	MainWindow.java	120	&File		&Archivo	&Файл	파일 (&F)	&Αρχείο	文件(&F)	&Fil	&Tiedosto	&File	&Fichier	&Fil	&Soubor	&Fil	檔案(&F)	&Plik	&Ficheiro		&फाइल		&Datei	&Bestand		&Arquivo
+MainWindow.menu.help	goryachev/password/MainWindow.java	MainWindow.java	146	&Help		&Ayuda	&Справка	도움말 (&H)	&Βοήθεια	帮助(&H)	&Hjælp	&Ohje	&Guida	&Aide	&Hjälp	&Nápověda	&Hjelp	說明(&H)	&Pomoc	&Ajuda		&मदद		&Hilfe	&Help		&Ajuda
+MainWindow.menu.lock database	goryachev/password/MainWindow.java	MainWindow.java	127	Lock		Bloqueo	Блок	잠금	Κλείδωμα	锁定	Lås	Lukko		Verrou	Lås	Zámek	Lås	鎖定	Blokada	Bloquear		पाश			Vergrendelen		Bloquear
+MainWindow.menu.new data file	goryachev/password/MainWindow.java	MainWindow.java	121	New Database																							
+MainWindow.menu.open file	goryachev/password/MainWindow.java	MainWindow.java	123	Open		Abrir	Открыть	열기	Άνοιγμα	打开	Åben	Avaa	Apri	Ouvrir	Öppna	Otevřít	Åpen	開啟	Otwórz	Abrir		खोलें		Öffnen	Openen		Abrir
+MainWindow.menu.preferences	goryachev/password/MainWindow.java	MainWindow.java	130	&Preferences																							
+MainWindow.menu.save file	goryachev/password/MainWindow.java	MainWindow.java	124	Save		Guardar	Сохранить	저장하기	Αποθήκευση	保存	Gem	Tallenna	Salva	Enregistrer	Spara	Uložit	Lagre	儲存	Zapisz	Guardar		सहेजें		Speichern	Opslaan		Salvar
+MainWindow.menu.save file as	goryachev/password/MainWindow.java	MainWindow.java	125	Save As		Guardar como	Сохранить как	다른 이름으로 저장하기	Αποθήκευση ως	另存为	Gem som	Tallenna nimellä	Salva come	Enregistrer Sous	Spara som	Uložit jako	Lagre Som	另存為	Zapisz jako	Guardar Como		ऐसे सहेजें		Speichern als	Opslaan als		Salvar Como
+MainWindow.menu.show license	goryachev/password/MainWindow.java	MainWindow.java	147	License		Licencia	Лицензия	라이선스	Άδεια χρήσης	许可证	Licens	Lisenssi	Licenza	Licence	Licens	Licence	Lisens	授權	Licencja	Licença		लाइसेंस		Lizenz	Licentie		Licença
+MainWindow.saving database	goryachev/password/MainWindow.java	MainWindow.java	516	Saving database...																							
+MainWindow.title.bill of rights	goryachev/password/MainWindow.java	MainWindow.java	489	The U. S. Bill of Rights																							
+MainWindow.title.change	goryachev/password/MainWindow.java	MainWindow.java	529	Change Database Password																							
+MainWindow.toolbar.add entry	goryachev/password/MainWindow.java	MainWindow.java	100	Add		Añadir	Добавить	추가	Προσθήκη	添加	Tilføj	Lisää	Aggiungi	Ajouter	Lägg till	Přidat	Legg til	新增		Adicionar		जोड़ें		Hinzufügen	Toevoegen		Adicionar
+MainWindow.toolbar.clear clipboard	goryachev/password/MainWindow.java	MainWindow.java	105	Clear		Borrar	Очистить	선택 취소	Απαλοιφή	清除		Tyhjennä	Deseleziona	Effacer	Töm	Vymazat	Fjern	清除		Limpar		मिटाएँ		Löschen	Wissen		Limpar
+MainWindow.toolbar.clear clipboard.tooltip	goryachev/password/MainWindow.java	MainWindow.java	105	Clear sensitive data from the clipboard																							
+MainWindow.toolbar.close program	goryachev/password/MainWindow.java	MainWindow.java	107	Exit		Salir	Выход	종료	Έξοδος	退出	Afslutte	Poistu	Esci	Quitter	Avsluta	Zavřít	Avslutt	結束	Zakończ	Sair		बाहर		Beenden	Afsluiten		Sair
+MainWindow.toolbar.lock.tooltip	goryachev/password/MainWindow.java	MainWindow.java	106	Lock the program																							
+MainWindow.toolbar.lock program	goryachev/password/MainWindow.java	MainWindow.java	106	Lock		Bloqueo	Блок	잠금	Κλείδωμα	锁定	Lås	Lukko		Verrou	Lås	Zámek	Lås	鎖定	Blokada	Bloquear		पाश			Vergrendelen		Bloquear
+MainWindow.toolbar.save file	goryachev/password/MainWindow.java	MainWindow.java	101	Save		Guardar	Сохранить	저장하기	Αποθήκευση	保存	Gem	Tallenna	Salva	Enregistrer	Spara	Uložit	Lagre	儲存	Zapisz	Guardar		सहेजें		Speichern	Opslaan		Salvar
+PassEditor.button.change password	goryachev/password/PassEditor.java	PassEditor.java	72	Change																							
+PassEditor.button tooltip.change password	goryachev/password/PassEditor.java	PassEditor.java	72	Change password																							
+PassEditor.button tooltip.copu p	goryachev/password/PassEditor.java	PassEditor.java	70	Copy password to clipboard																							
+PassEditor.button tooltip.copu u	goryachev/password/PassEditor.java	PassEditor.java	68	Copy user name to clipboard																							
+PassEditor.dialog.title	goryachev/password/PassEditor.java	PassEditor.java	217	Change Password		Cambiar contraseña	Изменить пароль	비밀번호  변경하기	Αλλαγή κωδικού πρόσβασης	更改密码	Ændre adgangskode	Vaihda salasana	Cambia password	Changer Mot de Passe	Ändra lösenord	Změnit heslo	Endre Passord	更改密碼		Alterar Palavra-passe		पासवर्ड बदलें		Passwort ändern	Wachtwoord wijzigen		Alterar Senha
+PassEditor.label.name	goryachev/password/PassEditor.java	PassEditor.java	108	Name:		Nombre:	Имя:	이름:	Όνομα:	名称：	Navn:	Nimi:	Nome:	Nom:	Namn:		Navn:	名稱：	Nazwa:	Nome:		नाम:		Name:	Naam:		Nome:
+PassEditor.label.notes	goryachev/password/PassEditor.java	PassEditor.java	120	Notes:																							
+PassEditor.label.pw	goryachev/password/PassEditor.java	PassEditor.java	115	Password:		Contraseña:	Пароль:	암호:	Κωδικός πρόσβασης:	密码：	Adgangskode:	Salasana:		Mot de Passe:	Lösenord:	Heslo:	Passord:	密碼：	Hasło:	Palavra-passe:		पासवर्ड:		Passwort:	Wachtwoord:		Senha:
+PassEditor.label.user	goryachev/password/PassEditor.java	PassEditor.java	111	User name:		Nombre de usuario:	Имя пользователя:	사용자 이름:	Όνομα χρήστη:	用户名：	Brugernavn:	Käyttäjänimi:	Nome Utente:	Nom d'utilisateur:	Användarnamn:	Uživatelské jméno:	Brukernavn:	使用者名稱：	Nazwa użytkownika:	Nome de utilizador:		प्रयोक्ता नाम:		Benutzername:	Gebruikersnaam:		Nome do usuário:
+PassException.corrupted	goryachev/password/data/PassException.java	PassException.java	32	File might have been corrupted or altered.																							
+PassException.failed to move	goryachev/password/data/PassException.java	PassException.java	33	Unable to write over existing database file.																							
+PassException.failed to save	goryachev/password/data/PassException.java	PassException.java	34	Unable to save database file.																							
+PassException.too long	goryachev/password/data/PassException.java	PassException.java	35	Text exceeds maximum length.																							
+PassException.wrong password	goryachev/password/data/PassException.java	PassException.java	36	Unable to decrypt the file with supplied password.																							
+PassException.wrong signature	goryachev/password/data/PassException.java	PassException.java	37	Wrong file format.																							
+PasswordVerifier.err.no match	goryachev/password/ui/PasswordVerifier.java	PasswordVerifier.java	135	Passwords don't match																							
+Preferences.lock timeout	goryachev/password/Preferences.java	Preferences.java	28	Lock timeout																							
+Preferences.title	goryachev/password/Preferences.java	Preferences.java	36	Preferences		Preferencias	Установки	선택	Προτιμήσεις	首选项	Indstillinger	Määritykset	Preferenze	Préférences	Inställningar	Předvolby	Innstillinger	喜好設定	Ustawienia	Preferências		पसंदगियाँ		Einstellungen	Voorkeuren		Preferências
+ProgressPage.Elapsed	goryachev/ui/dialogs/ProgressPage.java	ProgressPage.java	76	Elapsed:																							
+ProgressPage.Remaining	goryachev/ui/dialogs/ProgressPage.java	ProgressPage.java	74	Remaining:																							
+RecentFilesOption.menu.clear	goryachev/ui/options/RecentFilesOption.java	RecentFilesOption.java	219	Clear Recent Files																							
+SegmentedTextDialog.button.copy to clipboard	goryachev/ui/dialogs/license/SegmentedTextDialog.java	SegmentedTextDialog.java	37	Copy		Copiar	Копировать	복사	Αντιγραφή	复制	Kopier	Kopioi	Copia	Copier	Kopiera	Kopírovat	Kopier	複製		Copiar		प्रतिलिपि		Kopieren	Kopiëren		Copiar
+SegmentedTextDialog.button.print	goryachev/ui/dialogs/license/SegmentedTextDialog.java	SegmentedTextDialog.java	36	Print		Imprimir	Печать	출력	Εκτύπωση	打印	Udskrive	Tulosta	Stampa	Imprimer	Skriv ut		Skriv ut	列印	Drukuj	Imprimir		मुद्रण		Drucken	Afdrukken		Imprimir
+SegmentedTextDialog.button.save file	goryachev/ui/dialogs/license/SegmentedTextDialog.java	SegmentedTextDialog.java	38	Save		Guardar	Сохранить	저장하기	Αποθήκευση	保存	Gem	Tallenna	Salva	Enregistrer	Spara	Uložit	Lagre	儲存	Zapisz	Guardar		सहेजें		Speichern	Opslaan		Salvar
+StandardFilterLogic.tooltip	goryachev/ui/table/CFilterLogic.java	CFilterLogic.java	122	Click to clear filter																							
+StandardLicense.0	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	23	IMPORTANT-READ CAREFULLY: This End-User License Agreement ("EULA") is a legal agreement between you (either an individual or a single entity) and {0} for the SOFTWARE identified above, which includes the User Manual, any associated SOFTWARE components, any media, any printed materials other than the User Manual, and any "online" or electronic documentation ("SOFTWARE"). By installing, copying, or otherwise using the SOFTWARE, you agree to be bound by the terms of this EULA.  If you do not agree to the terms of this EULA, do not install or use the SOFTWARE.																							
+StandardLicense.1.title	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	24	1. The SOFTWARE is licensed, not sold.																							
+StandardLicense.10	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	33	{0} warrants that the Software will perform substantially in accordance with the accompanying written materials for a period of 90 days from the date of your receipt of the Software.  Any implied warranties on the Software are limited to 90 days.  Some states do not allow limitations on duration of an implied warranty, so the above limitation may not apply to you.  {1} DISCLAIMS ALL OTHER WARRANTIES, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT, WITH RESPECT TO THE SOFTWARE AND THE ACCOMPANYING WRITTEN MATERIALS.  This limited warranty gives you specific legal rights.  You may have others, which vary from state to state.																							
+StandardLicense.10.title	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	33	8. LIMITED WARRANTY.																							
+StandardLicense.11	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	34	IN NO EVENT SHALL {0} OR ITS SUPPLIERS BE LIABLE TO YOU FOR ANY CONSEQUENTIAL, SPECIAL, INCIDENTAL, OR INDIRECT DAMAGES OF ANY KIND ARISING OUT OF THE DELIVERY, PERFORMANCE, OR USE OF THE SOFTWARE, EVEN IF {0} HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  IN ANY EVENT, ANDY GORYACHEV'S LIABILITY FOR ANY CLAIM, WHETHER IN CONTRACT, TORT, OR ANY OTHER THEORY OF LIABILITY WILL NOT EXCEED THE LICENSE FEE PAID BY YOU.																							
+StandardLicense.11.title	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	34	9. LIMITATION OF LIABILITY.																							
+StandardLicense.12	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	35	If you acquired the SOFTWARE in the United States, this EULA is governed by the laws of the state of California.  If you acquired the SOFTWARE outside of the United States, then local laws may apply.																							
+StandardLicense.12.title	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	35	10. MISCELLANEOUS.																							
+StandardLicense.13	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	36	If you have any questions concerning this EULA, please send electronic mail to {0}
+																							
+StandardLicense.2.title	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	25	2. GRANT OF LICENSE.																							
+StandardLicense.3	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	26	You may use the evaluation configuration of SOFTWARE without charge for a period of 30 days.  At the end of the evaluation period, you should decide whether you want to keep the Software.  You must purchase a Registration Key if you want to continue using the Software after the evaluation period ends.  If you decide for any reason that you do not want to purchase a Registration Key, you must stop using the Software and remove it from your computer.																							
+StandardLicense.3.title	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	26	(a) Evaluation Configuration.																							
+StandardLicense.4	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	27	After you have purchased the license for SOFTWARE, and have received the Registration Key enabling the registered copy, you are licensed to install the SOFTWARE only on the number of computers corresponding to the number of licenses purchased.																							
+StandardLicense.4.title	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	27	(b) Registered Configuration.																							
+StandardLicense.5	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	28	You may not reverse engineer, de-compile, or disassemble the SOFTWARE, except and only to the extent that such activity is expressly permitted by applicable law notwithstanding this limitation.  <b>You may not use the SOFTWARE in a military domain; in the design, construction, operation or maintenance of weapons.</b>  You may not rent, lease, or lend the SOFTWARE.  You may permanently transfer all of your rights under this EULA, provided the recipient agrees to the terms of this EULA.																							
+StandardLicense.5.title	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	28	3. RESTRICTIONS.																							
+StandardLicense.6	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	29	{0} may provide you with support services related to the SOFTWARE.  Use of Support Services is governed by the policy described in the user manual, in online documentation, and/or other provided materials, as they may be modified from time to time.  Any supplemental SOFTWARE code provided to you as part of the Support Services shall be considered part of the SOFTWARE and subject to the terms and conditions of this EULA.																							
+StandardLicense.6.title	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	29	4. SUPPORT SERVICES.																							
+StandardLicense.7	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	30	Without prejudice to any other rights, {0} may terminate this EULA if you fail to comply with the terms and conditions of this EULA.  In such event, you must destroy all copies of the SOFTWARE.																							
+StandardLicense.7.title	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	30	5. TERMINATION.																							
+StandardLicense.8	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	31	The SOFTWARE is protected by United States copyright law and international treaty provisions.  You acknowledge that no title to the intellectual property in the SOFTWARE is transferred to you.  You further acknowledge that title and full ownership rights to the SOFTWARE will remain the exclusive property of {0} and you will not acquire any rights to the SOFTWARE except as expressly set forth in this license.  You agree that any copies of the SOFTWARE will contain the same proprietary notices which appear on and in the SOFTWARE.																							
+StandardLicense.8.title	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	31	6. COPYRIGHT.																							
+StandardLicense.9	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	32	You agree that you will not export or re-export the SOFTWARE to any country, person, entity, or end user subject to U.S.A. export restrictions.  Restricted countries currently include, but are not necessarily limited to Cuba, Iran, Iraq, Libya, North Korea, Sudan, and Syria.  You warrant and represent that neither the U.S.A. Bureau of Export Administration nor any other federal agency has suspended, revoked or denied your export privileges.																							
+StandardLicense.9.title	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	32	7. EXPORT RESTRICTIONS.																							
+StandardLicense.title	goryachev/ui/dialogs/license/StandardLicense.java	StandardLicense.java	22	END-USER LICENSE AGREEMENT																							
+StandardOperationDialog.button.Back	goryachev/ui/StandardOperationDialog.java	StandardOperationDialog.java	99	Back		Retroceder	Назад	뒤로	Μετάβαση προς τα πίσω	后退	Tilbage	Takaisin	Indietro	Retourner	Bakåt	Zpět	Tilbake	後退	Wstecz	Voltar		पछे		Zurück	Terug		Voltar
+StandardOperationDialog.button.Cancel	goryachev/ui/StandardOperationDialog.java	StandardOperationDialog.java	107	Cancel		Cancelar	Отменить	취소하기	Ακύρωση	取消	Annuller	Peruuta		Annuler	Avbryt	Storno	Avbryt	取消	Anuluj	Cancelar		रद्द		Abbrechen	Annuleren		Cancelar
+StandardOperationDialog.button.Next	goryachev/ui/StandardOperationDialog.java	StandardOperationDialog.java	220	Next		Siguiente	Следующий	다음	Επόμενο	下一步	Næste	Seuraava	Successivo	Suivant	Nästa	Další	Neste	下一步	Następne	Próximo		अगला		Nächste	Volgende		Próximo
+StandardOperationDialog.button.OK	goryachev/ui/StandardOperationDialog.java	StandardOperationDialog.java	115	OK		OK	OK	OK	OK	确定	OK	OK	OK	Ok	OK	OK	OK	確定	OK	OK		ठक		OK	OK		OK
+StandardOperationDialog.Elapsed	goryachev/ui/StandardOperationDialog.java	StandardOperationDialog.java	258	Elapsed:																							
+StandardOperationDialog.on cancel button pressed	goryachev/ui/StandardOperationDialog.java	StandardOperationDialog.java	408	Canceling...																							
+StandardOperationDialog.Remaining	goryachev/ui/StandardOperationDialog.java	StandardOperationDialog.java	256	Remaining:																							
+StandardOperationDialog.result.Cancelled	goryachev/ui/StandardOperationDialog.java	StandardOperationDialog.java	510	Operation Canceled																							
+StandardOperationDialog.result.error	goryachev/ui/StandardOperationDialog.java	StandardOperationDialog.java	453	Operation Failed																							
+Styles.file filter	goryachev/password/Styles.java	Styles.java	26	{0} - PasswordSafe Files																							
+UndoableOperation.redo presentation name	goryachev/ui/UndoableOperation.java	UndoableOperation.java	72	Redo {0}																							
+UndoableOperation.undo presentation name	goryachev/ui/UndoableOperation.java	UndoableOperation.java	78	Undo {0}																							
+WelcomeDialog.button.create file	goryachev/password/WelcomeDialog.java	WelcomeDialog.java	160	Create		Crear	Создать	생성	Δημιουργία	创建	Oprette	Luo	Crea	Créer	Skapa	Vytvořit	Opprett	建立	Utwórz	Criar		निर्मित करें		Erstellen	Creëren		Criar
+WelcomeDialog.button.open file	goryachev/password/WelcomeDialog.java	WelcomeDialog.java	161	Open		Abrir	Открыть	열기	Άνοιγμα	打开	Åben	Avaa	Apri	Ouvrir	Öppna	Otevřít	Åpen	開啟	Otwórz	Abrir		खोलें		Öffnen	Openen		Abrir
+WelcomeDialog.button.review license	goryachev/password/WelcomeDialog.java	WelcomeDialog.java	159	Review			Изучить																				
+WelcomeDialog.create	goryachev/password/WelcomeDialog.java	WelcomeDialog.java	156	Create a new password database.			Создать новую базу данных паролей.																				
+WelcomeDialog.language	goryachev/password/WelcomeDialog.java	WelcomeDialog.java	154	Select your language.			Выберите язык.																				
+WelcomeDialog.open	goryachev/password/WelcomeDialog.java	WelcomeDialog.java	157	Open an existing database.			Открыть существующую базу данных.																				
+WelcomeDialog.review	goryachev/password/WelcomeDialog.java	WelcomeDialog.java	155	Review and accept the license.			Изучить и принять условия лицензии.																				
+WelcomeDialog.thanks.1	goryachev/password/WelcomeDialog.java	WelcomeDialog.java	149	Thank you for trying out the Password Safe!			Спасибо что вы обратили внимание на Password Safe!																				
+WelcomeDialog.thanks.2	goryachev/password/WelcomeDialog.java	WelcomeDialog.java	151	This program allows you to store passwords and other sensitive information in an encrypted file.			Эта программа позволяет xранить пароли и другую секретную информацию в зашифрованном виде.																				
+WizardPage.button.next step	goryachev/ui/dialogs/WizardPage.java	WizardPage.java	183	&Next >>		&Siguiente >>	&Далее >>	다음 (&N) >>	&Επόμενο >>	下一步(&N) >>	&Næste >>	&Seuraava >>	&Successivo >>	&Suivant >>	&Nästa >>	&Další >>	&Neste >>	下一步(&N) >>	&Następne >>	&Próximo >>		&अगला >>		&Nächste >>	&Volgende >>		&Próximo >>
+WizardPage.button.step back	goryachev/ui/dialogs/WizardPage.java	WizardPage.java	189	<< &Back		<< &Retroceder	<< &Назад	<< &뒤로가기	<< &Πίσω	<< 返回(&B)	<<&Tilbage	<< &Takaisin	<< &Indietro	<< &Retour	<< &Tillbaks	<< &Zpět	<< &Tilbake	<< 返回(&B)	<< &Wstecz	<<&Voltar		<< &पीछे		<< &Zurück	<< &Vorige		<<&Voltar
+
+
+
+
+EOF

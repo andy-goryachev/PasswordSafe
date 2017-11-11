@@ -1,9 +1,11 @@
+/build/
+/graphics/
 /out/
-/user.home*/
+/reference/
 /test/
 /test.data/
 /test.out/
-/build/
+/user.home*/
 ~*
 *.log
 /*.jar
