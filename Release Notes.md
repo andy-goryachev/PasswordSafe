@@ -1,11 +1,4 @@
-﻿# KNOWN ISSUES
-
-- should open dialogs on the same monitor as the parent window
-- jar should be signed
-
-
-
-# RELEASE NOTES
+﻿# RELEASE NOTES
 
 ## 3.05.49
 - license changed to Apache 2.0

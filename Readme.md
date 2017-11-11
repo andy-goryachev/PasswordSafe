@@ -23,3 +23,8 @@ This project and its source code is licensed under the [Apache License 2.0](http
 
 <a href='https://goryachev.com/products/password-safe/index.html'>goryachev.com</a>
 
+### Project Status
+
+[Known Issues](Known Issues.md)
+
+[Release Notes](Release Notes.md)
