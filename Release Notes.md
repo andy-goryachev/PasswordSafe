@@ -5,6 +5,8 @@
 - removed separate lock window
 - bouncycastle 1.57
 - common code update
+- replaced deprecated AESFastEngine
+- added 32 bits of randomness to MemCrypt
 
 ## 3.04.48
 - bouncycastle 1.56

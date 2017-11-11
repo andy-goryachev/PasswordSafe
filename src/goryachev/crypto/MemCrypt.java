@@ -10,16 +10,22 @@ import org.bouncycastle.crypto.params.KeyParameter;
 
 
 /** 
- * In memory encryption mechanism to hide values stored in memory.
+ * The goal of this mechanism is to encrypt sensitive data sitting in memory.
  * Used for Secret* and Opaque* classes.
- * Does not provide a lot of security if an attacker has the access to the RAM,
- * but helps in cases when only a swap file or RAM snapshot is available to an attacker.
+ * 
+ * The values are encrypted with a key generated each time from several jvm session parameters
+ * such as Object.hashCode(), and a bit of (static) random data.  The key is not expected
+ * to change within the same jvm session, but might differ between sessions. 
  */ 
-public class MemCrypt
+public final class MemCrypt
 {
-	public static final int NONCE_SIZE_BYTES = 8;
-	public static final int MAC_SIZE_BITS = 64;
+	private static final int NONCE_SIZE_BYTES = 8;
+	private static final int MAC_SIZE_BITS = 64;
 	private static final byte[] ZERO_BYTE_ARRAY = new byte[0];
+	private static final int staticEntropy1 = initStaticEntropy();
+	private static final int staticEntropy2 = initStaticEntropy();
+	private static final int staticEntropy3 = initStaticEntropy();
+	private static final int staticEntropy4 = initStaticEntropy();
 
 	
 	public static final byte[] encrypt(byte[] data) throws Exception
@@ -86,11 +92,13 @@ public class MemCrypt
 	private static final byte[] generateKey() throws Exception
 	{
 		SHA256Digest d = new SHA256Digest();
+		d.update((byte)staticEntropy1);
+		d.update((byte)staticEntropy2);
+		d.update((byte)staticEntropy3);
+		d.update((byte)staticEntropy4);
 		update(d, Object.class.hashCode());
 		update(d, String.class.hashCode());
-		update(d, Integer.class.hashCode());
-		update(d, Class.class.hashCode());
-		update(d, ClassLoader.class.hashCode());
+		update(d, MemCrypt.class.hashCode());
 		byte[] b = new byte[d.getDigestSize()];
 		d.doFinal(b, 0);
 		return b;
@@ -103,5 +111,15 @@ public class MemCrypt
 		d.update((byte)(x >>> 16));
 		d.update((byte)(x >>>  8));
 		d.update((byte)(x       ));
+	}
+	
+	
+	/** 
+	 * let's add a bit of randomness without showing a high entropy object sitting in memory
+	 * yes, I know, it's silly. 
+	 */
+	private static final int initStaticEntropy()
+	{
+		return new SecureRandom().nextInt() & 0xff;
 	}
 }
