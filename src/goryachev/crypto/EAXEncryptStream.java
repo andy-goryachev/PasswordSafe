@@ -3,7 +3,7 @@ package goryachev.crypto;
 import goryachev.common.util.CKit;
 import java.io.IOException;
 import java.io.OutputStream;
-import org.bouncycastle.crypto.engines.AESFastEngine;
+import org.bouncycastle.crypto.engines.AESEngine;
 import org.bouncycastle.crypto.modes.EAXBlockCipher;
 import org.bouncycastle.crypto.params.AEADParameters;
 import org.bouncycastle.crypto.params.KeyParameter;
@@ -27,7 +27,7 @@ public class EAXEncryptStream
 			throw new IllegalArgumentException("key must be " + KEY_LENGTH_BYTES*8 + " bits");
 		}
 		
-		this.cipher = new EAXBlockCipher(new AESFastEngine());
+		this.cipher = new EAXBlockCipher(new AESEngine());
 		this.os = os;
 		
 		keyParameter = new KeyParameter(key);

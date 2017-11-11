@@ -3,7 +3,7 @@ package goryachev.crypto;
 import goryachev.common.util.CKit;
 import java.io.IOException;
 import java.io.InputStream;
-import org.bouncycastle.crypto.engines.AESFastEngine;
+import org.bouncycastle.crypto.engines.AESEngine;
 import org.bouncycastle.crypto.modes.EAXBlockCipher;
 import org.bouncycastle.crypto.params.AEADParameters;
 import org.bouncycastle.crypto.params.KeyParameter;
@@ -32,7 +32,7 @@ public class EAXDecryptStream
 		}
 		
 		this.in = in;
-		this.cipher = new EAXBlockCipher(new AESFastEngine());
+		this.cipher = new EAXBlockCipher(new AESEngine());
 		
 		keyParameter = new KeyParameter(key);
 		AEADParameters par = new AEADParameters(keyParameter, MAC_LEN_BITS, nonce, associatedData);

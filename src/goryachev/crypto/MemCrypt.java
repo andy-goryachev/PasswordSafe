@@ -3,7 +3,7 @@ package goryachev.crypto;
 import java.security.SecureRandom;
 import org.bouncycastle.crypto.Digest;
 import org.bouncycastle.crypto.digests.SHA256Digest;
-import org.bouncycastle.crypto.engines.AESFastEngine;
+import org.bouncycastle.crypto.engines.AESEngine;
 import org.bouncycastle.crypto.modes.EAXBlockCipher;
 import org.bouncycastle.crypto.params.AEADParameters;
 import org.bouncycastle.crypto.params.KeyParameter;
@@ -24,7 +24,7 @@ public class MemCrypt
 	
 	public static final byte[] encrypt(byte[] data) throws Exception
 	{
-		EAXBlockCipher cipher = new EAXBlockCipher(new AESFastEngine());
+		EAXBlockCipher cipher = new EAXBlockCipher(new AESEngine());
 		
 		byte[] nonce = new byte[NONCE_SIZE_BYTES];
 		new SecureRandom().nextBytes(nonce);
@@ -55,7 +55,7 @@ public class MemCrypt
 
 	public static final byte[] decrypt(byte[] data) throws Exception
 	{
-		EAXBlockCipher cipher = new EAXBlockCipher(new AESFastEngine());
+		EAXBlockCipher cipher = new EAXBlockCipher(new AESEngine());
 		
 		byte[] nonce = new byte[NONCE_SIZE_BYTES];
 		System.arraycopy(data, 0, nonce, 0, NONCE_SIZE_BYTES);

@@ -23,7 +23,7 @@ import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.Arrays;
 import org.bouncycastle.crypto.CipherParameters;
-import org.bouncycastle.crypto.engines.AESFastEngine;
+import org.bouncycastle.crypto.engines.AESEngine;
 import org.bouncycastle.crypto.modes.CBCBlockCipher;
 import org.bouncycastle.crypto.paddings.PaddedBufferedBlockCipher;
 import org.bouncycastle.crypto.params.KeyParameter;
@@ -530,7 +530,7 @@ public final class DataFormatV1
 	
 	private static final byte[] encrypt(byte[] key, byte[] data) throws Exception
 	{
-		PaddedBufferedBlockCipher c = new PaddedBufferedBlockCipher(new CBCBlockCipher(new AESFastEngine()));
+		PaddedBufferedBlockCipher c = new PaddedBufferedBlockCipher(new CBCBlockCipher(new AESEngine()));
 		CipherParameters p = new KeyParameter(key);
 		try
 		{
@@ -558,7 +558,7 @@ public final class DataFormatV1
 
 	private static final byte[] decrypt(byte[] key, byte[] data) throws Exception
 	{
-		PaddedBufferedBlockCipher c = new PaddedBufferedBlockCipher(new CBCBlockCipher(new AESFastEngine()));
+		PaddedBufferedBlockCipher c = new PaddedBufferedBlockCipher(new CBCBlockCipher(new AESEngine()));
 		CipherParameters p = new KeyParameter(key);
 		try
 		{
@@ -601,7 +601,7 @@ public final class DataFormatV1
 	
 	private static final InputStream createInputStream(byte[] key, byte[] iv, InputStream is)
 	{
-		PaddedBufferedBlockCipher c = new PaddedBufferedBlockCipher(new CBCBlockCipher(new AESFastEngine()));
+		PaddedBufferedBlockCipher c = new PaddedBufferedBlockCipher(new CBCBlockCipher(new AESEngine()));
 		if(iv.length != c.getBlockSize())
 		{
 			throw new Rex("invalid block size");
@@ -613,7 +613,7 @@ public final class DataFormatV1
 
 	private static final OutputStream createOutputStream(byte[] key, byte[] iv, OutputStream os)
 	{
-		PaddedBufferedBlockCipher c = new PaddedBufferedBlockCipher(new CBCBlockCipher(new AESFastEngine()));
+		PaddedBufferedBlockCipher c = new PaddedBufferedBlockCipher(new CBCBlockCipher(new AESEngine()));
 		if(iv.length != c.getBlockSize())
 		{
 			throw new Rex("invalid block size");
