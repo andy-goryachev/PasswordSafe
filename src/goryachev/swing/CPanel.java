@@ -19,7 +19,6 @@ public class CPanel
 	implements Scrollable
 {
 	public static final float FILL = CTableLayout.FILL;
-	//public static final float MINIMUM = CTableLayout3.MINIMUM;
 	public static final float PREFERRED = CTableLayout.PREFERRED;
 	public static final float PREF = CTableLayout.PREFERRED;
 	
@@ -578,6 +577,12 @@ public class CPanel
 	{
 		Component c = getBottom();
 		return (c instanceof CButtonPanel);
+	}
+	
+	
+	public void setMaximumSize(int w, int h)
+	{
+		setMaximumSize(new Dimension(w, h));
 	}
 }
 

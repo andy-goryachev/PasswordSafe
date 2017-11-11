@@ -1,12 +1,12 @@
 // Copyright © 2010-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options;
+import goryachev.common.util.CDateFormat;
 import goryachev.common.util.CSettings;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 
 
 public class TimeFormatOption
-	extends COption<SimpleDateFormat>
+	extends COption<CDateFormat>
 {
 	public final static String FORMAT_12H = "h:mm a";
 	public final static String FORMAT_12H_SECONDS = "h:mm:ss a";
@@ -26,20 +26,20 @@ public class TimeFormatOption
 	}
 
 
-	public SimpleDateFormat defaultValue()
+	public CDateFormat defaultValue()
 	{
-		return new SimpleDateFormat(FORMAT_24H);
+		return new CDateFormat(FORMAT_24H);
 	}
 
 
-	public SimpleDateFormat parseProperty(String s)
+	public CDateFormat parseProperty(String s)
 	{
-		return new SimpleDateFormat(s);
+		return new CDateFormat(s);
 	}
 
 
-	public String toProperty(SimpleDateFormat f)
+	public String toProperty(CDateFormat f)
 	{
-		return f.toPattern();
+		return f.getPattern();
 	}
 }

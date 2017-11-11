@@ -102,7 +102,33 @@ public class CMenu
 		}
 		return -1;
 	}
-
+	
+	
+	public CMenuItem item(String text, Action a)
+	{
+		CMenuItem m = new CMenuItem(text, a);
+		add(m);
+		return m;
+	}
+	
+	
+	public CMenuItem item(String text, Accelerator acc, Action a)
+	{
+		CMenuItem m = new CMenuItem(text, acc, a);
+		add(m);
+		return m;
+	}
+	
+	
+	/** creates a disabled menu item for development purposes */
+	@Deprecated
+	public CMenuItem item(String text)
+	{
+		CMenuItem m = new CMenuItem(text, XAction.DISABLED);
+		add(m);
+		return m;
+	}
+	
 
 	public void separator()
 	{

@@ -332,8 +332,15 @@ public class Theme
 			return "";
 		}
 		
-		// FIX ltr?
-		return ThemeOptions.dateFormat.get().format(x) + " " + ThemeOptions.timeFormat.get().format(x);
+		try
+		{
+			// FIX ltr?
+			return ThemeOptions.dateFormat.get().format(x) + " " + ThemeOptions.timeFormat.get().format(x);
+		}
+		catch(Exception e)
+		{
+			return "?" + x;
+		}
 	}
 	
 	
@@ -344,7 +351,14 @@ public class Theme
 			return "";
 		}
 		
-		return ThemeOptions.dateFormat.get().format(x);
+		try
+		{
+			return ThemeOptions.dateFormat.get().format(x);
+		}
+		catch(Exception e)
+		{
+			return "?" + x;
+		}
 	}
 	
 	
@@ -355,7 +369,14 @@ public class Theme
 			return "";
 		}
 		
-		return ThemeOptions.timeFormat.get().format(x);
+		try
+		{
+			return ThemeOptions.timeFormat.get().format(x);
+		}
+		catch(Exception e)
+		{
+			return "?" + x;
+		}
 	}
 	
 	

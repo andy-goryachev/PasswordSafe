@@ -4,6 +4,7 @@ package goryachev.common.util;
 
 /** More convenient StringBuilder */
 public class SB
+	implements Appendable, CharSequence
 {
 	protected StringBuilder sb;
 
@@ -155,6 +156,13 @@ public class SB
 	public SB append(String s)
 	{
 		sb.append(s);
+		return this;
+	}
+	
+	
+	public Appendable append(CharSequence cs)
+	{
+		sb.append(cs);
 		return this;
 	}
 
@@ -678,5 +686,11 @@ public class SB
 			
 			a(s);
 		}
+	}
+
+
+	public CharSequence subSequence(int start, int end)
+	{
+		return sb.subSequence(start, end);
 	}
 }

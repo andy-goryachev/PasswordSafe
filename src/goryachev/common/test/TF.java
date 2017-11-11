@@ -29,6 +29,23 @@ public class TF
 	}
 	
 	
+	/** checks if two arguments are CKit.equals() and throws a meaningful exception if not */
+	public static void eq(Object value, Object expected, Object message)
+	{
+		if(CKit.notEquals(value, expected))
+		{
+			throw new TestException
+			(
+				message +
+				", unexpected value=" + 
+				Dump.describe(value) + 
+				", expected=" + 
+				Dump.describe(expected)
+			);
+		}
+	}
+	
+	
 	/** checks whether an argument is not null */
 	public static void notNull(Object x)
 	{
@@ -58,9 +75,24 @@ public class TF
 	}
 	
 	
+	public static void isFalse(boolean x)
+	{
+		if(x)
+		{
+			throw new TestException("expression is not false");
+		}
+	}
+	
+	
 	public static void fail()
 	{
 		throw new TestException("test failed");
+	}
+	
+	
+	public static void fail(String message)
+	{
+		throw new TestException(message);
 	}
 
 	

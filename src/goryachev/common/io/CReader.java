@@ -2,6 +2,7 @@
 package goryachev.common.io;
 import goryachev.common.util.CKit;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -47,6 +48,12 @@ public class CReader
 	public CReader(InputStream in) throws Exception
 	{
 		this(in, CKit.CHARSET_UTF8);
+	}
+	
+	
+	public CReader(byte[] b) throws Exception
+	{
+		this(new ByteArrayInputStream(b));
 	}
 	
 	

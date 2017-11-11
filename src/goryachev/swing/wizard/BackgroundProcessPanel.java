@@ -127,6 +127,7 @@ public abstract class BackgroundProcessPanel
 		}
 		
 		textField.setText(null);
+		cancelAction.setEnabled(true);
 
 		if(operation == null)
 		{
@@ -172,6 +173,8 @@ public abstract class BackgroundProcessPanel
 		{
 			thread = null;
 			timer.stop();
+			
+			operation.dispose();
 			operation = null;
 			
 			if(err == null)
@@ -199,6 +202,7 @@ public abstract class BackgroundProcessPanel
 				}
 			}
 			
+			cancelAction.setEnabled(false);
 			updateActions();
 		}
 	}

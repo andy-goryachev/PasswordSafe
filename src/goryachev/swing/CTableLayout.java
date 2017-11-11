@@ -736,9 +736,7 @@ public class CTableLayout
 		}
 	}
 	
-	
 	//
-	
 	
 	public class Helper
 	{

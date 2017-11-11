@@ -1,12 +1,12 @@
 // Copyright © 2010-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options;
+import goryachev.common.util.CDateFormat;
 import goryachev.common.util.CSettings;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 
 
 public class DateFormatOption
-	extends COption<SimpleDateFormat>
+	extends COption<CDateFormat>
 {
 	public final static String FORMAT_DDMMYYYY_DASH = "dd-MM-yyyy";
 	public final static String FORMAT_DDMMYYYY_DOT = "dd.MM.yyyy";
@@ -28,20 +28,20 @@ public class DateFormatOption
 	}
 
 
-	public SimpleDateFormat defaultValue()
+	public CDateFormat defaultValue()
 	{
-		return new SimpleDateFormat(FORMAT_YYYYMMDD_DOT);
+		return new CDateFormat(FORMAT_YYYYMMDD_DOT);
 	}
 
 
-	public SimpleDateFormat parseProperty(String s)
+	public CDateFormat parseProperty(String s)
 	{
-		return new SimpleDateFormat(s);
+		return new CDateFormat(s);
 	}
 
 
-	public String toProperty(SimpleDateFormat f)
+	public String toProperty(CDateFormat f)
 	{
-		return f == null ? null : f.toPattern();
+		return f == null ? null : f.getPattern();
 	}
 }

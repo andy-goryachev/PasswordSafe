@@ -1,13 +1,14 @@
 // Copyright © 2013-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options.edit;
 import goryachev.common.i18n.TXT;
+import goryachev.common.util.CDateFormat;
 import goryachev.common.util.CLookup;
 import goryachev.swing.options.DateFormatOption;
 import java.text.SimpleDateFormat;
 
 
 public class DateFormatOptionEditor
-	extends ChoiceOptionEditor<SimpleDateFormat>
+	extends ChoiceOptionEditor<CDateFormat>
 {
 	private CLookup lookup;
 	
@@ -51,16 +52,16 @@ public class DateFormatOptionEditor
 	}
 
 
-	protected SimpleDateFormat parseEditorValue(String s)
+	protected CDateFormat parseEditorValue(String s)
 	{
 		String spec = (String)lookup.lookup(s);
-		return spec == null ? null : new SimpleDateFormat(spec);
+		return spec == null ? null : new CDateFormat(spec);
 	}
 
 
-	protected String toEditorValue(SimpleDateFormat f)
+	protected String toEditorValue(CDateFormat f)
 	{
-		return f.toPattern();
+		return f.getPattern();
 	}
 	
 	
@@ -70,9 +71,9 @@ public class DateFormatOptionEditor
 	}
 	
 	
-	public void setEditorValue(SimpleDateFormat f)
+	public void setEditorValue(CDateFormat f)
 	{
-		String v = (f == null ? null : f.toPattern());
+		String v = (f == null ? null : f.getPattern());
 		v = (String)lookup.lookup(v);
 		combo.setSelectedItem(v);
 	}

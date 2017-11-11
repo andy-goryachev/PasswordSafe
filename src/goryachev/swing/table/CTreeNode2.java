@@ -10,7 +10,7 @@ import goryachev.common.util.CList;
  * are added once.  For a non-caching mode, override loadChildren() method to reload 
  * children each time getChildren() is called (make sure to call clearChildren());
  */
-public abstract class CTreeNode2
+public class CTreeNode2
 	extends CTreeNode
 {
 	/** override in non-caching mode */

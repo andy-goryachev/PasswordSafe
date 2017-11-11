@@ -1,12 +1,13 @@
 // Copyright © 2013-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options.edit;
+import goryachev.common.util.CDateFormat;
 import goryachev.common.util.CLookup;
 import goryachev.swing.options.TimeFormatOption;
 import java.text.SimpleDateFormat;
 
 
 public class TimeFormatOptionEditor
-	extends ChoiceOptionEditor<SimpleDateFormat>
+	extends ChoiceOptionEditor<CDateFormat>
 {
 	private CLookup lookup;
 	
@@ -40,16 +41,16 @@ public class TimeFormatOptionEditor
 	}
 
 
-	protected SimpleDateFormat parseEditorValue(String s)
+	protected CDateFormat parseEditorValue(String s)
 	{
 		String spec = (String)lookup.lookup(s);
-		return spec == null ? null : new SimpleDateFormat(spec);
+		return spec == null ? null : new CDateFormat(spec);
 	}
 
 
-	protected String toEditorValue(SimpleDateFormat f)
+	protected String toEditorValue(CDateFormat f)
 	{
-		return f.toPattern();
+		return f.getPattern();
 	}
 	
 	

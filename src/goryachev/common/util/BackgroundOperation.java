@@ -20,4 +20,8 @@ public interface BackgroundOperation
 	
 	/** returns operation progress value of null if progress can not be determined. */
 	public Progress getProgress();
+	
+	
+	/** release all the resources after op completed normally or with an error */
+	public void dispose();
 }

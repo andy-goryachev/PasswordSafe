@@ -2,7 +2,6 @@
 package goryachev.swing;
 import goryachev.common.util.CTask;
 import goryachev.common.util.Log;
-import goryachev.common.util.ValueGenerator;
 import java.awt.EventQueue;
 
 
@@ -12,13 +11,7 @@ import java.awt.EventQueue;
 public class SwingTask<T>
 	extends CTask<T>
 {
-	public SwingTask(ValueGenerator<T> generator)
-	{
-		super(generator);
-	}
-	
-	
-	protected SwingTask()
+	public SwingTask()
 	{
 	}
 	
