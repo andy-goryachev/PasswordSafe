@@ -25,6 +25,6 @@ This project and its source code is licensed under the [Apache License 2.0](http
 
 ### Project Status
 
-[Known Issues](Known Issues.md)
+[Known Issues](Known%20Issues.md)
 
-[Release Notes](Release Notes.md)
+[Release Notes](Release%20Notes.md)
