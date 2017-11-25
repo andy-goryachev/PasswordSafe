@@ -5,7 +5,7 @@ import goryachev.common.i18n.Menus;
 import goryachev.common.i18n.TXT;
 import goryachev.common.util.CJob;
 import goryachev.common.util.CKit;
-import goryachev.common.util.CObjectProperty;
+import goryachev.common.util.CProperty;
 import goryachev.common.util.Log;
 import goryachev.common.util.platform.ApplicationSupport;
 import goryachev.swing.dialogs.license.StandardLicense;
@@ -288,9 +288,9 @@ public abstract class Application
 			
 			CFocusMonitor.init();
 			
-			TXT.getLanguageProperty().addListener(true, new CObjectProperty.Listener<CLanguage>()
+			TXT.getLanguageProperty().addListener(true, new CProperty.Listener<CLanguage>()
 			{
-				public void onPropertyChange(final CLanguage old, final CLanguage la)
+				public void onCPropertyChange(final CLanguage old, final CLanguage la)
 				{
 					UI.inEDT(new Runnable()
 					{

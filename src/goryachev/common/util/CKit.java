@@ -2251,4 +2251,14 @@ public final class CKit
 		 char[] cs = Character.toChars(cp);
 		 return new String(cs);
 	}
+	
+	
+	public static boolean inRange(int value, int min, int max)
+	{
+		if(min > max)
+		{
+			throw new Error("min > max");
+		}
+		return (value >= min) && (value <= max);
+	}
 }

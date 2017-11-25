@@ -40,6 +40,7 @@ public abstract class ZTableModelCommon
 	{
 		ZColumnInfo c = new ZColumnInfo();
 		columns.add(c);
+		fireTableStructureChanged();
 		return c;
 	}
 	

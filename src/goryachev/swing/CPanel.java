@@ -245,6 +245,12 @@ public class CPanel
 	{
 		setMinimumSize(new Dimension(w, h));
 	}
+	
+	
+	public JLabel rlabel(String s)
+	{
+		return new JLabel(s);
+	}
 
 
 	public JLabel label(String s)

@@ -9,30 +9,36 @@ import javax.swing.table.AbstractTableModel;
 public class SimpleTableModel<T>
 	extends AbstractTableModel
 {
-	private CList<T> items;
+	private CList<T> rows;
 	
 	
 	public SimpleTableModel()
 	{
-		items = new CList<>();
+		rows = new CList<>();
 	}
 	
 	
 	public SimpleTableModel(List<T> items)
 	{
-		this.items = new CList<>(items);
+		this.rows = new CList<>(items);
 	}
 	
 	
 	public SimpleTableModel(T[] items)
 	{
-		this.items = new CList<>(items);
+		this.rows = new CList<>(items);
+	}
+	
+	
+	public List<T> getItems()
+	{
+		return new CList(rows);
 	}
 	
 	
 	public int getRowCount()
 	{
-		return items.size();
+		return rows.size();
 	}
 
 
@@ -48,7 +54,7 @@ public class SimpleTableModel<T>
 		{
 			if(col == 0)
 			{
-				return items.get(row);
+				return rows.get(row);
 			}
 		}
 		return null;
@@ -59,7 +65,7 @@ public class SimpleTableModel<T>
 	{
 		if((row >= 0) && (row < getRowCount()))
 		{
-			return items.get(row);
+			return rows.get(row);
 		}
 		return null;
 	}
@@ -67,37 +73,56 @@ public class SimpleTableModel<T>
 	
 	public void add(int ix, T item)
 	{
-		items.add(ix, item);
+		rows.add(ix, item);
+		fireTableRowsInserted(ix, ix);
 	}
 	
 	
 	public void add(T item)
 	{
-		items.add(item);
+		int sz = getRowCount();
+		rows.add(item);
+		fireTableRowsInserted(sz, sz);
 	}
 	
 	
 	public void addAll(T ... items)
 	{
+		int sz = getRowCount();
 		for(T item: items)
 		{
-			this.items.add(item);
+			rows.add(item);
 		}
+		fireTableRowsInserted(sz, sz + items.length);
 	}
 	
 	
 	public void addAll(Collection<T> items)
 	{
+		int sz = getRowCount();
 		for(T item: items)
 		{
-			this.items.add(item);
+			this.rows.add(item);
 		}
+		fireTableRowsInserted(sz, sz + items.size());
 	}
 	
 	
 	public void setAll(Collection<T> x)
 	{
-		items.setAll(x);
+		int sz = getRowCount();
+		if(sz > 0)
+		{
+			rows.clear();
+			fireTableRowsDeleted(0, sz-1);
+		}
+		
+		rows.setAll(x);
+		sz = getRowCount();
+		if(sz > 0)
+		{
+			fireTableRowsInserted(0, sz-1);
+		}
 	}
 	
 	
@@ -142,13 +167,13 @@ public class SimpleTableModel<T>
 	
 	protected void insertItemNoEvent(int ix, T val)
 	{
-		items.add(ix, val);
+		rows.add(ix, val);
 	}
 	
 	
 	protected void clearNoEvents()
 	{
-		items.clear();
+		rows.clear();
 	}
 	
 	
@@ -179,5 +204,30 @@ public class SimpleTableModel<T>
 		{
 			return getItem(ix);
 		}
+	}
+	
+	
+	public void remove(T item)
+	{
+		int ix = indexOf(item);
+		remove(ix);
+	}
+	
+	
+	public void remove(int ix)
+	{
+		if((ix < 0) || (ix >= rows.size()))
+		{
+			return;
+		}
+
+		rows.remove(ix);
+		fireTableRowsDeleted(ix, ix);
+	}
+	
+	
+	public int indexOf(T item)
+	{
+		return rows.indexOf(item);
 	}
 }

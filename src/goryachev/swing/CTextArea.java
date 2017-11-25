@@ -1,7 +1,9 @@
 // Copyright © 2015-2017 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import javax.swing.JTextArea;
+import javax.swing.text.AbstractDocument;
 import javax.swing.text.Document;
+import javax.swing.text.DocumentFilter;
 
 
 /** JTextArea with default popup menu installed */
@@ -60,5 +62,11 @@ public class CTextArea
 	{
 		super.setText(text);
 		setCaretPosition(0);
+	}
+	
+	
+	public void setDocumentFilter(DocumentFilter f)
+	{
+		((AbstractDocument)getDocument()).setDocumentFilter(f);
 	}
 }

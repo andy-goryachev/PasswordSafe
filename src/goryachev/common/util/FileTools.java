@@ -424,7 +424,7 @@ public class FileTools
 	}
 
 
-	// read file as an ascii string
+	// read file as an ASCII string
 	public static String loadFile(String file) throws Exception
 	{
 		File f = new File(file);

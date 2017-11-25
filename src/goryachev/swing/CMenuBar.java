@@ -23,7 +23,7 @@ public class CMenuBar
 	}
 	
 	
-	protected JMenu lastMenu()
+	public JMenu lastMenu()
 	{
 		for(int i=getComponentCount()-1; i>=0; --i)
 		{

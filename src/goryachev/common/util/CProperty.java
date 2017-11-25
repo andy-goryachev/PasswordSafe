@@ -4,11 +4,12 @@ import java.lang.ref.WeakReference;
 
 
 /** fx-like object property capable of dealing with normal and weak listeners. */
-public class CObjectProperty<T>
+public class CProperty<T>
 {
-	public interface Listener<T>
+	@FunctionalInterface
+	public static interface Listener<T>
 	{
-		public void onPropertyChange(T old, T cur);
+		public void onCPropertyChange(T old, T cur);
 	}
 	
 	//
@@ -17,13 +18,13 @@ public class CObjectProperty<T>
 	private CList<Object> listeners;
 	
 	
-	public CObjectProperty(T value)
+	public CProperty(T value)
 	{
 		set(value);
 	}
 	
 	
-	public CObjectProperty()
+	public CProperty()
 	{
 	}
 	
@@ -76,7 +77,7 @@ public class CObjectProperty<T>
 				{
 					try
 					{
-						((Listener)x).onPropertyChange(old, cur);
+						((Listener)x).onCPropertyChange(old, cur);
 					}
 					catch(Exception e)
 					{
@@ -138,6 +139,15 @@ public class CObjectProperty<T>
 		if(fireImmediately)
 		{
 			fireEvent(null, get());
+		}
+	}
+	
+	
+	public synchronized void removeListener(Listener<T> li)
+	{
+		if(listeners != null)
+		{
+			listeners.remove(li);
 		}
 	}
 }

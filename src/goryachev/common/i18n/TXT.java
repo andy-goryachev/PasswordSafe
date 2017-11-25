@@ -2,7 +2,7 @@
 package goryachev.common.i18n;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
-import goryachev.common.util.CObjectProperty;
+import goryachev.common.util.CProperty;
 import goryachev.common.util.HasPrompts;
 import goryachev.common.util.WeakList;
 import java.util.Locale;
@@ -69,7 +69,7 @@ public class TXT
 	private static Character testChar;
 	private static Mode mode = Mode.OFF;
 	private static WeakList<HasPrompts> hasPrompts;
-	private static CObjectProperty<CLanguage> languageProperty;
+	private static CProperty<CLanguage> languageProperty;
 
 	
 	/** returns localized prompt in the current language */
@@ -247,11 +247,11 @@ public class TXT
 	}
 	
 	
-	public static CObjectProperty<CLanguage> getLanguageProperty()
+	public static CProperty<CLanguage> getLanguageProperty()
 	{
 		if(languageProperty == null)
 		{
-			languageProperty = new CObjectProperty<CLanguage>(CLanguage.getDefault());
+			languageProperty = new CProperty<CLanguage>(CLanguage.getDefault());
 		}
 		return languageProperty;
 	}

@@ -172,7 +172,7 @@ public class Dump
 	
 	
 	// dumps byte array into a nicely formatted String
-	// printing address first, then 16 bytes of hex then ascii representation then newline
+	// printing address first, then 16 bytes of hex then ASCII representation then newline
 	//     "0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................" or
 	// "00000000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................" 
 	// depending on startAddress
@@ -231,7 +231,7 @@ public class Dump
 			// space or newline
 			if(col >= 15)
 			{
-				dumpAscii(sb, bytes, lineStart);
+				dumpASCII(sb, bytes, lineStart);
 				col = 0;
 			}
 			else
@@ -249,13 +249,13 @@ public class Dump
 				sb.append("   ");
 			}
 
-			dumpAscii(sb, bytes, lineStart);
+			dumpASCII(sb, bytes, lineStart);
 		}
 	}
 	
 	
 	// dumps byte array into a nicely formatted String
-	// printing address first, then 16 bytes of hex then ascii representation then newline
+	// printing address first, then 16 bytes of hex then ASCII representation then newline
 	//     "0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................" or
 	// "00000000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................" 
 	public static String hex(byte[] bytes)
@@ -381,7 +381,7 @@ public class Dump
 	}
 	
 	
-	private static void dumpAscii(SB sb, byte[] bytes, int lineStart)
+	private static void dumpASCII(SB sb, byte[] bytes, int lineStart)
 	{
 		// first, print padding
 		sb.append(' ');

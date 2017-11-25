@@ -108,8 +108,8 @@ public class RandomAccessByteBuffer
 	}
 
 	
-	// same format as StringTools.writeAsciiString()
-	public void writeAsciiString(String s) throws IOException
+	// same format as StringTools.writeASCIIString()
+	public void writeASCIIString(String s) throws IOException
 	{
 		if(s == null)
 		{

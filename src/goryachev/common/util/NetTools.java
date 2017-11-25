@@ -151,7 +151,7 @@ public class NetTools
 	}
 
 	
-	/** replaces non-ascii symbols with their UTF-8 byte representation and spaces with %20 */
+	/** replaces non-ASCII symbols with their UTF-8 byte representation and spaces with %20 */
 	public static String parseUrlString(String url)
 	{
 		byte[] bytes = url.getBytes(CKit.CHARSET_UTF8);

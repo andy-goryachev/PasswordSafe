@@ -245,23 +245,13 @@ public class UI
 
 	public static Frame getParentFrame(Component c)
 	{
-		if(c instanceof Frame)
-		{
-			return (Frame)c;
-		}
-		
-		return (Frame)SwingUtilities.getAncestorOfClass(Frame.class, c);
+		return getAncestorOfClass(Frame.class, c);
 	}
 	
 
 	public static JFrame getParentJFrame(Component c)
 	{
-		if(c instanceof JFrame)
-		{
-			return (JFrame)c;
-		}
-		
-		return (JFrame)SwingUtilities.getAncestorOfClass(JFrame.class, c);
+		return getAncestorOfClass(JFrame.class, c);
 	}
 	
 
@@ -272,7 +262,7 @@ public class UI
 			return (Window)c;
 		}
 
-		Window w = (Window)SwingUtilities.getAncestorOfClass(Window.class, c);
+		Window w = getAncestorOfClass(Window.class, c);
 		if(w == null)
 		{
 			w = CFocusMonitor.getLastWindow();
@@ -283,17 +273,25 @@ public class UI
 	
 	public static <T extends Container> T getAncestorOfClass(Class<T> c, Component comp)
 	{
-		if(comp == null)
+		while(comp != null)
 		{
-			return null;
+			if(c.isInstance(comp))
+			{
+				return (T)comp;
+			}
+			
+			if(comp instanceof JPopupMenu)
+			{
+				if(comp.getParent() == null)
+				{
+					comp = ((JPopupMenu)comp).getInvoker();
+					continue;
+				}
+			}
+			
+			comp = comp.getParent();
 		}
-		
-		if(c.isAssignableFrom(comp.getClass()))
-		{
-			return (T)comp;
-		}
-		
-		return (T)SwingUtilities.getAncestorOfClass(c, comp);
+		return null;
 	}
 	
 	
@@ -1661,7 +1659,7 @@ public class UI
 	{
 		if(c instanceof JFrame)
 		{
-			validateAndRepaint(((JFrame)c).getContentPane());
+			validateAndRepaint(((JFrame)c).getRootPane());
 		}
 		else if(c != null)
 		{

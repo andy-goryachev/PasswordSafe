@@ -330,7 +330,7 @@ public class D
 			}
 			else
 			{
-				print("\n" + Hex.toHexStringAscii(b));
+				print("\n" + Hex.toHexStringASCII(b));
 			}
 		}
 	}
@@ -346,7 +346,7 @@ public class D
 			}
 			else
 			{
-				print(s, "\n" + Hex.toHexStringAscii(b));
+				print(s, "\n" + Hex.toHexStringASCII(b));
 			}
 		}
 	}
