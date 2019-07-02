@@ -1,3 +1,5 @@
-﻿bcprov-jdk15on-156.jar    - binary
-lcrypto-jdk15on-156.zip   - sources
+﻿https://www.bouncycastle.org/latest_releases.html
+
+bcprov-jdk15on-*.jar    - binary
+lcrypto-jdk15on-*.zip   - sources
 

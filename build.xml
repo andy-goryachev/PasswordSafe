@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright © 2016-2017 Andy Goryachev <andy@goryachev.com> -->
+<!-- Copyright © 2019 Andy Goryachev <andy@goryachev.com> -->
 
 
 <project default="build-all" basedir=".">
@@ -9,7 +9,7 @@
 	
 	<!-- libraries -->
 	<path id="libs">
-		<pathelement location="lib/bouncycastle/bcprov-jdk15on-157.jar" />
+		<pathelement location="lib/bouncycastle/bcprov-jdk15on-162.jar" />
 	</path>
 	
 	
