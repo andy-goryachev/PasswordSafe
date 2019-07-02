@@ -1,4 +1,4 @@
-// Copyright © 2012-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.io.InputStream;
 import java.security.DigestException;
@@ -55,7 +55,7 @@ public class CDigest
 		}
 		catch(Exception e)
 		{
-			throw new Rex(e);
+			throw new Error(e);
 		}
 	}
 	
@@ -162,7 +162,9 @@ public class CDigest
 	
 	public byte[] digest()
 	{
-		return md.digest();
+		byte[] rv = md.digest();
+		md.reset();
+		return rv;
 	}
 	
 	

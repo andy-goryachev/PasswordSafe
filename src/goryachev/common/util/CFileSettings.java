@@ -1,4 +1,4 @@
-// Copyright © 2011-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
@@ -214,6 +214,8 @@ public class CFileSettings
 	public static CFileSettings loadQuiet(File f)
 	{
 		CFileSettings s = new CFileSettings(f);
+		s.setSorted(true);
+		
 		try
 		{
 			s.load();

@@ -1,7 +1,6 @@
-// Copyright © 2013-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.i18n;
 import goryachev.common.util.CMap;
-import goryachev.common.util.Rex;
 import goryachev.common.util.SB;
 import java.util.Random;
 
@@ -129,7 +128,7 @@ public abstract class AbstractPseudoLocalization
 			String s = ss[i++];
 			if(s.length() < 2)
 			{
-				throw new Rex("must contain at least two characters: " + s);
+				throw new Error("must contain at least two characters: " + s);
 			}
 			
 			char k = s.charAt(0);

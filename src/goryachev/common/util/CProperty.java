@@ -1,4 +1,4 @@
-// Copyright © 2015-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2015-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.lang.ref.WeakReference;
 
@@ -147,7 +147,29 @@ public class CProperty<T>
 	{
 		if(listeners != null)
 		{
-			listeners.remove(li);
+			for(int i=listeners.size()-1; i>=0; i--)
+			{
+				Object x = listeners.get(i);
+				if(x == li)
+				{
+					listeners.remove(i);
+					return;
+				}
+				else if(x instanceof WeakReference)
+				{
+					Object w = ((WeakReference)x).get();
+					if(w == null)
+					{
+						listeners.remove(i);
+						continue;
+					}
+					else if(w == li)
+					{
+						listeners.remove(i);
+						return;
+					}
+				}
+			}
 		}
 	}
 }

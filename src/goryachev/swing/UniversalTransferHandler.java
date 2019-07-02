@@ -1,8 +1,7 @@
-// Copyright © 2012-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.CList;
 import goryachev.common.util.Log;
-import goryachev.common.util.Rex;
 import java.awt.Component;
 import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
@@ -171,7 +170,7 @@ public abstract class UniversalTransferHandler
 				return h;
 			}
 		}
-		throw new Rex("No handler defined for: " + f);
+		throw new Error("No handler defined for: " + f);
 	}
 	
 	

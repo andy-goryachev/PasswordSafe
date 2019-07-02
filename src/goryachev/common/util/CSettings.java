@@ -1,4 +1,4 @@
-// Copyright © 2005-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2005-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.io.File;
 import java.util.Hashtable;
@@ -98,6 +98,12 @@ public class CSettings
 	
 	
 	public void setBoolean(String key, boolean val)
+	{
+		set(key, val);
+	}
+	
+	
+	public void setBool(String key, boolean val)
 	{
 		set(key, val);
 	}

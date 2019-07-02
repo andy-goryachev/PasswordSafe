@@ -1,8 +1,7 @@
-// Copyright © 2014-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2014-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CMap;
-import goryachev.common.util.Rex;
 import java.awt.Component;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
@@ -76,7 +75,7 @@ public class FormLogic
 		}
 		else
 		{
-			throw new Rex("not supported: " + CKit.className(c));
+			throw new Error("not supported: " + CKit.className(c));
 		}
 	}
 }

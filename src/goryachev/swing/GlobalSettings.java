@@ -1,4 +1,4 @@
-// Copyright © 2005-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2005-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.CFileSettings;
 import goryachev.common.util.CList;
@@ -6,7 +6,6 @@ import goryachev.common.util.CMap;
 import goryachev.common.util.CSettings;
 import goryachev.common.util.Log;
 import goryachev.common.util.Obj;
-import goryachev.common.util.Rex;
 import goryachev.common.util.SB;
 import goryachev.common.util.WeakList;
 import goryachev.swing.options.COption;
@@ -564,7 +563,7 @@ public class GlobalSettings
 		}
 		else
 		{
-			throw new Rex();
+			throw new Error();
 		}
 	}
 }

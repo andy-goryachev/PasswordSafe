@@ -1,6 +1,5 @@
-// Copyright © 2006-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2006-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.util.Rex;
 import java.awt.ItemSelectable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -82,7 +81,7 @@ public abstract class InputTracker
 		}
 		else
 		{
-			throw new Rex("ignored: " + c);
+			throw new Error("ignored: " + c);
 		}
 	}
 	

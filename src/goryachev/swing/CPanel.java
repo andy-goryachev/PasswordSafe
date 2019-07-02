@@ -1,6 +1,5 @@
-// Copyright © 2009-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.util.Rex;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -83,7 +82,7 @@ public class CPanel
 		}
 		else
 		{
-			throw new Rex();
+			throw new Error();
 		}
 	}
 	
@@ -290,6 +289,16 @@ public class CPanel
 	{
 		JLabel t = new JLabel(s);
 		t.setFont(t.getFont().deriveFont(Font.BOLD));
+		return t;
+	}
+	
+	
+	public JLabel heading(String s, float scale)
+	{
+		JLabel t = new JLabel(s);
+		
+		Font f = t.getFont();
+		t.setFont(f.deriveFont(Font.BOLD, f.getSize2D() * scale));
 		return t;
 	}
 

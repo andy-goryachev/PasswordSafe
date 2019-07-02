@@ -1,4 +1,4 @@
-// Copyright © 2009-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.i18n.Menus;
 import goryachev.common.i18n.TXT;
@@ -70,10 +70,10 @@ public class CMemoryBar
 	public JPopupMenu createPopupMenu()
 	{
 		CPopupMenu m = new CPopupMenu();
-		m.add(new CMenuItem(TXT.get("CMemoryBar.run memory garbage collector", "Run Garbage Collector (double click)"), gcAction));
-		m.addSeparator();
-		m.add(new CMenuItem(TXT.get("CMemoryBar.show system info", "System Information"), sysInfoAction));
-		m.add(TXT.get("CMemoryBar.show error log", "Error Log"));
+		m.item(TXT.get("CMemoryBar.run memory garbage collector", "Run Garbage Collector (double click)"), gcAction);
+		m.separator();
+		m.item(TXT.get("CMemoryBar.show system info", "System Information"), sysInfoAction);
+		m.item(TXT.get("CMemoryBar.show error log", "Error Log"));
 		return m;
 	}
 

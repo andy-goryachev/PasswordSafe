@@ -1,4 +1,4 @@
-// Copyright © 2015-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2015-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.dialogs.options;
 import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;

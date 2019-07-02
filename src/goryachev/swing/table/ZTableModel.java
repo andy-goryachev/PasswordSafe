@@ -1,8 +1,7 @@
-// Copyright © 2012-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.table;
 import goryachev.common.util.CList;
 import goryachev.common.util.CMap;
-import goryachev.common.util.Rex;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
@@ -232,7 +231,7 @@ public abstract class ZTableModel<K,V>
 	{
 		if(t.getModel() != this)
 		{
-			throw new Rex("wrong table");
+			throw new Error("wrong table");
 		}
 		
 		int ix = t.convertRowIndexToModel(viewRow);

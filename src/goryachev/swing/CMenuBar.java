@@ -1,4 +1,4 @@
-// Copyright © 2013-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.swing.theme.AssignMnemonic;
 import java.awt.Component;
@@ -72,6 +72,16 @@ public class CMenuBar
 	public CMenuItem item(String text)
 	{
 		CMenuItem m = new CMenuItem(text, XAction.DISABLED);
+		lastMenu().add(m);
+		return m;
+	}
+	
+	
+	/** creates a disabled checkbox menu item for development purposes */
+	@Deprecated
+	public CCheckBoxMenuItem checkBoxItem(String text)
+	{
+		CCheckBoxMenuItem m = new CCheckBoxMenuItem(text, XAction.DISABLED);
 		lastMenu().add(m);
 		return m;
 	}

@@ -1,9 +1,8 @@
-// Copyright © 2013-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
 import goryachev.common.util.CMap;
-import goryachev.common.util.Rex;
 import java.util.List;
 import javax.swing.text.JTextComponent;
 
@@ -40,7 +39,7 @@ public class InputForm
 		}
 		else
 		{
-			throw new Rex("unsupported entry field type: " + CKit.simpleName(f));
+			throw new Error("unsupported entry field type: " + CKit.getSimpleName(f));
 		}
 	}
 	

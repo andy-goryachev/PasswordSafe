@@ -1,4 +1,4 @@
-// Copyright © 2012-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.swing.theme.AssignMnemonic;
 import javax.swing.Action;
@@ -34,6 +34,14 @@ public class CPopupMenu
 	public CMenuItem item(String s, Action a)
 	{
 		CMenuItem m = new CMenuItem(s, a);
+		add(m);
+		return m;
+	}
+	
+	
+	public CMenuItem item(String s, Runnable r)
+	{
+		CMenuItem m = new CMenuItem(s, new XAction(r));
 		add(m);
 		return m;
 	}

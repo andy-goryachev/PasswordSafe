@@ -1,4 +1,4 @@
-// Copyright © 2011-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.Log;
 import java.awt.Component;
@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JComponent;
 import javax.swing.JTable;
+import javax.swing.JTree;
 import javax.swing.text.Caret;
 import javax.swing.text.JTextComponent;
 
@@ -23,7 +24,7 @@ public abstract class CPopupMenuController
 	
 	//
 	
-	private boolean enforceTableSelection = true;
+	private boolean enforceSelection = true;
 	private int clickx;
 	private int clicky;
 	private Component source;
@@ -66,9 +67,9 @@ public abstract class CPopupMenuController
 	}
 	
 	
-	public void setEnforceTableSelection(boolean on)
+	public void setEnforceSelectionUnderMouseClick(boolean on)
 	{
-		enforceTableSelection = on;
+		enforceSelection = on;
 	}
 	
 	
@@ -126,7 +127,7 @@ public abstract class CPopupMenuController
 		
 		if(source instanceof JTable)
 		{
-			if(enforceTableSelection)
+			if(enforceSelection)
 			{
 				Point p = ev.getPoint();
 				JTable table = (JTable)source;
@@ -137,6 +138,22 @@ public abstract class CPopupMenuController
 					if(!table.isCellSelected(row, col))
 					{
 						table.changeSelection(row, col, false, false);
+					}
+				}
+			}
+		}
+		else if(source instanceof JTree)
+		{
+			if(enforceSelection)
+			{
+				Point p = ev.getPoint();
+				JTree tree = (JTree)source;
+				int row = tree.getRowForLocation(ev.getX(), ev.getY());
+				if(row >= 0)
+				{
+					if(!tree.isRowSelected(row))
+					{
+						tree.setSelectionRow(row);
 					}
 				}
 			}

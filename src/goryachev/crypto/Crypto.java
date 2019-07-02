@@ -1,10 +1,10 @@
-// Copyright © 2011-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto;
-import goryachev.common.util.CField;
 import goryachev.common.util.CKit;
 import goryachev.common.util.Log;
-import goryachev.common.util.Rex;
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.security.SecureRandom;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.Arrays;
@@ -30,10 +30,6 @@ import org.bouncycastle.crypto.signers.RSADigestSigner;
 /** Collection of simple operations related to cryptography */
 public class Crypto
 {
-	private static final CField<int[]> BIGINTEGER_MAG = new CField(BigInteger.class, "mag");
-	private static final CField<char[]> STRING_VALUE = new CField(String.class, "value");
-	
-	
 	public static void zero(CipherParameters p)
 	{
 		try
@@ -51,7 +47,7 @@ public class Crypto
 				else
 				{
 					// should not see this in production
-					throw new Rex("unknown " + p.getClass());
+					throw new Error("unknown " + p.getClass());
 				}
 			}
 		}
@@ -110,26 +106,13 @@ public class Crypto
 	}
 	
 	
-	/** 
-	 * destroys char[] array inside of a String.  
-	 * this method uses reflection and may or may not work.
-	 * this method must be used against strings created via String(char[]) constuctor
-	 * to avoid messing up the jvm.
-	 */
-	public static final void zero(String s)
+	public static final void zero(CharBuffer b)
 	{
 		try
 		{
-			if(s != null)
+			if(b != null)
 			{
-				char[] v = STRING_VALUE.get(s);
-				if(v != null)
-				{
-					Arrays.fill(v, '\u0000');
-				}
-				
-				// this will ensure NPE if the code tries to reuse the destroyed string
-				STRING_VALUE.set(s, null);
+				Arrays.fill(b.array(), '\u0000');
 			}
 		}
 		catch(Throwable e)
@@ -139,25 +122,13 @@ public class Crypto
 	}
 	
 	
-	/** 
-	 * destroys int[] array inside of a BigInteger.  
-	 * this method uses reflection and may or may not work.
-	 * this method must be used against objects created via explicit constructor
-	 * to avoid messing up the jvm.
-	 */
-	public static final void zero(BigInteger x)
+	public static final void zero(ByteBuffer b)
 	{
 		try
 		{
-			if(x != null)
+			if(b != null)
 			{
-				int[] v = BIGINTEGER_MAG.get(x);
-				if(v != null)
-				{
-					Arrays.fill(v, '\u0000');
-				}
-				
-				BIGINTEGER_MAG.set(x, null);
+				Arrays.fill(b.array(), (byte)0);
 			}
 		}
 		catch(Throwable e)
@@ -271,7 +242,7 @@ public class Crypto
 		}
 		else
 		{
-			throw new Exception("no CipherParameters in " + CKit.simpleName(x));
+			throw new Exception("no CipherParameters in " + CKit.getSimpleName(x));
 		}
 	}
 	
@@ -300,7 +271,7 @@ public class Crypto
 		}
 		else
 		{
-			throw new Exception("don't know how to convert " + CKit.simpleName(x) + " to byte[]");
+			throw new Exception("don't know how to convert " + CKit.getSimpleName(x) + " to byte[]");
 		}
 	}
 

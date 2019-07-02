@@ -1,4 +1,4 @@
-// Copyright © 2012-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import goryachev.common.util.platform.ApplicationSupport;
 import java.util.Collection;
@@ -22,7 +22,7 @@ public abstract class CJob
 	private CList<CJob> children;
 	private volatile boolean cancelled;
 	private static final Object NULL = new Object();
-	private static final ParallelExecutor exec = init();
+	private static final ParallelExecutor exec = createExecutor();
 	private static final ThreadLocal<CJob> currentJob = new ThreadLocal<>();
 	
 	
@@ -55,7 +55,7 @@ public abstract class CJob
 	}
 	
 	
-	private static ParallelExecutor init()
+	private static ParallelExecutor createExecutor()
 	{
 		return new ParallelExecutor("cjob", 10);
 	}
@@ -157,8 +157,18 @@ public abstract class CJob
 	}
 	
 	
+	protected boolean hasResult()
+	{
+		return (result != null);
+	}
+	
+	
 	protected synchronized Object getResult()
 	{
+		if(result == NULL)
+		{
+			return null;
+		}
 		return result;
 	}
 	
@@ -176,8 +186,7 @@ public abstract class CJob
 	// FIX add the job to the child and release the thread
 	public void waitForCompletion() throws Exception
 	{
-		Object rv;
-		while((rv = getResult()) == null)
+		while(!hasResult())
 		{
 			if(isCancelled())
 			{
@@ -189,7 +198,7 @@ public abstract class CJob
 				try
 				{
 					// FIX something is wrong here, should not need the timeout parameter
-					wait(1000);
+					wait(100);
 				}
 				catch(Exception e)
 				{
@@ -198,6 +207,7 @@ public abstract class CJob
 			}
 		}
 		
+		Object rv = getResult();
 		if(rv instanceof Exception)
 		{
 			throw (Exception)rv;
@@ -242,8 +252,14 @@ public abstract class CJob
 	
 	public void submit()
 	{
+		submit(this);
+	}
+	
+	
+	public static void submit(Runnable r)
+	{
 		ApplicationSupport.shutdownCJobExecutor = true;
-		exec.submit(this);
+		exec.submit(r);
 	}
 	
 	

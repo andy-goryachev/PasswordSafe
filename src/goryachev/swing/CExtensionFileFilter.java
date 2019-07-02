@@ -1,4 +1,4 @@
-// Copyright © 2006-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2006-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;

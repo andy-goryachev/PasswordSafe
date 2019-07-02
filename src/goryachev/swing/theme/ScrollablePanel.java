@@ -1,4 +1,4 @@
-// Copyright © 2005-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2005-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.theme;
 import java.awt.BorderLayout;
 import java.awt.Component;

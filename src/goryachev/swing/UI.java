@@ -1,4 +1,4 @@
-// Copyright © 2009-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.i18n.Menus;
 import goryachev.common.i18n.TXT;
@@ -8,7 +8,6 @@ import goryachev.common.util.CPlatform;
 import goryachev.common.util.Clearable;
 import goryachev.common.util.Log;
 import goryachev.common.util.Obj;
-import goryachev.common.util.Rex;
 import goryachev.common.util.SB;
 import goryachev.swing.dialogs.ZeroFrame;
 import goryachev.swing.theme.InsetsResource;
@@ -74,7 +73,7 @@ import javax.swing.text.JTextComponent;
 /** common UI tools */
 public class UI
 {
-	public static final String COPYRIGHT = "Copyright © 1996-2017 Andy Goryachev <andy@goryachev.com>  All Rights Reserved.";
+	public static final String COPYRIGHT = "Copyright © 1996-2019 Andy Goryachev <andy@goryachev.com>  All Rights Reserved.";
 	public static final int ALT = InputEvent.ALT_DOWN_MASK;
 	public static final int CTRL = InputEvent.CTRL_DOWN_MASK;
 	public static final int SHIFT = InputEvent.SHIFT_DOWN_MASK;
@@ -338,7 +337,7 @@ public class UI
 			}
 			else
 			{
-				throw new Rex();
+				throw new Error();
 			}
 			
 			if(a == null)
@@ -572,7 +571,7 @@ public class UI
 	{
 		if(!EventQueue.isDispatchThread())
 		{
-			throw new Rex("must be in EDT");
+			throw new Error("must be in EDT");
 		}
 	}
 

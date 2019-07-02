@@ -1,4 +1,4 @@
-// Copyright © 2011-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.io.File;
 import java.math.BigDecimal;
@@ -539,5 +539,29 @@ public class Parsers
 			}
 		}
 		return new HashSet<>();
+	}
+	
+	
+	/** parses an Enum value */
+	public static <T extends Enum> T parseEnum(Object val, Class<T> type, T defaultValue)
+	{
+		if(val != null)
+		{
+			T[] values = type.getEnumConstants();
+			for(T v: values)
+			{
+				if(v == val)
+				{
+					return v;
+				}
+				
+				String s = val.toString();
+				if(v.toString().equals(s))
+				{
+					return v;
+				}
+			}
+		}
+		return defaultValue;
 	}
 }

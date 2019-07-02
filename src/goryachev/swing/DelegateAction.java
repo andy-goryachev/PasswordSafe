@@ -1,4 +1,4 @@
-// Copyright © 2013-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;

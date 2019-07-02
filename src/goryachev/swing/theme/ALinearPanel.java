@@ -1,6 +1,5 @@
-// Copyright © 2015-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2015-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.theme;
-import goryachev.common.util.Rex;
 import goryachev.swing.CBorder;
 import goryachev.swing.Theme;
 import java.awt.Component;
@@ -90,7 +89,7 @@ public class ALinearPanel
 		}
 		else
 		{
-			throw new Rex();
+			throw new Error();
 		}
 	}
 	

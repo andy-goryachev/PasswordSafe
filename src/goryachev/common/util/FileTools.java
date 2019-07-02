@@ -1,4 +1,4 @@
-// Copyright © 2004-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2004-2019 Andy Goryachev <andy@goryachev.com>
 // Contains fragments of Apache FileNameUtils code
 // http://www.apache.org/licenses/LICENSE-2.0
 package goryachev.common.util;
@@ -933,7 +933,7 @@ public class FileTools
 		int ix = name.lastIndexOf('.');
 		if(ix >= 0)
 		{
-			return name.substring(ix);
+			return name.substring(ix + 1);
 		}
 		else
 		{

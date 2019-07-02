@@ -1,4 +1,4 @@
-// Copyright © 2005-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2005-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 
 
@@ -45,6 +45,21 @@ public class ElasticLongArray
 	{
 		prepareFor(size);
 		array[size++] = value;
+	}
+	
+	
+	public void addAll(ElasticLongArray a)
+	{
+		if(a != null)
+		{
+			int sz = a.size();
+			if(sz > 0)
+			{
+				prepareFor(size + sz);
+				System.arraycopy(a.array, 0, array, size, sz);
+				size += sz;
+			}
+		}
 	}
 	
 	

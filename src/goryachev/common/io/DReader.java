@@ -1,4 +1,4 @@
-// Copyright © 2011-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.io;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -72,6 +72,17 @@ public class DReader
 			throw new EOFException();
 		}
 		return (byte)(ch);
+	}
+	
+	
+	public int readInt8() throws IOException
+	{
+		int ch = in.read();
+		if(ch < 0)
+		{
+			throw new EOFException();
+		}
+		return (ch & 0xff);
 	}
 	
 	
@@ -209,5 +220,11 @@ public class DReader
 	public void close() throws IOException
 	{
 		in.close();
+	}
+	
+	
+	public long skip(long nbytes) throws IOException
+	{
+		return in.skip(nbytes);
 	}
 }

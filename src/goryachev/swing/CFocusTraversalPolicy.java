@@ -1,9 +1,8 @@
-// Copyright © 2009-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
 import goryachev.common.util.Log;
-import goryachev.common.util.Rex;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FocusTraversalPolicy;
@@ -50,7 +49,7 @@ public class CFocusTraversalPolicy
 		Component c = UI.findByAction(parent, a);
 		if(c == null)
 		{
-			throw new Rex("unable to find component by action " + a);
+			throw new Error("unable to find component by action " + a);
 		}
 			
 		add(c);

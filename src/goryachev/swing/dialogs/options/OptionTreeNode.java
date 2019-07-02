@@ -1,4 +1,4 @@
-// Copyright © 2011-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.dialogs.options;
 import goryachev.common.util.CList;
 import goryachev.swing.options.OptionEditorInterface;

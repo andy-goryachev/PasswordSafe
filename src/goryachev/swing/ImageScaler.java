@@ -1,7 +1,6 @@
-// Copyright © 2013-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.Log;
-import goryachev.common.util.Rex;
 import goryachev.swing.img.jhlabs.GaussianFilter;
 import goryachev.swing.img.mortennobel.ResampleOp;
 import java.awt.Color;
@@ -310,7 +309,7 @@ public class ImageScaler
 			}
 			else if(dx < 0)
 			{
-				throw new Rex("dx=" + dx);
+				throw new Error("dx=" + dx);
 			}
 			
 			if(dy > 0)
@@ -329,7 +328,7 @@ public class ImageScaler
 			}
 			else if(dy < 0)
 			{
-				throw new Rex("dy=" + dy);
+				throw new Error("dy=" + dy);
 			}
 			
 			// shadow			
@@ -386,7 +385,7 @@ public class ImageScaler
 		{
 			if(throwException)
 			{
-				throw new Rex(e);
+				throw new Error(e);
 			}
 			
 			// make it obvious
@@ -439,8 +438,15 @@ public class ImageScaler
 	}
 	
 	
-	// multi-core resize
+	/** single-threaded image resize operation */
 	public static BufferedImage resize(Image image, int width, int height, boolean fitWidth)
+	{
+		return resize(image, width, height, fitWidth, 1);
+	}
+	
+	
+	/** multi-threaded image resize operation */
+	public static BufferedImage resize(Image image, int width, int height, boolean fitWidth, int numberOfThreads)
 	{
 		int w = image.getWidth(null);
 		int h = image.getHeight(null);
@@ -456,6 +462,7 @@ public class ImageScaler
 		
 		BufferedImage src = ImageTools.toBufferedImage(image);
 		ResampleOp op = new ResampleOp(width, height);
+		op.setNumberOfThreads(numberOfThreads);
 		//op.setUnsharpenMask(AdvancedResizeOp.UnsharpenMask.VerySharp);
 		return op.filter(src, null);
 	}

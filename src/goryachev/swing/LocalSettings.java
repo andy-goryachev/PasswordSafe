@@ -1,8 +1,7 @@
-// Copyright © 2013-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.CMap;
 import goryachev.common.util.Obj;
-import goryachev.common.util.Rex;
 import java.awt.Component;
 import java.awt.Container;
 import javax.swing.JComponent;
@@ -41,7 +40,7 @@ public class LocalSettings
 		JComponent c = getJComponent(x);
 		if(c == null)
 		{
-			throw new Rex("JFrame, JDialog, or JComponent");
+			throw new Error("JFrame, JDialog, or JComponent");
 		}
 		c.putClientProperty(KEY, this);
 	}
@@ -83,7 +82,7 @@ public class LocalSettings
 	{
 		if(components.put(prop, c) != null)
 		{
-			throw new Rex("name already present: " + prop); 
+			throw new Error("name already present: " + prop); 
 		}
 	}
 

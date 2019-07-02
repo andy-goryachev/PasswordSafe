@@ -1,6 +1,5 @@
-// Copyright © 2007-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2007-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.util.Rex;
 import goryachev.swing.theme.CButtonPanelLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -91,7 +90,7 @@ public class CButtonPanel
 		}
 		else
 		{
-			throw new Rex();
+			throw new Error();
 		}
 	}
 	

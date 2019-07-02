@@ -1,4 +1,4 @@
-// Copyright © 2009-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeModel;
@@ -70,5 +70,15 @@ public class CTree
 		}
 		
 		return sel;
+	}
+	
+	
+	public void selectFirst()
+	{
+		int rows = getRowCount();
+		if(rows > 0)
+		{
+			setSelectionRow(0);
+		}
 	}
 }

@@ -1,8 +1,7 @@
-// Copyright © 2013-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.CSettings;
 import goryachev.common.util.Obj;
-import goryachev.common.util.Rex;
 import java.awt.Component;
 import javax.swing.JComponent;
 
@@ -40,7 +39,7 @@ public abstract class ComponentSettings
 		}
 		else
 		{
-			throw new Rex("unable to attach, " + x);
+			throw new Error("unable to attach, " + x);
 		}
 	}
 	

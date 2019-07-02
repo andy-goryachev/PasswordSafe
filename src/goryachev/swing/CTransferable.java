@@ -1,9 +1,8 @@
-// Copyright © 2010-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2010-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CMap;
 import goryachev.common.util.Parsers;
-import goryachev.common.util.Rex;
 import goryachev.common.util.SB;
 import goryachev.swing.table.ZTable;
 import java.awt.datatransfer.DataFlavor;
@@ -100,7 +99,7 @@ public class CTransferable
 	{
 		if(data.put(f, x) != null)
 		{
-			throw new Rex("flavor is already present: " + f);
+			throw new Error("flavor is already present: " + f);
 		}
 	}
 	

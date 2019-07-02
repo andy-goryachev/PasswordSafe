@@ -203,6 +203,7 @@ public class ResampleOp
 		}
 		verticalFromWorkToDst(workPixels, outPixels, 0, numberOfThreads);
 		
+		// FIX may deadlock with a new fixed size thread pool
 		CJob.waitForAll(jobs);
 
 		workPixels = null; // gc

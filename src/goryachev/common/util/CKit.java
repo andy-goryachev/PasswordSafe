@@ -1,4 +1,4 @@
-// Copyright © 2007-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2007-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import goryachev.common.io.CWriter;
 import java.io.BufferedInputStream;
@@ -32,9 +32,11 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 import java.util.zip.ZipFile;
@@ -42,7 +44,7 @@ import java.util.zip.ZipFile;
 
 public final class CKit
 {
-	public static final String COPYRIGHT = "Copyright © 1996-2017 Andy Goryachev <andy@goryachev.com>  All Rights Reserved.";
+	public static final String COPYRIGHT = "Copyright © 1996-2019 Andy Goryachev <andy@goryachev.com>  All Rights Reserved.";
 	public static final char APPLE = '\u2318';
 	public static final char BOM = '\ufeff';
 	public static final String[] emptyStringArray = new String[0];
@@ -56,6 +58,14 @@ public final class CKit
 	public static final long MS_IN_A_WEEK = 604800000;
 	private static AtomicInteger id = new AtomicInteger(); 
 	private static Boolean eclipseDetected;
+	private static final JavaVersion JAVA8 = JavaVersion.parse("1.8.0");
+	private static final JavaVersion JAVA9 = JavaVersion.parse("9");
+	public static final long KB = 1024;
+	public static final long MB = 1024 * KB;
+	public static final long GB = 1024 * MB;
+	public static final long TB = 1024 * GB;
+	private static final double LOW_MEMORY_CHECK_THRESHOLD = 0.9;
+	private static final double LOW_MEMORY_FAIL_AFTER_GC_THRESHOLD = 0.87;
 	
 	
 	public static void close(Closeable x)
@@ -1182,7 +1192,7 @@ public final class CKit
 	}
 
 
-	public static String simpleName(Object x)
+	public static String getSimpleName(Object x)
 	{
 		return Dump.simpleName(x);
 	}
@@ -1454,23 +1464,31 @@ public final class CKit
 	}
 	
 	
-	/** reads byte array from a resource local to the parent object or class */
-	public static byte[] readLocalBytes(Object parent, String name) throws Exception
+	/** reads byte array from a resource local to the parent object (or class) */
+	public static byte[] readBytes(Object parent, String name) throws Exception
 	{
 		ByteArrayOutputStream out = new ByteArrayOutputStream(65536);
 		Class c = (parent instanceof Class ? (Class)parent : parent.getClass()); 
 		InputStream in = c.getResourceAsStream(name);
-		copy(in, out);
+		try
+		{
+			copy(in, out);
+		}
+		finally
+		{
+			close(in);
+			close(out);
+		}
 		return out.toByteArray();
 	}
 	
 	
-	/** reads byte array from a resource local to the parent object or class, without throwing an exception */
-	public static byte[] readLocalBytesQuiet(Object parent, String name)
+	/** reads byte array from a resource local to the parent object (or class), without throwing an exception */
+	public static byte[] readBytesQuiet(Object parent, String name)
 	{
 		try
 		{
-			return readLocalBytes(parent, name);
+			return readBytes(parent, name);
 		}
 		catch(Exception ignore)
 		{
@@ -1524,11 +1542,13 @@ public final class CKit
 	}
 	
 	
-	private static final double LOW_MEMORY_CHECK_THRESHOLD = 0.9;
-	private static final double LOW_MEMORY_FAIL_AFTER_GC_THRESHOLD = 0.87;
-	
-	
 	public static boolean isLowMemory()
+	{
+		return isLowMemory(LOW_MEMORY_CHECK_THRESHOLD, LOW_MEMORY_FAIL_AFTER_GC_THRESHOLD);
+	}
+	
+	
+	public static boolean isLowMemory(double triggerThreshold, double failThreshold)
 	{
 		Runtime r = Runtime.getRuntime();
 		
@@ -1536,7 +1556,7 @@ public final class CKit
 		long used = total - r.freeMemory();
 		long max = r.maxMemory();
 		
-		if(used > (long)(max * LOW_MEMORY_CHECK_THRESHOLD))
+		if(used > (long)(max * triggerThreshold))
 		{
 			// let's see if gc can help
 			System.gc();
@@ -1544,7 +1564,7 @@ public final class CKit
 			
 			total = r.totalMemory();
 			used = total - r.freeMemory();
-			if(used > (long)(max * LOW_MEMORY_FAIL_AFTER_GC_THRESHOLD))
+			if(used > (long)(max * failThreshold))
 			{
 				return true;
 			}
@@ -1792,7 +1812,7 @@ public final class CKit
 		}
 		catch(Exception e)
 		{
-			throw new Exception("failed to copy " + simpleName(x), e);
+			throw new Exception("failed to copy " + getSimpleName(x), e);
 		}
 	}
 	
@@ -2129,10 +2149,31 @@ public final class CKit
 	}
 
 
-	/** utility method converts a String Collection to a String[] */ 
-	public static String[] toArray(Collection<String> x)
+	/** 
+	 * utility method converts a String Collection to a String[].
+	 * returns null if input is null 
+	 */ 
+	public static String[] toArray(Collection<String> coll)
 	{
-		return x.toArray(new String[x.size()]);
+		if(coll == null)
+		{
+			return null;
+		}
+		return coll.toArray(new String[coll.size()]);
+	}
+	
+	
+	/** converts a collection to an array.  returns null if collection is null */
+	public static <T> T[] toArray(Class<T> type, Collection<T> coll)
+	{
+		if(coll == null)
+		{
+			return null;
+		}
+		
+		int sz = coll.size();
+		T[] a = (T[])Array.newInstance(type, sz);
+		return coll.toArray(a);
 	}
 	
 	
@@ -2260,5 +2301,131 @@ public final class CKit
 			throw new Error("min > max");
 		}
 		return (value >= min) && (value <= max);
+	}
+	
+	
+	public static boolean isJava9OrLater()
+	{
+		return JavaVersion.getJavaVersion().isSameOrLaterThan(JAVA9);
+	}
+
+
+	public static long kebi(int x)
+	{
+		return KB * x;
+	}
+	
+	
+	public static long mebi(int x)
+	{
+		return MB * x;
+	}
+	
+	
+	public static long gibi(int x)
+	{
+		return GB * x;
+	}
+	
+	
+	public static long tebi(int x)
+	{
+		return TB * x;
+	}
+	
+	
+	/** converts seconds to milliseconds */
+	public static int seconds(int seconds)
+	{
+		return seconds * 1000;
+	}
+	
+	
+	public static byte[] copy(byte[] b)
+	{
+		if(b == null)
+		{
+			return null;
+		}
+		
+		byte[] c = new byte[b.length];
+		System.arraycopy(b, 0, c, 0, b.length);
+		return c;
+	}
+	
+	
+	public static <S,T> List<T> transform(List<S> src, Function<S,T> converter)
+	{
+		return transform(src, null, converter);
+	}
+	
+	
+	public static <S,T> List<T> transform(List<S> src, List<T> target, Function<S,T> converter)
+	{
+		if(src == null)
+		{
+			return null;
+		}
+		
+		int sz = src.size();
+		if(target == null)
+		{
+			target = new CList<T>(sz);
+		}
+		
+		for(int i=0; i<sz; i++)
+		{
+			S s = src.get(i);
+			T t = converter.apply(s);
+			target.add(t);
+		}
+		return target;
+	}
+	
+	
+	public static byte[] copyOf(byte[] b)
+	{
+		if(b == null)
+		{
+			return null;
+		}
+		
+		return Arrays.copyOf(b, b.length);
+	}
+	
+	
+	/** returns a new copy of the specified array with the item added */
+	public static <T> T[] add(T[] items, T item)
+	{
+		int len = items.length;
+		T[] a = Arrays.copyOf(items, len + 1);
+		a[len] = item;
+		return a;
+	}
+	
+	
+	/** 
+	 * returns a new copy of the specified array with the first matching item removed.
+	 * the matching item is determined by CKit.equals() method.
+	 * this method returns the original array if no matching item is found.
+	 */
+	public static <T> T[] remove(T[] items, T item)
+	{
+		int ix = indexOf(items, item);
+		if(ix < 0)
+		{
+			return items;
+		}
+		
+		int len = items.length - 1;
+		T[] a = Arrays.copyOf(items, len);
+		
+		len = len - ix;
+		if(len > 0)
+		{
+			System.arraycopy(items, ix + 1, a, ix, len);
+		}
+		
+		return a;
 	}
 }

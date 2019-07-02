@@ -1,7 +1,5 @@
-// Copyright © 2011-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto;
-import goryachev.common.util.Rex;
-
 
 /**
  * This class provides additional level of security by storing only the encrypted value in memory.
@@ -15,6 +13,12 @@ abstract class OpaqueMemObject
 	
 	protected OpaqueMemObject()
 	{
+	}
+	
+	
+	protected OpaqueMemObject(OpaqueMemObject x)
+	{
+		encrypted = x.encrypted;
 	}
 	
 	
@@ -45,7 +49,7 @@ abstract class OpaqueMemObject
 			catch(Exception e)
 			{
 				// should not happen
-				throw new Rex(e);
+				throw new Error(e);
 			}
 		}
 	}
@@ -65,7 +69,7 @@ abstract class OpaqueMemObject
 			catch(Exception e)
 			{
 				// should not happen
-				throw new Rex(e);
+				throw new Error(e);
 			}
 		}
 		finally
@@ -100,7 +104,7 @@ abstract class OpaqueMemObject
 			catch(Exception e)
 			{
 				// should not happen
-				throw new Rex(e);
+				throw new Error(e);
 			}
 		}
 	}

@@ -1,6 +1,8 @@
-// Copyright © 2008-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.util.CKit;
 import goryachev.common.util.HasProperty;
+import java.awt.event.ItemEvent;
 import java.util.Collection;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -34,6 +36,15 @@ public class CComboBox
 	private void init()
 	{
 		setMaximumRowCount(32);
+	}
+	
+	
+	public void selectFirst()
+	{
+		if(getItemCount() > 0)
+		{
+			setSelectedIndex(0);
+		}
 	}
 	
 	
@@ -136,6 +147,46 @@ public class CComboBox
 		else
 		{
 			return getSelectedItem();
+		}
+	}
+	
+	
+	/** performs toString conversion of getCurrentItem() */
+	public String getSelectedString()
+	{
+		Object rv = getCurrentItem();
+		return CKit.toString(rv);
+	}
+	
+	
+	public void addSelectionListener(Runnable r)
+	{
+		addItemListener((ItemEvent ev) ->
+		{
+			if(ev.getStateChange() == ItemEvent.SELECTED)
+			{
+				r.run();
+			}
+		});
+	}
+	
+	
+	public void selectByString(Object value)
+	{
+		if(value != null)
+		{
+			String val = value.toString();
+			
+			int sz = getModel().getSize();
+			for(int i=0; i<sz; i++)
+			{
+				String v = getModel().getElementAt(i).toString();
+				if(val.equals(v))
+				{
+					setSelectedIndex(i);
+					return;
+				}
+			}
 		}
 	}
 }

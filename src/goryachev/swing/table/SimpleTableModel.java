@@ -1,4 +1,4 @@
-// Copyright © 2015-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2015-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.table;
 import goryachev.common.util.CList;
 import java.util.Collection;
@@ -118,6 +118,24 @@ public class SimpleTableModel<T>
 		}
 		
 		rows.setAll(x);
+		sz = getRowCount();
+		if(sz > 0)
+		{
+			fireTableRowsInserted(0, sz-1);
+		}
+	}
+	
+	
+	public void setAll(T ... items)
+	{
+		int sz = getRowCount();
+		if(sz > 0)
+		{
+			rows.clear();
+			fireTableRowsDeleted(0, sz-1);
+		}
+		
+		rows.setAll(items);
 		sz = getRowCount();
 		if(sz > 0)
 		{

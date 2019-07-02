@@ -1,7 +1,6 @@
-// Copyright © 2012-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.table;
 import goryachev.common.util.CList;
-import goryachev.common.util.Rex;
 
 
 /** 
@@ -43,7 +42,7 @@ public abstract class ZRowTableSelector<T>
 		
 		if((t.getModel() instanceof ZTableModel) == false)
 		{
-			throw new Rex("needs ZTableModel");
+			throw new Error("needs ZTableModel");
 		}
 	}
 	

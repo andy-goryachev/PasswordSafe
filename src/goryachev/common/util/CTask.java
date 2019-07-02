@@ -1,4 +1,4 @@
-// Copyright © 2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2017-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.util.concurrent.ExecutorService;
 import java.util.function.Consumer;
@@ -23,7 +23,7 @@ public class CTask<T>
 	}
 	
 	
-	public CTask<T> setGenerator(ValueGenerator<? extends T> generator)
+	public CTask<T> producer(ValueGenerator<? extends T> generator)
 	{
 		this.generator = generator;
 		return this;

@@ -1,4 +1,4 @@
-// Copyright © 2011-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto;
 import goryachev.common.util.CKit;
 
@@ -12,6 +12,18 @@ public final class OpaqueChars
 	public OpaqueChars(char[] cs)
 	{
 		set(cs);
+	}
+	
+	
+	public OpaqueChars(OpaqueChars op)
+	{
+		super(op);
+	}
+	
+	
+	public OpaqueChars(byte[] b)
+	{
+		super(b);
 	}
 	
 	
@@ -63,14 +75,17 @@ public final class OpaqueChars
 		byte[] b = null;
 		try
 		{
-			int sz = cs.length;
-			b = new byte[sz + sz];
-			int ix = 0;
-			for(int i=0; i<sz; i++)
+			if(cs != null)
 			{
-				int c = cs[i];
-				b[ix++] = (byte)(c >>> 8);
-				b[ix++] = (byte)c;
+				int sz = cs.length;
+				b = new byte[sz + sz];
+				int ix = 0;
+				for(int i=0; i<sz; i++)
+				{
+					int c = cs[i];
+					b[ix++] = (byte)(c >>> 8);
+					b[ix++] = (byte)c;
+				}
 			}
 			
 			setBytes(b);
@@ -193,6 +208,25 @@ public final class OpaqueChars
 		finally
 		{
 			Crypto.zero(cs);
+		}
+	}
+	
+	
+	public OpaqueChars copy()
+	{
+		return new OpaqueChars(this);
+	}
+	
+	
+	public static OpaqueChars copy(OpaqueChars x)
+	{
+		if(x == null)
+		{
+			return null;
+		}
+		else
+		{
+			return x.copy();
 		}
 	}
 }
