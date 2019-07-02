@@ -112,7 +112,12 @@ public class MainWindow
 	{
 		SB sb = new SB();
 		sb.a(Application.getTitle());
-		if(getFile() != null)
+		if(getFile() == null)
+		{
+			sb.a("  ");
+			sb.a(Version.VERSION);
+		}
+		else
 		{
 			sb.a(" - ");
 			sb.a(getFile().getAbsolutePath());
@@ -185,6 +190,7 @@ public class MainWindow
 
 		setJMenuBar(null);
 		setContent(new LockPanel(this, f));
+		updateTitle();
 		validate();
 		repaint();
 	}

@@ -105,7 +105,7 @@ public class MainPanel
 	{
 		CToolBar t = Theme.toolbar();
 		t.setPreferredSize(null);
-		t.setBorder(new CBorder(2, 0, 2, 0));
+		t.setBorder(new CBorder(1, 0, 0, 0));
 		
 		t.add(sz(addButton));
 		t.add(sz(saveButton));
