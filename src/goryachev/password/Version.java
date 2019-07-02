@@ -1,4 +1,4 @@
-// Copyright © 2016-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2016-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
 
 
@@ -7,5 +7,5 @@ package goryachev.password;
  */
 public class Version
 {
-	public static final String VERSION   = "3.05.49-RC";
+	public static final String VERSION   = "2019-0701-2204";
 }

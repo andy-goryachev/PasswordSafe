@@ -1,4 +1,4 @@
-// Copyright © 2013-2017 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.data.v2;
 import goryachev.common.util.CKit;
 import goryachev.crypto.Crypto;
