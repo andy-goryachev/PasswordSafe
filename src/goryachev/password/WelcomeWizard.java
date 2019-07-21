@@ -228,6 +228,7 @@ public class WelcomeWizard
 	protected void openMainWindow(File f)
 	{
 		MainWindow w = new MainWindow();
+		w.setFile(f);
 		w.lock();
 		w.open();
 		
