@@ -3,9 +3,9 @@ package goryachev.password;
 
 
 /**
- * Version.
+ * Application Version.
  */
 public class Version
 {
-	public static final String VERSION   = "2019-0701-2204";
+	public static final String VERSION = "2019-0721-1325";
 }

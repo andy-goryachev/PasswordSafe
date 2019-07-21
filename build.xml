@@ -22,6 +22,7 @@
 		<mkdir dir="build" />
 		<mkdir dir="build/classes" />
 		<mkdir dir="build/jars" />
+		<mkdir dir="dist" />
 	</target>
 
 			
@@ -86,10 +87,12 @@
 	<!-- copy jar to base dir -->
 	<target name="copy-jar" depends="make-jar">
 		<copy file="build/jars/${TARGET}.jar" todir="." />
+		<copy file="build/jars/${TARGET}.jar" todir="dist/" />
+		<copy file="build/jars/${TARGET}.jar.sha256.txt" todir="dist/" />
 	</target>
 	
 
 	<!-- build all -->
-	<target name="build-all" depends="compile, copy-resources, make-jar, sha-jar, copy-jar" />
+	<target name="build-all" depends="init, compile, copy-resources, make-jar, sha-jar, copy-jar" />
 	
 </project>
