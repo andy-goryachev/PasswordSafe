@@ -6,6 +6,7 @@
 
 	<!-- project name -->
 	<property name="TARGET" value="PasswordSafe"/>
+	<property name="MAIN_CLASS" value="goryachev.password.PasswordSafeApp"/>
 	
 	<!-- libraries -->
 	<path id="libs">
@@ -68,12 +69,11 @@
 	<target name="make-jar" depends="compile, copy-resources, unpack-jars">
 		<delete file="build/jars/${TARGET}.jar" />
 
-		<jar
-			jarfile="build/jars/${TARGET}.jar"
-			basedir="build/classes"
-			filesonly="true"
-			manifest="config/${TARGET}.manifest"
-			>
+		<jar jarfile="build/jars/${TARGET}.jar" basedir="build/classes" filesonly="true">
+			<manifest>
+				<attribute name="Main-Class" value="${MAIN_CLASS}" />
+				<attribute name="Created-By" value="andy@goryachev.com" />
+			</manifest>
 		</jar>
 	</target>
 	
