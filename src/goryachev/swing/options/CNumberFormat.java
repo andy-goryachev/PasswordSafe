@@ -1,6 +1,6 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
 import java.text.DecimalFormat;
 import java.text.FieldPosition;
 import java.text.Format;
@@ -16,6 +16,7 @@ import java.util.Locale;
 public class CNumberFormat
 	extends Format
 {
+	protected static final Log log = Log.get("CNumberFormat");
 	public static final String PROPERTY_EUROPEAN = "#.##0,###";
 	public static final String PROPERTY_SI_FRENCH = "# ##0,###";
 	public static final String PROPERTY_SI_ENGLISH = "# ##0.###";
@@ -119,7 +120,7 @@ public class CNumberFormat
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 			}
 		}
 		

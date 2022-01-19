@@ -1,7 +1,7 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.log.Log;
 import goryachev.common.util.CMap;
-import goryachev.common.util.Log;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -47,6 +47,7 @@ public class TextLineNumberComponent
 	extends JPanel
 	implements CaretListener, DocumentListener, PropertyChangeListener
 {
+	protected static final Log log = Log.get("TextLineNumberComponent");
 	public final static float LEFT = 0.0f;
 	public final static float CENTER = 0.5f;
 	public final static float RIGHT = 1.0f;
@@ -285,7 +286,7 @@ public class TextLineNumberComponent
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 				break;
 			}
 		}

@@ -1,6 +1,6 @@
-// Copyright © 2007-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2007-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -15,6 +15,8 @@ public abstract class DelayedAction
 	public static final int DEFAULT_PERIOD = 500;
 
 	//
+	
+	protected static final Log log = Log.get("DelayedAction");
 
 
 	private static final ActionListener listener = new ActionListener()
@@ -27,7 +29,7 @@ public abstract class DelayedAction
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 			}
 		}
 	};

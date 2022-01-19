@@ -1,7 +1,7 @@
-// Copyright © 2018-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2018-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
-import goryachev.common.util.Log;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -16,6 +16,7 @@ import java.awt.LayoutManager2;
 public class CFlowLayout
 	implements LayoutManager2
 {
+	protected static final Log log = Log.get("CFlowLayout");
 	protected int hgap;
 	protected int vgap;
 	protected int top;
@@ -125,7 +126,7 @@ public class CFlowLayout
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 			}
 		}
 	}

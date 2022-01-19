@@ -1,14 +1,15 @@
 // Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.prompts;
-import goryachev.common.i18n.CLanguageCode;
-import goryachev.common.i18n.LocalizedPromptsProvider;
-import goryachev.common.i18n.TXT;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
+import goryachev.i18n.CLanguageCode;
+import goryachev.i18n.LocalizedPromptsProvider;
+import goryachev.i18n.TXT;
 import goryachev.swing.Appearance;
 
 
 public class Prompts
 {
+	protected static final Log log = Log.get("Prompts");
 	public static final CLanguageCode[] LANGUAGES =
 	{
 		CLanguageCode.EnglishUS,
@@ -32,7 +33,7 @@ public class Prompts
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}		
 		
 		TXT.setLanguage(Appearance.getLanguage());

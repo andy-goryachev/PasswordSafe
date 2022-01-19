@@ -1,9 +1,9 @@
-// Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.common.util.platform.SysInfo;
+import goryachev.i18n.Menus;
+import goryachev.i18n.TXT;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;

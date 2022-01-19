@@ -1,7 +1,7 @@
 // Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.i18n.TXT;
 import goryachev.crypto.swing.OnScreenKeyboard;
+import goryachev.i18n.TXT;
 import goryachev.password.img.PasswordSafeIcons;
 import goryachev.swing.CExtensionFileFilter;
 import javax.swing.JLabel;

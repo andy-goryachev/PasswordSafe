@@ -1,7 +1,7 @@
-// Copyright © 2008-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
-import goryachev.common.util.Log;
 import goryachev.swing.CBorder;
 import goryachev.swing.Theme;
 import goryachev.swing.UI;
@@ -26,6 +26,7 @@ public abstract class OptionEditor<T>
 	
 	//
 	
+	protected static final Log log = Log.get("OptionEditor");
 	public static final Color BORDER_COLOR = UI.mix(Color.black, 0.25, Theme.PANEL_BG); 
 	public static final CBorder BORDER_EDITOR = new CBorder(1, BORDER_COLOR, 2, 2);
 	public static final CBorder BORDER_THIN = new CBorder(1, BORDER_COLOR);
@@ -67,7 +68,7 @@ public abstract class OptionEditor<T>
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 			return false;
 		}
 	}

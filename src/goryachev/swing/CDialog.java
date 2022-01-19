@@ -1,7 +1,7 @@
-// Copyright © 2005-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2005-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.log.Log;
 import goryachev.common.util.CList;
-import goryachev.common.util.Log;
 import goryachev.swing.theme.AssignMnemonic;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -37,6 +37,7 @@ public class CDialog
 	
 	//
 	
+	protected static final Log log = Log.get("CDialog");
 	public static final int DEFAULT_WIDTH  = 700;
 	public static final int DEFAULT_HEIGHT = 550;
 	public static final int MARGIN = 10;
@@ -184,7 +185,7 @@ public class CDialog
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 		
 		setVisible(false);

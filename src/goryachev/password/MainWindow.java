@@ -1,8 +1,8 @@
 // Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.common.util.SB;
+import goryachev.i18n.TXT;
 import goryachev.password.ui.ActivityMonitor;
 import goryachev.password.ui.ClipboardHandler;
 import goryachev.swing.AppFrame;
@@ -35,7 +35,9 @@ public class MainWindow
 	{
 		super("MainWindow");
 		
-		int ms = (int)(Preferences.lockTimeoutOption.get() * CKit.MS_IN_A_MINUTE);
+		int min = Preferences.lockTimeoutOption.get();
+		int ms = (int)CKit.minutesToMilliseconds(min);
+		
 		activityMonitor = new ActivityMonitor(this, ms)
 		{
 			protected void onNoActivity()

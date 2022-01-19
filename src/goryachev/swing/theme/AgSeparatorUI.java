@@ -1,4 +1,4 @@
-// Copyright © 2015-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2015-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.theme;
 import javax.swing.JComponent;
 import javax.swing.UIDefaults;

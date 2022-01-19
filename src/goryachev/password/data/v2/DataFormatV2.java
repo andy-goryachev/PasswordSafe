@@ -2,11 +2,10 @@
 package goryachev.password.data.v2;
 import goryachev.common.util.CKit;
 import goryachev.crypto.Crypto;
-import goryachev.crypto.EAXDecryptStream;
-import goryachev.crypto.EAXEncryptStream;
 import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.SecretByteArrayOutputStream;
-import goryachev.crypto.swing.EntropyGathererSwing;
+import goryachev.crypto.eax.EAXDecryptStream;
+import goryachev.crypto.eax.EAXEncryptStream;
 import goryachev.password.data.DataFile;
 import goryachev.password.data.DataFormat;
 import goryachev.password.data.DataTools;

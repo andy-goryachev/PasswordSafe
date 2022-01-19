@@ -1,6 +1,6 @@
-// Copyright © 2006-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2006-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.table;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
 import goryachev.common.util.Parsers;
 import goryachev.swing.CAlignment;
 import goryachev.swing.UI;
@@ -16,6 +16,7 @@ import javax.swing.table.TableModel;
 public class ZTableRenderer
 	extends DefaultTableCellRenderer
 {
+	protected static final Log log = Log.get("ZTableRenderer");
 	protected CTableRendererBorder border = createDefaultBorder();
 	protected transient JTable table;
 	protected transient ElasticColumnHandler handler;
@@ -157,7 +158,7 @@ public class ZTableRenderer
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 		return this;
 	}

@@ -1,6 +1,6 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.i18n.Menus;
+import goryachev.i18n.Menus;
 import java.awt.Component;
 import javax.swing.JComponent;
 import javax.swing.JPopupMenu;

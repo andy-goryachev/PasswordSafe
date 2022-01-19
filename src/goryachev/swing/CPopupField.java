@@ -1,6 +1,6 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
 import goryachev.swing.options.OptionEditor;
 import goryachev.swing.theme.AgComboBoxUI;
 import goryachev.swing.theme.CPopupWindow;
@@ -38,6 +38,7 @@ public abstract class CPopupField<T extends JComponent>
 	
 	//
 	
+	protected static final Log log = Log.get("CPopupField");
 	public final XAction showPopupAction = new XAction(this::actionTogglePopup);
 	public final XAction cancelPopupAction = new XAction(this::actionCancelPopup);
 	private static int arrowButtonWidth = AgComboBoxUI.DEFAULT_BUTTON_WIDTH;
@@ -208,7 +209,7 @@ public abstract class CPopupField<T extends JComponent>
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 				UI.beep();
 			}
 			
@@ -354,7 +355,7 @@ public abstract class CPopupField<T extends JComponent>
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 			}
 		}
 		

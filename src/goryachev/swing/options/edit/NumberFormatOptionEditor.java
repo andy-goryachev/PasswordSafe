@@ -1,4 +1,4 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options.edit;
 import goryachev.swing.options.CNumberFormat;
 import goryachev.swing.options.NumberFormatOption;

@@ -1,6 +1,5 @@
 // Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.swing;
-import goryachev.common.util.Log;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;
 import goryachev.swing.Theme;
@@ -50,7 +49,6 @@ public final class CPasswordField
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
 			UIManager.getLookAndFeel().provideErrorFeedback(this);
 		}
 	}

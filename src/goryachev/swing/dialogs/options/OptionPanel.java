@@ -1,9 +1,9 @@
-// Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.dialogs.options;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
+import goryachev.i18n.Menus;
+import goryachev.i18n.TXT;
 import goryachev.swing.CBorder;
 import goryachev.swing.CPanel;
 import goryachev.swing.CScrollPane;

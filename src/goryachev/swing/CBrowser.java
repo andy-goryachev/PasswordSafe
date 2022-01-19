@@ -1,6 +1,6 @@
-// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
 import goryachev.common.util.NetTools;
 import java.awt.Desktop;
 import java.net.URI;
@@ -9,6 +9,9 @@ import java.net.URL;
 
 public class CBrowser
 {
+	protected static final Log log = Log.get("CBrowser");
+	
+	
 	public static void openLink(String uri) throws Exception
 	{
 		URI u = NetTools.parseURI(uri);
@@ -24,7 +27,7 @@ public class CBrowser
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 	
@@ -43,7 +46,7 @@ public class CBrowser
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 

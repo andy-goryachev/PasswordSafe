@@ -1,4 +1,4 @@
-// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.wizard;
 import goryachev.swing.UI;
 import java.awt.Color;

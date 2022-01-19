@@ -1,8 +1,8 @@
-// Copyright © 2010-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2010-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.table;
+import goryachev.common.log.Log;
 import goryachev.common.util.CList;
 import goryachev.common.util.CSorter;
-import goryachev.common.util.Log;
 import java.awt.Rectangle;
 import java.util.Comparator;
 import java.util.List;
@@ -15,6 +15,7 @@ import javax.swing.table.TableStringConverter;
 public class ZTableRowSorter
 	extends TableRowSorter
 {
+	protected static final Log log = Log.get("ZTableRowSorter");
 	private final ZTable table;
 	private Comparator[] comparators;
 	private static Comparator<Object> betterComparator = CSorter.comparator();
@@ -63,11 +64,11 @@ public class ZTableRowSorter
 		catch(IndexOutOfBoundsException e)
 		{ 
 			// weird error
-			Log.ex(e);
+			log.error(e);
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 
@@ -84,7 +85,7 @@ public class ZTableRowSorter
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 

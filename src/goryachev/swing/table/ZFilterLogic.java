@@ -1,8 +1,8 @@
-// Copyright © 2008-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.table;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
+import goryachev.i18n.Menus;
+import goryachev.i18n.TXT;
 import goryachev.swing.CBorder;
 import goryachev.swing.CPanel;
 import goryachev.swing.CTextFieldWithPrompt;

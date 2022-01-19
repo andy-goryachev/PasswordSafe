@@ -1,14 +1,14 @@
-// Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
 import goryachev.common.util.CPlatform;
 import goryachev.common.util.Clearable;
-import goryachev.common.util.Log;
 import goryachev.common.util.Obj;
 import goryachev.common.util.SB;
+import goryachev.i18n.Menus;
+import goryachev.i18n.TXT;
 import goryachev.swing.dialogs.ZeroFrame;
 import goryachev.swing.theme.InsetsResource;
 import java.awt.Color;
@@ -73,7 +73,8 @@ import javax.swing.text.JTextComponent;
 /** common UI tools */
 public class UI
 {
-	public static final String COPYRIGHT = "Copyright © 1996-2019 Andy Goryachev <andy@goryachev.com>  All Rights Reserved.";
+	protected static final Log log = Log.get("UI");
+	public static final String COPYRIGHT = "Copyright © 1996-2022 Andy Goryachev <andy@goryachev.com>  All Rights Reserved.";
 	public static final int ALT = InputEvent.ALT_DOWN_MASK;
 	public static final int CTRL = InputEvent.CTRL_DOWN_MASK;
 	public static final int SHIFT = InputEvent.SHIFT_DOWN_MASK;
@@ -495,7 +496,7 @@ public class UI
 		{ }
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 	
@@ -535,7 +536,7 @@ public class UI
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 	
@@ -562,7 +563,7 @@ public class UI
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 	
@@ -725,7 +726,7 @@ public class UI
 		}
 		else
 		{
-			Log.ex("no horizontal alignment for " + x);
+			log.error("no horizontal alignment for " + x);
 		}
 	}
 	
@@ -1276,7 +1277,7 @@ public class UI
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 		return null;
 	}
@@ -1290,7 +1291,7 @@ public class UI
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 		return null;
 	}

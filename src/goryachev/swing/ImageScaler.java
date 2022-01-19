@@ -1,6 +1,6 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
 import goryachev.swing.img.jhlabs.GaussianFilter;
 import goryachev.swing.img.mortennobel.ResampleOp;
 import java.awt.Color;
@@ -21,6 +21,7 @@ import java.awt.image.BufferedImage;
  */
 public class ImageScaler
 {
+	protected static final Log log = Log.get("ImageScaler");
 	private int width;
 	private int height;
 	private int margin;
@@ -389,7 +390,7 @@ public class ImageScaler
 			}
 			
 			// make it obvious
-			Log.ex(e);
+			log.error(e);
 			g.setColor(Color.red);
 			g.fillRect(0, 0, width, height);
 		}

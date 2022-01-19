@@ -1,9 +1,9 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CSettings;
 import goryachev.common.util.Hex;
-import goryachev.common.util.Log;
 import goryachev.common.util.Parsers;
 import goryachev.common.util.SB;
 import goryachev.swing.table.CTreeNode;
@@ -32,6 +32,7 @@ import javax.swing.table.TableColumnModel;
 public class UISettings
 	extends CSettings
 {
+	protected static final Log log = Log.get("UISettings");
 	public static final String DIALOG = ".Dialog";
 	public static final String WINDOW = ".Window";
 	public static final String CHECK = ".Check";
@@ -131,7 +132,7 @@ public class UISettings
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 
@@ -431,7 +432,7 @@ public class UISettings
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 	

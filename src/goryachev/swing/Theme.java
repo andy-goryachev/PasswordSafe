@@ -1,8 +1,8 @@
-// Copyright © 2008-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.log.Log;
 import goryachev.common.util.CList;
 import goryachev.common.util.CPlatform;
-import goryachev.common.util.Log;
 import goryachev.swing.theme.ATheme;
 import goryachev.swing.theme.AgButtonUI;
 import goryachev.swing.theme.AgCheckBoxUI;
@@ -45,6 +45,8 @@ import javax.swing.plaf.InsetsUIResource;
 /** defines color/font theme and forces a platform-independent look and feel */
 public class Theme
 {
+	protected static final Log log = Log.get("Theme");
+	
 	public static final ThemeColor AFFIRM_BUTTON_COLOR = ThemeColor.create(ThemeKey.AFFIRM_BUTTON_COLOR);
 	public static final ThemeColor DESTRUCTIVE_BUTTON_COLOR = ThemeColor.create(ThemeKey.DESTRUCTIVE_BUTTON_COLOR);
 	public static final ThemeColor FIELD_BG = ThemeColor.create(ThemeKey.FIELD_BG);
@@ -90,7 +92,7 @@ public class Theme
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 		
 		// init default colors and borders

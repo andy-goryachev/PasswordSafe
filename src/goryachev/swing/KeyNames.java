@@ -1,9 +1,9 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.i18n.TXT;
 import goryachev.common.util.CPlatform;
 import goryachev.common.util.SB;
 import goryachev.common.util.platform.CPlatformMac;
+import goryachev.i18n.TXT;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.KeyStroke;

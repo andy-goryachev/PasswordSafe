@@ -1,4 +1,4 @@
-// Copyright © 2010-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2010-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CMap;
@@ -77,7 +77,7 @@ public class CTransferable
 //			}
 //			catch(Exception e)
 //			{
-//				Log.ex(e);
+//				log.error(e);
 //			}
 //		}
 //	}

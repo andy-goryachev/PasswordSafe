@@ -1,8 +1,8 @@
-// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.i18n.Menus;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
-import goryachev.common.util.Log;
+import goryachev.i18n.Menus;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.KeyboardFocusManager;
@@ -24,6 +24,7 @@ import javax.swing.undo.UndoableEdit;
 public class CUndoManager
 	extends UndoManager
 {
+	protected static final Log log = Log.get("CUndoManager");
 	public static final Object KEY_UNDO_MANAGER = new Object();
 	public final LocalUndoAction localUndoAction = new LocalUndoAction();
 	public final LocalRedoAction localRedoAction = new LocalRedoAction();
@@ -259,7 +260,7 @@ public class CUndoManager
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 				UI.beep();
 			}
 			
@@ -310,7 +311,7 @@ public class CUndoManager
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 				UI.beep();
 			}
 			

@@ -1,4 +1,4 @@
-// Copyright © 2004-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2004-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -507,7 +507,7 @@ public class Dump
 			}
 			else if(isPrimitive(x.getClass()))
 			{
-				sb.a(CKit.getSimpleName(x)).a("=").a(x);
+				sb.a(simpleName(x)).a("=").a(x);
 			}
 			else if(x instanceof Enum)
 			{
@@ -637,7 +637,7 @@ public class Dump
 	
 	public static void toShortString(String s, SB sb)
 	{
-		toShortString(s, sb, 26);
+		toShortString(s, sb, 80);
 	}
 	
 	

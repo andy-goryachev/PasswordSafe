@@ -1,8 +1,8 @@
-// Copyright © 2015-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2015-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CancelledException;
-import goryachev.common.util.Log;
 import goryachev.common.util.UserException;
 import goryachev.swing.icons.CIcons;
 import goryachev.swing.theme.ThemeColor;
@@ -16,6 +16,7 @@ import javax.swing.text.JTextComponent;
 
 public class Panels
 {
+	protected static final Log log = Log.get("Panels");
 	private static final ThemeColor ICON_FIELD_BG = ThemeColor.create(ThemeKey.TEXT_FG, 0.04, ThemeKey.TEXT_BG);
 	
 	
@@ -289,7 +290,7 @@ public class Panels
 				}
 				else
 				{
-					Log.ex(e);
+					log.error(e);
 				}
 				
 				msg = CKit.stackTrace(e);

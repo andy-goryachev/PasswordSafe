@@ -1,11 +1,11 @@
-// Copyright © 2008-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CancelledException;
-import goryachev.common.util.Log;
 import goryachev.common.util.UserException;
+import goryachev.i18n.Menus;
+import goryachev.i18n.TXT;
 import goryachev.swing.dialogs.options.COptionDialog;
 import goryachev.swing.dialogs.options.OptionTreeNode;
 import goryachev.swing.icons.CIcons;
@@ -32,6 +32,7 @@ public class Dialogs
 	//
 	
 	
+	protected static final Log log = Log.get("Dialogs");
 	public static final Dimension DEFAULT_SIZE = new Dimension(550, 300);
 	
 	
@@ -105,7 +106,7 @@ public class Dialogs
 				}
 				else
 				{
-					Log.ex(e);
+					log.error(e);
 				}
 				
 				msg = CKit.stackTrace(e);

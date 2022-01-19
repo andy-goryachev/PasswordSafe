@@ -1,14 +1,14 @@
 // Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
-import goryachev.common.util.Log;
 import goryachev.common.util.SB;
 import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.swing.CPasswordField;
 import goryachev.crypto.swing.MatchLabel;
 import goryachev.crypto.swing.OnScreenKeyboard;
+import goryachev.i18n.Menus;
+import goryachev.i18n.TXT;
 import goryachev.password.data.DataFile;
 import goryachev.password.ui.PasswordVerifier2;
 import goryachev.swing.BackgroundThread;
@@ -30,6 +30,7 @@ import java.io.File;
 public class CreateDataFileDialog
 	extends CDialog
 {
+	protected static final Log log = Log.get("CreateDataFileDialog");
 	public final CAction createAction = new CAction() { public void action() { actionCreate(); } };
 	public final CAction browseAction = new CAction() { public void action() { actionBrowse(); } };
 	private final CTextField fileField;
@@ -242,7 +243,7 @@ public class CreateDataFileDialog
 				public void onError(Throwable e)
 				{
 					setProgress(false);
-					Log.ex(e);
+					log.error(e);
 					backToPassword();
 				}
 			}.start();

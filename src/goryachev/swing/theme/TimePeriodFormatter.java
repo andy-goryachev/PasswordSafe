@@ -1,13 +1,19 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.theme;
-import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
+import goryachev.i18n.TXT;
 import java.util.Date;
 
 
 /** formats time period using variable precision and over estimation */
 public class TimePeriodFormatter
 {
+	private static final long MS_IN_A_DAY = CKit.daysToMilliseconds(1);
+	private static final long MS_IN_AN_HOUR = CKit.hoursToMilliseconds(1);
+	private static final long MS_IN_A_MINUTE = CKit.minutesToMilliseconds(1);
+	private static final long MS_IN_A_SECOND = CKit.secondsToMilliseconds(1);
+	
+	
 	public static String formatRough(Object x)
 	{
 		if(x != null)
@@ -67,7 +73,7 @@ public class TimePeriodFormatter
 			return null;
 		}
 		
-		a = t / CKit.MS_IN_A_DAY;
+		a = t / MS_IN_A_DAY;
 		if(a > 0)
 		{
 			// more than a day
@@ -76,12 +82,12 @@ public class TimePeriodFormatter
 		
 		//
 		
-		a = t / CKit.MS_IN_AN_HOUR;
+		a = t / MS_IN_AN_HOUR;
 		b = -1;
 		delta = 1;
 		if(a < 5)
 		{
-			b = (t % CKit.MS_IN_AN_HOUR) / CKit.MS_IN_A_MINUTE;
+			b = (t % MS_IN_AN_HOUR) / MS_IN_A_MINUTE;
 			if(a > 0)
 			{
 				if(a == 1)
@@ -118,12 +124,12 @@ public class TimePeriodFormatter
 		
 		//
 		
-		a = t / CKit.MS_IN_A_MINUTE;
+		a = t / MS_IN_A_MINUTE;
 		b = -1;
 		delta = 1;
 		if(a < 3)
 		{
-			b = (t % CKit.MS_IN_A_MINUTE) / CKit.MS_IN_A_SECOND;
+			b = (t % MS_IN_A_MINUTE) / MS_IN_A_SECOND;
 			if(a > 0)
 			{
 				if(a == 1)
@@ -160,7 +166,7 @@ public class TimePeriodFormatter
 		
 		//
 		
-		a = t / CKit.MS_IN_A_SECOND;
+		a = t / MS_IN_A_SECOND;
 		if(a > 10)
 		{
 			a = round(a, 10);
@@ -213,14 +219,14 @@ public class TimePeriodFormatter
 			return null;
 		}
 		
-		long h = (int)(time / CKit.MS_IN_AN_HOUR);
-		int t = (int)(time % CKit.MS_IN_AN_HOUR);
+		long h = (int)(time / MS_IN_AN_HOUR);
+		int t = (int)(time % MS_IN_AN_HOUR);
 		
-		int m = t / (int)CKit.MS_IN_A_MINUTE;
-		t %= CKit.MS_IN_A_MINUTE;
+		int m = t / (int)MS_IN_A_MINUTE;
+		t %= MS_IN_A_MINUTE;
 		
-		int s = t / (int)CKit.MS_IN_A_SECOND;
-		t %= CKit.MS_IN_A_SECOND;
+		int s = t / (int)MS_IN_A_SECOND;
+		t %= MS_IN_A_SECOND;
 		
 		if(h > 0)
 		{

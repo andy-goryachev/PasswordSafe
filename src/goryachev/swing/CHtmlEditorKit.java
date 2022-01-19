@@ -1,6 +1,6 @@
-// Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
 import goryachev.common.util.html.HtmlTools;
 import goryachev.swing.icons.CIcons;
 import goryachev.swing.text.LocalImageView;
@@ -22,7 +22,8 @@ import javax.swing.text.html.StyleSheet;
 
 public class CHtmlEditorKit 
 	extends HTMLEditorKit 
-{	
+{
+	protected static final Log log = Log.get("CHtmlEditorKit");
 	private boolean allowExternalImages;
 	private StyleSheet styles;
 	
@@ -113,7 +114,7 @@ public class CHtmlEditorKit
 		}
 		catch(Exception e)
 		{
-			Log.ex(new Error("Unable to load icon: " + src, e));
+			log.error(new Error("Unable to load icon: " + src, e));
 		}
 		
 		return CIcons.TBD;

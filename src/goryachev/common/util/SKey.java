@@ -1,10 +1,10 @@
-// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 
 
 /** String-based database identifier (key) */
 public class SKey
-	implements Cloneable
+	implements Cloneable, Comparable<SKey>
 {
 	public static interface Getter
 	{
@@ -19,6 +19,13 @@ public class SKey
 	public SKey(String key)
 	{
 		this.key = key;
+	}
+	
+	
+	public static SKey format(String format, Object ... args)
+	{
+		String s = String.format(format, args);
+		return new SKey(s);
 	}
 	
 	
@@ -89,5 +96,11 @@ public class SKey
 	public boolean endsWith(String suffix)
 	{
 		return key.endsWith(suffix);
+	}
+
+
+	public int compareTo(SKey x)
+	{
+		return key.compareTo(x.key);
 	}
 }

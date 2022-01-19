@@ -1,13 +1,13 @@
-// Copyright © 2007-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2007-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.i18n.CLanguage;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
+import goryachev.common.log.Log;
 import goryachev.common.util.CJob;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CProperty;
-import goryachev.common.util.Log;
 import goryachev.common.util.platform.ApplicationSupport;
+import goryachev.i18n.CLanguage;
+import goryachev.i18n.Menus;
+import goryachev.i18n.TXT;
 import goryachev.swing.dialogs.license.StandardLicense;
 import goryachev.swing.text.DocumentTools;
 import java.awt.AWTEvent;
@@ -60,6 +60,7 @@ public abstract class Application
 
 	//
 	
+	protected static final Log log = Log.get("Application");
 	public static final XAction exitAction = new XAction(Application::exit);
 
 	public final String profileName;
@@ -110,7 +111,8 @@ public abstract class Application
 		File dir = getLogFolder();
 		dir.mkdirs();
 		
-		Log.init(dir);
+		// FIX
+//		Log.init(dir);
 		
 		initCustomLog();
 	}
@@ -164,7 +166,7 @@ public abstract class Application
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 		
 		try
@@ -173,7 +175,7 @@ public abstract class Application
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 			System.exit(-1);
 		}
 		
@@ -183,7 +185,7 @@ public abstract class Application
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 			System.exit(-2);
 		}
 		
@@ -194,7 +196,7 @@ public abstract class Application
 		catch(final Exception e)
 		{
 			// failed app init
-			Log.ex(e);
+			log.error(e);
 
 			try
 			{
@@ -252,7 +254,7 @@ public abstract class Application
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 			System.exit(-1);
 		}
 		
@@ -262,7 +264,7 @@ public abstract class Application
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 			System.exit(-2);
 		}
 		
@@ -273,7 +275,7 @@ public abstract class Application
 		catch(final Exception e)
 		{
 			// failed app init
-			Log.ex(e);
+			log.error(e);
 			System.exit(-3);
 		}
 	}
@@ -316,7 +318,7 @@ public abstract class Application
 	// in EDT
 	public void showError(Throwable e)
 	{
-		Log.ex(e);
+		log.error(e);
 		
 		String msg = e.getMessage();
 		if(CKit.isBlank(msg))

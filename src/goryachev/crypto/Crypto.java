@@ -1,7 +1,7 @@
-// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
-import goryachev.common.util.Log;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -30,6 +30,9 @@ import org.bouncycastle.crypto.signers.RSADigestSigner;
 /** Collection of simple operations related to cryptography */
 public class Crypto
 {
+	protected static final Log log = Log.get("Crypto");
+	
+	
 	public static void zero(CipherParameters p)
 	{
 		try
@@ -53,7 +56,7 @@ public class Crypto
 		}
 		catch(Throwable e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 	
@@ -69,7 +72,7 @@ public class Crypto
 		}
 		catch(Throwable e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 
@@ -85,7 +88,7 @@ public class Crypto
 		}
 		catch(Throwable e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 	
@@ -101,7 +104,7 @@ public class Crypto
 		}
 		catch(Throwable e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 	
@@ -117,7 +120,7 @@ public class Crypto
 		}
 		catch(Throwable e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 	
@@ -133,7 +136,7 @@ public class Crypto
 		}
 		catch(Throwable e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 	
@@ -354,5 +357,58 @@ public class Crypto
 		{
 			Crypto.zero(decrypted);
 		}
+	}
+	
+	
+	public static byte[] copy(byte[] key)
+	{
+		if(key == null)
+		{
+			return null;
+		}
+		byte[] rv = new byte[key.length];
+		System.arraycopy(key, 0, rv, 0, key.length);
+		return rv;
+	}
+	
+	
+	public static byte[] chars2bytes(char[] cs)
+	{
+		if(cs == null)
+		{
+			return null;
+		}
+		
+		int sz = cs.length;
+		byte[] b = new byte[sz + sz];
+		int ix = 0;
+		for(int i=0; i<sz; i++)
+		{
+			int c = cs[i];
+			b[ix++] = (byte)(c >>> 8);
+			b[ix++] = (byte)c;
+		}
+		return b;
+	}
+	
+	
+	public static char[] bytes2chars(byte[] b)
+	{
+		if(b == null)
+		{
+			return null;
+		}
+		
+		int sz = b.length/2;
+		char[] cs = new char[sz];
+		int ix = 0;
+		for(int i=0; i<sz; i++)
+		{
+			int c = (b[ix++] & 0xff) << 8;
+			c |= (b[ix++] & 0xff);
+			cs[i] = (char)c;
+		}
+		
+		return cs;
 	}
 }

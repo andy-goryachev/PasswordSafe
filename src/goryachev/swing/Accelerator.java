@@ -1,8 +1,8 @@
-// Copyright © 2008-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.common.util.FH;
+import goryachev.i18n.TXT;
 import goryachev.swing.options.COption;
 import java.awt.Toolkit;
 import java.util.ArrayList;

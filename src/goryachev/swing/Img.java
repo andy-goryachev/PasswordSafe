@@ -1,7 +1,7 @@
-// Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.log.Log;
 import goryachev.common.util.CMap;
-import goryachev.common.util.Log;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -16,13 +16,10 @@ import javax.swing.ImageIcon;
 public class Img
 	extends ImageIcon
 {
+	protected static final Log log = Log.get("Img");
+
 	public static final Icon EMPTY = new CIcon(16);
 	public static final Object KEY_URL = new Object();
-	
-	
-	//
-	
-	
 	private CMap<Object,Object> properties;
 	
 
@@ -148,7 +145,7 @@ public class Img
 		}
 		catch(Exception e)
 		{
-			Log.ex("Icon not found: " + name);
+			log.error("Icon not found: " + name);
 			return new Img(ImageTools.create(16, 16, Color.red));
 		}
 	}
@@ -163,7 +160,7 @@ public class Img
 		}
 		catch(Exception e)
 		{
-			Log.ex("Icon not found: " + name);
+			log.error("Icon not found: " + name);
 			return new Img(ImageTools.create(16, 16, Color.red));
 		}
 	}

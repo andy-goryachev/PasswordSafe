@@ -1,7 +1,7 @@
 // Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
+import goryachev.i18n.Menus;
+import goryachev.i18n.TXT;
 import goryachev.swing.Appearance;
 import goryachev.swing.Dialogs;
 import goryachev.swing.dialogs.options.OptionTreeBuilder;

@@ -1,6 +1,6 @@
 // Copyright © 2008-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.i18n.TXT;
+import goryachev.i18n.TXT;
 import goryachev.swing.Accelerator;
 import java.awt.event.KeyEvent;
 

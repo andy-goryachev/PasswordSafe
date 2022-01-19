@@ -1,7 +1,7 @@
-// Copyright © 2015-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2015-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.theme;
+import goryachev.common.log.Log;
 import goryachev.common.util.CList;
-import goryachev.common.util.Log;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -22,6 +22,7 @@ import java.awt.LayoutManager2;
 public class LinearLayout
 	implements LayoutManager2
 {
+	protected static final Log log = Log.get("LinearLayout");
 	//public static final float MINIMUM = -1.0f;
 	public static final float PREFERRED = -2.0f;
 	public static final float FILL = -3.0f;
@@ -191,7 +192,7 @@ public class LinearLayout
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 			}
 		}
 	}

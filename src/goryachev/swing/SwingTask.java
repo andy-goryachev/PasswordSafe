@@ -1,7 +1,7 @@
-// Copyright © 2017-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2017-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.log.Log;
 import goryachev.common.util.CTask;
-import goryachev.common.util.Log;
 import java.awt.EventQueue;
 
 
@@ -29,7 +29,7 @@ public class SwingTask<T>
 	{
 		if(onError == null)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 		else
 		{

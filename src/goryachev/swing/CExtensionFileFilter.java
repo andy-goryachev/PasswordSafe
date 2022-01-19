@@ -1,8 +1,8 @@
-// Copyright © 2006-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2006-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
+import goryachev.i18n.TXT;
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
 

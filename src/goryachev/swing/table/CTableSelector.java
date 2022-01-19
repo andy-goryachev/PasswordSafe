@@ -1,8 +1,8 @@
-// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.table;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
-import goryachev.common.util.Log;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -17,6 +17,7 @@ public abstract class CTableSelector
 	
 	//
 
+	protected static final Log log = Log.get("CTableSelector");
 	private static final int[] NONE = new int[0];
 	public final JTable table;
 	private int[] selected = NONE;
@@ -144,7 +145,7 @@ public abstract class CTableSelector
 				}
 				catch(Exception e)
 				{
-					Log.ex(e);
+					log.error(e);
 				}
 			}
 		}

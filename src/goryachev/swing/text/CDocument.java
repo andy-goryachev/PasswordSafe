@@ -1,6 +1,6 @@
-// Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.text;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
 import java.awt.Component;
 import javax.swing.ImageIcon;
 import javax.swing.text.AbstractDocument;
@@ -19,6 +19,7 @@ import javax.swing.text.StyleContext;
 public class CDocument
 	extends DefaultStyledDocument
 {
+	protected static final Log log = Log.get("CDocument");
 	public static final Object AttributeLink = new Object();
 	
 	
@@ -96,7 +97,7 @@ public class CDocument
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 

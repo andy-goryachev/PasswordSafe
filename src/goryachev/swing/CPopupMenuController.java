@@ -1,6 +1,6 @@
-// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
 import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -24,6 +24,7 @@ public abstract class CPopupMenuController
 	
 	//
 	
+	protected static final Log log = Log.get("CPopupMenuController");
 	private boolean enforceSelection = true;
 	private int clickx;
 	private int clicky;
@@ -174,7 +175,7 @@ public abstract class CPopupMenuController
 					}
 					catch(Exception e)
 					{
-						Log.ex(e);
+						log.error(e);
 					}
 				}
 			}
@@ -253,7 +254,7 @@ public abstract class CPopupMenuController
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 		ev.consume();
 	}

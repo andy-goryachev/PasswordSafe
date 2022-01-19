@@ -1,4 +1,4 @@
-// Copyright © 2005-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2005-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.lang.reflect.Array;
 import java.util.Collection;
@@ -22,6 +22,19 @@ public class TextTools
 
 	// attempt to trim on the word boundary up to max characters
 	public static String trimNicely(String s, int max)
+	{
+		try
+		{
+			return trimNicely_FIX(s, max);
+		}
+		catch(Exception e)
+		{
+			return s;
+		}
+	}
+	// FIX throws an exception
+	// in the middle of this: "- https://icons.theforgesmith.com/"
+	private static String trimNicely_FIX(String s, int max)
 	{
 		if(s == null)
 		{
@@ -931,6 +944,7 @@ public class TextTools
 		int start = 0;
 		for(;;)
 		{
+			// FIX suboptimal
 			int ix = sb.indexOfIgnoreCase(pattern, start);
 			if(ix < 0)
 			{
@@ -974,7 +988,7 @@ public class TextTools
 	}
 
 
-	public static int indexOfIgnoreCase(String text, String pattern, int fromIndex)
+	public static int indexOfIgnoreCase(CharSequence text, String pattern, int fromIndex)
 	{
 		int textLen = text.length();
 		int patternLen = pattern.length();
@@ -1269,5 +1283,58 @@ public class TextTools
 		{
 			list.add(x.toString());
 		}
+	}
+	
+	
+	public static int indexOf(CharSequence text, CharSequence pattern)
+	{
+		return indexOf(text, pattern, 0);
+	}
+	
+	
+	public static int indexOf(CharSequence text, CharSequence pattern, int start)
+	{
+		int len = pattern.length();
+		if(start >= text.length())
+		{
+			return (len == 0 ? text.length() : -1);
+		}
+		else if(start < 0)
+		{
+			start = 0;
+		}
+		
+		if(len == 0)
+		{
+			return start;
+		}
+
+		int mx = text.length() - len;
+		char ch0 = pattern.charAt(0);
+
+		for(int i=start; i<=mx; i++)
+		{
+			if(text.charAt(i) != ch0)
+			{
+				while((++i <= mx) && (text.charAt(i) != ch0))
+				{ 
+				}
+			}
+
+			if(i <= mx)
+			{
+				int j = i + 1;
+				int end = j + len - 1;
+				for(int k=1; (j<end) && (text.charAt(j) == pattern.charAt(k)); j++,k++)
+				{
+				}
+
+				if(j == end)
+				{
+					return i;
+				}
+			}
+		}
+		return -1;
 	}
 }

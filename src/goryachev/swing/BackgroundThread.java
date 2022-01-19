@@ -1,7 +1,6 @@
-// Copyright © 2006-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2006-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.CKit;
-import goryachev.common.util.CancellableThread;
 import goryachev.common.util.Progress;
 import java.awt.EventQueue;
 
@@ -15,7 +14,7 @@ import java.awt.EventQueue;
 // error()   - in EDT thread
 //
 public abstract class BackgroundThread
-	extends CancellableThread
+	extends Thread
 {
 	/** executed in the background thread */
 	public abstract void process() throws Throwable;

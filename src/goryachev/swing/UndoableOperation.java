@@ -1,6 +1,6 @@
-// Copyright © 2008-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.i18n.TXT;
+import goryachev.i18n.TXT;
 import java.util.ArrayList;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;

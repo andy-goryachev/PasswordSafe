@@ -1,13 +1,13 @@
 // Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.swing.CPasswordField;
 import goryachev.crypto.swing.MatchLabel;
 import goryachev.crypto.swing.OnScreenKeyboard;
 import goryachev.crypto.swing.SecureTextField;
+import goryachev.i18n.Menus;
+import goryachev.i18n.TXT;
 import goryachev.password.data.DataFile;
 import goryachev.password.data.PassEntry;
 import goryachev.password.prompts.Tx;

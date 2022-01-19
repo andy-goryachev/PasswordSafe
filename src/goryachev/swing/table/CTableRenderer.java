@@ -1,6 +1,6 @@
-// Copyright © 2006-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2006-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.table;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
 import goryachev.swing.UI;
 import java.awt.Color;
 import java.awt.Component;
@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class CTableRenderer<T>
 	extends DefaultTableCellRenderer
 {
+	protected static final Log log = Log.get("CTableRenderer");
 	private JTable table;
 	private double selectedMix = 0.28125;
 	private double selectedFocusedMix = 0.8203125;
@@ -191,7 +192,7 @@ public class CTableRenderer<T>
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 		return this;
 	}

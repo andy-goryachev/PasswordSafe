@@ -1,6 +1,6 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.text;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
 import javax.swing.text.BoxView;
 import javax.swing.text.Element;
 
@@ -8,6 +8,9 @@ import javax.swing.text.Element;
 public class XBoxView
 	extends BoxView
 {
+	protected static final Log log = Log.get("XBoxView");
+	
+	
 	public XBoxView(Element em, int axis)
 	{
 		super(em, axis);
@@ -23,7 +26,7 @@ public class XBoxView
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 
@@ -37,7 +40,7 @@ public class XBoxView
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 			return 0;
 		}
 	}

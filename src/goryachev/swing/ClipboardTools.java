@@ -1,7 +1,7 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.i18n.Menus;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
+import goryachev.i18n.Menus;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
@@ -10,6 +10,9 @@ import java.awt.datatransfer.StringSelection;
 
 public class ClipboardTools
 {
+	protected static final Log log = Log.get("ClipboardTools");
+	
+	
 	public static Clipboard getClipboard()
 	{
 		return Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -28,7 +31,7 @@ public class ClipboardTools
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 		return null;
 	}

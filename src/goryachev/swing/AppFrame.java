@@ -1,6 +1,6 @@
-// Copyright © 2007-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2007-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
 import goryachev.swing.theme.AssignMnemonic;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -35,6 +35,7 @@ public class AppFrame
 	//
 	
 	
+	protected static final Log log = Log.get("AppFrame");
 	public final XAction closeAction = new XAction(this::actionWindowClose); 
 	public final XAction appExitAction = new XAction(Application::exit); 
 	protected Rectangle normalBounds;
@@ -124,7 +125,7 @@ public class AppFrame
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 		
 		int count = 0;

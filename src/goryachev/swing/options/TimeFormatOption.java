@@ -1,4 +1,4 @@
-// Copyright © 2010-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2010-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options;
 import goryachev.common.util.CDateFormat;
 import goryachev.common.util.CSettings;

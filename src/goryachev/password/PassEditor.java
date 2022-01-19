@@ -1,11 +1,10 @@
 // Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
-import goryachev.common.util.Log;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.swing.CPasswordField;
+import goryachev.i18n.Menus;
+import goryachev.i18n.TXT;
 import goryachev.password.data.PassEntry;
 import goryachev.password.ui.ClipboardHandler;
 import goryachev.swing.CAction;
@@ -24,6 +23,7 @@ import goryachev.swing.Theme;
 import goryachev.swing.UI;
 import goryachev.swing.text.CEditorKit;
 import java.awt.Color;
+import java.awt.Toolkit;
 import javax.swing.JPopupMenu;
 
 
@@ -230,7 +230,7 @@ public class PassEditor
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				Toolkit.getDefaultToolkit().beep();
 			}
 			finally
 			{

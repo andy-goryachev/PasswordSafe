@@ -1,4 +1,4 @@
-// Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options;
 import goryachev.common.util.CSettings;
 import java.awt.Color;

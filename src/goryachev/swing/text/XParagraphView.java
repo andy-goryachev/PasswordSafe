@@ -1,6 +1,6 @@
-// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.text;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
 import java.awt.FontMetrics;
 import java.awt.Shape;
 import java.awt.Toolkit;
@@ -15,6 +15,7 @@ import javax.swing.text.ViewFactory;
 public class XParagraphView
 	extends ParagraphView
 {
+	protected static final Log log = Log.get("XParagraphView");
 	private CEditorKit kit;
 
 
@@ -89,7 +90,7 @@ public class XParagraphView
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 
@@ -103,7 +104,7 @@ public class XParagraphView
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 }

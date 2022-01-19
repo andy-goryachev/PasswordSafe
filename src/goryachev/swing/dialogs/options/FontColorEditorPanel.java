@@ -1,11 +1,11 @@
-// Copyright © 2015-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2015-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.dialogs.options;
-import goryachev.common.i18n.TXT;
 import goryachev.common.util.CList;
 import goryachev.common.util.CMap;
 import goryachev.common.util.CSorter;
 import goryachev.common.util.Hex;
 import goryachev.common.util.SB;
+import goryachev.i18n.TXT;
 import goryachev.swing.CButton;
 import goryachev.swing.CPanel;
 import goryachev.swing.CTextField;

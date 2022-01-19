@@ -1,7 +1,7 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options.edit;
-import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
+import goryachev.i18n.TXT;
 import goryachev.swing.table.ZColumnHandler;
 import goryachev.swing.table.ZModel;
 import javax.swing.KeyStroke;

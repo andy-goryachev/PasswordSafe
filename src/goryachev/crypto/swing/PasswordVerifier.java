@@ -1,8 +1,8 @@
 // Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.swing;
-import goryachev.common.i18n.TXT;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;
+import goryachev.i18n.TXT;
 import goryachev.swing.InputTracker;
 import java.util.Arrays;
 

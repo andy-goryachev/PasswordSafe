@@ -1,14 +1,17 @@
-// Copyright © 2015-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2015-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.log.Log;
 import goryachev.common.util.CList;
 import goryachev.common.util.CMultiMap;
-import goryachev.common.util.Log;
 
 
 // TODO add weak references
 @Deprecated // kill, replace with Subscription
 public class Broadcast
 {
+	protected static final Log log = Log.get("Broadcast");
+	
+	
 	public static interface Handler<K>
 	{
 		public void handleEvent(K key);
@@ -70,7 +73,7 @@ public class Broadcast
 				}
 				catch(Exception e)
 				{
-					Log.ex(e);
+					log.error(e);
 				}
 			}
 		}

@@ -1,8 +1,8 @@
-// Copyright © 2007-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2007-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.log.Log;
 import goryachev.common.util.Base64;
 import goryachev.common.util.FileTools;
-import goryachev.common.util.Log;
 import goryachev.common.util.Reflector;
 import goryachev.common.util.SB;
 import goryachev.common.util.TextTools;
@@ -27,6 +27,9 @@ import javax.swing.ImageIcon;
 
 public class ImageTools
 {
+	protected static final Log log = Log.get("ImageTools");
+	
+	
 	public static BufferedImage colorImage(BufferedImage in, Color c)
 	{
 		BufferedImage image = new BufferedImage(in.getWidth(), in.getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -121,7 +124,7 @@ public class ImageTools
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 			}
 		}
 		return null;
@@ -169,7 +172,7 @@ public class ImageTools
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 			}
 		}
 		return null;
@@ -239,7 +242,7 @@ public class ImageTools
 			}
 		}
 		
-		Log.ex(new Exception("don't know how to get alpha from " + im.getClass()));
+		log.error(new Exception("don't know how to get alpha from " + im.getClass()));
 		return false;
 	}
 	
@@ -347,7 +350,7 @@ public class ImageTools
 		}
 		catch(Exception e)
 		{
-			Log.ex("Image not found: " + name);
+			log.error("Image not found: " + name);
 			return colorImage(16, 16, Color.red);
 		}
 	}

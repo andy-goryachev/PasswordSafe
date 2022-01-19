@@ -1,15 +1,13 @@
 // Copyright © 2005-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.i18n.TXT;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CSystem;
 import goryachev.common.util.Copyright;
-import goryachev.common.util.Log;
 import goryachev.common.util.ProductInfo;
-import goryachev.common.util.log.FileLogWriter;
-import goryachev.common.util.log.LogWriter;
 import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.swing.EntropyGathererSwing;
+import goryachev.i18n.TXT;
 import goryachev.password.data.DataFile;
 import goryachev.password.data.DataFormat;
 import goryachev.password.data.v1.DataFormatV1;
@@ -32,6 +30,7 @@ public class PasswordSafeApp
 	public static final String EXTENSION = ".safe";
 	public static final String PRODUCT_URL = "http://goryachev.com/products/password-safe";
 	public static final String UPDATE_URL = PRODUCT_URL + "/version";
+	protected static final Log log = Log.get("PasswordSafeApp");
 	private static SecureRandom random;
 
 	
@@ -61,23 +60,24 @@ public class PasswordSafeApp
 	
 	protected void initLogger()
 	{
-		Log.initConsole();
+		// TODO
+//		Log.initConsole();
 		
-		File folder = new File(getDefaultSettingsDirectory(), "logs");
-		folder.mkdirs();
-		
-		try
-		{
-			Log.writeStartupLog(new File(folder, "startup.log"));
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		LogWriter wr = new FileLogWriter("file", new File(folder, "error.log"), 5000000L, 5);
-		wr.setAsync(true);
-		Log.addErrorWriter(wr);
+//		File folder = new File(getDefaultSettingsDirectory(), "logs");
+//		folder.mkdirs();
+//		
+//		try
+//		{
+//			Log.writeStartupLog(new File(folder, "startup.log"));
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//
+//		LogWriter wr = new FileLogWriter("file", new File(folder, "error.log"), 5000000L, 5);
+//		wr.setAsync(true);
+//		Log.addErrorWriter(wr);
 	}
 	
 
@@ -116,7 +116,7 @@ public class PasswordSafeApp
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 		return f;
 	}
@@ -154,7 +154,7 @@ public class PasswordSafeApp
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e); // TODO fail
 			failed(CKit.stackTrace(e));
 		}
 	}

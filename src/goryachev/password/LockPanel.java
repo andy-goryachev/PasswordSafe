@@ -1,10 +1,10 @@
 // Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
 import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.swing.CPasswordField;
 import goryachev.crypto.swing.OnScreenKeyboard;
+import goryachev.i18n.Menus;
+import goryachev.i18n.TXT;
 import goryachev.password.data.DataFile;
 import goryachev.swing.Application;
 import goryachev.swing.BackgroundThread;

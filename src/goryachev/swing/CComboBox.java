@@ -1,4 +1,4 @@
-// Copyright © 2008-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.CKit;
 import goryachev.common.util.HasProperty;
@@ -155,7 +155,7 @@ public class CComboBox
 	public String getSelectedString()
 	{
 		Object rv = getCurrentItem();
-		return CKit.toString(rv);
+		return CKit.toStringOrNull(rv);
 	}
 	
 	

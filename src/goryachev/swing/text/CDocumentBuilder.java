@@ -1,6 +1,6 @@
-// Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.text;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
 import goryachev.common.util.SB;
 import goryachev.swing.CBorder;
 import goryachev.swing.CBrowser;
@@ -25,6 +25,7 @@ import javax.swing.text.StyleConstants;
 
 public class CDocumentBuilder
 {
+	protected static final Log log = Log.get("CDocumentBuilder");
 	private CDocument d;
 	private SimpleAttributeSet a;
 
@@ -295,7 +296,7 @@ public class CDocumentBuilder
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 

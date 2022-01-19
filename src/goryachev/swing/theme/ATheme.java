@@ -1,10 +1,10 @@
-// Copyright © 2015-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2015-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.theme;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
 import goryachev.common.util.CPlatform;
 import goryachev.common.util.CSorter;
-import goryachev.common.util.Log;
 import goryachev.swing.Theme;
 import goryachev.swing.ThemeKey;
 import goryachev.swing.UI;
@@ -341,7 +341,7 @@ public class ATheme
 			return (Color)v;
 		}
 		
-		Log.ex("color not found " + k + " in " + name);
+		log.error("color not found " + k + " in " + name);
 		return Color.magenta;
 	}
 	
@@ -354,7 +354,7 @@ public class ATheme
 			return (Font)v;
 		}
 		
-		Log.ex("font not found " + k + " in " + name);
+		log.error("font not found " + k + " in " + name);
 		return basePlainFont;
 	}
 	

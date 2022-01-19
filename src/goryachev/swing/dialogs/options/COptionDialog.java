@@ -1,6 +1,6 @@
-// Copyright © 2008-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.dialogs.options;
-import goryachev.common.i18n.Menus;
+import goryachev.i18n.Menus;
 import goryachev.swing.CBorder;
 import goryachev.swing.CButtonPanel;
 import goryachev.swing.CDialog;

@@ -1,8 +1,7 @@
 // Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.swing;
-import goryachev.common.i18n.CLanguage;
-import goryachev.common.i18n.CLanguageCode;
-import goryachev.common.util.Log;
+import goryachev.i18n.CLanguage;
+import goryachev.i18n.CLanguageCode;
 import goryachev.swing.CAction;
 import goryachev.swing.CMenuItem;
 import goryachev.swing.CPopupMenu;
@@ -115,7 +114,7 @@ public class VKey
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+//			Log.ex(e);
 		}
 	}
 	
@@ -190,7 +189,7 @@ public class VKey
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+//				Log.ex(e);
 			}
 		}
 	}

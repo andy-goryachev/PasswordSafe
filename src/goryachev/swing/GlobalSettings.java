@@ -1,10 +1,10 @@
-// Copyright © 2005-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2005-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.log.Log;
 import goryachev.common.util.CFileSettings;
 import goryachev.common.util.CList;
 import goryachev.common.util.CMap;
 import goryachev.common.util.CSettings;
-import goryachev.common.util.Log;
 import goryachev.common.util.Obj;
 import goryachev.common.util.SB;
 import goryachev.common.util.WeakList;
@@ -29,6 +29,7 @@ import javax.swing.JTree;
 
 public class GlobalSettings
 {
+	protected static final Log log = Log.get("GlobalSettings");
 	private static final Obj IGNORE = new Obj("IGNORE");
 
 	public static final String UI = "ui.";
@@ -487,7 +488,7 @@ public class GlobalSettings
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 		
 		for(COption op: options)
@@ -498,7 +499,7 @@ public class GlobalSettings
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 			}
 		}
 
@@ -508,7 +509,7 @@ public class GlobalSettings
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 	
@@ -523,7 +524,7 @@ public class GlobalSettings
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 			}
 		}
 	}

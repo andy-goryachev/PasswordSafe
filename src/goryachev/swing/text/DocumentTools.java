@@ -1,9 +1,8 @@
-// Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.text;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
-import goryachev.common.util.Log;
 import goryachev.common.util.TextTools;
-import goryachev.common.util.TextTools.SeparatorFunction;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.InputEvent;
@@ -23,6 +22,8 @@ import javax.swing.text.StyledDocument;
  */
 public class DocumentTools
 {
+	protected static final Log log = Log.get("DocumentTools");
+
 	public static final int MASK_ALL_MODIFIERS = 
 		InputEvent.CTRL_DOWN_MASK | 
 		InputEvent.SHIFT_DOWN_MASK | 
@@ -231,7 +232,7 @@ public class DocumentTools
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 			}
 		}
 		return null;
@@ -248,7 +249,7 @@ public class DocumentTools
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 			return null;
 		}
 	}
@@ -274,7 +275,7 @@ public class DocumentTools
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 			return null;
 		}
 	}
@@ -327,7 +328,7 @@ public class DocumentTools
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 	}
 

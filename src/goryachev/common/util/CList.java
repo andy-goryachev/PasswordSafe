@@ -1,7 +1,9 @@
-// Copyright © 2007-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2007-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 
 public class CList<T>
@@ -24,6 +26,18 @@ public class CList<T>
 		if(c != null)
 		{
 			addAll(c);
+		}
+	}
+	
+	
+	public CList(Iterator<? extends T> it)
+	{
+		if(it != null)
+		{
+			while(it.hasNext())
+			{
+				add(it.next());
+			}
 		}
 	}
 	
@@ -223,5 +237,47 @@ public class CList<T>
 		{
 			super.add(null);
 		}
+	}
+	
+	
+	/** 
+	 * safely inserts an item into the list, adding an item to the end of the list when index is >= size, 
+	 * or inserting at the position 0 when index is <= 0
+	 */
+	public void insert(int index, T item)
+	{
+		if(index < 0)
+		{
+			index = 0;
+		}
+		
+		if(index >= size())
+		{
+			add(item);
+		}
+		else
+		{
+			add(index, item);
+		}
+	}
+
+
+	public static <V> CList<V> of(V ... a)
+	{
+		return new CList(a);
+	}
+	
+	
+	public static <V> CList<V> copy(Collection<V> items)
+	{
+		if(items == null)
+		{
+			return null;
+		}
+		
+		int sz = items.size();
+		CList<V> rv = new CList(sz);
+		rv.addAll(items);
+		return rv;
 	}
 }

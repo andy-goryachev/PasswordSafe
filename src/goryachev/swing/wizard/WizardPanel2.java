@@ -1,9 +1,9 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.wizard;
-import goryachev.common.i18n.Menus;
 import goryachev.common.util.CKit;
 import goryachev.common.util.HasPrompts;
 import goryachev.common.util.UserException;
+import goryachev.i18n.Menus;
 import goryachev.swing.CButton;
 import goryachev.swing.CPanel;
 import goryachev.swing.Panels;

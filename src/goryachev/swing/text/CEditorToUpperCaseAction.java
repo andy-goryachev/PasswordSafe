@@ -1,6 +1,6 @@
-// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.text;
-import goryachev.common.util.Log;
+import goryachev.common.log.Log;
 import goryachev.swing.UI;
 import java.util.Locale;
 import javax.swing.JEditorPane;
@@ -11,6 +11,9 @@ import javax.swing.text.DefaultStyledDocument;
 public class CEditorToUpperCaseAction
 	extends CEditorAction
 {
+	protected static final Log log = Log.get("CEditorToUpperCaseAction");
+	
+	
 	public CEditorToUpperCaseAction()
 	{
 		super("toUpperCaseAtion");
@@ -55,7 +58,7 @@ public class CEditorToUpperCaseAction
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 				UI.beep();
 			}
 		}

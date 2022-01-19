@@ -1,7 +1,6 @@
 // Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.data;
 import goryachev.common.util.CMap;
-import goryachev.common.util.Log;
 import goryachev.crypto.OpaqueChars;
 
 
@@ -59,7 +58,6 @@ public final class PassEntry
 			}
 			else
 			{
-				Log.ex("name is not a string");
 				name = null;
 			}
 		}
@@ -81,10 +79,6 @@ public final class PassEntry
 		{
 			return (String)x;
 		}
-		else
-		{
-			Log.ex("username is not a string");
-		}
 		return null;
 	}
 	
@@ -102,10 +96,6 @@ public final class PassEntry
 		{
 			return (OpaqueChars)x;
 		}
-		else
-		{
-			Log.ex("username is not an opaque value");
-		}
 		return null;
 	}
 	
@@ -122,10 +112,6 @@ public final class PassEntry
 		if(x instanceof String)
 		{
 			return (String)x;
-		}
-		else
-		{
-			Log.ex("username is not a string");
 		}
 		return null;
 	}

@@ -17,7 +17,7 @@
  * 2004-2010 ICEsoft Technologies Canada, Corp. All Rights Reserved.
  *
  * Contributor(s): 
- *   2012-2019 Andy Goryachev <andy@goryachev.com>
+ *   2012-2022 Andy Goryachev <andy@goryachev.com>
  *
  */
 package goryachev.swing;

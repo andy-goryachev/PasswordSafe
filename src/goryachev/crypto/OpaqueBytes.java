@@ -1,11 +1,11 @@
-// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto;
 
 
 /**
  * This class provides an opaque storage for a byte array.
  */
-public class OpaqueBytes
+public final class OpaqueBytes
 	extends OpaqueMemObject
 {
 	public OpaqueBytes(byte[] b)
@@ -28,5 +28,11 @@ public class OpaqueBytes
 	public final void setValue(byte[] b)
 	{
 		setBytes(b);
+	}
+	
+	
+	public final void setValue(OpaqueBytes b)
+	{
+		setFrom(b);
 	}
 }

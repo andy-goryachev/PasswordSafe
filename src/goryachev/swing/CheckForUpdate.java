@@ -1,10 +1,10 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.i18n.TXT;
 import goryachev.common.io.WebReader;
+import goryachev.common.log.Log;
 import goryachev.common.util.DotSeparatedVersion;
-import goryachev.common.util.Log;
 import goryachev.common.util.UserException;
+import goryachev.i18n.TXT;
 import java.io.FileNotFoundException;
 import java.net.URL;
 
@@ -14,6 +14,7 @@ import java.net.URL;
  */ 
 public class CheckForUpdate
 {
+	protected static final Log log = Log.get("CheckForUpdate");
 	private final String url;
 	private final WebReader reader;
 	private volatile String siteVersion;
@@ -34,7 +35,7 @@ public class CheckForUpdate
 		}
 		catch(FileNotFoundException e)
 		{
-			Log.ex(e);
+			log.error(e);
 			URL u = new URL(url);
 			throw new UserException(TXT.get("CheckForUpdate.err.server problem", "Sorry, there seems to be a problem contacting server [{0}]", u.getHost()));
 		}

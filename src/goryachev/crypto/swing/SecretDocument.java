@@ -1,6 +1,5 @@
 // Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.swing;
-import goryachev.common.util.Log;
 import goryachev.crypto.OpaqueChars;
 import javax.swing.text.PlainDocument;
 
@@ -40,7 +39,7 @@ public class SecretDocument
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+//			Log.ex(e);
 		}
 	}
 	
@@ -53,7 +52,7 @@ public class SecretDocument
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+//			Log.ex(e);
 			return new OpaqueChars();
 		}
 	}

@@ -1,10 +1,10 @@
-// Copyright © 2014-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2014-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CSettings;
 import goryachev.common.util.Hex;
 import goryachev.common.util.HiddenData;
-import goryachev.common.util.Log;
 import java.util.Collection;
 
 
@@ -12,6 +12,9 @@ import java.util.Collection;
 public class HiddenCharArrayOption
 	extends COption<char[]>
 {
+	protected static final Log log = Log.get("HiddenCharArrayOption");
+	
+	
 	public HiddenCharArrayOption(String key, CSettings options, Collection<COption<?>> list)
 	{
 		super(key, options, list);
@@ -59,7 +62,7 @@ public class HiddenCharArrayOption
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 			return null;
 		}
 	}
@@ -76,7 +79,7 @@ public class HiddenCharArrayOption
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 			return null;
 		}
 	}

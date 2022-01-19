@@ -1,4 +1,4 @@
-// Copyright © 2008-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options.edit;
 import goryachev.swing.options.COption;
 import goryachev.swing.options.OptionEditor;

@@ -1,8 +1,8 @@
-// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
-import goryachev.common.i18n.CLanguage;
-import goryachev.common.i18n.CLanguageCode;
 import goryachev.common.util.CList;
+import goryachev.i18n.CLanguage;
+import goryachev.i18n.CLanguageCode;
 import goryachev.swing.options.LanguageOption;
 import goryachev.swing.options.edit.LanguageOptionEditor;
 

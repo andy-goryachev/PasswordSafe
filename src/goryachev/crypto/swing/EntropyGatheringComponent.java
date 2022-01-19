@@ -1,6 +1,5 @@
 // Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.swing;
-import goryachev.common.util.Log;
 import goryachev.swing.CBorder;
 import goryachev.swing.Theme;
 import goryachev.swing.theme.ThemeTools;
@@ -119,7 +118,7 @@ public class EntropyGatheringComponent
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+//			Log.ex(e);
 		}
 	}
 	

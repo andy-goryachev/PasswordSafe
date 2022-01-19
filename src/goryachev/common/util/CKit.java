@@ -1,6 +1,7 @@
-// Copyright © 2007-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 1996-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.common.util;
 import goryachev.common.io.CWriter;
+import goryachev.common.log.Log;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -32,6 +33,8 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
@@ -44,28 +47,22 @@ import java.util.zip.ZipFile;
 
 public final class CKit
 {
-	public static final String COPYRIGHT = "Copyright © 1996-2019 Andy Goryachev <andy@goryachev.com>  All Rights Reserved.";
+	public static final String COPYRIGHT = "Copyright © 1996-2022 Andy Goryachev <andy@goryachev.com>  All Rights Reserved.";
+	protected static final Log log = Log.get("CKit");
 	public static final char APPLE = '\u2318';
 	public static final char BOM = '\ufeff';
 	public static final String[] emptyStringArray = new String[0];
 	public static final Charset CHARSET_8859_1 = Charset.forName("8859_1");
 	public static final Charset CHARSET_ASCII = Charset.forName("US-ASCII");
 	public static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");
-	public static final long MS_IN_A_SECOND = 1000;
-	public static final long MS_IN_A_MINUTE = 60000;
-	public static final long MS_IN_AN_HOUR = 3600000;
-	public static final long MS_IN_A_DAY = 86400000;
-	public static final long MS_IN_A_WEEK = 604800000;
 	private static AtomicInteger id = new AtomicInteger(); 
 	private static Boolean eclipseDetected;
-	private static final JavaVersion JAVA8 = JavaVersion.parse("1.8.0");
-	private static final JavaVersion JAVA9 = JavaVersion.parse("9");
-	public static final long KB = 1024;
-	public static final long MB = 1024 * KB;
-	public static final long GB = 1024 * MB;
-	public static final long TB = 1024 * GB;
 	private static final double LOW_MEMORY_CHECK_THRESHOLD = 0.9;
 	private static final double LOW_MEMORY_FAIL_AFTER_GC_THRESHOLD = 0.87;
+	private static final long MS_IN_A_SECOND = 1000L;
+	private static final long MS_IN_A_MINUTE = 60000L;
+	private static final long MS_IN_AN_HOUR = 3600000L;
+	private static final long MS_IN_A_DAY = 86400000L;
 	
 	
 	public static void close(Closeable x)
@@ -149,6 +146,10 @@ public final class CKit
 						{
 							return Arrays.equals((byte[])a, (byte[])b);
 						}
+						else if(ta == boolean.class)
+						{
+							return Arrays.equals((boolean[])a, (boolean[])b);
+						}
 						else if(ta == char.class)
 						{
 							return Arrays.equals((char[])a, (char[])b);
@@ -190,7 +191,7 @@ public final class CKit
 				}
 				else
 				{
-					return Arrays.equals((Object[])a, (Object[])b);
+					return Arrays.deepEquals((Object[])a, (Object[])b);
 				}
 			}
 			else
@@ -420,7 +421,7 @@ public final class CKit
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 			return null;
 		}
 	}
@@ -910,7 +911,7 @@ public final class CKit
 			int start = 0;
 			for(;;)
 			{
-				int ix = s.indexOf(delim,start);
+				int ix = s.indexOf(delim, start);
 				if(ix >= 0)
 				{
 					list.add(s.substring(start,ix));
@@ -932,13 +933,13 @@ public final class CKit
 	// 1. does not use regex pattern and therefore faster
 	// 2. splits ("a,", ",") -> String[] { "a", "" }
 	//    while the regular split omits the empty string
-	public static String[] split(String s, char delim)
+	public static String[] split(CharSequence s, char delim)
 	{
 		return split(s, delim, false);
 	}
 
 
-	public static String[] split(String s, char delim, boolean includeDelimiter)
+	public static String[] split(CharSequence s, char delim, boolean includeDelimiter)
 	{
 		CList<String> a = new CList<>();
 
@@ -947,25 +948,40 @@ public final class CKit
 			int start = 0;
 			for(;;)
 			{
-				int ix = s.indexOf(delim, start);
+				int ix = indexOf(s, delim, start);
 				if(ix >= 0)
 				{
-					a.add(s.substring(start, ix));
+					a.add(s.subSequence(start, ix).toString());
 					if(includeDelimiter)
 					{
-						a.add(s.substring(ix, ix+1));
+						a.add(s.subSequence(ix, ix+1).toString());
 					}
 					start = ix + 1;
 				}
 				else
 				{
-					a.add(s.substring(start, s.length()));
+					a.add(s.subSequence(start, s.length()).toString());
 					break;
 				}
 			}
 		}
 
 		return a.toArray(new String[a.size()]);
+	}
+	
+	
+	public static int indexOf(CharSequence s, char ch, int start)
+	{
+		int len = s.length();
+		for(int i=start; i<len; i++)
+		{
+			char c = s.charAt(i);
+			if(c == ch)
+			{
+				return i;
+			}
+		}
+		return -1;
 	}
 	
 	
@@ -1093,7 +1109,7 @@ public final class CKit
 	
 	
 	/** converts argument to its toString() representation or null */
-	public static String toString(Object x)
+	public static String toStringOrNull(Object x)
 	{
 		return (x == null) ? null : x.toString(); 
 	}
@@ -1216,7 +1232,7 @@ public final class CKit
 			int count = in.read(b, offset, b.length - offset);
 			if(count < 0)
 			{
-				throw new EOFException("read only " + offset + " bytes");
+				throw new EOFException("read only " + offset + " bytes instead of " + b.length);
 			}
 			offset += count;
 		}
@@ -1295,12 +1311,24 @@ public final class CKit
 	/** copies input stream into the output stream using 64K buffer.  returns the number of bytes copied.  supports cancellation */
 	public static long copy(InputStream in, OutputStream out) throws Exception
 	{
+		return copy(in, out, 65536);
+	}
+	
+	
+	/** copies input stream into the output stream.  returns the number of bytes copied.  supports cancellation */
+	public static long copy(InputStream in, OutputStream out, int bufferSize) throws Exception
+	{
+		if(bufferSize < 1)
+		{
+			throw new IllegalArgumentException("invalid bufferSize=" + bufferSize);
+		}
+		
 		if(in == null)
 		{
 			return 0;
 		}
 		
-		byte[] buf = new byte[65536];
+		byte[] buf = new byte[bufferSize];
 		long count = 0;
 		for(;;)
 		{
@@ -1497,21 +1525,14 @@ public final class CKit
 	}
 
 
-	public static long milliseconds(int hours, int minutes, int seconds)
+	/** 
+	 * checks whether the current thread has been interrupted or low memory condition exists.
+	 * if interrupted - throws CancelledException
+	 * if low memory condition - throws LowMemoryException
+	 */
+	public static void checkCancelled() throws CancelledException,LowMemoryException
 	{
-		return (hours * MS_IN_AN_HOUR) + (minutes * MS_IN_A_MINUTE) + (seconds * MS_IN_A_SECOND);
-	}
-	
-	
-	public static int ms(int hours, int minutes, int seconds)
-	{
-		return (int)milliseconds(hours, minutes, seconds);
-	}
-
-
-	public static void checkCancelled() throws CancelledException
-	{
-		if(isCancelled())
+		if(Thread.interrupted())
 		{
 			throw new CancelledException();
 		}
@@ -1519,25 +1540,6 @@ public final class CKit
 		if(isLowMemory())
 		{
 			throw new LowMemoryException();
-		}
-	}
-	
-	
-	public static boolean isCancelled()
-	{
-		return isCancelled(Thread.currentThread());
-	}
-	
-	
-	public static boolean isCancelled(Thread t)
-	{
-		if(t instanceof CancellableThread)
-		{
-			return ((CancellableThread)t).isCancelled();
-		}
-		else
-		{
-			return t.isInterrupted();
 		}
 	}
 	
@@ -2124,7 +2126,7 @@ public final class CKit
 				}
 				catch(Exception e)
 				{
-					Log.ex(e);
+					log.error(e);
 				}
 			}
 		}
@@ -2303,41 +2305,66 @@ public final class CKit
 		return (value >= min) && (value <= max);
 	}
 	
-	
-	public static boolean isJava9OrLater()
+
+	/** IEC kibi = 2^10, or 2014 */
+	public static long kibi(int x)
 	{
-		return JavaVersion.getJavaVersion().isSameOrLaterThan(JAVA9);
+		return 1024L * x;
 	}
 
-
-	public static long kebi(int x)
-	{
-		return KB * x;
-	}
 	
-	
+	/** IEC mebi = 2^20, or 1024 * 1024 */ 
 	public static long mebi(int x)
 	{
-		return MB * x;
+		return 1048576L * x;
 	}
 	
 	
+	/** IEC gibi = 2^30, or 1024 * 1024 * 1024 */ 
 	public static long gibi(int x)
 	{
-		return GB * x;
+		return 1073741824L * x;
 	}
 	
 	
+	/** IEC tebi = 2^40, or 1024 * 1024 * 1024 * 1024 */ 
 	public static long tebi(int x)
 	{
-		return TB * x;
+		return 1099511627776L * x;
+	}
+	
+
+	public static long milliseconds(int hours, int minutes, int seconds)
+	{
+		return (hours * MS_IN_AN_HOUR) + (minutes * MS_IN_A_MINUTE) + (seconds * MS_IN_A_SECOND);
 	}
 	
 	
-	/** converts seconds to milliseconds */
-	public static int seconds(int seconds)
+	/** @return milliseconds for the given number of seconds */
+	public static long secondsToMilliseconds(int seconds)
 	{
-		return seconds * 1000;
+		return seconds * MS_IN_A_SECOND;
+	}
+	
+	
+	/** @return milliseconds for the given number of minutes */
+	public static long minutesToMilliseconds(int minutes)
+	{
+		return minutes * MS_IN_A_MINUTE;
+	}
+	
+	
+	/** @return milliseconds for the given number of hours */
+	public static long hoursToMilliseconds(int hours)
+	{
+		return hours * MS_IN_AN_HOUR;
+	}
+	
+	
+	/** @return milliseconds for the given number of days */
+	public static long daysToMilliseconds(int days)
+	{
+		return days * MS_IN_A_DAY;
 	}
 	
 	
@@ -2427,5 +2454,86 @@ public final class CKit
 		}
 		
 		return a;
+	}
+	
+	
+	/** returns the next power of 2 or, if overflow, the argument.  useful for allocating growing arrays */
+	public static int toNeatSize(int x)
+	{
+		int v = Integer.highestOneBit(x);
+		if(x == v)
+		{
+			return v;
+		}
+		v = (v << 1);
+		if(v < 0)
+		{
+			return x;
+		}
+		return v;
+	}
+	
+	
+	public static <T> Iterator<T> iterator(T[] items)
+	{
+		if(items == null)
+		{
+			return Collections.emptyIterator();
+		}
+		else
+		{
+			return new Iterator<T>()
+			{
+				private int ix;
+				
+				
+				public boolean hasNext()
+				{
+					return ix < items.length;
+				}
+
+				
+				public T next()
+				{
+					return items[ix++];
+				}
+			};
+		}
+	}
+	
+	
+	/** trims a toString() representation of an object, limiting the text to maxLength */
+	public static String trim(Object x, int maxLength)
+	{
+		if(x == null)
+		{
+			return null;
+		}
+		
+		String s = x.toString();
+		if(s.length() > maxLength)
+		{
+			return s.substring(0, maxLength);
+		}
+		return s;
+	}
+	
+	
+	/** creates a new array instance, copying the contents */
+	public static <T> T[] shallowCopy(T[] src)
+	{
+		if(src == null)
+		{
+			return null;
+		}
+		return Arrays.copyOf(src, src.length);
+	}
+	
+	
+	/** returns elapsed time in milliseconds, since the last time in nanoseconds, as returned by System.nanoTime() */
+	public static long elapsed(long startNanoseconds)
+	{
+		long t = System.nanoTime() - startNanoseconds;
+		return (t / 1_000_000L);
 	}
 }

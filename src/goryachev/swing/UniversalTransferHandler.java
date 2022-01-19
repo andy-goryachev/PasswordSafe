@@ -1,7 +1,7 @@
-// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.log.Log;
 import goryachev.common.util.CList;
-import goryachev.common.util.Log;
 import java.awt.Component;
 import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
@@ -46,6 +46,7 @@ public abstract class UniversalTransferHandler
 	
 	//
 	
+	protected static final Log log = Log.get("UniversalTransferHandler");
 	private CList<FHandler> handlers = new CList();
 	private JTextComponent textComp;
 	private boolean remove;
@@ -205,7 +206,7 @@ public abstract class UniversalTransferHandler
 		}
 		catch(Exception e)
 		{ 
-			Log.ex(e);
+			log.error(e);
 		}
 		
 		return false;
@@ -293,7 +294,7 @@ public abstract class UniversalTransferHandler
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 		
 		return false;
@@ -521,7 +522,7 @@ public abstract class UniversalTransferHandler
 				}
 				catch(Exception e)
 				{
-					Log.ex(e);
+					log.error(e);
 				}
 			}
 		}
@@ -567,7 +568,7 @@ public abstract class UniversalTransferHandler
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-// Copyright © 2004-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2004-2022 Andy Goryachev <andy@goryachev.com>
 // Contains fragments of Apache FileNameUtils code
 // http://www.apache.org/licenses/LICENSE-2.0
 package goryachev.common.util;
@@ -466,6 +466,28 @@ public class FileTools
 			close(in);
 		}
 	}
+	
+	
+	/** @return canonical name of the parent folder */
+	public static String getFilePath(File f)
+	{
+		if(f != null)
+		{
+			File p = f.getParentFile();
+			if(p != null)
+			{
+				try
+				{
+					return p.getCanonicalPath();
+				}
+				catch(Exception e)
+				{
+					return p.getAbsolutePath();
+				}
+			}
+		}
+		return null;
+	}
 
 
 	public static String getPathToParent(File parent, File f)
@@ -534,18 +556,25 @@ public class FileTools
 	}
 
 
-	public static void createZeroLengthFile(File f) throws Exception
+	public static void createNewFile(File f) throws Exception
 	{
 		ensureParentFolder(f);
-		FileOutputStream os = new FileOutputStream(f);
-		CKit.close(os);
+		f.createNewFile();
 	}
 	
 	
+	/** copies file, preserving the file stamp.  throws an exception if both arguments point to the same absolute file */
 	public static void copy(File src, File dst) throws Exception
 	{
+		if(src.getAbsoluteFile().equals(dst.getAbsoluteFile()))
+		{
+			throw new Exception("same file");
+		}
+		
+		long t = src.lastModified();
 		FileInputStream in = new FileInputStream(src);
 		copy(in, dst);
+		dst.setLastModified(t);
 	}
 
 
@@ -869,14 +898,10 @@ public class FileTools
 	}
 	
 
-	/** returns true if the specified file is either an empty directory or does not exist */
+	/** returns true if the specified directory contains no files */
 	public static boolean isEmptyDirectory(File f)
 	{
-		if(!f.exists())
-		{
-			return true;
-		}
-		else if(f.isDirectory())
+		if(f.isDirectory())
 		{
 			File[] fs = f.listFiles();
 			if(fs == null)
@@ -915,14 +940,14 @@ public class FileTools
 	
 	
 	/** creates a file in the same directory */
-	public static File createSiblingFile(File file, String name)
+	public static File inSameDir(File file, String name)
 	{
 		File parent = file.getParentFile();
 		return new File(parent, name);
 	}
 	
 	
-	/** returns file extension (after last period) or null */ 
+	/** returns file extension (after the last period) or null */ 
 	public static String getExtension(String name)
 	{
 		if(name == null)
@@ -938,6 +963,26 @@ public class FileTools
 		else
 		{
 			return null;
+		}
+	}
+	
+	
+	/** returns base file name (before the last period) */ 
+	public static String getBaseName(String name)
+	{
+		if(name == null)
+		{
+			return null;
+		}
+		
+		int ix = name.lastIndexOf('.');
+		if(ix >= 0)
+		{
+			return name.substring(0, ix);
+		}
+		else
+		{
+			return name;
 		}
 	}
 }

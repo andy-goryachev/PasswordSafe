@@ -1,8 +1,8 @@
-// Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CList;
-import goryachev.common.util.Log;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FocusTraversalPolicy;
@@ -14,6 +14,7 @@ import javax.swing.text.JTextComponent;
 public class CFocusTraversalPolicy
 	extends FocusTraversalPolicy
 {
+	protected static final Log log = Log.get("CFocusTraversalPolicy");
 	private CList<Component> components = new CList();
 	private Component defaultComponent;
 
@@ -110,7 +111,7 @@ public class CFocusTraversalPolicy
 		}
 		catch(Exception e)
 		{
-			Log.ex(e);
+			log.error(e);
 		}
 		
 		return components.get(0);

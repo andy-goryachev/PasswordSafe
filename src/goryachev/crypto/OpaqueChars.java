@@ -1,4 +1,4 @@
-// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto;
 import goryachev.common.util.CKit;
 
@@ -72,22 +72,9 @@ public final class OpaqueChars
 	
 	public final void set(char[] cs)
 	{
-		byte[] b = null;
+		byte[] b = Crypto.chars2bytes(cs);
 		try
 		{
-			if(cs != null)
-			{
-				int sz = cs.length;
-				b = new byte[sz + sz];
-				int ix = 0;
-				for(int i=0; i<sz; i++)
-				{
-					int c = cs[i];
-					b[ix++] = (byte)(c >>> 8);
-					b[ix++] = (byte)c;
-				}
-			}
-			
 			setBytes(b);
 		}
 		finally
@@ -99,22 +86,10 @@ public final class OpaqueChars
 	
 	public final char[] getChars()
 	{
-		byte[] b = null;
+		byte[] b = getBytes();
 		try
 		{
-			b = getBytes();
-			int sz = b.length/2;
-			
-			char[] cs = new char[sz];
-			int ix = 0;
-			for(int i=0; i<sz; i++)
-			{
-				int c = (b[ix++] & 0xff) << 8;
-				c |= (b[ix++] & 0xff);
-				cs[i] = (char)c;
-			}
-			
-			return cs;
+			return Crypto.bytes2chars(b);
 		}
 		finally
 		{
@@ -164,11 +139,15 @@ public final class OpaqueChars
 		char[] cs = getChars();
 		try
 		{
-			char[] rv = new char[cs.length + add.length];
+			int len = cs == null ? 0 : cs.length;
+			char[] rv = new char[len + add.length];
 			try
 			{
-				System.arraycopy(cs, 0, rv, 0, cs.length);
-				System.arraycopy(add, 0, rv, cs.length, add.length);
+				if(cs != null)
+				{
+					System.arraycopy(cs, 0, rv, 0, cs.length);
+				}
+				System.arraycopy(add, 0, rv, len, add.length);
 				set(rv);
 			}
 			finally

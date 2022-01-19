@@ -1,13 +1,12 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.wizard;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
-import goryachev.common.util.BackgroundOperation;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CancelledException;
-import goryachev.common.util.Log;
 import goryachev.common.util.Progress;
 import goryachev.common.util.UserException;
+import goryachev.i18n.Menus;
+import goryachev.i18n.TXT;
 import goryachev.swing.BackgroundThread;
 import goryachev.swing.CBorder;
 import goryachev.swing.CIcon;
@@ -42,6 +41,7 @@ public abstract class BackgroundProcessPanel
 	
 	//
 	
+	protected static final Log log = Log.get("BackgroundProcessPanel");
 	public final XAction cancelAction = new XAction(this::actionCancel);
 	public final JLabel statusField;
 	public final CTextPane textField;
@@ -197,7 +197,7 @@ public abstract class BackgroundProcessPanel
 				}
 				else
 				{
-					Log.ex(err);
+					log.error(err);
 					printError(CKit.stackTrace(err));
 				}
 			}
@@ -226,7 +226,7 @@ public abstract class BackgroundProcessPanel
 				}
 				catch(Exception e)
 				{
-					Log.ex(e);
+					log.error(e);
 				}
 			}
 		});
@@ -278,7 +278,7 @@ public abstract class BackgroundProcessPanel
 	{
 		if(thread != null)
 		{
-			thread.cancel();
+			thread.interrupt();
 			cancelled = true;
 			thread = null;
 			

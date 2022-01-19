@@ -1,9 +1,9 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.dialogs;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
 import goryachev.common.util.CKit;
 import goryachev.common.util.ProductInfo;
+import goryachev.i18n.Menus;
+import goryachev.i18n.TXT;
 import goryachev.swing.Application;
 import goryachev.swing.CButton;
 import goryachev.swing.CheckForUpdate;

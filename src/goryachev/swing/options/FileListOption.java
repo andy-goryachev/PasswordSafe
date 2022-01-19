@@ -1,7 +1,7 @@
-// Copyright © 2008-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
-import goryachev.common.util.Log;
 import goryachev.common.util.SB;
 import goryachev.swing.CAction;
 import java.io.File;
@@ -20,6 +20,7 @@ import javax.swing.event.MenuListener;
 public class FileListOption
 	extends COption<List<File>>
 {
+	protected static final Log log = Log.get("FileListOption");
 	public static final String DIVIDER = "\n";
 	private int max;
 
@@ -67,7 +68,7 @@ public class FileListOption
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 			}
 		}
 		return sb.toString();
@@ -108,7 +109,7 @@ public class FileListOption
 			}
 			catch(Exception e)
 			{
-				Log.ex(e);
+				log.error(e);
 			}
 		}
 	}

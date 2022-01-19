@@ -1,4 +1,4 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.CKit;
 import goryachev.common.util.Progress;
@@ -106,7 +106,7 @@ public class ProgressLogic
 		}
 		
 		long est = getEstimatedTimeToCompletion();
-		if(est > 30 * CKit.MS_IN_A_DAY)
+		if(est > CKit.daysToMilliseconds(30))
 		{
 			return "...";
 		}

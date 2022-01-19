@@ -1,10 +1,10 @@
 // Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.common.i18n.Menus;
-import goryachev.common.i18n.TXT;
 import goryachev.common.util.HasPrompts;
 import goryachev.common.util.ProductInfo;
 import goryachev.common.util.SB;
+import goryachev.i18n.Menus;
+import goryachev.i18n.TXT;
 import goryachev.password.img.PasswordSafeIcons;
 import goryachev.swing.Application;
 import goryachev.swing.CAction;

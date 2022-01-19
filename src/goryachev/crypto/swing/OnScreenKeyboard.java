@@ -1,7 +1,7 @@
 // Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto.swing;
-import goryachev.common.i18n.CLanguage;
-import goryachev.common.i18n.CLanguageCode;
+import goryachev.i18n.CLanguage;
+import goryachev.i18n.CLanguageCode;
 import goryachev.swing.CBorder;
 import goryachev.swing.Theme;
 import goryachev.swing.ThemeKey;

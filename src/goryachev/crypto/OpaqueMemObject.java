@@ -1,4 +1,4 @@
-// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.crypto;
 
 /**
@@ -18,13 +18,39 @@ abstract class OpaqueMemObject
 	
 	protected OpaqueMemObject(OpaqueMemObject x)
 	{
-		encrypted = x.encrypted;
+		encrypted = clone(x.encrypted);
 	}
 	
 	
 	protected OpaqueMemObject(byte[] b)
 	{
 		setBytes(b);
+	}
+	
+	
+	protected void setFrom(OpaqueMemObject x)
+	{
+		if(x == null)
+		{
+			encrypted = null;
+		}
+		else
+		{
+			if(x.getClass() == getClass())
+			{
+				encrypted = clone(x.encrypted);
+			}
+			else
+			{
+				encrypted = null;
+			}
+		}
+	}
+	
+	
+	private static byte[] clone(byte[] b)
+	{
+		return (b == null) ? null : b.clone();
 	}
 	
 	
@@ -107,6 +133,12 @@ abstract class OpaqueMemObject
 				throw new Error(e);
 			}
 		}
+	}
+	
+	
+	public boolean isEmpty()
+	{
+		return encrypted == null;
 	}
 	
 	

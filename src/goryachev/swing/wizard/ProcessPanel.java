@@ -1,10 +1,10 @@
-// Copyright © 2013-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.wizard;
-import goryachev.common.i18n.TXT;
+import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CancelledException;
-import goryachev.common.util.Log;
 import goryachev.common.util.UserException;
+import goryachev.i18n.TXT;
 import goryachev.swing.BackgroundThread;
 import goryachev.swing.CBorder;
 import goryachev.swing.CIcon;
@@ -32,6 +32,7 @@ public abstract class ProcessPanel
 	
 	//
 	
+	protected static final Log log = Log.get("ProcessPanel");
 	public final XAction cancelAction = new XAction(this::actionCancel);
 	protected final Action continueAction;
 	protected final Action[] otherActions;
@@ -173,7 +174,7 @@ public abstract class ProcessPanel
 				}
 				else
 				{
-					Log.ex(err);
+					log.error(err);
 					setText(CKit.stackTrace(err));
 					
 					// this looks better
@@ -230,7 +231,7 @@ public abstract class ProcessPanel
 	{
 		if(thread != null)
 		{
-			thread.cancel();
+			thread.interrupt();
 			cancelled = true;
 			thread = null;
 			error = null;
