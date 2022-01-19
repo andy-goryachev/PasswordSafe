@@ -1,6 +1,5 @@
 // Copyright © 2011-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.cryptoswing;
-import goryachev.common.log.Log;
 import goryachev.i18n.CLanguage;
 import goryachev.i18n.CLanguageCode;
 import goryachev.swing.CAction;
@@ -17,7 +16,6 @@ import javax.swing.text.JTextComponent;
 public class VKey
 	extends JButton
 {
-	protected static final Log log = Log.get("VKey");
 	private OnScreenKeyboard kb;
 	private String symbols;
 	private VCode code;
@@ -116,7 +114,6 @@ public class VKey
 		}
 		catch(Exception e)
 		{
-			log.error(e);
 		}
 	}
 	
@@ -191,7 +188,6 @@ public class VKey
 			}
 			catch(Exception e)
 			{
-				log.error(e);
 			}
 		}
 	}

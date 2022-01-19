@@ -1,19 +1,15 @@
 // Copyright © 2011-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.cryptoswing;
-import goryachev.common.log.Log;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;
 import goryachev.swing.Theme;
+import goryachev.swing.UI;
 import javax.swing.JPasswordField;
-import javax.swing.UIManager;
 
 
 public final class CPasswordField
 	extends JPasswordField
 {
-	protected static final Log log = Log.get("CPasswordField");
-	
-	
 	public CPasswordField()
 	{
 		super(new SecretDocument(), null, 0);
@@ -53,8 +49,7 @@ public final class CPasswordField
 		}
 		catch(Exception e)
 		{
-			log.error(e);
-			UIManager.getLookAndFeel().provideErrorFeedback(this);
+			UI.beep();
 		}
 	}
 
