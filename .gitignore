@@ -11,3 +11,4 @@ hs_err_pid*
 .settings/
 /*.log
 /*.conf
+/*.sha256.txt

@@ -258,7 +258,7 @@ public final class DataFormatV2
 			int sz = DataTools.readInt(in);
 			if(sz < 0)
 			{
-				throw new PassException(PassException.CORRUPTED);
+				throw new PassException(PassException.Error.CORRUPTED);
 			}
 			
 			DataFile df = new DataFile();

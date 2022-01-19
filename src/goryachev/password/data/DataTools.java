@@ -142,7 +142,7 @@ public class DataTools
 		int sz = readInt(in);
 		if(sz < 0)
 		{
-			throw new PassException(PassException.CORRUPTED);
+			throw new PassException(PassException.Error.CORRUPTED);
 		}
 		
 		switch(type)
@@ -179,7 +179,7 @@ public class DataTools
 			}
 			
 		default:
-			throw new PassException(PassException.CORRUPTED);
+			throw new PassException(PassException.Error.CORRUPTED);
 		}
 	}
 	
@@ -188,11 +188,11 @@ public class DataTools
 	{
 		if(sz < 0)
 		{
-			throw new PassException(PassException.CORRUPTED);
+			throw new PassException(PassException.Error.CORRUPTED);
 		}
 		else if(CKit.isOdd(sz))
 		{
-			throw new PassException(PassException.CORRUPTED);
+			throw new PassException(PassException.Error.CORRUPTED);
 		}
 		
 		return new char[sz/2];
@@ -204,7 +204,7 @@ public class DataTools
 		int sz = cs.length;
 		if(sz > MAX_STRING_LENGTH)
 		{
-			throw new PassException(PassException.STRING_TOO_LONG);
+			throw new PassException(PassException.Error.STRING_TOO_LONG);
 		}
 		
 		writeInt(out, sz + sz); // 2 bytes per char

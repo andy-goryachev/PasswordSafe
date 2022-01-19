@@ -186,7 +186,7 @@ public final class DataFormatV1
 			long sig = readLong(in, md);
 			if(SIGNATURE_V1 != sig)
 			{
-				throw new PassException(PassException.WRONG_SIGNATURE);
+				throw new PassException(PassException.Error.WRONG_SIGNATURE);
 			}
 						
 			byte[] salt = new byte[SALT_LENGTH];
@@ -198,7 +198,7 @@ public final class DataFormatV1
 			int iterations = readInt(in, md);
 			if(iterations <= 256)
 			{
-				throw new PassException(PassException.CORRUPTED);
+				throw new PassException(PassException.Error.CORRUPTED);
 			}
 			
 			pkey = deriveKey(salt, iterations, password);
@@ -220,20 +220,20 @@ public final class DataFormatV1
 			}
 			catch(Exception e)
 			{
-				throw new PassException(PassException.WRONG_PASSWORD, e);
+				throw new PassException(PassException.Error.WRONG_PASSWORD, e);
 			}
 			
 			hash2 = new byte[HASH_LENGTH];
 			readFully(in, md, hash2);
 			if(!Arrays.equals(hash, hash2))
 			{
-				throw new PassException(PassException.WRONG_PASSWORD);
+				throw new PassException(PassException.Error.WRONG_PASSWORD);
 			}
 			
 			int sz = readInt(in, md);
 			if(sz < 0)
 			{
-				throw new PassException(PassException.CORRUPTED);
+				throw new PassException(PassException.Error.CORRUPTED);
 			}
 			
 			for(int i=0; i<sz; i++)
@@ -251,7 +251,7 @@ public final class DataFormatV1
 			int end = readInt(in, md);
 			if(end != END)
 			{
-				throw new PassException(PassException.CORRUPTED);
+				throw new PassException(PassException.Error.CORRUPTED);
 			}
 			
 			byte[] hmac = new byte[HASH_LENGTH];
@@ -260,7 +260,7 @@ public final class DataFormatV1
 			byte[] hmac2 = md.digest();
 			if(!Arrays.equals(hmac, hmac2))
 			{
-				throw new PassException(PassException.CORRUPTED);
+				throw new PassException(PassException.Error.CORRUPTED);
 			}
 			
 			df.setPassword(password);
@@ -284,7 +284,7 @@ public final class DataFormatV1
 		int sz = cs.length;
 		if(sz > MAX_STRING_LENGTH)
 		{
-			throw new PassException(PassException.STRING_TOO_LONG);
+			throw new PassException(PassException.Error.STRING_TOO_LONG);
 		}
 			
 		writeInt(out, md, sz + sz); // 2 bytes per char
@@ -357,7 +357,7 @@ public final class DataFormatV1
 		int sz = readInt(in, md);
 		if(sz < 0)
 		{
-			throw new PassException(PassException.CORRUPTED);
+			throw new PassException(PassException.Error.CORRUPTED);
 		}
 		
 		switch(type)
@@ -394,7 +394,7 @@ public final class DataFormatV1
 			}
 			
 		default:
-			throw new PassException(PassException.CORRUPTED);
+			throw new PassException(PassException.Error.CORRUPTED);
 		}
 	}
 	
