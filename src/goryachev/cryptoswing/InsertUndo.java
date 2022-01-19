@@ -1,4 +1,4 @@
-// Copyright © 2013-2020 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.cryptoswing;
 import java.util.Vector;
 import javax.swing.undo.AbstractUndoableEdit;

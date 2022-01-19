@@ -1,4 +1,4 @@
-// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.prompts;
 import goryachev.common.log.Log;
 import goryachev.i18n.CLanguageCode;

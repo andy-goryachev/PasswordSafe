@@ -1,4 +1,4 @@
-// Copyright © 2012-2020 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.cryptoswing;
 import goryachev.crypto.EntropyGathererBase;
 import goryachev.swing.UI;
