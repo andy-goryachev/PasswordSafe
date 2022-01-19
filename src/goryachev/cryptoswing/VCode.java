@@ -1,5 +1,5 @@
-// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
-package goryachev.crypto.swing;
+// Copyright © 2011-2020 Andy Goryachev <andy@goryachev.com>
+package goryachev.cryptoswing;
 
 
 public enum VCode

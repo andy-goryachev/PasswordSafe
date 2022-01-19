@@ -1,5 +1,5 @@
-// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
-package goryachev.crypto.swing;
+// Copyright © 2012-2020 Andy Goryachev <andy@goryachev.com>
+package goryachev.cryptoswing;
 import javax.swing.text.Position;
 
 

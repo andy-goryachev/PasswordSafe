@@ -2,10 +2,10 @@
 package goryachev.password.ui;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;
-import goryachev.crypto.swing.CPasswordField;
-import goryachev.crypto.swing.MatchLabel;
-import goryachev.crypto.swing.SecretDocument;
-import goryachev.crypto.swing.SecureTextField;
+import goryachev.cryptoswing.CPasswordField;
+import goryachev.cryptoswing.MatchLabel;
+import goryachev.cryptoswing.SecretDocument;
+import goryachev.cryptoswing.SecureTextField;
 import goryachev.i18n.TXT;
 import goryachev.swing.InputTracker;
 import java.awt.event.ItemEvent;

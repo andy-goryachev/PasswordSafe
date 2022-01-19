@@ -1,5 +1,5 @@
-// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
-package goryachev.crypto.swing;
+// Copyright © 2011-2020 Andy Goryachev <andy@goryachev.com>
+package goryachev.cryptoswing;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;
 import goryachev.i18n.TXT;

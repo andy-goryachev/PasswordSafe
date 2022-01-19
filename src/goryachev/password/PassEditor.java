@@ -2,7 +2,7 @@
 package goryachev.password;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;
-import goryachev.crypto.swing.CPasswordField;
+import goryachev.cryptoswing.CPasswordField;
 import goryachev.i18n.Menus;
 import goryachev.i18n.TXT;
 import goryachev.password.data.PassEntry;

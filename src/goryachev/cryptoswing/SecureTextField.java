@@ -1,5 +1,6 @@
-// Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
-package goryachev.crypto.swing;
+// Copyright © 2011-2020 Andy Goryachev <andy@goryachev.com>
+package goryachev.cryptoswing;
+import goryachev.common.log.Log;
 import goryachev.crypto.Crypto;
 import goryachev.crypto.OpaqueChars;
 import javax.swing.JTextField;
@@ -9,6 +10,9 @@ import javax.swing.text.Document;
 public class SecureTextField
 	extends JTextField
 {
+	protected static final Log log = Log.get("SecureTextField");
+	
+	
 	public SecureTextField()
 	{
 		super(new SecretDocument(), null, 0);
@@ -49,7 +53,7 @@ public class SecureTextField
 		}
 		catch(Exception e)
 		{
-//			Log.ex(e);
+			log.error(e);
 		}
 		finally
 		{

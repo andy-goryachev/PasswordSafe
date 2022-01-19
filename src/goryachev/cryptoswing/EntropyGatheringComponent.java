@@ -1,5 +1,6 @@
-// Copyright © 2012-2019 Andy Goryachev <andy@goryachev.com>
-package goryachev.crypto.swing;
+// Copyright © 2012-2020 Andy Goryachev <andy@goryachev.com>
+package goryachev.cryptoswing;
+import goryachev.common.log.Log;
 import goryachev.swing.CBorder;
 import goryachev.swing.Theme;
 import goryachev.swing.theme.ThemeTools;
@@ -18,6 +19,7 @@ public class EntropyGatheringComponent
 	extends JTextArea
 	implements MouseListener, MouseMotionListener
 {
+	protected static final Log log = Log.get("EntropyGatheringComponent");
 	private Runnable onEntropyCollected;
 	private SecureRandom random = new SecureRandom();
 	private int eventCount;
@@ -118,7 +120,7 @@ public class EntropyGatheringComponent
 		}
 		catch(Exception e)
 		{
-//			Log.ex(e);
+			log.error(e);
 		}
 	}
 	

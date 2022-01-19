@@ -1,10 +1,10 @@
 // Copyright © 2011-2019 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
 import goryachev.crypto.OpaqueChars;
-import goryachev.crypto.swing.CPasswordField;
-import goryachev.crypto.swing.MatchLabel;
-import goryachev.crypto.swing.OnScreenKeyboard;
-import goryachev.crypto.swing.SecureTextField;
+import goryachev.cryptoswing.CPasswordField;
+import goryachev.cryptoswing.MatchLabel;
+import goryachev.cryptoswing.OnScreenKeyboard;
+import goryachev.cryptoswing.SecureTextField;
 import goryachev.i18n.Menus;
 import goryachev.password.prompts.Tx;
 import goryachev.password.ui.PasswordVerifier2;

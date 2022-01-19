@@ -1,5 +1,5 @@
-// Copyright © 2009-2019 Andy Goryachev <andy@goryachev.com>
-package goryachev.crypto.swing;
+// Copyright © 2009-2020 Andy Goryachev <andy@goryachev.com>
+package goryachev.cryptoswing;
 import goryachev.swing.CPanel;
 import goryachev.swing.CScrollPane;
 import goryachev.swing.Theme;

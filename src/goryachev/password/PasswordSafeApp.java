@@ -6,7 +6,7 @@ import goryachev.common.util.CSystem;
 import goryachev.common.util.Copyright;
 import goryachev.common.util.ProductInfo;
 import goryachev.crypto.OpaqueChars;
-import goryachev.crypto.swing.EntropyGathererSwing;
+import goryachev.cryptoswing.EntropyGathererSwing;
 import goryachev.i18n.TXT;
 import goryachev.password.data.DataFile;
 import goryachev.password.data.DataFormat;
