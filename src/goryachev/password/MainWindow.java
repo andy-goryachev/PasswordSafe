@@ -3,6 +3,7 @@ package goryachev.password;
 import goryachev.common.util.CKit;
 import goryachev.common.util.SB;
 import goryachev.i18n.TXT;
+import goryachev.password.data.DataFile;
 import goryachev.password.ui.ActivityMonitor;
 import goryachev.password.ui.ClipboardHandler;
 import goryachev.swing.AppFrame;
@@ -14,7 +15,9 @@ import goryachev.swing.Theme;
 import goryachev.swing.UI;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Window;
 import java.io.File;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 
@@ -149,6 +152,19 @@ public class MainWindow
 	
 	protected void lock()
 	{
+		// do not lock if any dialogs are open
+		for(Window w: Window.getWindows())
+		{
+			if(w.isVisible())
+			{
+				if(w instanceof JDialog)
+				{
+					log.debug("cannot lock: dialog open");
+					return;
+				}
+			}
+		}
+		
 		ClipboardHandler.clearConditionally();
 		GlobalSettings.storeAll();
 		
@@ -166,6 +182,14 @@ public class MainWindow
 		{
 			lock(getFile());
 		}
+	}
+	
+	
+	public void unlock(File file, DataFile df)
+	{
+		setMainPanel();
+		mainPanel.setDataFile(file, df);
+		activityMonitor.trigger();
 	}
 	
 	

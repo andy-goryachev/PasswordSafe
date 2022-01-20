@@ -1,5 +1,9 @@
 ﻿# RELEASE NOTES
 
+## TBD
+- bouncy castle 1.69
+- updated common code
+
 ## 3.05.49
 - license changed to Apache 2.0
 - removed separate lock window

@@ -28,7 +28,7 @@ public class PasswordSafeApp
 {
 	public static final String TITLE = "PasswørdSafe";
 	public static final String EXTENSION = ".safe";
-	public static final String PRODUCT_URL = "http://goryachev.com/products/password-safe";
+	public static final String PRODUCT_URL = "https://goryachev.com/products/password-safe";
 	public static final String UPDATE_URL = PRODUCT_URL + "/version";
 	protected static final Log log = Log.get("PasswordSafeApp");
 	private static SecureRandom random;
@@ -36,7 +36,7 @@ public class PasswordSafeApp
 	
 	public PasswordSafeApp()
 	{
-		super("PasswordSafe", Version.VERSION, Copyright.COPYRIGHT);
+		super("PasswordSafe", Version.VERSION, Version.COPYRIGHT);
 	}
 	
 
@@ -60,8 +60,7 @@ public class PasswordSafeApp
 	
 	protected void initLogger()
 	{
-		// TODO
-//		Log.initConsole();
+		Log.initForDebug();
 		
 //		File folder = new File(getDefaultSettingsDirectory(), "logs");
 //		folder.mkdirs();

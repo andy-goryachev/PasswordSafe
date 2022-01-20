@@ -43,7 +43,7 @@ public abstract class ActivityMonitor
 	}
 	
 	
-	protected void trigger()
+	public void trigger()
 	{
 		if(timer != null)
 		{
