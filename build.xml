@@ -23,6 +23,7 @@
 		<mkdir dir="build" />
 		<mkdir dir="build/classes" />
 		<mkdir dir="build/jars" />
+		<mkdir dir="dist" />
 	</target>
 
 			
@@ -87,8 +88,8 @@
 	<target name="copy-jar" depends="make-jar">
 		<delete file="./${TARGET}.jar" failonerror="false" />
 		<copy file="build/jars/${TARGET}.jar" todir="." overwrite="true" />
-		<delete file="./${TARGET}.jar.sha256.txt" failonerror="false" />
-		<copy file="build/jars/${TARGET}.jar.sha256.txt" overwrite="true" todir="." />
+		<copy file="build/jars/${TARGET}.jar" todir="dist/" overwrite="true" />
+		<copy file="build/jars/${TARGET}.jar.sha256.txt" overwrite="true" todir="dist/" />
 	</target>
 	
 
