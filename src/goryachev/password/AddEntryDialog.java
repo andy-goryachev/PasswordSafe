@@ -179,8 +179,8 @@ public class AddEntryDialog
 		p.row(0, notesLabel);
 		p.row(1, 3, scroll);
 
-		CButton addButton = new CButton(Menus.OK, addAction, true);
 		CButton cancelButton = new CButton(Menus.Cancel, closeDialogAction);
+		CButton addButton = new CButton("Add", addAction, true);
 
 		p.buttonPanel().setBorder(new CBorder(5, 0, 0, 0));
 		p.buttonPanel().addButton(cancelButton);

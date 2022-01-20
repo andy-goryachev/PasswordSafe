@@ -18,8 +18,6 @@ import goryachev.swing.GlobalSettings;
 import goryachev.swing.UI;
 import goryachev.swing.XAction;
 import java.awt.Component;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 
 public class ChangePasswordDialog
@@ -27,13 +25,13 @@ public class ChangePasswordDialog
 {
 	public final XAction commitAction = new XAction(this::onCommit);
 	public final XAction generateAction = new XAction(this::generatePassword);
-	protected CPasswordField passField;
-	protected SecureTextField clearPassField;
-	protected CPasswordField verifyField;
-	protected MatchLabel matchField;
-	protected CCheckBox hidePassField;
+	protected final CPasswordField passField;
+	protected final SecureTextField clearPassField;
+	protected final CPasswordField verifyField;
+	protected final MatchLabel matchField;
+	protected final CCheckBox hidePassField;
 	protected final PasswordVerifier2 verifier;
-	protected OnScreenKeyboard keyboard;
+	protected final OnScreenKeyboard keyboard;
 	private OpaqueChars entered;
 	private boolean showPassword;
 
@@ -57,12 +55,9 @@ public class ChangePasswordDialog
 		hidePassField = new CCheckBox(Tx.HidePasswordInThisDialog);
 		hidePassField.setBorder(null);
 		GlobalSettings.setKey(hidePassField, "ChangePasswordDialog.hide");
-		hidePassField.addItemListener(new ItemListener()
+		hidePassField.addItemListener((ev) ->
 		{
-			public void itemStateChanged(ItemEvent ev)
-			{
-				onHide();
-			}
+			onHide();
 		});
 		
 		matchField = new MatchLabel();
@@ -194,6 +189,7 @@ public class ChangePasswordDialog
 	
 	protected void generatePassword()
 	{
-		new GeneratePasswordDialog(this).open();
+		boolean hide = hidePassField.isSelected();
+		new GeneratePasswordDialog(this, hide).open();
 	}
 }

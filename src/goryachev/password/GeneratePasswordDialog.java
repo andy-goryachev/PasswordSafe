@@ -1,6 +1,8 @@
 // Copyright © 2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
+import goryachev.crypto.OpaqueChars;
 import goryachev.cryptoswing.CPasswordField;
+import goryachev.cryptoswing.SecureTextField;
 import goryachev.i18n.Menus;
 import goryachev.password.prompts.Tx;
 import goryachev.swing.CButton;
@@ -9,9 +11,10 @@ import goryachev.swing.CComboBox;
 import goryachev.swing.CDialog;
 import goryachev.swing.CPanel;
 import goryachev.swing.CTextField;
+import goryachev.swing.ChangeMonitor;
+import goryachev.swing.UI;
 import goryachev.swing.XAction;
 import java.awt.Component;
-import javax.swing.JSeparator;
 
 
 /**
@@ -20,10 +23,12 @@ import javax.swing.JSeparator;
 public class GeneratePasswordDialog
 	extends CDialog
 {
-	protected final String LATIN = "Latin";
-	protected final String CYRILLIC = "Cyrillic";
+	protected final static String LATIN = "Latin";
+	protected final static String CYRILLIC = "Cyrillic";
+	protected final int MONITOR_DELAY = 300;
 	
 	protected final XAction generateAction = new XAction(this::onGenerate);
+	protected final XAction okAction = new XAction(this::onOK);
 	
 	protected final CComboBox alphabetField;
 	protected final CTextField includeField = new CTextField();
@@ -31,12 +36,15 @@ public class GeneratePasswordDialog
 	protected final CCheckBox lowercaseField = new CCheckBox("lowercase");
 	protected final CCheckBox digitsField = new CCheckBox("digits");
 	protected final CComboBox lengthField;
+	protected final SecureTextField clearPassField;
 	protected final CPasswordField passwordField = new CPasswordField();
-	protected final CCheckBox showField = new CCheckBox("show password");
+	protected final CCheckBox hidePassField = new CCheckBox(Tx.HidePasswordInThisDialog);
+	private PasswordGenerator generator;
+	private boolean hasPassword;
 	
 	
 	// TODO position under or over the parent, or cascade
-	public GeneratePasswordDialog(Component parent)
+	public GeneratePasswordDialog(Component parent, boolean hidePassword)
 	{
 		super(parent, "GeneratePasswordDialog", true);
 
@@ -52,8 +60,13 @@ public class GeneratePasswordDialog
 		);
 		
 		lowercaseField.setSelected(true);
+		digitsField.setEnabled(true);
 		
-		showField.setSelected(true);
+		hidePassField.setSelected(hidePassword);
+		hidePassField.addItemListener((ev) ->
+		{
+			onHide();
+		});
 		
 		lengthField = new CComboBox
 		(
@@ -72,7 +85,35 @@ public class GeneratePasswordDialog
 			64
 		);
 		lengthField.setEditable(true);
+		lengthField.select("16");
 		
+		clearPassField = new SecureTextField();
+		UI.installDefaultPopupMenu(clearPassField);
+		
+		ChangeMonitor mon = new ChangeMonitor(MONITOR_DELAY, this::onGenerate);
+		mon.listenAll
+		(
+			alphabetField,
+			includeField,
+			lowercaseField,
+			digitsField,
+			uppercaseField,
+			lengthField
+		);
+		
+		updateLayout();
+		
+		updateActions();
+		
+		UI.later(() ->
+		{
+			onGenerate();
+		});
+	}
+	
+	
+	protected void updateLayout()
+	{
 		CPanel p = new CPanel();
 		p.setGaps(5);
 		p.setBorder();
@@ -86,7 +127,7 @@ public class GeneratePasswordDialog
 		p.row(0, p.label("Alphabet:"));
 		p.row(1, alphabetField);
 		p.nextRow();
-		p.row(0, p.label("Include Symbols:"));
+		p.row(0, p.label("Must Include:"));
 		p.row(1, 2, includeField);
 		p.nextRow();
 		p.row(1, uppercaseField);
@@ -102,14 +143,21 @@ public class GeneratePasswordDialog
 		p.nextRow();
 		p.row(0, p.label("Generated Password:"));
 		p.nextRow();
-		p.row(0, 3, passwordField);
+		if(hidePassField.isSelected())
+		{
+			p.row(0, 3, passwordField);
+		}
+		else
+		{
+			p.row(0, 3, clearPassField);	
+		}
 		p.nextRow();
 //		p.row(0, 3, new JSeparator(JSeparator.HORIZONTAL));
-		p.row(1, showField);
+		p.row(1, hidePassField);
 		
 		CButton cancelButton = new CButton(Menus.Cancel, closeDialogAction);
 		CButton generateButton = new CButton("Generate", generateAction);
-		CButton okButton = new CButton("OK", generateAction, true); // FIX
+		CButton okButton = new CButton("OK", okAction, true); // FIX
 		
 		p.buttonPanel().addButton(cancelButton);
 		p.buttonPanel().addButton(generateButton);
@@ -119,8 +167,62 @@ public class GeneratePasswordDialog
 	}
 	
 	
+	protected void onHide()
+	{
+		updateLayout();
+	}
+	
+	
+	protected void updateActions()
+	{
+		boolean idle = (generator == null);
+		
+		generateAction.setEnabled(idle);
+		okAction.setEnabled(idle && hasPassword);
+	}
+	
+	
 	protected void onGenerate()
 	{
+		if(generator != null)
+		{
+			generator.cancel();
+		}
+		
+		generator = new PasswordGenerator(this::onPasswordGenerated);
+		generator.generate();
+				
 		// TODO
+		
+		updateActions();
+	}
+
+
+	protected void onPasswordGenerated(PasswordGenerator gen, OpaqueChars pw)
+	{
+		UI.later(() ->
+		{
+			if(generator != gen)
+			{
+				return;
+			}
+			
+			passwordField.setPassword(pw);
+			clearPassField.setText(pw);
+			// TODO set password, has password
+			
+			generator = null;
+			hasPassword = true;
+			
+			updateActions();
+		});
+	}
+	
+	
+	protected void onOK()
+	{
+		// TODO
+		
+		close();
 	}
 }

@@ -9,7 +9,7 @@ import goryachev.swing.CPanel;
 import goryachev.swing.CScrollPane;
 import goryachev.swing.CSplitPane;
 import goryachev.swing.CTextFieldWithPrompt;
-import goryachev.swing.DelayedAction;
+import goryachev.swing.DelayedActionSwing;
 import goryachev.swing.Dialogs;
 import goryachev.swing.GlobalSettings;
 import goryachev.swing.Theme;
@@ -43,7 +43,7 @@ public class OptionPanel
 	public final CPanel detailPanel;
 	public final JLabel titleField;
 	public final CSplitPane split;
-	public final DelayedAction delayed;
+	public final DelayedActionSwing delayed;
 	private OptionTreeNode root;
 	
 	
@@ -51,13 +51,7 @@ public class OptionPanel
 	{
 		this.root = r;
 		
-		delayed = new DelayedAction()
-		{
-			public void action()
-			{
-				onSearch();
-			}
-		};
+		delayed = new DelayedActionSwing(500, this::onSearch);
 		
 		filter = new CTextFieldWithPrompt();
 		filter.setPrompt(Menus.find);

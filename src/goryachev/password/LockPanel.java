@@ -110,6 +110,26 @@ public class LockPanel
 		
 		UI.focusLater(passField);
 		UI.whenAncestorOfFocusedComponent(this, KeyEvent.VK_ESCAPE, mainWindow.closeAction);
+		
+		UI.later(() ->
+		{
+			checkDebugPassword();
+		});
+	}
+	
+	
+	protected final void checkDebugPassword()
+	{
+		String pw = System.getProperty("password");
+		if(pw != null)
+		{
+			if(pw.length() <= 1)
+			{
+				char[] cs = pw.toCharArray();
+				passField.setPassword(cs);
+				onOk();
+			}
+		}
 	}
 	
 	

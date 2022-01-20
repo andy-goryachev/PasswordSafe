@@ -7,7 +7,6 @@ import goryachev.i18n.Menus;
 import goryachev.i18n.TXT;
 import goryachev.password.data.PassEntry;
 import goryachev.password.ui.ClipboardHandler;
-import goryachev.swing.CAction;
 import goryachev.swing.CBorder;
 import goryachev.swing.CButton;
 import goryachev.swing.CMenuItem;
@@ -21,6 +20,7 @@ import goryachev.swing.CUndoManager;
 import goryachev.swing.InputTracker;
 import goryachev.swing.Theme;
 import goryachev.swing.UI;
+import goryachev.swing.XAction;
 import goryachev.swing.text.CEditorKit;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -30,9 +30,9 @@ import javax.swing.JPopupMenu;
 public class PassEditor
 	extends CPanel
 {
-	public final CAction changePasswordAction = new CAction() { public void action() { actionChangePassword(); } };
-	public final CAction copyPasswordAction = new CAction() { public void action() { actionCopyPassword(); } };
-	public final CAction copyUsernameAction = new CAction() { public void action() { actionCopyUsername(); } };
+	public final XAction changePasswordAction = new XAction(this::actionChangePassword);
+	public final XAction copyPasswordAction = new XAction(this::actionCopyPassword);
+	public final XAction copyUsernameAction = new XAction(this::actionCopyUsername);
 	public final CTextField nameField;
 	public final CTextField usernameField;
 	public final CButton copyUserButton;
@@ -145,7 +145,7 @@ public class PassEditor
 	protected JPopupMenu createPassFieldPopup()
 	{
 		CPopupMenu m = new CPopupMenu();
-		m.add(new CMenuItem(copyPassButton.getText(), copyUsernameAction));
+		m.add(new CMenuItem(copyPassButton.getText(), copyPasswordAction));
 		return m;
 	}
 	
