@@ -9,6 +9,7 @@ import javax.swing.Icon;
 import javax.swing.KeyStroke;
 
 
+@Deprecated // TODO replace with XAction (and may be rename XAction -> CAction)
 public abstract class CAction
 	extends AbstractAction
 {
