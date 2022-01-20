@@ -60,7 +60,7 @@ public class AddEntryDialog
 		this.dataFile = df;
 
 		setTitle(Tx.AddEntry);
-		setMinimumSize(500, 400);
+		setMinimumSize(600, 400);
 
 		nameField = new CTextField();
 
@@ -146,7 +146,7 @@ public class AddEntryDialog
 		CPanel p = new CPanel();
 		p.setGaps(5);
 		p.setBorder();
-		p.addColumns(CPanel.PREFERRED, CPanel.PREFERRED, CPanel.FILL );
+		p.addColumns(CPanel.PREFERRED, CPanel.PREFERRED, CPanel.FILL);
 
 		p.row(0, p.label(TXT.get("AddEntryDialog.label.name", "Name:")));
 		p.row(1, 3, nameField);

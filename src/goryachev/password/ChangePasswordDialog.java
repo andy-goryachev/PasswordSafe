@@ -8,8 +8,6 @@ import goryachev.cryptoswing.SecureTextField;
 import goryachev.i18n.Menus;
 import goryachev.password.prompts.Tx;
 import goryachev.password.ui.PasswordVerifier2;
-import goryachev.swing.CAction;
-import goryachev.swing.CBorder;
 import goryachev.swing.CButton;
 import goryachev.swing.CCheckBox;
 import goryachev.swing.CDialog;
@@ -18,6 +16,7 @@ import goryachev.swing.CPanel;
 import goryachev.swing.Dialogs;
 import goryachev.swing.GlobalSettings;
 import goryachev.swing.UI;
+import goryachev.swing.XAction;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -26,7 +25,8 @@ import java.awt.event.ItemListener;
 public class ChangePasswordDialog
 	extends CDialog
 {
-	public final CAction commitAction = new CAction() { public void action() { onCommit(); } };
+	public final XAction commitAction = new XAction(this::onCommit);
+	public final XAction generateAction = new XAction(this::generatePassword);
 	protected CPasswordField passField;
 	protected SecureTextField clearPassField;
 	protected CPasswordField verifyField;
@@ -44,6 +44,8 @@ public class ChangePasswordDialog
 
 		setTitle(Tx.ChangePassword);
 		setCloseOnEscape();
+		setMinimumSize(600, 300);
+		setSize(600, 300);
 
 		clearPassField = new SecureTextField();
 		UI.installDefaultPopupMenu(clearPassField);
@@ -79,9 +81,6 @@ public class ChangePasswordDialog
 		hidePassField.setSelected(false);
 
 		updateActions();
-		
-		setMinimumSize(500, 300);
-		setSize(500, 300);
 	}
 	
 	
@@ -104,7 +103,6 @@ public class ChangePasswordDialog
 		PassTools.copyPassword(clearPassField, passField, verifyField, on);
 		
 		CPanel p = new CPanel();
-		p.setBorder(new CBorder(0, 0, 10, 0));
 		p.setGaps(5);
 		p.addColumns
 		(
@@ -137,9 +135,15 @@ public class ChangePasswordDialog
 		p.nextRow();
 		p.add(1, 3, hidePassField);
 		
+		CButton generateButton = new CButton("Generate Password", generateAction);
 		CButton cancelButton = new CButton(Menus.Cancel, closeDialogAction);
 		CButton changeButton = new CButton(Tx.Change, commitAction, true);
 
+		p.buttonPanel().addButton(generateButton);
+		p.buttonPanel().fill();
+		p.buttonPanel().addButton(cancelButton);
+		p.buttonPanel().addButton(changeButton);
+		
 		CFocusTraversalPolicy tp = new CFocusTraversalPolicy();
 		if(showPassword)
 		{
@@ -153,9 +157,6 @@ public class ChangePasswordDialog
 		tp.add(changeButton);
 		tp.add(cancelButton);
 		tp.apply(this);
-		
-		p.buttonPanel().addButton(cancelButton);
-		p.buttonPanel().addButton(changeButton);
 		
 		panel().setCenter(p);
 				
@@ -188,5 +189,11 @@ public class ChangePasswordDialog
 	public OpaqueChars getEnteredPassword()
 	{
 		return entered;
+	}
+	
+	
+	protected void generatePassword()
+	{
+		new GeneratePasswordDialog(this).open();
 	}
 }

@@ -19,9 +19,9 @@ public class CComboBox
 	}
 	
 	
-	public CComboBox(Object[] items)
+	public CComboBox(Object ... items)
 	{
-		super(items == null ? new Object[0] : items);
+		super(items);
 		init();
 	}
 
