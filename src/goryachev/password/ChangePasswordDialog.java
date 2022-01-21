@@ -190,6 +190,14 @@ public class ChangePasswordDialog
 	protected void generatePassword()
 	{
 		boolean hide = hidePassField.isSelected();
-		new GeneratePasswordDialog(this, hide).open();
+		new GeneratePasswordDialog(this, hide, this::setPassword).open();
+	}
+	
+	
+	protected void setPassword(OpaqueChars pw)
+	{
+		clearPassField.setText(pw);
+		passField.setPassword(pw);
+		verifyField.setPassword(pw);
 	}
 }

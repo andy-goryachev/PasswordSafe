@@ -18,6 +18,7 @@ import goryachev.swing.ChangeMonitor;
 import goryachev.swing.UI;
 import goryachev.swing.XAction;
 import java.awt.Component;
+import java.util.function.Consumer;
 
 
 /**
@@ -33,6 +34,7 @@ public class GeneratePasswordDialog
 	protected final XAction generateAction = new XAction(this::onGenerate);
 	protected final XAction okAction = new XAction(this::onOK);
 	
+	protected final Consumer<OpaqueChars> callback;
 	protected final CComboBox alphabetField;
 	protected final CTextField includeField = new CTextField();
 	protected final CCheckBox uppercaseField = new CCheckBox("uppercase");
@@ -43,13 +45,14 @@ public class GeneratePasswordDialog
 	protected final CPasswordField passwordField = new CPasswordField();
 	protected final CCheckBox hidePassField = new CCheckBox(Tx.HidePasswordInThisDialog);
 	private PasswordGenerator generator;
-	private boolean hasPassword;
+	private OpaqueChars password;
 	
 	
 	// TODO position under or over the parent, or cascade
-	public GeneratePasswordDialog(Component parent, boolean hidePassword)
+	public GeneratePasswordDialog(Component parent, boolean hidePassword, Consumer<OpaqueChars> callback)
 	{
 		super(parent, "GeneratePasswordDialog", true);
+		this.callback = callback;
 
 		setTitle(Tx.GeneratePassword);
 		setCloseOnEscape();
@@ -89,7 +92,7 @@ public class GeneratePasswordDialog
 			64
 		);
 		lengthField.setEditable(true);
-		lengthField.select("32");
+		lengthField.select(String.valueOf(PasswordGenerator.DEFALT_LENGTH));
 		
 		clearPassField = new SecureTextField();
 		UI.installDefaultPopupMenu(clearPassField);
@@ -160,7 +163,7 @@ public class GeneratePasswordDialog
 		p.row(1, hidePassField);
 		
 		CButton cancelButton = new CButton(Menus.Cancel, closeDialogAction);
-		CButton generateButton = new CButton("Generate", generateAction);
+		CButton generateButton = new CButton("Re-generate", generateAction);
 		CButton okButton = new CButton("OK", okAction, true); // FIX
 		
 		p.buttonPanel().addButton(cancelButton);
@@ -180,6 +183,7 @@ public class GeneratePasswordDialog
 	protected void updateActions()
 	{
 		boolean idle = (generator == null);
+		boolean hasPassword = (password != null);
 		
 		generateAction.setEnabled(idle);
 		okAction.setEnabled(idle && hasPassword);
@@ -207,7 +211,7 @@ public class GeneratePasswordDialog
 	{
 		// TODO error?
 		String s = lengthField.getSelectedString();
-		return Parsers.parseInt(s, 16);
+		return Parsers.parseInt(s, PasswordGenerator.DEFALT_LENGTH);
 	}
 	
 	
@@ -220,8 +224,6 @@ public class GeneratePasswordDialog
 		
 		PasswordGenerator.Alphabet alphabet = getAlphabet();
 		int len = getLength();
-		
-		// TODO must select uppercase or lowercase
 		
 		generator = new PasswordGenerator(this::onPasswordGenerated);
 		generator.setAlphabet(alphabet);
@@ -245,11 +247,11 @@ public class GeneratePasswordDialog
 				return;
 			}
 			
+			generator = null;
+			password = pw;
+			
 			passwordField.setPassword(pw);
 			clearPassField.setText(pw);
-			
-			generator = null;
-			hasPassword = true;
 			
 			updateActions();
 		});
@@ -258,7 +260,7 @@ public class GeneratePasswordDialog
 	
 	protected void onOK()
 	{
-		// TODO
+		callback.accept(password);
 		
 		close();
 	}

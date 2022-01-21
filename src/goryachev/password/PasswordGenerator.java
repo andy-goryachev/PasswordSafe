@@ -1,7 +1,6 @@
 // Copyright © 2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
 import goryachev.common.util.CKit;
-import goryachev.common.util.D;
 import goryachev.common.util.SB;
 import goryachev.crypto.OpaqueChars;
 import java.security.SecureRandom;
@@ -20,14 +19,16 @@ public class PasswordGenerator
 		LATIN,
 		CYRILLIC
 	}
-	
+
+	public static final int DEFALT_LENGTH = 32;
+	private static final int COMFORT_PERIOD = 300;
 	private final BiConsumer<PasswordGenerator,OpaqueChars> callback;
 	private boolean cancelled;
 	private Alphabet alphabet = Alphabet.LATIN;
 	private boolean uppercase;
 	private boolean lowercase;
 	private boolean digits;
-	private int length = 32;
+	private int length = DEFALT_LENGTH;
 	private String mustInclude;
 	
 	
@@ -66,6 +67,14 @@ public class PasswordGenerator
 	
 	public void setMustInclude(String x)
 	{
+		if(x != null)
+		{
+			if(x.length() == 0)
+			{
+				x = null;
+			}
+		}
+		
 		mustInclude = x;
 	}
 	
@@ -91,14 +100,13 @@ public class PasswordGenerator
 	
 	public void run()
 	{
-		CKit.sleep(200); // FIX
+		CKit.sleep(COMFORT_PERIOD);
 		
 		char[] cs = generatePassword();
 		OpaqueChars pw = new OpaqueChars(cs);
 		
 		if(!cancelled)
 		{
-			D.print("yo"); // FIX
 			callback.accept(this, pw);
 		}
 	}
@@ -143,15 +151,21 @@ public class PasswordGenerator
 			sb.append("0123456789");
 		}
 		
-		// TODO must include
-		
 		String src = sb.toString();
 		int sz = src.length();
 		
 		SecureRandom r = new SecureRandom();
 		char[] cs = new char[length];
 		
-		for(int i=0; i<length; i++)
+		int start = 0;
+		if(mustInclude != null)
+		{
+			int ix = r.nextInt(mustInclude.length());
+			cs[0] = mustInclude.charAt(ix);
+			start = 1;
+		}
+		
+		for(int i=start; i<length; i++)
 		{
 			int ix = r.nextInt(sz);
 			cs[i] = src.charAt(ix);
