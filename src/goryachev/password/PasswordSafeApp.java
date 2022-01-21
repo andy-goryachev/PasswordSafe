@@ -3,11 +3,11 @@ package goryachev.password;
 import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CSystem;
-import goryachev.common.util.Copyright;
 import goryachev.common.util.ProductInfo;
 import goryachev.crypto.OpaqueChars;
-import goryachev.cryptoswing.EntropyGathererSwing;
 import goryachev.i18n.TXT;
+import goryachev.memsafecrypto.CRandom;
+import goryachev.memsafecryptoswing.EntropyGathererSwing;
 import goryachev.password.data.DataFile;
 import goryachev.password.data.DataFormat;
 import goryachev.password.data.v1.DataFormatV1;
@@ -19,7 +19,6 @@ import goryachev.swing.Application;
 import goryachev.swing.Dialogs;
 import goryachev.swing.dialogs.license.StandardLicense;
 import java.io.File;
-import java.security.SecureRandom;
 import javax.swing.ImageIcon;
 
 
@@ -31,7 +30,6 @@ public class PasswordSafeApp
 	public static final String PRODUCT_URL = "https://goryachev.com/products/password-safe";
 	public static final String UPDATE_URL = PRODUCT_URL + "/version";
 	protected static final Log log = Log.get("PasswordSafeApp");
-	private static SecureRandom random;
 
 	
 	public PasswordSafeApp()
@@ -131,7 +129,7 @@ public class PasswordSafeApp
 	{
 		try
 		{
-			random = EntropyGathererSwing.init();
+			EntropyGathererSwing.start();
 			
 			// check license
 			long time = Preferences.licenseAcceptedOption.get();
@@ -186,7 +184,7 @@ public class PasswordSafeApp
 	{
 		DataFormat format = new DataFormatV2();
 		
-		byte[] b = format.save(df, random);
+		byte[] b = format.save(df, new CRandom());
 		
 		// write to temp file
 		File f = File.createTempFile("PasswordSafe-", ".tmp", file.getParentFile());

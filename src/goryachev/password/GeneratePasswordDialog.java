@@ -6,6 +6,7 @@ import goryachev.crypto.OpaqueChars;
 import goryachev.cryptoswing.CPasswordField;
 import goryachev.cryptoswing.SecureTextField;
 import goryachev.i18n.Menus;
+import goryachev.memsafecrypto.CRandom;
 import goryachev.password.PasswordGenerator.Alphabet;
 import goryachev.password.prompts.Tx;
 import goryachev.swing.CButton;
@@ -228,7 +229,7 @@ public class GeneratePasswordDialog
 		PasswordGenerator.Alphabet alphabet = getAlphabet();
 		int len = getLength();
 		
-		generator = new PasswordGenerator(this::onPasswordGenerated);
+		generator = new PasswordGenerator(new CRandom(), this::onPasswordGenerated);
 		generator.setAlphabet(alphabet);
 		generator.setUppercase(uppercaseField.isSelected());
 		generator.setLowercase(lowercaseField.isSelected());

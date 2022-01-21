@@ -22,6 +22,7 @@ public class PasswordGenerator
 
 	public static final int DEFALT_LENGTH = 32;
 	private static final int COMFORT_PERIOD = 300;
+	private final SecureRandom random;
 	private final BiConsumer<PasswordGenerator,OpaqueChars> callback;
 	private boolean cancelled;
 	private Alphabet alphabet = Alphabet.LATIN;
@@ -32,8 +33,9 @@ public class PasswordGenerator
 	private String mustInclude;
 	
 	
-	public PasswordGenerator(BiConsumer<PasswordGenerator,OpaqueChars> callback)
+	public PasswordGenerator(SecureRandom r, BiConsumer<PasswordGenerator,OpaqueChars> callback)
 	{
+		this.random = r;
 		this.callback = callback;
 		
 		setPriority(MIN_PRIORITY);
@@ -153,21 +155,19 @@ public class PasswordGenerator
 		
 		String src = sb.toString();
 		int sz = src.length();
-		
-		SecureRandom r = new SecureRandom();
 		char[] cs = new char[length];
 		
 		int start = 0;
 		if(mustInclude != null)
 		{
-			int ix = r.nextInt(mustInclude.length());
+			int ix = random.nextInt(mustInclude.length());
 			cs[0] = mustInclude.charAt(ix);
 			start = 1;
 		}
 		
 		for(int i=start; i<length; i++)
 		{
-			int ix = r.nextInt(sz);
+			int ix = random.nextInt(sz);
 			cs[i] = src.charAt(ix);
 		}
 
