@@ -2,10 +2,10 @@
 package goryachev.cryptoswing;
 import goryachev.i18n.CLanguage;
 import goryachev.i18n.CLanguageCode;
-import goryachev.swing.CAction;
 import goryachev.swing.CMenuItem;
 import goryachev.swing.CPopupMenu;
 import goryachev.swing.UI;
+import goryachev.swing.XAction;
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import javax.swing.JButton;
@@ -222,13 +222,11 @@ public class VKey
 		CPopupMenu m = new CPopupMenu();
 		for(final CLanguageCode c: OnScreenKeyboard.getSupportedLayouts())
 		{
-			CAction a = new CAction()
+			XAction a = new XAction(() ->
 			{
-				public void action()
-				{
-					getKeyboard().change(c);
-				}
-			};
+				getKeyboard().change(c);
+			});
+			
 			String name = CLanguage.parse(c.getCode()).getLocalName();
 			m.add(new CMenuItem(name, a));
 		}

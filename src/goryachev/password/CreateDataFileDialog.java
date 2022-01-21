@@ -12,7 +12,6 @@ import goryachev.i18n.TXT;
 import goryachev.password.data.DataFile;
 import goryachev.password.ui.PasswordVerifier2;
 import goryachev.swing.BackgroundThread;
-import goryachev.swing.CAction;
 import goryachev.swing.CButton;
 import goryachev.swing.CDialog;
 import goryachev.swing.CFocusTraversalPolicy;
@@ -22,6 +21,7 @@ import goryachev.swing.CTextField;
 import goryachev.swing.Dialogs;
 import goryachev.swing.InfoField;
 import goryachev.swing.Theme;
+import goryachev.swing.XAction;
 import goryachev.swing.dialogs.CFileChooser;
 import java.awt.Component;
 import java.io.File;
@@ -31,8 +31,8 @@ public class CreateDataFileDialog
 	extends CDialog
 {
 	protected static final Log log = Log.get("CreateDataFileDialog");
-	public final CAction createAction = new CAction() { public void action() { actionCreate(); } };
-	public final CAction browseAction = new CAction() { public void action() { actionBrowse(); } };
+	public final XAction createAction = new XAction(this::actionCreate);
+	public final XAction browseAction = new XAction(this::actionBrowse);
 	private final CTextField fileField;
 	private final CPasswordField passField;
 	private final CPasswordField verifyField;

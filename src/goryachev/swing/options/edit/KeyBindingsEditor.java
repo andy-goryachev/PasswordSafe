@@ -5,7 +5,6 @@ import goryachev.common.util.SB;
 import goryachev.i18n.Menus;
 import goryachev.i18n.TXT;
 import goryachev.swing.Accelerator;
-import goryachev.swing.CAction;
 import goryachev.swing.CBorder;
 import goryachev.swing.CButton;
 import goryachev.swing.CMenuItem;
@@ -16,6 +15,7 @@ import goryachev.swing.CScrollPane;
 import goryachev.swing.CToolBar;
 import goryachev.swing.Theme;
 import goryachev.swing.UI;
+import goryachev.swing.XAction;
 import goryachev.swing.options.OptionEditorInterface;
 import goryachev.swing.table.CTableSelector;
 import goryachev.swing.table.ZFilterLogic;
@@ -33,8 +33,8 @@ public class KeyBindingsEditor
 	extends CPanel
 	implements OptionEditorInterface
 {
-	public final CAction clearAction = new CAction(TXT.get("KeyBindingsEditor.clear key binding", "Clear")) { public void action() { actionClear(); } };
-	public final CAction modifyAction = new CAction(TXT.get("KeyBindingsEditor.modify key binding", "Modify")) { public void action() { actionModify(); } };
+	public final XAction clearAction = new XAction(TXT.get("KeyBindingsEditor.clear key binding", "Clear"), this::actionClear);
+	public final XAction modifyAction = new XAction(TXT.get("KeyBindingsEditor.modify key binding", "Modify"), this::actionModify);
 	public final KeyBindingsTableModel model;
 	public final ZTable table;
 	public final ZFilterLogic filter;

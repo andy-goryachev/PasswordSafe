@@ -7,13 +7,13 @@ import goryachev.i18n.Menus;
 import goryachev.i18n.TXT;
 import goryachev.password.img.PasswordSafeIcons;
 import goryachev.swing.Application;
-import goryachev.swing.CAction;
 import goryachev.swing.CButton;
 import goryachev.swing.CPanel;
 import goryachev.swing.CheckForUpdate;
 import goryachev.swing.GlobalSettings;
 import goryachev.swing.Panels;
 import goryachev.swing.Theme;
+import goryachev.swing.XAction;
 import goryachev.swing.dialogs.CFileChooser;
 import goryachev.swing.dialogs.license.StandardLicense;
 import goryachev.swing.icons.CIcons;
@@ -31,11 +31,11 @@ public class WelcomeWizard
 	extends WizardFrame2
 	implements HasPrompts
 {
-	public final CAction acceptLicenseAction = new CAction() { public void action() { actionAcceptLicense(); }};
-	public final CAction showLicenseAction = new CAction() { public void action() { actionShowLicense(); }};
-	public final CAction showOptionsAction = new CAction() { public void action() { actionShowOptions(); }};
-	public final CAction createNewAction = new CAction() { public void action() { actionCreateNew(); } };
-	public final CAction openExistingAction = new CAction() { public void action() { actionOpenExisting(); } };
+	public final XAction acceptLicenseAction = new XAction(this::actionAcceptLicense);
+	public final XAction showLicenseAction = new XAction(this::actionShowLicense);
+	public final XAction showOptionsAction = new XAction(this::actionShowOptions);
+	public final XAction createNewAction = new XAction(this::actionCreateNew);
+	public final XAction openExistingAction = new XAction(this::actionOpenExisting);
 
 	public final CheckForUpdate checkForUpdate;
 	protected LanguagePage languagePage;

@@ -5,6 +5,7 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.Icon;
 
 
 /**
@@ -31,6 +32,20 @@ public class XAction
 	public XAction(String title)
 	{
 		super(title);
+	}
+	
+	
+	public XAction(String title, Runnable action)
+	{
+		super(title);
+		this.action = action;
+	}
+	
+	
+	public XAction(Icon icon, Runnable action)
+	{
+		this.action = action;
+		putValue(Action.SMALL_ICON, icon);
 	}
 
 

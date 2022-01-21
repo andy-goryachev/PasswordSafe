@@ -37,19 +37,19 @@ import java.io.File;
 public class MainPanel
 	extends CPanel
 {
-	public final CAction aboutAction = new CAction() { public void action() { About.about(MainPanel.this); } };
-	public final CAction changeDataPassAction = new CAction() { public void action() { onChangeDatabasePassword(); } };
-	public final CAction checkForUpdatesAction = new CAction() { public void action() { actionCheckForUpdates(); } };
-	public final CAction clearClipboardAction = new CAction() { public void action() { onClearClipboard(); } };
-	public final CAction createDatabaseAction = new CAction() { public void action() { actionCreateDatabase(); } };
+	public final XAction aboutAction = new XAction(() -> About.about(MainPanel.this));
+	public final XAction changeDataPassAction = new XAction(this::onChangeDatabasePassword);
+	public final XAction checkForUpdatesAction = new XAction(this::actionCheckForUpdates);
+	public final XAction clearClipboardAction = new XAction(this::onClearClipboard);
+	public final XAction createDatabaseAction = new XAction(this::actionCreateDatabase);
 	public final XAction exitAction = new XAction(this::onExit);
 	public final XAction focusAddAction = new XAction(this::focusAddButton);
-	public final CAction lockAction = new CAction() { public void action() { lock(); } };
-	public final CAction openAction = new CAction() { public void action() { openFile(); } };
-	public final CAction preferencesAction = new CAction(PasswordSafeIcons.Options) { public void action() { actionPreferences(); } };
-	public final CAction saveAction = new CAction() { public void action() { saveFile(); } };
-	public final CAction saveAsAction = new CAction() { public void action() { saveFileAs(); } };
-	public final CAction xkcdAction = new CAction() { public void action() { actionXkcd(); } };
+	public final XAction lockAction = new XAction(this::lock);
+	public final XAction openAction = new XAction(this::openFile);
+	public final XAction preferencesAction = new XAction(PasswordSafeIcons.Options, this::actionPreferences);
+	public final XAction saveAction = new XAction(this::saveFile);
+	public final XAction saveAsAction = new XAction(this::saveFileAs);
+	public final XAction xkcdAction = new XAction(this::actionXkcd);
 	public final CButton addButton;
 	public final CButton saveButton;
 	public final CButton clearButton;

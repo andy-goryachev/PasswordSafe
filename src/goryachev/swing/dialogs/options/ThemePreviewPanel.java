@@ -3,7 +3,6 @@ package goryachev.swing.dialogs.options;
 import goryachev.common.util.html.HtmlTools;
 import goryachev.i18n.TXT;
 import goryachev.swing.Application;
-import goryachev.swing.CAction;
 import goryachev.swing.CBorder;
 import goryachev.swing.CButton;
 import goryachev.swing.CCheckBox;
@@ -434,7 +433,7 @@ public class ThemePreviewPanel
 		t.space(5);
 		t.add(createButton("Affirmative", "Affirmative Button", dummyAction, ThemeKey.AFFIRM_BUTTON_COLOR));
 		t.add(createButton("Destructive", "Destructive Action Button", dummyAction, ThemeKey.DESTRUCTIVE_BUTTON_COLOR));
-		t.add(createButton("Disabled", "Disabled Button", CAction.TODO, null));
+		t.add(createButton("Disabled", "Disabled Button", XAction.DISABLED, null));
 		t.add(createButton("Regular", "Button", dummyAction, null));
 
 		setFeatures

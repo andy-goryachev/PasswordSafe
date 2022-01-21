@@ -12,7 +12,6 @@ import goryachev.password.data.DataFile;
 import goryachev.password.data.PassEntry;
 import goryachev.password.prompts.Tx;
 import goryachev.password.ui.PasswordVerifier2;
-import goryachev.swing.CAction;
 import goryachev.swing.CBorder;
 import goryachev.swing.CButton;
 import goryachev.swing.CCheckBox;
@@ -26,6 +25,7 @@ import goryachev.swing.Dialogs;
 import goryachev.swing.GlobalSettings;
 import goryachev.swing.Theme;
 import goryachev.swing.UI;
+import goryachev.swing.XAction;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.JComponent;
@@ -35,7 +35,7 @@ import javax.swing.JLabel;
 public class AddEntryDialog
 	extends CDialog
 {
-	public final CAction addAction = new CAction() { public void action() { onAdd(); } };
+	public final XAction addAction = new XAction(this::onAdd);
 	protected CTextField nameField;
 	protected CTextField usernameField;
 	protected SecureTextField clearPassField;

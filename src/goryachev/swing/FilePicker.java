@@ -12,7 +12,7 @@ import javax.swing.filechooser.FileFilter;
 
 public class FilePicker
 {
-	public final CAction browseAction = new CAction(Menus.Browse) { public void action() { openDialog(); }};
+	public final XAction browseAction = new XAction(Menus.Browse, this::openDialog);
 	public final JTextField fileField;
 	private String title;
 	private String button;

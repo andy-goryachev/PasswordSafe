@@ -20,13 +20,6 @@ public abstract class CAction
 	private String tooltip;
 	private ActionEvent event;
 	
-	@Deprecated // the user should implement the real functionality
-	public static final CAction TODO = new CAction() 
-	{
-		public void action() { }
-		public boolean isEnabled() { return false; }
-	};
-
 
 	public CAction()
 	{

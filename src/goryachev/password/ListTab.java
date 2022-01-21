@@ -6,7 +6,6 @@ import goryachev.i18n.Menus;
 import goryachev.i18n.TXT;
 import goryachev.password.data.DataFile;
 import goryachev.password.data.PassEntry;
-import goryachev.swing.CAction;
 import goryachev.swing.CBorder;
 import goryachev.swing.CMenuItem;
 import goryachev.swing.CPanel;
@@ -18,6 +17,7 @@ import goryachev.swing.Dialogs;
 import goryachev.swing.GlobalSettings;
 import goryachev.swing.Theme;
 import goryachev.swing.UI;
+import goryachev.swing.XAction;
 import goryachev.swing.table.CTableSelector;
 import goryachev.swing.table.ZColumnHandler;
 import goryachev.swing.table.ZFilterLogic;
@@ -30,10 +30,10 @@ import javax.swing.JPopupMenu;
 public class ListTab
 	extends CPanel
 {
-	public final CAction addEntryAction = new CAction() { public void action() { actionAddEntry(); } };
-	public final CAction deleteEntryAction = new CAction() { public void action() { actionDeleteEntry(); } };
-	public final CAction focusFilterAction = new CAction() { public void action() { actionFocusFilter(); } };
-	public final CAction focusTableAction = new CAction() { public void action() { actionFocusTable(); } };
+	public final XAction addEntryAction = new XAction(this::actionAddEntry);
+	public final XAction deleteEntryAction = new XAction(this::actionDeleteEntry);
+	public final XAction focusFilterAction = new XAction(this::actionFocusFilter);
+	public final XAction focusTableAction = new XAction(this::actionFocusTable);
 
 	public final ZModel<PassEntry> model;
 	public final ZTable table;
