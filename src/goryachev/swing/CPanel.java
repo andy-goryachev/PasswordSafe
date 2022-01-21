@@ -477,6 +477,12 @@ public class CPanel
 	}
 	
 	
+	public int currentRow()
+	{
+		return currentRow;
+	}
+	
+	
 	public void addColumn(float spec)
 	{
 		tableLayout().addColumn(spec);

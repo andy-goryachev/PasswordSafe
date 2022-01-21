@@ -36,21 +36,25 @@ public class AddEntryDialog
 	extends CDialog
 {
 	public final XAction addAction = new XAction(this::onAdd);
-	protected CTextField nameField;
-	protected CTextField usernameField;
-	protected SecureTextField clearPassField;
-	protected CPasswordField passField;
-	protected CPasswordField verifyField;
-	protected MatchLabel matchField;
-	protected CCheckBox hidePassField;
+	public final XAction generateAction = new XAction(this::onGeneratePassword);
+	protected final CTextField nameField;
+	protected final CTextField usernameField;
+	protected final SecureTextField clearPassField;
+	protected final CPasswordField passField;
+	protected final CPasswordField verifyField;
+	protected final MatchLabel matchField;
+	protected final CCheckBox hidePassField;
 	protected final PasswordVerifier2 verifier;
-	protected CTextArea notesField;
-	protected CScrollPane scroll;
-	protected JLabel notesLabel;
-	private OnScreenKeyboard keyboard;
+	protected final CTextArea notesField;
+	protected final CScrollPane scroll;
+	protected final JLabel notesLabel;
+	private final OnScreenKeyboard keyboard;
 	private DataFile dataFile;
 	private PassEntry entry;
 	private boolean showPassword;
+	protected final CButton cancelButton = new CButton(Menus.Cancel, closeDialogAction);
+	protected final CButton addButton = new CButton("Add", addAction, true);
+	protected final CButton generateButton = new CButton("Generate Password", generateAction);
 
 
 	public AddEntryDialog(JComponent parent, DataFile df)
@@ -60,7 +64,7 @@ public class AddEntryDialog
 		this.dataFile = df;
 
 		setTitle(Tx.AddEntry);
-		setMinimumSize(600, 400);
+		setMinimumSize(700, 470);
 
 		nameField = new CTextField();
 
@@ -146,46 +150,47 @@ public class AddEntryDialog
 		CPanel p = new CPanel();
 		p.setGaps(5);
 		p.setBorder();
-		p.addColumns(CPanel.PREFERRED, CPanel.PREFERRED, CPanel.FILL);
+		p.addColumns
+		(
+			CPanel.PREFERRED,
+			CPanel.PREFERRED,
+			CPanel.PREFERRED,
+			CPanel.FILL,
+			CPanel.PREFERRED
+		);
 
 		p.row(0, p.label(TXT.get("AddEntryDialog.label.name", "Name:")));
-		p.row(1, 3, nameField);
+		p.row(1, 4, nameField);
 		p.nextRow();
 		p.row(0, p.label(TXT.get("AddEntryDialog.label.user", "User name:")));
-		p.row(1, 3, usernameField);
+		p.row(1, 4, usernameField);
 		p.nextRow();
 		p.row(0, p.label(TXT.get("AddEntryDialog.label.password", "Password:")));
 		if(showPassword)
 		{
-			p.row(1, 3, clearPassField);
+			p.row(1, 4, clearPassField);
 		}
 		else
 		{
-			p.row(1, 2, passField);
-		}
-		
-		if(!showPassword)
-		{
+			p.row(1, 3, passField);
 			p.nextRow();
 			p.row(0, p.label(TXT.get("AddEntryDialog.label.verify password", "Verify:")));
-			p.row(1, 2, verifyField);
-			p.row(3, matchField);
+			p.row(1, 3, verifyField);
+			p.row(4, matchField);
 		}
+		
 		p.nextRow();
-		p.row(1, keyboard);
+		p.row(1, 2, keyboard);
+		
 		p.nextRow();
-		p.row(1, 3, hidePassField);
+//		p.row(1, generateButton);
+		p.row(1, 4, hidePassField);
+		
 		p.nextFillRow();
 		p.row(0, notesLabel);
-		p.row(1, 3, scroll);
+		p.row(1, 4, scroll);
 
-		CButton cancelButton = new CButton(Menus.Cancel, closeDialogAction);
-		CButton addButton = new CButton("Add", addAction, true);
-
-		p.buttonPanel().setBorder(new CBorder(5, 0, 0, 0));
-		p.buttonPanel().addButton(cancelButton);
-		p.buttonPanel().addButton(addButton);
-
+		// focus
 		CFocusTraversalPolicy tp = new CFocusTraversalPolicy();
 		tp.add(nameField);
 		tp.add(usernameField);
@@ -194,6 +199,7 @@ public class AddEntryDialog
 		{
 			tp.add(verifyField);
 		}
+		tp.add(generateButton);
 		tp.add(notesField);
 		if(!showPassword)
 		{
@@ -203,10 +209,16 @@ public class AddEntryDialog
 		tp.add(cancelButton);
 		tp.apply(this);
 
-		setCenter(p);
+		// buttons
+		p.buttonPanel().setBorder(new CBorder(5, 0, 0, 0));
+		p.buttonPanel().addButton(generateButton);
+		p.buttonPanel().fill();
+		p.buttonPanel().addButton(cancelButton);
+		p.buttonPanel().addButton(addButton);
 
-		validate();
-		repaint();
+		setCenter(p);
+		
+		UI.validateAndRepaint(this);
 	}
 
 
@@ -257,5 +269,20 @@ public class AddEntryDialog
 	{
 		open();
 		return entry;
+	}
+	
+	
+	protected void onGeneratePassword()
+	{
+		boolean hidePass = hidePassField.isSelected();
+		new GeneratePasswordDialog(this, hidePass, this::onPasswordGenerated).open();
+	}
+	
+	
+	protected void onPasswordGenerated(OpaqueChars pw)
+	{
+		clearPassField.setText(pw);
+		passField.setPassword(pw);
+		verifyField.setPassword(pw);
 	}
 }

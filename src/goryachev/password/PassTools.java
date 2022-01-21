@@ -25,7 +25,7 @@ public class PassTools
 				// copy from clearField
 				pw = clearField.getOpaquePassword();
 				passField.setPassword(pw);
-				verifyField.clear();
+				verifyField.setPassword(pw);
 			}
 		}
 		finally

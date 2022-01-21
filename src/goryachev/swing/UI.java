@@ -1904,4 +1904,11 @@ public class UI
 	{
 		return (x instanceof Icon) ? (Icon)x : null;
 	}
+	
+	
+	public static void d(JComponent c)
+	{
+		c.setOpaque(true);
+		c.setBackground(Color.RED);
+	}
 }
