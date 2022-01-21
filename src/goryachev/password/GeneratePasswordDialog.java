@@ -1,9 +1,12 @@
 // Copyright © 2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
+import goryachev.common.util.CKit;
+import goryachev.common.util.Parsers;
 import goryachev.crypto.OpaqueChars;
 import goryachev.cryptoswing.CPasswordField;
 import goryachev.cryptoswing.SecureTextField;
 import goryachev.i18n.Menus;
+import goryachev.password.PasswordGenerator.Alphabet;
 import goryachev.password.prompts.Tx;
 import goryachev.swing.CButton;
 import goryachev.swing.CCheckBox;
@@ -59,6 +62,7 @@ public class GeneratePasswordDialog
 			CYRILLIC
 		);
 		
+		uppercaseField.setSelected(true);
 		lowercaseField.setSelected(true);
 		digitsField.setEnabled(true);
 		
@@ -85,7 +89,7 @@ public class GeneratePasswordDialog
 			64
 		);
 		lengthField.setEditable(true);
-		lengthField.select("16");
+		lengthField.select("32");
 		
 		clearPassField = new SecureTextField();
 		UI.installDefaultPopupMenu(clearPassField);
@@ -182,6 +186,31 @@ public class GeneratePasswordDialog
 	}
 	
 	
+	protected PasswordGenerator.Alphabet getAlphabet()
+	{
+		String s = CKit.toStringOrNull(alphabetField.getSelectedItem());
+		if(s != null)
+		{
+			switch(s)
+			{
+			case LATIN:
+				return Alphabet.LATIN;
+			case CYRILLIC:
+				return Alphabet.CYRILLIC;
+			}
+		}
+		return Alphabet.LATIN;
+	}
+	
+	
+	protected int getLength()
+	{
+		// TODO error?
+		String s = lengthField.getSelectedString();
+		return Parsers.parseInt(s, 16);
+	}
+	
+	
 	protected void onGenerate()
 	{
 		if(generator != null)
@@ -189,11 +218,20 @@ public class GeneratePasswordDialog
 			generator.cancel();
 		}
 		
+		PasswordGenerator.Alphabet alphabet = getAlphabet();
+		int len = getLength();
+		
+		// TODO must select uppercase or lowercase
+		
 		generator = new PasswordGenerator(this::onPasswordGenerated);
+		generator.setAlphabet(alphabet);
+		generator.setUppercase(uppercaseField.isSelected());
+		generator.setLowercase(lowercaseField.isSelected());
+		generator.setDigits(digitsField.isSelected());
+		generator.setMustInclude(includeField.getText());
+		generator.setLength(len);
 		generator.generate();
 				
-		// TODO
-		
 		updateActions();
 	}
 
@@ -209,7 +247,6 @@ public class GeneratePasswordDialog
 			
 			passwordField.setPassword(pw);
 			clearPassField.setText(pw);
-			// TODO set password, has password
 			
 			generator = null;
 			hasPassword = true;
