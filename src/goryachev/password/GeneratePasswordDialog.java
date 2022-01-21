@@ -95,7 +95,10 @@ public class GeneratePasswordDialog
 		lengthField.select(String.valueOf(PasswordGenerator.DEFALT_LENGTH));
 		
 		clearPassField = new SecureTextField();
+		UI.disableEditingSetCaretVisible(clearPassField);
 		UI.installDefaultPopupMenu(clearPassField);
+		
+		UI.disableEditingSetCaretVisible(passwordField);
 		
 		ChangeMonitor mon = new ChangeMonitor(MONITOR_DELAY, this::onGenerate);
 		mon.listenAll

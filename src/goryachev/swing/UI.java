@@ -1911,4 +1911,11 @@ public class UI
 		c.setOpaque(true);
 		c.setBackground(Color.RED);
 	}
+	
+	
+	public static void disableEditingSetCaretVisible(JTextComponent c)
+	{
+		c.setEditable(false);
+		c.getCaret().setVisible(true);
+	}
 }

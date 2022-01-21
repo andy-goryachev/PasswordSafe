@@ -183,7 +183,6 @@ public class AddEntryDialog
 		p.row(1, 2, keyboard);
 		
 		p.nextRow();
-//		p.row(1, generateButton);
 		p.row(1, 4, hidePassField);
 		
 		p.nextFillRow();
@@ -199,7 +198,6 @@ public class AddEntryDialog
 		{
 			tp.add(verifyField);
 		}
-		tp.add(generateButton);
 		tp.add(notesField);
 		if(!showPassword)
 		{
@@ -207,6 +205,7 @@ public class AddEntryDialog
 		}
 		tp.add(addButton);
 		tp.add(cancelButton);
+		tp.add(generateButton);
 		tp.apply(this);
 
 		// buttons
@@ -226,7 +225,6 @@ public class AddEntryDialog
 	{
 		boolean on = !hidePassField.isSelected();
 		setShowPassword(on);
-		// TODO carry password
 	}
 
 
