@@ -162,12 +162,12 @@ public class PasswordSafeApp
 		
 		// TODO DataFormatV3
 		
-		try
-		{
+//		try
+//		{
 			return new DataFormatV2().load(enc, pass);
-		}
-		catch(Exception e)
-		{
+//		}
+//		catch(Exception e)
+//		{
 //			if(e.getMessage() == DataFormatV2.ERROR_WRONG_SIGNATURE)
 //			{
 //				// fall back to V1
@@ -175,9 +175,9 @@ public class PasswordSafeApp
 //			}
 //			else
 //			{
-				throw e;
+//				throw e;
 //			}
-		}
+//		}
 	}
 
 
