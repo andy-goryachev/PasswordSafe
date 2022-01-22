@@ -9,7 +9,7 @@ public class TestPasswordSafe
 	{
 		TF.run
 		(
-			TestDataFormatV2.class
+			TestEncryptionHandlerV2.class
 		);
 	}
 }

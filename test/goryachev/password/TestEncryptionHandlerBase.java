@@ -2,24 +2,18 @@
 package goryachev.password;
 import goryachev.common.test.TF;
 import goryachev.common.test.Test;
+import goryachev.memsafecrypto.CByteArray;
 import goryachev.memsafecrypto.OpaqueChars;
-import goryachev.password.data.v2.DataFormatV2;
+import goryachev.password.data.IEncryptionHandler;
+import goryachev.password.data.v2.EncryptionHandlerV2;
 import java.security.SecureRandom;
 
 
-public class TestDataFormatV2
+public class TestEncryptionHandlerBase
 {
-	public static void main(String[] args)
-	{
-		TF.run();
-	}
-	
-	
-	@Test
-	public void test() throws Exception
+	public void test(IEncryptionHandler h) throws Exception
 	{
 		SecureRandom r = new SecureRandom();
-		DataFormatV2 f = new DataFormatV2();
 		
 		for(int i=0; i<5; i++)
 		{
@@ -34,26 +28,28 @@ public class TestDataFormatV2
 			}
 			OpaqueChars pw = new OpaqueChars(cs);
 			
-			t(f, d, pw, r);
+			t(h, d, pw, r);
 		}
 	}
 	
 	
-	protected void t(DataFormatV2 f, byte[] d, OpaqueChars pw, SecureRandom r) throws Exception
+	protected void t(IEncryptionHandler h, byte[] payload, OpaqueChars pw, SecureRandom r) throws Exception
 	{
-		TF.print("d");
-		TF.list(d);
-
-		byte[] enc = f.encrypt(d, pw, r);
+		TF.print("payload");
+		TF.list(payload);
+		
+		CByteArray b = CByteArray.readOnly(payload);
+		byte[] enc = h.encrypt(r, pw, b);
 
 		TF.print("enc");
 		TF.list(enc);
 
-		byte[] dec = f.decrypt(enc, pw);
+		CByteArray db2 = h.decrypt(enc, pw);
+		byte[] dec = db2.toByteArray();
 		
 		TF.print("dec");
 		TF.list(dec);
 		
-		TF.eq(d, dec);
+		TF.eq(payload, dec);
 	}
 }
