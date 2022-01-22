@@ -1,8 +1,9 @@
 // Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.data;
 import goryachev.common.util.CKit;
-import goryachev.crypto.Crypto;
-import goryachev.crypto.OpaqueChars;
+import goryachev.memsafecrypto.CCharArray;
+import goryachev.memsafecrypto.Crypto;
+import goryachev.memsafecrypto.OpaqueChars;
 import java.io.EOFException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -104,21 +105,12 @@ public class DataTools
 		else if(x instanceof String)
 		{
 			DataTools.writeByte(out, PassEntry.TYPE_STRING);
-			char[] cs = null;
-			try
-			{
-				cs = ((String)x).toCharArray();
-				writeChars(out, cs);
-			}
-			finally
-			{
-				Crypto.zero(cs);
-			}
+			writeString(out, (String)x);
 		}
 		else if(x instanceof OpaqueChars)
 		{
 			DataTools.writeByte(out, PassEntry.TYPE_OPAQUE);
-			char[] cs = null;
+			CCharArray cs = null;
 			try
 			{
 				cs = ((OpaqueChars)x).getChars();
@@ -151,40 +143,28 @@ public class DataTools
 			return null;
 			
 		case PassEntry.TYPE_STRING:
-			char[] cs = null;
+			return readString(in, sz);
+			
+		case PassEntry.TYPE_OPAQUE:
+			CCharArray cs = null;
 			try
 			{
 				cs = constructCharArray(sz);
 				readChars(in, cs);
-				return new String(cs);
+				return new OpaqueChars(cs);
 			}
 			finally
 			{
 				Crypto.zero(cs);
 			}
 			
-		case PassEntry.TYPE_OPAQUE:
-			char[] ocs = null;
-			try
-			{
-				ocs = constructCharArray(sz);
-				readChars(in, ocs);
-				OpaqueChars op = new OpaqueChars();
-				op.set(ocs);
-				return op;
-			}
-			finally
-			{
-				Crypto.zero(ocs);
-			}
-			
 		default:
 			throw new PassException(PassException.Error.CORRUPTED);
 		}
 	}
-	
-	
-	public static char[] constructCharArray(int sz) throws Exception
+
+
+	public static CCharArray constructCharArray(int sz) throws Exception
 	{
 		if(sz < 0)
 		{
@@ -194,14 +174,15 @@ public class DataTools
 		{
 			throw new PassException(PassException.Error.CORRUPTED);
 		}
-		
-		return new char[sz/2];
+
+		int len = sz / 2;
+		return new CCharArray(len);
 	}
-	
-	
-	public static void writeChars(OutputStream out, char[] cs) throws Exception
+
+
+	public static void writeString(OutputStream out, String s) throws Exception
 	{
-		int sz = cs.length;
+		int sz = s.length();
 		if(sz > MAX_STRING_LENGTH)
 		{
 			throw new PassException(PassException.Error.STRING_TOO_LONG);
@@ -211,21 +192,67 @@ public class DataTools
 		
 		for(int i=0; i<sz; i++)
 		{
-			int d = cs[i];
+			int d = s.charAt(i);
+			writeByte(out, d >>> 8);
+			writeByte(out, d);
+		}
+	}
+	
+	
+	public static String readString(InputStream in, int sz) throws Exception
+	{
+		if((sz % 2) != 0)
+		{
+			throw new PassException(PassException.Error.CORRUPTED);
+		}
+		sz /= 2;
+		
+		char[] cs = new char[sz];
+		try
+		{
+			for(int i=0; i<sz; i++)
+			{
+				int c = readByte(in) << 8;
+				c |= readByte(in);
+				cs[i] = (char)c;
+			}
+			return new String(cs);
+		}
+		finally
+		{
+			// pointless, leaks through String
+			Crypto.zero(cs);
+		}
+	}
+	
+	
+	public static void writeChars(OutputStream out, CCharArray cs) throws Exception
+	{
+		int sz = cs.length();
+		if(sz > MAX_STRING_LENGTH)
+		{
+			throw new PassException(PassException.Error.STRING_TOO_LONG);
+		}
+		
+		writeInt(out, sz + sz); // 2 bytes per char
+		
+		for(int i=0; i<sz; i++)
+		{
+			int d = cs.get(i);
 			writeByte(out, d >>> 8);
 			writeByte(out, d);
 		}
 	}
 
 	
-	public static void readChars(InputStream in, char[] cs) throws Exception
+	public static void readChars(InputStream in, CCharArray cs) throws Exception
 	{
-		int sz = cs.length;
+		int sz = cs.length();
 		for(int i=0; i<sz; i++)
 		{
 			int c = readByte(in) << 8;
 			c |= readByte(in);
-			cs[i] = (char)c;
+			cs.set(i, (char)c);
 		}
 	}
 }

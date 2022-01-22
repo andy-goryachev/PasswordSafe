@@ -68,7 +68,7 @@ public class GeneratePasswordDialog
 		
 		uppercaseField.setSelected(true);
 		lowercaseField.setSelected(true);
-		digitsField.setEnabled(true);
+		digitsField.setSelected(true);
 		
 		hidePassField.setSelected(hidePassword);
 		hidePassField.addItemListener((ev) ->
