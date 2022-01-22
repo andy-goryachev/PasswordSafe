@@ -4,6 +4,7 @@ import goryachev.memsafecrypto.OpaqueChars;
 import java.security.SecureRandom;
 
 
+@Deprecated // FIX remove
 public interface DataFormat
 {
 	public byte[] save(DataFile f, SecureRandom random) throws Exception;

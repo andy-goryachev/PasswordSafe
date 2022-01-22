@@ -156,6 +156,7 @@ public class PasswordSafeApp
 	}
 	
 	
+	// FIX move to DataIO
 	public static DataFile loadDataFile(File file, OpaqueChars pass) throws Exception
 	{
 		byte[] enc = CKit.readBytes(file, Integer.MAX_VALUE);
@@ -181,6 +182,7 @@ public class PasswordSafeApp
 	}
 
 
+	// FIX move to DataIO
 	public static void save(DataFile df, File file) throws Exception
 	{
 		DataFormat format = new DataFormatV2();

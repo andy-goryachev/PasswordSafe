@@ -1,18 +1,14 @@
 // Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.data.v2;
 import goryachev.common.util.CKit;
-import goryachev.crypto.SecretByteArrayOutputStream;
 import goryachev.crypto.eax.EAXDecryptStream;
 import goryachev.crypto.eax.EAXEncryptStream;
 import goryachev.memsafecrypto.CByteArray;
 import goryachev.memsafecrypto.Crypto;
 import goryachev.memsafecrypto.OpaqueChars;
 import goryachev.memsafecrypto.bc.SCrypt;
-import goryachev.password.data.DataFile;
-import goryachev.password.data.DataFormat;
 import goryachev.password.data.DataTools;
-import goryachev.password.data.PassEntry;
-import goryachev.password.data.PassException;
+import goryachev.password.data.IEncryptionHandler;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.security.SecureRandom;
@@ -36,8 +32,8 @@ import java.security.SecureRandom;
  * price/performance ratio, resulting in 16MB RAM and approximately 3 second processing 
  * on a 2.7 GHz CPU.
  */
-public final class DataFormatV2
-	implements DataFormat
+public final class EncryptionHandlerV2
+	implements IEncryptionHandler
 {
 	public static final long SIGNATURE_V2 = 0x1DEA201312111148L;
 	public static final int SCRYPT_N = 16384;
@@ -53,7 +49,7 @@ public final class DataFormatV2
 	 * Encrypts payload byte array with a key derived from the supplied password.
 	 * Returns the byte array formatted according to the specification.  
 	 */
-	public final byte[] encrypt(byte[] payload, OpaqueChars pass, SecureRandom random) throws Exception
+	public final byte[] encrypt(SecureRandom random, OpaqueChars pass, CByteArray payload) throws Exception
 	{
 		int n = SCRYPT_N;
 		int r = SCRYPT_R;
@@ -96,8 +92,13 @@ public final class DataFormatV2
 						EAXEncryptStream es = new EAXEncryptStream(bkey, nonce, null, out);
 						try
 						{
-							DataTools.writeInt(es, payload.length);
-							es.write(payload);
+							int len = payload.length();
+							DataTools.writeInt(es, len);
+							
+							for(int i=0; i<len; i++)
+							{
+								es.write(payload.get(i));
+							}
 						}
 						finally
 						{
@@ -132,7 +133,7 @@ public final class DataFormatV2
 	 * Attempts to decrypt the supplied byte array using the specified passphrase.
 	 * Returns the decrypted data or throws an exception. 
 	 */
-	public final byte[] decrypt(byte[] encrypted, OpaqueChars pass) throws Exception
+	public final CByteArray decrypt(byte[] encrypted, OpaqueChars pass) throws Exception
 	{
 		ByteArrayInputStream in = new ByteArrayInputStream(encrypted);
 		try
@@ -182,9 +183,17 @@ public final class DataFormatV2
 							int len = DataTools.readInt(ds);
 							DataTools.check(len, 0, Integer.MAX_VALUE, ERROR_INVALID_FORMAT);
 							
+							// WARNING: leaks secret via byte[]
 							byte[] decrypted = new byte[len];
-							CKit.readFully(ds, decrypted);
-							return decrypted;
+							try
+							{
+								CKit.readFully(ds, decrypted);
+								return CByteArray.readOnly(decrypted);
+							}
+							finally
+							{
+								Crypto.zero(decrypted);
+							}
 						}
 						finally
 						{
@@ -209,98 +218,6 @@ public final class DataFormatV2
 		finally
 		{
 			CKit.close(in);
-		}
-	}
-	
-	
-	/**
-	 * Serializes the data object to a byte array and then encrypts it. 
-	 */
-	public final byte[] save(DataFile df, SecureRandom random) throws Exception
-	{
-		OpaqueChars passphrase = df.getPassword();
-		
-		SecretByteArrayOutputStream out = new SecretByteArrayOutputStream();
-		try
-		{
-			PassEntry[] entries = df.getEntries();
-			int sz = entries.length;
-			DataTools.writeInt(out, sz);
-			
-			for(int i=0; i<sz; i++)
-			{
-				PassEntry en = entries[i];
-				Byte[] keys = en.getKeys();
-				
-				DataTools.writeInt(out, keys.length);
-				
-				for(int j=0; j<keys.length; j++)
-				{
-					Byte id = keys[j]; 
-					DataTools.writeByte(out, id);
-					
-					Object x = en.getValue(id);
-					DataTools.writeObject(out, x);
-				}
-			}
-			
-			byte[] payload = out.toByteArray();
-			try
-			{
-				// using entropy collected from the user mouse/keyboard
-				// as well as provided by the jvm
-//				SecureRandom r = EntropyGathererSwing.getSecureRandom();
-				
-				return encrypt(payload, passphrase, random);
-			}
-			finally
-			{
-				Crypto.zero(payload);
-			}
-		}
-		finally
-		{
-			CKit.close(out);
-		}
-	}
-	
-
-	/**
-	 * Attempts to decrypt the supplied data and deserialize the DataFile object.
-	 */
-	public final DataFile load(byte[] encrypted, OpaqueChars passphrase) throws Exception
-	{
-		byte[] dec = decrypt(encrypted, passphrase);
-		try
-		{
-			ByteArrayInputStream in = new ByteArrayInputStream(dec);
-			int sz = DataTools.readInt(in);
-			if(sz < 0)
-			{
-				throw new PassException(PassException.Error.CORRUPTED);
-			}
-			
-			DataFile df = new DataFile();
-			df.setPassword(passphrase);
-			
-			for(int i=0; i<sz; i++)
-			{
-				PassEntry en = df.addEntry();
-				int keyCount = DataTools.readInt(in);
-				
-				for(int j=0; j<keyCount; j++)
-				{
-					byte id = (byte)DataTools.readByte(in);
-					Object x = DataTools.readObject(in);
-					en.putValue(id, x);
-				}
-			}
-			
-			return df;
-		}
-		finally
-		{
-			Crypto.zero(dec);
 		}
 	}
 }
