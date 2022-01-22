@@ -2,7 +2,7 @@
 package goryachev.password;
 import goryachev.common.util.CKit;
 import goryachev.common.util.SB;
-import goryachev.crypto.OpaqueChars;
+import goryachev.memsafecrypto.OpaqueChars;
 import java.security.SecureRandom;
 import java.util.Locale;
 import java.util.function.BiConsumer;

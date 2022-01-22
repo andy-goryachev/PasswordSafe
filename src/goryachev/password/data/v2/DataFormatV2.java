@@ -1,11 +1,13 @@
 // Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.data.v2;
 import goryachev.common.util.CKit;
-import goryachev.crypto.Crypto;
-import goryachev.crypto.OpaqueChars;
 import goryachev.crypto.SecretByteArrayOutputStream;
 import goryachev.crypto.eax.EAXDecryptStream;
 import goryachev.crypto.eax.EAXEncryptStream;
+import goryachev.memsafecrypto.CByteArray;
+import goryachev.memsafecrypto.Crypto;
+import goryachev.memsafecrypto.OpaqueChars;
+import goryachev.memsafecrypto.bc.SCrypt;
 import goryachev.password.data.DataFile;
 import goryachev.password.data.DataFormat;
 import goryachev.password.data.DataTools;
@@ -14,7 +16,6 @@ import goryachev.password.data.PassException;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.security.SecureRandom;
-import org.bouncycastle.crypto.generators.SCrypt;
 
 
 /**
@@ -72,8 +73,8 @@ public final class DataFormatV2
 			random.nextBytes(nonce);
 			out.write(nonce);
 		
-			byte[] pw = null;
-			byte[] salt = nonce; // reuse nonce as salt
+			CByteArray pw = null;
+			CByteArray salt = CByteArray.readOnly(nonce); // reuse nonce as salt
 
 			try
 			{
@@ -83,20 +84,29 @@ public final class DataFormatV2
 				// N - cpu/memory cost
 				// r - block mix size parameter
 				// p - parallelization parameter
-				pw = pass.getBytes();
+				pw = pass.getCByteArray();
 				
-				byte[] key = SCrypt.generate(pw, salt, n, r, p, KEY_SIZE_BYTES);
+				CByteArray key = SCrypt.generate(pw, salt, n, r, p, KEY_SIZE_BYTES);
 				try
-				{					
-					EAXEncryptStream es = new EAXEncryptStream(key, nonce, null, out);
+				{
+					// WARNING: leaks secret via byte[]
+					byte[] bkey = key.toByteArray();
 					try
 					{
-						DataTools.writeInt(es, payload.length);
-						es.write(payload);
+						EAXEncryptStream es = new EAXEncryptStream(bkey, nonce, null, out);
+						try
+						{
+							DataTools.writeInt(es, payload.length);
+							es.write(payload);
+						}
+						finally
+						{
+							CKit.close(es);
+						}
 					}
 					finally
 					{
-						CKit.close(es);
+						Crypto.zero(bkey);
 					}
 				}
 				finally
@@ -146,8 +156,8 @@ public final class DataFormatV2
 			byte[] nonce = new byte[NONCE_SIZE_BYTES];
 			CKit.readFully(in, nonce);
 
-			byte[] pw = null;
-			byte[] salt = nonce; // reuse nonce as salt
+			CByteArray pw = null;
+			CByteArray salt = CByteArray.readOnly(nonce); // reuse nonce as salt
 
 			try
 			{
@@ -157,24 +167,33 @@ public final class DataFormatV2
 				// N - cpu/memory cost
 				// r - block mix size parameter
 				// p - parallelization parameter
-				pw = pass.getBytes();
+				pw = pass.getCByteArray();
 				
-				byte[] key = SCrypt.generate(pw, salt, n, r, p, KEY_SIZE_BYTES);
+				CByteArray key = SCrypt.generate(pw, salt, n, r, p, KEY_SIZE_BYTES);
 				try
 				{
-					EAXDecryptStream ds = new EAXDecryptStream(key, nonce, null, in);
+					// WARNING: leaks secret via byte[]
+					byte[] bkey = key.toByteArray();
 					try
 					{
-						int len = DataTools.readInt(ds);
-						DataTools.check(len, 0, Integer.MAX_VALUE, ERROR_INVALID_FORMAT);
-						
-						byte[] decrypted = new byte[len];
-						CKit.readFully(ds, decrypted);
-						return decrypted;
+						EAXDecryptStream ds = new EAXDecryptStream(bkey, nonce, null, in);
+						try
+						{
+							int len = DataTools.readInt(ds);
+							DataTools.check(len, 0, Integer.MAX_VALUE, ERROR_INVALID_FORMAT);
+							
+							byte[] decrypted = new byte[len];
+							CKit.readFully(ds, decrypted);
+							return decrypted;
+						}
+						finally
+						{
+							CKit.close(ds);
+						}
 					}
 					finally
 					{
-						CKit.close(ds);
+						Crypto.zero(bkey);
 					}
 				}
 				finally

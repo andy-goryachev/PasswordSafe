@@ -1,6 +1,6 @@
 // Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.data;
-import goryachev.crypto.OpaqueChars;
+import goryachev.memsafecrypto.OpaqueChars;
 import java.security.SecureRandom;
 
 

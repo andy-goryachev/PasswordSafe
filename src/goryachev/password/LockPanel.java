@@ -1,10 +1,10 @@
 // Copyright © 2011-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.crypto.OpaqueChars;
-import goryachev.cryptoswing.CPasswordField;
-import goryachev.cryptoswing.OnScreenKeyboard;
 import goryachev.i18n.Menus;
 import goryachev.i18n.TXT;
+import goryachev.memsafecrypto.OpaqueChars;
+import goryachev.memsafecryptoswing.CPasswordField;
+import goryachev.memsafecryptoswing.OnScreenKeyboard;
 import goryachev.password.data.DataFile;
 import goryachev.swing.Application;
 import goryachev.swing.BackgroundThread;
@@ -126,7 +126,7 @@ public class LockPanel
 			if(pw.length() <= 1)
 			{
 				char[] cs = pw.toCharArray();
-				passField.setPassword(cs);
+				passField.setPassword(new OpaqueChars(cs));
 				onOk();
 			}
 		}

@@ -1,12 +1,13 @@
 // Copyright © 2011-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.ui;
-import goryachev.crypto.Crypto;
-import goryachev.crypto.OpaqueChars;
-import goryachev.cryptoswing.CPasswordField;
-import goryachev.cryptoswing.MatchLabel;
-import goryachev.cryptoswing.SecretDocument;
-import goryachev.cryptoswing.SecureTextField;
 import goryachev.i18n.TXT;
+import goryachev.memsafecrypto.CCharArray;
+import goryachev.memsafecrypto.Crypto;
+import goryachev.memsafecrypto.OpaqueChars;
+import goryachev.memsafecryptoswing.CPasswordField;
+import goryachev.memsafecryptoswing.MatchLabel;
+import goryachev.memsafecryptoswing.SecretDocument;
+import goryachev.memsafecryptoswing.SecureTextField;
 import goryachev.swing.InputTracker;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -123,14 +124,14 @@ public abstract class PasswordVerifier2
 			OpaqueChars p1 = field1.getOpaquePassword();
 			OpaqueChars p2 = field2.getOpaquePassword();
 			
-			char[] cs1 = null;
-			char[] cs2 = null;
+			CCharArray cs1 = null;
+			CCharArray cs2 = null;
 			try
 			{
 				cs1 = p1.getChars();
 				cs2 = p2.getChars();
 				
-				if(!Arrays.equals(cs1, cs2))
+				if(!cs1.sameContentAs(cs2))
 				{
 					throw new Exception(TXT.get("PasswordVerifier2.err.no match", "Passwords don't match"));
 				}

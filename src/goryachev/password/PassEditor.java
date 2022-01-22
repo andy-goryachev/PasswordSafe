@@ -1,10 +1,11 @@
 // Copyright © 2011-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
-import goryachev.crypto.Crypto;
-import goryachev.crypto.OpaqueChars;
-import goryachev.cryptoswing.CPasswordField;
 import goryachev.i18n.Menus;
 import goryachev.i18n.TXT;
+import goryachev.memsafecrypto.CCharArray;
+import goryachev.memsafecrypto.Crypto;
+import goryachev.memsafecrypto.OpaqueChars;
+import goryachev.memsafecryptoswing.CPasswordField;
 import goryachev.password.data.PassEntry;
 import goryachev.password.ui.ClipboardHandler;
 import goryachev.swing.CBorder;
@@ -208,8 +209,7 @@ public class PassEditor
 	{
 		if(entry != null)
 		{
-			char[] cs = null;
-			String s = null;
+			CCharArray cs = null;
 			try
 			{
 				OpaqueChars op = entry.getPassword();
@@ -224,8 +224,16 @@ public class PassEditor
 					cs = op.getChars();
 	
 					// unavoidable - can't copy to clipboard without converting to a string
-					s = new String(cs); 
-					ClipboardHandler.copy(s);
+					char[] cc = cs.toCharArray();
+					try
+					{
+						String s = new String(cc); 
+						ClipboardHandler.copy(s);
+					}
+					finally
+					{
+						Crypto.zero(cc);
+					}
 				}
 			}
 			catch(Exception e)
@@ -235,7 +243,6 @@ public class PassEditor
 			finally
 			{
 				Crypto.zero(cs);
-				s = null;
 			}
 		}
 	}

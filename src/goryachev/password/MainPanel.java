@@ -1,9 +1,9 @@
 // Copyright © 2009-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
 import goryachev.common.util.CKit;
-import goryachev.crypto.OpaqueChars;
 import goryachev.i18n.Menus;
 import goryachev.i18n.TXT;
+import goryachev.memsafecrypto.OpaqueChars;
 import goryachev.password.data.DataFile;
 import goryachev.password.data.PassEntry;
 import goryachev.password.img.PasswordSafeIcons;

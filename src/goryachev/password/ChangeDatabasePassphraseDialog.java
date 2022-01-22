@@ -2,15 +2,14 @@
 package goryachev.password;
 import goryachev.common.util.CKit;
 import goryachev.common.util.UserException;
-import goryachev.crypto.OpaqueChars;
-import goryachev.cryptoswing.CPasswordField;
-import goryachev.cryptoswing.MatchLabel;
-import goryachev.cryptoswing.OnScreenKeyboard;
-import goryachev.cryptoswing.SecureTextField;
 import goryachev.i18n.Menus;
 import goryachev.i18n.TXT;
+import goryachev.memsafecrypto.OpaqueChars;
+import goryachev.memsafecryptoswing.CPasswordField;
+import goryachev.memsafecryptoswing.MatchLabel;
+import goryachev.memsafecryptoswing.OnScreenKeyboard;
+import goryachev.memsafecryptoswing.SecureTextField;
 import goryachev.password.ui.PasswordVerifier2;
-import goryachev.swing.CAction;
 import goryachev.swing.CButton;
 import goryachev.swing.CCheckBox;
 import goryachev.swing.CDialog;
@@ -19,6 +18,7 @@ import goryachev.swing.CPanel;
 import goryachev.swing.Dialogs;
 import goryachev.swing.GlobalSettings;
 import goryachev.swing.UI;
+import goryachev.swing.XAction;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -27,7 +27,7 @@ import java.awt.event.ItemListener;
 public class ChangeDatabasePassphraseDialog
 	extends CDialog
 {
-	public final CAction commitAction = new CAction() { public void action() { onCommit(); } };
+	public final XAction commitAction = new XAction(this::onCommit);
 	protected final CPasswordField oldPassField;
 	protected final CPasswordField passField;
 	protected final SecureTextField clearPassField;
@@ -189,7 +189,7 @@ public class ChangeDatabasePassphraseDialog
 			CKit.sleep(500);
 			
 			OpaqueChars pw = oldPassField.getOpaquePassword();
-			if(!oldPass.sameAs(pw))
+			if(!oldPass.sameContentAs(pw))
 			{
 				throw new UserException(TXT.get("ChangeDatabasePassphraseDialog.err.old passphrase is incorrect", "Old passphrase you have entered is incorrect."));
 			}

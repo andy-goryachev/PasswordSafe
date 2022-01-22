@@ -4,13 +4,12 @@ import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CSystem;
 import goryachev.common.util.ProductInfo;
-import goryachev.crypto.OpaqueChars;
 import goryachev.i18n.TXT;
 import goryachev.memsafecrypto.CRandom;
+import goryachev.memsafecrypto.OpaqueChars;
 import goryachev.memsafecryptoswing.EntropyGathererSwing;
 import goryachev.password.data.DataFile;
 import goryachev.password.data.DataFormat;
-import goryachev.password.data.v1.DataFormatV1;
 import goryachev.password.data.v2.DataFormatV2;
 import goryachev.password.img.PasswordSafeIcons;
 import goryachev.password.prompts.Prompts;
@@ -161,21 +160,23 @@ public class PasswordSafeApp
 	{
 		byte[] enc = CKit.readBytes(file, Integer.MAX_VALUE);
 		
+		// TODO DataFormatV3
+		
 		try
 		{
 			return new DataFormatV2().load(enc, pass);
 		}
 		catch(Exception e)
 		{
-			if(e.getMessage() == DataFormatV2.ERROR_WRONG_SIGNATURE)
-			{
-				// fall back to V1
-				return new DataFormatV1().load(enc, pass);
-			}
-			else
-			{
+//			if(e.getMessage() == DataFormatV2.ERROR_WRONG_SIGNATURE)
+//			{
+//				// fall back to V1
+//				return new DataFormatV1().load(enc, pass);
+//			}
+//			else
+//			{
 				throw e;
-			}
+//			}
 		}
 	}
 

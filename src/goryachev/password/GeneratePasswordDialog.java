@@ -2,11 +2,11 @@
 package goryachev.password;
 import goryachev.common.util.CKit;
 import goryachev.common.util.Parsers;
-import goryachev.crypto.OpaqueChars;
-import goryachev.cryptoswing.CPasswordField;
-import goryachev.cryptoswing.SecureTextField;
 import goryachev.i18n.Menus;
 import goryachev.memsafecrypto.CRandom;
+import goryachev.memsafecrypto.OpaqueChars;
+import goryachev.memsafecryptoswing.CPasswordField;
+import goryachev.memsafecryptoswing.SecureTextField;
 import goryachev.password.PasswordGenerator.Alphabet;
 import goryachev.password.prompts.Tx;
 import goryachev.swing.CButton;

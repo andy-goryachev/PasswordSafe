@@ -1,7 +1,7 @@
 // Copyright © 2011-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.data;
 import goryachev.common.util.CMap;
-import goryachev.crypto.OpaqueChars;
+import goryachev.memsafecrypto.OpaqueChars;
 
 
 public final class PassEntry
