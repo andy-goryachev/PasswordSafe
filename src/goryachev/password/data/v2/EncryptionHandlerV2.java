@@ -27,6 +27,7 @@ import java.security.SecureRandom;
  *    byte[] nonce;       // nonce used as scrypt salt as well as for EAX encryption
  *    int payloadSize;
  *    byte[] payload;     // payloadSize bytes of the payload
+ *                        // payload is encrypted with AES cipher in EAX mode
  * 
  * Scrypt parameters (N=16384, R=8, P=32) have been empirically selected to produce a balanced
  * price/performance ratio, resulting in 16MB RAM and approximately 3 second processing 
@@ -35,7 +36,7 @@ import java.security.SecureRandom;
 public final class EncryptionHandlerV2
 	implements IEncryptionHandler
 {
-	public static final long SIGNATURE_V2 = 0x1DEA201312111148L;
+	public static final long SIGNATURE_V2 = 0x1DEA_2013_1211_1148L;
 	public static final int SCRYPT_N = 16384;
 	public static final int SCRYPT_R = 8;
 	public static final int SCRYPT_P = 32;

@@ -15,12 +15,25 @@ import java.security.SecureRandom;
 
 
 /**
- * Handles the main key persistence.
+ * Persists data with Scrypt + XSalsa20Poly1305.
+ * 
+ * Format:
+ * 
+ *    long SIGNATURE;
+ *    int N;              // scrypt N parameter
+ *    int R;              // scrypt R parameter
+ *    int P;              // scrypt P parameter
+ *    byte[] nonce;       // nonce
+ *    int payloadSize;
+ *    byte[] payload;     // payloadSize bytes of the payload
+ *                        // payload is encrypted with XSalsa20Poly1305 cipher
+ *                        // scrypt salt is a Blake2b hash of nonce
+ *
  */
-public final class KeyFile
+public final class EncryptionHandlerV3
 	implements IEncryptionHandler
 {
-	public static final long SIGNATURE_V1 = 0x1DEA202112011515L;
+	public static final long SIGNATURE_V1 = 0x1DEA_2022_0122_1455L;
 	
 	public static final int KEY_SIZE_BYTES = 256/8;
 	public static final int NONCE_SIZE_BYTES = 256/8;
