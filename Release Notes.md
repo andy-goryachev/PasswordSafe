@@ -1,6 +1,10 @@
 ﻿# RELEASE NOTES
 
 ## TBD
+- added generate password dialog
+- removed DataFormatV1
+
+## 2022.0120.2200
 - bouncy castle 1.69
 - updated common code
 
