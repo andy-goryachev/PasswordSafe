@@ -1,5 +1,6 @@
 // Copyright © 2011-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
+import goryachev.common.util.CKit;
 import goryachev.i18n.Menus;
 import goryachev.i18n.TXT;
 import goryachev.memsafecrypto.OpaqueChars;
@@ -122,8 +123,10 @@ public class LockPanel
 	protected final void checkDebugPassword()
 	{
 		String pw = System.getProperty("password");
-		if(pw != null)
+		if(CKit.isNotBlank(pw))
 		{
+			System.setProperty("password", "");
+			
 			if(pw.length() <= 1)
 			{
 				char[] cs = pw.toCharArray();
