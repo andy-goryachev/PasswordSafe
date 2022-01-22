@@ -6,6 +6,7 @@ import goryachev.memsafecrypto.OpaqueChars;
 import goryachev.memsafecryptoswing.CPasswordField;
 import goryachev.memsafecryptoswing.OnScreenKeyboard;
 import goryachev.password.data.DataFile;
+import goryachev.password.data.DataIO;
 import goryachev.swing.Application;
 import goryachev.swing.BackgroundThread;
 import goryachev.swing.CButton;
@@ -181,7 +182,7 @@ public class LockPanel
 				
 				public void process() throws Throwable
 				{
-					df = PasswordSafeApp.loadDataFile(file, pass);
+					df = DataIO.loadDataFile(file, pass);
 				}
 	
 				public void success()

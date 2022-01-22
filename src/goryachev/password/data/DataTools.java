@@ -80,6 +80,20 @@ public class DataTools
 		d |= readByte(in);
 		return d;
 	}
+	
+	
+	public static long getLong(byte[] b) throws Exception
+	{
+		long d = ((long)(b[0] & 0xff) << 56);
+		d |= ((long)(b[1] & 0xff) << 48);
+		d |= ((long)(b[2] & 0xff) << 40);
+		d |= ((long)(b[3] & 0xff) << 32);
+		d |= ((long)(b[4] & 0xff) << 24);
+		d |= ((long)(b[5] & 0xff) << 16);
+		d |= ((long)(b[6] & 0xff) << 8);
+		d |= (b[7] & 0xff);
+		return d;
+	}
 
 
 	public static void check(int value, int min, int max, String err) throws Exception

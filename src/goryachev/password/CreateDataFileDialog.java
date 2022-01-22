@@ -10,6 +10,7 @@ import goryachev.memsafecryptoswing.CPasswordField;
 import goryachev.memsafecryptoswing.MatchLabel;
 import goryachev.memsafecryptoswing.OnScreenKeyboard;
 import goryachev.password.data.DataFile;
+import goryachev.password.data.DataIO;
 import goryachev.password.ui.PasswordVerifier2;
 import goryachev.swing.BackgroundThread;
 import goryachev.swing.CButton;
@@ -230,7 +231,7 @@ public class CreateDataFileDialog
 				{
 					df = new DataFile();
 					df.setPassword(pass);
-					PasswordSafeApp.save(df, f);
+					DataIO.saveDataFile(df, f);
 				}
 	
 				public void success()

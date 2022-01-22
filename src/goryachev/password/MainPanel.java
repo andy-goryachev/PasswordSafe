@@ -5,12 +5,12 @@ import goryachev.i18n.Menus;
 import goryachev.i18n.TXT;
 import goryachev.memsafecrypto.OpaqueChars;
 import goryachev.password.data.DataFile;
+import goryachev.password.data.DataIO;
 import goryachev.password.data.PassEntry;
 import goryachev.password.img.PasswordSafeIcons;
 import goryachev.password.licenses.OpenSourceLicenses;
 import goryachev.password.ui.ClipboardHandler;
 import goryachev.swing.Application;
-import goryachev.swing.CAction;
 import goryachev.swing.CBorder;
 import goryachev.swing.CBrowser;
 import goryachev.swing.CButton;
@@ -220,7 +220,7 @@ public class MainPanel
 			DataFile df = listTab.getDataFile();
 			if(df != null)
 			{
-				PasswordSafeApp.save(df, getFile());
+				DataIO.saveDataFile(df, getFile());
 				mainWindow.setModified(false);
 			}
 		}
@@ -255,7 +255,7 @@ public class MainPanel
 					}
 					
 					mainWindow.setFile(f);
-					PasswordSafeApp.save(df, f);
+					DataIO.saveDataFile(df, f);
 					
 					Preferences.dataFileOption.set(f);
 

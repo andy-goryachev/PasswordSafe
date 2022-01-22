@@ -1,11 +1,15 @@
 // Copyright © 2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.data;
 import goryachev.common.util.CKit;
+import goryachev.i18n.TXT;
 import goryachev.memsafecrypto.CByteArray;
+import goryachev.memsafecrypto.CRandom;
 import goryachev.memsafecrypto.Crypto;
 import goryachev.memsafecrypto.OpaqueChars;
 import goryachev.memsafecrypto.util.CByteArrayInputStreamWrapper;
 import goryachev.memsafecrypto.util.CByteArrayOutputStream;
+import goryachev.password.data.v2.EncryptionHandlerV2;
+import java.io.File;
 import java.security.SecureRandom;
 
 
@@ -14,69 +18,70 @@ import java.security.SecureRandom;
  */
 public final class DataIO
 {
-	private final IEncryptionHandler handler;
-	
-	
-	public DataIO(IEncryptionHandler h)
-	{
-		this.handler = h;
-	}
+	private final static IEncryptionHandler handler = new EncryptionHandlerV2();
 	
 	
 	/**
-	 * Serializes the data object to a byte array and then encrypts it. 
+	 * Attempts to decrypt the supplied data and deserialize the DataFile object.
 	 */
-	public final byte[] save(DataFile df, SecureRandom random) throws Exception
+	public static DataFile loadDataFile(File file, OpaqueChars pass) throws Exception
 	{
-		OpaqueChars passphrase = df.getPassword();
+		byte[] enc = CKit.readBytes(file, Integer.MAX_VALUE);
 		
-		CByteArrayOutputStream out = new CByteArrayOutputStream(65536);
-		try
+		CByteArray b;
+		long sig = DataTools.getLong(enc);
+		if(sig == EncryptionHandlerV2.SIGNATURE_V2)
 		{
-			PassEntry[] entries = df.getEntries();
-			int sz = entries.length;
-			DataTools.writeInt(out, sz);
-			
-			for(int i=0; i<sz; i++)
-			{
-				PassEntry en = entries[i];
-				Byte[] keys = en.getKeys();
-				
-				DataTools.writeInt(out, keys.length);
-				
-				for(int j=0; j<keys.length; j++)
-				{
-					Byte id = keys[j]; 
-					DataTools.writeByte(out, id);
-					
-					Object x = en.getValue(id);
-					DataTools.writeObject(out, x);
-				}
-			}
-			
-			CByteArray payload = out.toCByteArray();
-			try
-			{
-				return handler.encrypt(random, passphrase, payload);
-			}
-			finally
-			{
-				Crypto.zero(payload);
-			}
+			b = handler.decrypt(enc, pass);
 		}
-		finally
+		else
 		{
-			CKit.close(out);
+			// TODO DataFormatV3
+			throw new Exception();
 		}
+		
+		DataFile df = read(b);
+		df.setPassword(pass);
+		return df;
 	}
 	
 
 	/**
-	 * Attempts to decrypt the supplied data and deserialize the DataFile object.
+	 * Serializes the data object to a byte array and then encrypts it. 
 	 */
-	public final DataFile load(byte[] encrypted, OpaqueChars passphrase) throws Exception
+	public static void saveDataFile(DataFile df, File file) throws Exception
 	{
-		CByteArray dec = handler.decrypt(encrypted, passphrase);
+		SecureRandom random = random();
+		OpaqueChars pass = df.getPassword();
+		
+		byte[] b;
+		CByteArray payload = store(df);
+		try
+		{
+			b = handler.encrypt(random, pass, payload);
+		}
+		finally
+		{
+			Crypto.zero(payload);
+		}
+		
+		// write to temp file
+		File f = File.createTempFile("PasswordSafe-", ".tmp", file.getParentFile());
+		CKit.write(b, f);
+		
+		// delete old version and rename
+		file.delete();
+		
+		// finish
+		if(f.renameTo(file) == false)
+		{
+			throw new Exception(TXT.get("DataFile.failed to rename", "Unable to replace existing file {0}.", file));
+		}
+	}
+	
+
+	protected static final DataFile read(CByteArray dec) throws Exception
+	{
 		try
 		{
 			CByteArrayInputStreamWrapper in = new CByteArrayInputStreamWrapper(dec);
@@ -89,8 +94,7 @@ public final class DataIO
 				}
 				
 				DataFile df = new DataFile();
-				df.setPassword(passphrase);
-				
+
 				for(int i=0; i<sz; i++)
 				{
 					PassEntry en = df.addEntry();
@@ -115,5 +119,46 @@ public final class DataIO
 		{
 			Crypto.zero(dec);
 		}
+	}
+
+	
+	protected static final CByteArray store(DataFile df) throws Exception
+	{
+		CByteArrayOutputStream out = new CByteArrayOutputStream(65536);
+		try
+		{
+			PassEntry[] entries = df.getEntries();
+			int sz = entries.length;
+			DataTools.writeInt(out, sz);
+			
+			for(int i=0; i<sz; i++)
+			{
+				PassEntry en = entries[i];
+				Byte[] keys = en.getKeys();
+				
+				DataTools.writeInt(out, keys.length);
+				
+				for(int j=0; j<keys.length; j++)
+				{
+					Byte id = keys[j]; 
+					DataTools.writeByte(out, id);
+					
+					Object x = en.getValue(id);
+					DataTools.writeObject(out, x);
+				}
+			}
+			
+			return out.toCByteArray();
+		}
+		finally
+		{
+			CKit.close(out);
+		}
+	}
+	
+	
+	protected static final SecureRandom random()
+	{
+		return new CRandom();
 	}
 }

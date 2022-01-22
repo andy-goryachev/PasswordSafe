@@ -5,12 +5,7 @@ import goryachev.common.util.CKit;
 import goryachev.common.util.CSystem;
 import goryachev.common.util.ProductInfo;
 import goryachev.i18n.TXT;
-import goryachev.memsafecrypto.CRandom;
-import goryachev.memsafecrypto.OpaqueChars;
 import goryachev.memsafecryptoswing.EntropyGathererSwing;
-import goryachev.password.data.DataFile;
-import goryachev.password.data.DataFormat;
-import goryachev.password.data.v2.DataFormatV2;
 import goryachev.password.img.PasswordSafeIcons;
 import goryachev.password.prompts.Prompts;
 import goryachev.password.ui.ClipboardHandler;
@@ -152,54 +147,6 @@ public class PasswordSafeApp
 		{
 			log.error(e); // TODO fail
 			failed(CKit.stackTrace(e));
-		}
-	}
-	
-	
-	// FIX move to DataIO
-	public static DataFile loadDataFile(File file, OpaqueChars pass) throws Exception
-	{
-		byte[] enc = CKit.readBytes(file, Integer.MAX_VALUE);
-		
-		// TODO DataFormatV3
-		
-//		try
-//		{
-			return new DataFormatV2().load(enc, pass);
-//		}
-//		catch(Exception e)
-//		{
-//			if(e.getMessage() == DataFormatV2.ERROR_WRONG_SIGNATURE)
-//			{
-//				// fall back to V1
-//				return new DataFormatV1().load(enc, pass);
-//			}
-//			else
-//			{
-//				throw e;
-//			}
-//		}
-	}
-
-
-	// FIX move to DataIO
-	public static void save(DataFile df, File file) throws Exception
-	{
-		DataFormat format = new DataFormatV2();
-		
-		byte[] b = format.save(df, new CRandom());
-		
-		// write to temp file
-		File f = File.createTempFile("PasswordSafe-", ".tmp", file.getParentFile());
-		CKit.write(b, f);
-		
-		// delete old version and rename
-		file.delete();
-		
-		// finish
-		if(f.renameTo(file) == false)
-		{
-			throw new Exception(TXT.get("DataFile.failed to rename", "Unable to replace existing file {0}.", file));
 		}
 	}
 }
