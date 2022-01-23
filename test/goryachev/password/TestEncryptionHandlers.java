@@ -2,11 +2,11 @@
 package goryachev.password;
 import goryachev.common.test.TF;
 import goryachev.common.test.Test;
+import goryachev.common.util.CKit;
+import goryachev.common.util.D;
 import goryachev.memsafecrypto.CByteArray;
 import goryachev.memsafecrypto.OpaqueChars;
 import goryachev.password.data.IEncryptionHandler;
-import goryachev.password.data.v2.EncryptionHandlerV2;
-import goryachev.password.data.v3.EncryptionHandlerV3;
 import goryachev.password.data.v4.EncryptionHandlerV4;
 import java.security.SecureRandom;
 
@@ -36,7 +36,14 @@ public class TestEncryptionHandlers
 	@Test
 	public void testV4() throws Exception
 	{
+		long start = System.nanoTime();
+		
 		test(new EncryptionHandlerV4(), 3);
+		
+		double elapsed = CKit.elapsedSeconds(start);
+		D.printf("roundtrip=%.2f", elapsed);
+		
+		// mac: 256mb 4 iter, roundtrip=0.38 too fast
 	}
 	
 	
