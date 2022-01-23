@@ -55,7 +55,7 @@ public final class EncryptionHandlerV3
 	 */
 	public final byte[] encrypt(SecureRandom random, OpaqueChars pass, CByteArray payload) throws Exception
 	{
-		int containerSize = ((payload.length() + 4 / BLOCK_LENGTH) + 1) * BLOCK_LENGTH;
+		int containerSize = (((payload.length() + 4) / BLOCK_LENGTH) + 1) * BLOCK_LENGTH;
 		CByteArray container = new CByteArray(containerSize);
 		try
 		{

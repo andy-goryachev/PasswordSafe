@@ -25,7 +25,7 @@ public class TestEncryptionHandlers
 	}
 	
 	
-//	@Test
+	@Test
 	public void testV3() throws Exception
 	{
 		test(new EncryptionHandlerV3(), 3);
