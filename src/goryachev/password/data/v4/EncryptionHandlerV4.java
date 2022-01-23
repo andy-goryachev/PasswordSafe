@@ -39,9 +39,9 @@ public final class EncryptionHandlerV4
 	// hard-coded
 	public static final int ARGON_TYPE = Argon2Parameters.ARGON2_id;
 	public static final int ARGON_VERSION = Argon2Parameters.ARGON2_VERSION_13;
-	public static final int ARGON_MEM_KB = 256;
+	public static final int ARGON_MEM_KB = 256_000;
 	public static final int ARGON_LANES = 4;
-	public static final int ARGON_ITERATIONS = 4;
+	public static final int ARGON_ITERATIONS = 2;
 	
 	/** enforce encrypted block size in 4k increments to obfuscate the actual payload length */ 
 	public static final int BLOCK_LENGTH = 4096;

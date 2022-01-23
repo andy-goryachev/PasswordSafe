@@ -38,12 +38,12 @@ public class TestEncryptionHandlers
 	{
 		long start = System.nanoTime();
 		
-		test(new EncryptionHandlerV4(), 3);
+		test(new EncryptionHandlerV4(), 1);
 		
 		double elapsed = CKit.elapsedSeconds(start);
 		D.printf("roundtrip=%.2f", elapsed);
 		
-		// mac: 256mb 4 iter, roundtrip=0.38 too fast
+		// xeon 2.6Ghz 24 cores: roundtrip=4.86
 	}
 	
 	
