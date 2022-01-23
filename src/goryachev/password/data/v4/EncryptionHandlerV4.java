@@ -31,7 +31,7 @@ import java.security.SecureRandom;
 public final class EncryptionHandlerV4
 	implements IEncryptionHandler
 {
-	public static final long SIGNATURE_V1 = 0x1DEA_2022_0123_1023L;
+	public static final long SIGNATURE = 0x1DEA_2022_0123_1530L;
 	
 	public static final int KEY_SIZE_BYTES = 256/8;
 	public static final int NONCE_SIZE_BYTES = 256/8;
@@ -41,7 +41,7 @@ public final class EncryptionHandlerV4
 	public static final int ARGON_VERSION = Argon2Parameters.ARGON2_VERSION_13;
 	public static final int ARGON_MEM_KB = 256_000;
 	public static final int ARGON_LANES = 4;
-	public static final int ARGON_ITERATIONS = 2;
+	public static final int ARGON_ITERATIONS = 4;
 	
 	/** enforce encrypted block size in 4k increments to obfuscate the actual payload length */ 
 	public static final int BLOCK_LENGTH = 4096;
@@ -69,7 +69,7 @@ public final class EncryptionHandlerV4
 			try
 			{
 				// header
-				out.writeLong(SIGNATURE_V1);
+				out.writeLong(SIGNATURE);
 		
 				// the same nonce is being used for both scrypt and EAX encryption
 				byte[] nonce = new byte[NONCE_SIZE_BYTES];
@@ -151,7 +151,7 @@ public final class EncryptionHandlerV4
 		{			
 			// header
 			long ver = rd.readLong();
-			if(ver != SIGNATURE_V1)
+			if(ver != SIGNATURE)
 			{
 				throw new Exception(ERROR_WRONG_SIGNATURE);
 			}

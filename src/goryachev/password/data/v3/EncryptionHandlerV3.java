@@ -33,7 +33,7 @@ import java.security.SecureRandom;
 public final class EncryptionHandlerV3
 	implements IEncryptionHandler
 {
-	public static final long SIGNATURE_V1 = 0x1DEA_2022_0122_1455L;
+	public static final long SIGNATURE = 0x1DEA_2022_0122_1455L;
 	
 	public static final int KEY_SIZE_BYTES = 256/8;
 	public static final int NONCE_SIZE_BYTES = 256/8;
@@ -71,7 +71,7 @@ public final class EncryptionHandlerV3
 			try
 			{
 				// header
-				out.writeLong(SIGNATURE_V1);
+				out.writeLong(SIGNATURE);
 				out.writeInt(n);
 				out.writeInt(r);
 				out.writeInt(p);
@@ -149,7 +149,7 @@ public final class EncryptionHandlerV3
 		{			
 			// header
 			long ver = rd.readLong();
-			if(ver != SIGNATURE_V1)
+			if(ver != SIGNATURE)
 			{
 				throw new Exception(ERROR_WRONG_SIGNATURE);
 			}

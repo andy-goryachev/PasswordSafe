@@ -36,7 +36,7 @@ import java.security.SecureRandom;
 public final class EncryptionHandlerV2
 	implements IEncryptionHandler
 {
-	public static final long SIGNATURE_V2 = 0x1DEA_2013_1211_1148L;
+	public static final long SIGNATURE = 0x1DEA_2013_1211_1148L;
 	public static final int SCRYPT_N = 16384;
 	public static final int SCRYPT_R = 8;
 	public static final int SCRYPT_P = 32;
@@ -60,7 +60,7 @@ public final class EncryptionHandlerV2
 		try
 		{
 			// header
-			DataTools.writeLong(out, SIGNATURE_V2);
+			DataTools.writeLong(out, SIGNATURE);
 			DataTools.writeInt(out, n);
 			DataTools.writeInt(out, r);
 			DataTools.writeInt(out, p);
@@ -141,7 +141,7 @@ public final class EncryptionHandlerV2
 		{			
 			// header
 			long ver = DataTools.readLong(in);
-			if(ver != SIGNATURE_V2)
+			if(ver != SIGNATURE)
 			{
 				throw new Exception(ERROR_WRONG_SIGNATURE);
 			}

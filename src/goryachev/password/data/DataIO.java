@@ -9,6 +9,7 @@ import goryachev.memsafecrypto.OpaqueChars;
 import goryachev.memsafecrypto.util.CByteArrayInputStreamWrapper;
 import goryachev.memsafecrypto.util.CByteArrayOutputStream;
 import goryachev.password.data.v2.EncryptionHandlerV2;
+import goryachev.password.data.v4.EncryptionHandlerV4;
 import java.io.File;
 import java.security.SecureRandom;
 
@@ -18,7 +19,7 @@ import java.security.SecureRandom;
  */
 public final class DataIO
 {
-	private final static IEncryptionHandler handler = new EncryptionHandlerV2();
+	private final static IEncryptionHandler handler = new EncryptionHandlerV4();
 	
 	
 	/**
@@ -30,14 +31,17 @@ public final class DataIO
 		
 		CByteArray b;
 		long sig = DataTools.getLong(enc);
-		if(sig == EncryptionHandlerV2.SIGNATURE_V2)
+		if(sig == EncryptionHandlerV4.SIGNATURE)
 		{
 			b = handler.decrypt(enc, pass);
 		}
+		else if(sig == EncryptionHandlerV2.SIGNATURE)
+		{
+			b = new EncryptionHandlerV2().decrypt(enc, pass);
+		}
 		else
 		{
-			// TODO DataFormatV3
-			throw new Exception();
+			throw new Exception("unknown file signature");
 		}
 		
 		DataFile df = read(b);
