@@ -6,18 +6,39 @@ import goryachev.memsafecrypto.CByteArray;
 import goryachev.memsafecrypto.OpaqueChars;
 import goryachev.password.data.IEncryptionHandler;
 import goryachev.password.data.v2.EncryptionHandlerV2;
+import goryachev.password.data.v3.EncryptionHandlerV3;
 import java.security.SecureRandom;
 
 
-public class TestEncryptionHandlerBase
+public class TestEncryptionHandlers
 {
-	public void test(IEncryptionHandler h) throws Exception
+	public static void main(String[] args)
+	{
+		TF.run();
+	}
+	
+	
+	@Test
+	public void testV2() throws Exception
+	{
+		test(new EncryptionHandlerV2(), 3);
+	}
+	
+	
+//	@Test
+	public void testV3() throws Exception
+	{
+		test(new EncryptionHandlerV3(), 3);
+	}
+	
+	
+	protected void test(IEncryptionHandler h, int count) throws Exception
 	{
 		SecureRandom r = new SecureRandom();
 		
-		for(int i=0; i<5; i++)
+		for(int i=0; i<count; i++)
 		{
-			byte[] d = new byte[r.nextInt(128000)];
+			byte[] d = new byte[r.nextInt(4000)];
 			r.nextBytes(d);
 			
 			char[] cs = new char[r.nextInt(133)];

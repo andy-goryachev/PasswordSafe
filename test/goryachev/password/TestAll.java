@@ -3,13 +3,13 @@ package goryachev.password;
 import goryachev.common.test.TF;
 
 
-public class TestPasswordSafe
+public class TestAll
 {
 	public static void main(String[] args)
 	{
 		TF.run
 		(
-			TestEncryptionHandlerV2.class
+			TestEncryptionHandlers.class
 		);
 	}
 }
