@@ -7,6 +7,7 @@ import goryachev.memsafecrypto.OpaqueChars;
 import goryachev.password.data.IEncryptionHandler;
 import goryachev.password.data.v2.EncryptionHandlerV2;
 import goryachev.password.data.v3.EncryptionHandlerV3;
+import goryachev.password.data.v4.EncryptionHandlerV4;
 import java.security.SecureRandom;
 
 
@@ -18,17 +19,24 @@ public class TestEncryptionHandlers
 	}
 	
 	
-	@Test
-	public void testV2() throws Exception
-	{
-		test(new EncryptionHandlerV2(), 3);
-	}
+//	@Test
+//	public void testV2() throws Exception
+//	{
+//		test(new EncryptionHandlerV2(), 3);
+//	}
+//	
+//	
+//	@Test
+//	public void testV3() throws Exception
+//	{
+//		test(new EncryptionHandlerV3(), 3);
+//	}
 	
 	
 	@Test
-	public void testV3() throws Exception
+	public void testV4() throws Exception
 	{
-		test(new EncryptionHandlerV3(), 3);
+		test(new EncryptionHandlerV4(), 3);
 	}
 	
 	
