@@ -4,6 +4,7 @@ import goryachev.common.log.Log;
 import goryachev.common.util.CJob;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CProperty;
+import goryachev.common.util.ProductInfo;
 import goryachev.common.util.platform.ApplicationSupport;
 import goryachev.i18n.CLanguage;
 import goryachev.i18n.Menus;
@@ -570,6 +571,20 @@ public abstract class Application
 				
 				Toolkit.getDefaultToolkit().addAWTEventListener(awtListener, mask);
 			}
+		}
+	}
+	
+	
+	public static void contactSupport(Component w, String email)
+	{
+		try
+		{
+			String subject = "Question about " + getTitle() + " ver. " + getVersion();
+			MailTools.mail(email, subject, null);
+		}
+		catch(Exception e)
+		{
+			Dialogs.error(w, e);
 		}
 	}
 }

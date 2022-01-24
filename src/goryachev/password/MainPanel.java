@@ -19,7 +19,6 @@ import goryachev.swing.CMenuBar;
 import goryachev.swing.CPanel;
 import goryachev.swing.CToolBar;
 import goryachev.swing.CUndoManager;
-import goryachev.swing.ContactSupport;
 import goryachev.swing.Dialogs;
 import goryachev.swing.GlobalSettings;
 import goryachev.swing.Theme;
@@ -161,7 +160,7 @@ public class MainPanel
 		m.item(TXT.get("MainWindow.menu.delete an entry","Delete Entry"), listTab.deleteEntryAction);
 		// help
 		m.menu(Menus.Help);
-		m.item(Menus.ContactSupport, ContactSupport.action);
+		m.item(Menus.ContactSupport, new XAction(this::contactSupport));
 		m.item(Menus.CheckForUpdates, checkForUpdatesAction);
 		m.separator();
 		m.item(TXT.get("MainWindow.menu.about passwords", "Mandatory XKCD Reference"), xkcdAction);
@@ -383,5 +382,11 @@ public class MainPanel
 	public void purgeSecrets()
 	{
 		listTab.purgeSecrets();
+	}
+	
+	
+	protected void contactSupport()
+	{
+		Application.contactSupport(this, Version.EMAIL);
 	}
 }
