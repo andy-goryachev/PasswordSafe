@@ -3,6 +3,8 @@
 ## TBD
 - added generate password dialog
 - removed DataFormatV1
+- new data format V4: argon2id + xsalsa20poly1305
+- memory safe crypto library https://github.com/andy-goryachev/MemSafeCrypto
 
 ## 2022.0120.2200
 - bouncy castle 1.69
