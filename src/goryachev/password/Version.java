@@ -7,7 +7,7 @@ package goryachev.password;
  */
 public class Version
 {
-	public static final String VERSION = "2022.0123.1530";
+	public static final String VERSION = "2022.0124.1555";
 	
 	public static final String COPYRIGHT = "copyright © 2011-2022 andy goryachev";
 	
