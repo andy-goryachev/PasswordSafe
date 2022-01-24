@@ -1,6 +1,6 @@
 ﻿# RELEASE NOTES
 
-## TBD
+## 2022.0124.1555
 - added generate password dialog
 - removed DataFormatV1
 - new data format V4: argon2id + xsalsa20poly1305
