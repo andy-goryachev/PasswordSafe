@@ -3,7 +3,6 @@ package goryachev.password;
 import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CSystem;
-import goryachev.common.util.ProductInfo;
 import goryachev.i18n.TXT;
 import goryachev.memsafecryptoswing.EntropyGathererSwing;
 import goryachev.password.img.PasswordSafeIcons;
@@ -21,8 +20,6 @@ public class PasswordSafeApp
 {
 	public static final String TITLE = "PasswørdSafe";
 	public static final String EXTENSION = ".safe";
-	public static final String PRODUCT_URL = "https://goryachev.com/products/password-safe";
-	public static final String UPDATE_URL = PRODUCT_URL + "/version";
 	protected static final Log log = Log.get("PasswordSafeApp");
 
 	
@@ -40,7 +37,6 @@ public class PasswordSafeApp
 	
 	protected void initApplication() throws Exception
 	{
-		ProductInfo.setWebSite(PRODUCT_URL);
 	}
 	
 	

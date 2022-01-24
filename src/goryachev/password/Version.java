@@ -12,4 +12,8 @@ public class Version
 	public static final String COPYRIGHT = "copyright © 2011-2022 andy goryachev";
 	
 	public static final String EMAIL = "support@goryachev.com";
+	
+	public static final String WEB_SITE = "https://goryachev.com/products/password-safe";
+
+	public static final String UPDATE_URL = WEB_SITE + "/version";
 }

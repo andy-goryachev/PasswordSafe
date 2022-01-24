@@ -1,9 +1,9 @@
 // Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.dialogs;
 import goryachev.common.util.CKit;
-import goryachev.common.util.ProductInfo;
 import goryachev.i18n.Menus;
 import goryachev.i18n.TXT;
+import goryachev.password.Version;
 import goryachev.swing.Application;
 import goryachev.swing.CButton;
 import goryachev.swing.CheckForUpdate;
@@ -49,7 +49,7 @@ public class CheckForUpdatesDialog
 						b.nl();
 						b.a(TXT.get("CheckForUpdatesDialog.to download", "Please visit the web site to download the new version."));
 						b.nl();
-						b.link(ProductInfo.getWebSite());
+						b.link(Version.WEB_SITE);
 						
 						setStatusIcon(CIcons.Info32);
 						setDocument(b.getDocument());

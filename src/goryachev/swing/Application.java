@@ -4,7 +4,6 @@ import goryachev.common.log.Log;
 import goryachev.common.util.CJob;
 import goryachev.common.util.CKit;
 import goryachev.common.util.CProperty;
-import goryachev.common.util.ProductInfo;
 import goryachev.common.util.platform.ApplicationSupport;
 import goryachev.i18n.CLanguage;
 import goryachev.i18n.Menus;

@@ -1,7 +1,6 @@
 // Copyright © 2012-2022 Andy Goryachev <andy@goryachev.com>
 package goryachev.password;
 import goryachev.common.util.HasPrompts;
-import goryachev.common.util.ProductInfo;
 import goryachev.common.util.SB;
 import goryachev.i18n.Menus;
 import goryachev.i18n.TXT;
@@ -46,7 +45,7 @@ public class WelcomeWizard
 		super("WelcomeWizard");
 		setMinimumSize(500, 500);
 		
-		checkForUpdate = new CheckForUpdate(PasswordSafeApp.UPDATE_URL + "?" + Application.getVersion());
+		checkForUpdate = new CheckForUpdate(Version.UPDATE_URL + "?" + Application.getVersion());
 		
 		showOptionsAction.setEnabled(false);
 				
@@ -139,7 +138,7 @@ public class WelcomeWizard
 					CDocumentBuilder b = new CDocumentBuilder();
 					b.a(TXT.get("InstallationPage.update", "A new version of {0} has been released.  Please visit our web site to obtain the updated version.", Application.getTitle()));
 					b.nl();
-					b.link(ProductInfo.getWebSite());
+					b.link(Version.WEB_SITE);
 					setDocument(b.getDocument());
 					setStatusIcon(CIcons.Info32);
 				}
