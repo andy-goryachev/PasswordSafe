@@ -3,7 +3,6 @@ package goryachev.swing.dialogs;
 import goryachev.common.util.CKit;
 import goryachev.i18n.Menus;
 import goryachev.i18n.TXT;
-import goryachev.password.Version;
 import goryachev.swing.Application;
 import goryachev.swing.CButton;
 import goryachev.swing.CheckForUpdate;
@@ -20,14 +19,14 @@ public class CheckForUpdatesDialog
 	protected final CheckForUpdate check;
 	
 	
-	public CheckForUpdatesDialog(Component parent, String url)
+	public CheckForUpdatesDialog(Component parent, String checkUrl, String webSite)
 	{
 		super(parent, "CheckForUpdatesDialog", true);
 		
 		setTitle(TXT.get("CheckForUpdatesDialog.title", "Check for Updates"));
 		setSize(450, 250);
 		
-		check = new CheckForUpdate(url);
+		check = new CheckForUpdate(checkUrl);
 
 		ProcessPanel p = new ProcessPanel(null, null, closeDialogAction)
 		{
@@ -49,7 +48,7 @@ public class CheckForUpdatesDialog
 						b.nl();
 						b.a(TXT.get("CheckForUpdatesDialog.to download", "Please visit the web site to download the new version."));
 						b.nl();
-						b.link(Version.WEB_SITE);
+						b.link(webSite);
 						
 						setStatusIcon(CIcons.Info32);
 						setDocument(b.getDocument());

@@ -375,7 +375,7 @@ public class MainPanel
 	
 	protected void actionCheckForUpdates()
 	{
-		new CheckForUpdatesDialog(this, Version.UPDATE_URL + "?menu").open();
+		new CheckForUpdatesDialog(this, Version.UPDATE_URL + "?menu", Version.WEB_SITE).open();
 	}
 	
 	
