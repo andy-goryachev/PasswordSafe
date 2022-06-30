@@ -170,7 +170,9 @@ public class CLanguage
 	
 	public int hashCode()
 	{
-		return FH.hash(CLanguage.class, locale, code);
+		int h = FH.hash(CLanguage.class);
+		h = FH.hash(h, locale);
+		return FH.hash(h, code);
 	}
 	
 	

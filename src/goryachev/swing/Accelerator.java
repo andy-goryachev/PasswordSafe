@@ -72,7 +72,9 @@ public class Accelerator
 	
 	public int hashCode()
 	{
-		return FH.hash(getID(), getKeyStroke());
+		int h = FH.hash(Accelerator.class);
+		h = FH.hash(h, getID());
+		return FH.hash(h, getKeyStroke());
 	}
 	
 	

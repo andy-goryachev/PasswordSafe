@@ -48,7 +48,7 @@ public class PasswordSafeApp
 	
 	protected void initLogger()
 	{
-		Log.initForDebug();
+		Log.initConsoleForDebug();
 		
 //		File folder = new File(getDefaultSettingsDirectory(), "logs");
 //		folder.mkdirs();
