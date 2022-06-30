@@ -1,5 +1,9 @@
 ﻿# RELEASE NOTES
 
+
+## TBD
+- create parent folder(s) when creating a new data file
+
 ## 2022.0124.1555
 - added generate password dialog
 - removed DataFormatV1

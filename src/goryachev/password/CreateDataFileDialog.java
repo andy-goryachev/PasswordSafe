@@ -2,6 +2,7 @@
 package goryachev.password;
 import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
+import goryachev.common.util.FileTools;
 import goryachev.common.util.SB;
 import goryachev.i18n.Menus;
 import goryachev.i18n.TXT;
@@ -231,6 +232,8 @@ public class CreateDataFileDialog
 				{
 					df = new DataFile();
 					df.setPassword(pass);
+					
+					FileTools.ensureParentFolder(f);
 					DataIO.saveDataFile(df, f);
 				}
 	
