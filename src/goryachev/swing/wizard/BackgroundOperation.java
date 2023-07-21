@@ -1,4 +1,4 @@
-// Copyright © 2013-2022 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2013-2023 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.wizard;
 import goryachev.common.util.CancelledException;
 import goryachev.common.util.Progress;

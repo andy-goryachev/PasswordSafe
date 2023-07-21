@@ -1,4 +1,4 @@
-// Copyright © 2011-2022 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2023 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.swing.theme.AssignMnemonic;
 import javax.swing.event.MenuEvent;

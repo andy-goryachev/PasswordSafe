@@ -1,4 +1,4 @@
-// Copyright © 2011-2022 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2011-2023 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.dialogs.license;
 import goryachev.i18n.TXT;
 import goryachev.swing.Application;

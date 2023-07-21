@@ -1,4 +1,4 @@
-// Copyright © 2020-2022 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2020-2023 Andy Goryachev <andy@goryachev.com>
 package goryachev.memsafecrypto.salsa;
 import goryachev.common.io.CIOTools;
 import goryachev.common.util.CKit;
@@ -100,7 +100,49 @@ public class XSalsaRandomAccessFile
 		} while(read < len);
 	}
 
+	
+	public int readByte() throws IOException
+	{
+		for(;;)
+		{
+			int rv = read(databuf, 0, 1);
+			if(rv < 1)
+			{
+				return -1;
+			}
+			else if(rv == 0)
+			{
+				continue;
+			}
+			else
+			{
+				return databuf[0] & 0xff;
+			}
+		}
+	}
+	
+	
+	public void writeByte(int x) throws IOException
+	{
+		databuf[0] = (byte)x;
+		write(databuf, 0, 1);
+	}
+	
 
+	public int readInt() throws IOException
+	{
+		readFully(databuf, 0, 4);
+		return CIOTools.bytesToInt(databuf);
+	}
+	
+	
+	public void writeInt(int x) throws IOException
+	{
+		CIOTools.intToBytes(databuf, x);
+		write(databuf, 0, 4);
+	}
+	
+	
 	public long readLong() throws IOException
 	{
 		readFully(databuf, 0, 8);
@@ -147,6 +189,58 @@ public class XSalsaRandomAccessFile
 	public void write(byte[] buf) throws IOException
 	{
 		write(buf, 0, buf.length);
+	}
+	
+	
+	/**
+	 * Writes bytes to the file as is, unencryped.
+	 * This method does advance the position in the encryption engine,
+	 * unless the write operation throws an exception.
+	 * When that happens, the position is reset to the value it had
+	 * prior to this call.
+	 */ 
+	public void writeUnencrypted(byte[] buf) throws IOException
+	{
+		long pos = raf.getFilePointer();
+		try
+		{
+			raf.write(buf);
+			pos = -1L;
+			engine.skip(buf.length);
+		}
+		finally
+		{
+			if(pos >= 0L)
+			{
+				seek(pos);
+			}
+		}		
+	}
+	
+
+	/**
+	 * Reads bytes from the file as is, unencrypted.
+	 * This method does advance the position in the encryption engine,
+	 * unless the read operation throws an exception.
+	 * When that happens, the position is reset to the value it had
+	 * prior to this call.
+	 */
+	public void readUnencrypted(byte[] buf) throws IOException
+	{
+		long pos = raf.getFilePointer();
+		try
+		{
+			raf.readFully(buf);
+			pos = -1L;
+			engine.skip(buf.length);
+		}
+		finally
+		{
+			if(pos >= 0L)
+			{
+				seek(pos);
+			}
+		}
 	}
 
 

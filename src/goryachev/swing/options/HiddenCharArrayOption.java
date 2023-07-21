@@ -1,4 +1,4 @@
-// Copyright © 2014-2022 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2014-2023 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options;
 import goryachev.common.log.Log;
 import goryachev.common.util.CKit;

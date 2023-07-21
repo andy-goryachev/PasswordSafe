@@ -1,4 +1,4 @@
-// Copyright © 2009-2022 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2023 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.theme;
 import goryachev.swing.Theme;
 import javax.swing.BoxLayout;

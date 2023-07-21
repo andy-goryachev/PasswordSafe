@@ -1,4 +1,4 @@
-// Copyright © 2005-2022 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2005-2023 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options;
 import goryachev.common.util.CSettings;
 import java.util.Collection;

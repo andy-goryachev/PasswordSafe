@@ -1,4 +1,4 @@
-// Copyright © 2009-2022 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2023 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.log.Log;
 import goryachev.common.util.CKit;
@@ -74,7 +74,7 @@ import javax.swing.text.JTextComponent;
 public class UI
 {
 	protected static final Log log = Log.get("UI");
-	public static final String COPYRIGHT = "Copyright © 1996-2022 Andy Goryachev <andy@goryachev.com>  All Rights Reserved.";
+	public static final String COPYRIGHT = "Copyright © 1996-2023 Andy Goryachev <andy@goryachev.com>  All Rights Reserved.";
 	public static final int ALT = InputEvent.ALT_DOWN_MASK;
 	public static final int CTRL = InputEvent.CTRL_DOWN_MASK;
 	public static final int SHIFT = InputEvent.SHIFT_DOWN_MASK;

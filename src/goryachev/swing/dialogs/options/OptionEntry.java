@@ -1,4 +1,4 @@
-// Copyright © 2012-2022 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2023 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.dialogs.options;
 import goryachev.swing.options.OptionEditorInterface;
 import javax.swing.JComponent;

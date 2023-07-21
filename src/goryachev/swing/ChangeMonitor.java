@@ -1,4 +1,4 @@
-// Copyright © 2022 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2022-2023 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.log.Log;
 import goryachev.common.util.CList;

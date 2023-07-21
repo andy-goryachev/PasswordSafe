@@ -1,4 +1,4 @@
-// Copyright © 2012-2022 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2012-2023 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.text;
 import javax.swing.UIManager;
 import javax.swing.text.JTextComponent;

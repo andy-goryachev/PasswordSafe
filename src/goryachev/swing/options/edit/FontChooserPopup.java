@@ -1,4 +1,4 @@
-// Copyright © 2008-2022 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2008-2023 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.options.edit;
 import goryachev.i18n.TXT;
 import goryachev.swing.CBorder;

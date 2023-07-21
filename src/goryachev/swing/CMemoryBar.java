@@ -1,4 +1,4 @@
-// Copyright © 2009-2022 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2009-2023 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.common.util.CKit;
 import goryachev.common.util.platform.SysInfo;
@@ -280,7 +280,6 @@ public class CMemoryBar
 	protected void actionGC()
 	{
 		System.gc();
-		System.runFinalization();
 		System.gc();
 	}
 	

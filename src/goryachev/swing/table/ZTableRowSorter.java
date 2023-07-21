@@ -1,4 +1,4 @@
-// Copyright © 2010-2022 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2010-2023 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing.table;
 import goryachev.common.log.Log;
 import goryachev.common.util.CList;

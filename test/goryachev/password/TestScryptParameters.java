@@ -226,7 +226,7 @@ public class TestScryptParameters
 	private void t(int n, int r, int p, byte[] pw, byte[] s)
 	{
 		SW sw = new SW();
-		CKit.forceGC();
+		System.gc();
 		
 		long start = used();
 		SCrypt.generate(pw, s, n, r, p, 32);

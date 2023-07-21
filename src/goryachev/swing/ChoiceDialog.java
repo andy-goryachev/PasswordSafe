@@ -1,4 +1,4 @@
-// Copyright © 2014-2022 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2014-2023 Andy Goryachev <andy@goryachev.com>
 package goryachev.swing;
 import goryachev.swing.icons.CIcons;
 import java.awt.Color;
