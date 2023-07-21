@@ -1,9 +1,10 @@
 ﻿# RELEASE NOTES
 
 
-## TBD
+## 2022.0124.1555
 - create parent folder(s) when creating a new data file
 - fixed error handling in check for update
+- requires java 17+
 
 ## 2022.0124.1555
 - added generate password dialog

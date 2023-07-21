@@ -1,4 +1,4 @@
-// Copyright © 2020-2022 Andy Goryachev <andy@goryachev.com>
+// Copyright © 2020-2023 Andy Goryachev <andy@goryachev.com>
 package goryachev.password.data.v4;
 import goryachev.common.io.DReader;
 import goryachev.common.io.DWriter;
