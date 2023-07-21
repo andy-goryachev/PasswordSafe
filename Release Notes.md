@@ -1,7 +1,7 @@
 ﻿# RELEASE NOTES
 
 
-## 2022.0124.1555
+## 2023.0720.2241
 - create parent folder(s) when creating a new data file
 - fixed error handling in check for update
 - requires java 17+
